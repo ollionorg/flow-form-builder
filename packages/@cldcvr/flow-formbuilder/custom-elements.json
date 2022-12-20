@@ -1,0 +1,508 @@
+{
+  "schemaVersion": "1.0.0",
+  "readme": "",
+  "modules": [
+    {
+      "kind": "javascript-module",
+      "path": "src/index.ts",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-form-builder/f-form-builder\""
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/shims.d.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "content",
+          "type": {
+            "text": "Record<string, string>"
+          }
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "content",
+            "module": "src/shims.d.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "content",
+            "module": "src/shims.d.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/f-form-builder-types.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/f-form-builder.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FFormBuilder",
+          "members": [
+            {
+              "kind": "field",
+              "name": "config",
+              "type": {
+                "text": "FormBuilderConfig"
+              },
+              "attribute": "config"
+            },
+            {
+              "kind": "field",
+              "name": "values",
+              "type": {
+                "text": "FormBuilderValues"
+              },
+              "attribute": "values",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FormBuilderState"
+              },
+              "description": "Internal state of formbuilder"
+            },
+            {
+              "kind": "field",
+              "name": "formRef",
+              "type": {
+                "text": "Ref<HTMLFormElement>"
+              },
+              "description": "form reference"
+            },
+            {
+              "kind": "method",
+              "name": "handleFormChange"
+            },
+            {
+              "kind": "method",
+              "name": "build"
+            },
+            {
+              "kind": "method",
+              "name": "onSubmit",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "SubmitEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "checkAllIfs"
+            },
+            {
+              "kind": "method",
+              "name": "validateForm",
+              "parameters": [
+                {
+                  "name": "silent",
+                  "default": "false"
+                }
+              ],
+              "description": "validate whole form"
+            },
+            {
+              "kind": "method",
+              "name": "buildFields",
+              "parameters": [
+                {
+                  "name": "fields",
+                  "type": {
+                    "text": "FormBuilderField[]"
+                  }
+                }
+              ],
+              "description": "render field based on field config"
+            },
+            {
+              "kind": "method",
+              "name": "bindValues",
+              "parameters": [
+                {
+                  "name": "inputElement",
+                  "type": {
+                    "text": "HTMLInputElement | undefined"
+                  }
+                },
+                {
+                  "name": "name",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "index",
+                  "type": {
+                    "text": "number"
+                  }
+                },
+                {
+                  "name": "isMultiple",
+                  "type": {
+                    "text": "boolean"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "bindValidation",
+              "parameters": [
+                {
+                  "name": "inputElement",
+                  "type": {
+                    "text": "HTMLInputElement | undefined"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "validateField",
+              "parameters": [
+                {
+                  "name": "inputElement",
+                  "type": {
+                    "text": "HTMLInputElement"
+                  }
+                },
+                {
+                  "name": "silent",
+                  "default": "false"
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "config",
+              "type": {
+                "text": "FormBuilderConfig"
+              },
+              "fieldName": "config"
+            },
+            {
+              "name": "values",
+              "type": {
+                "text": "FormBuilderValues"
+              },
+              "fieldName": "values"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-form-builder",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FFormBuilder",
+          "declaration": {
+            "name": "FFormBuilder",
+            "module": "src/components/f-form-builder/f-form-builder.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-form-builder",
+          "declaration": {
+            "name": "FFormBuilder",
+            "module": "src/components/f-form-builder/f-form-builder.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/f-form-validator.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "validate",
+          "parameters": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "elementRules",
+              "type": {
+                "text": "FormBuilderValidationRules"
+              }
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "validate",
+            "module": "src/components/f-form-builder/f-form-validator.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/utils.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "isEmptyObject",
+          "parameters": [
+            {
+              "name": "obj",
+              "type": {
+                "text": "Object"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "isNullOrUndefined",
+          "return": {
+            "type": {
+              "text": "value is undefined | null"
+            }
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "type": {
+                "text": "unknown"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "isEmptyArray",
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          },
+          "parameters": [
+            {
+              "name": "arr",
+              "type": {
+                "text": "unknown"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "isEmptyObject",
+          "declaration": {
+            "name": "isEmptyObject",
+            "module": "src/components/f-form-builder/utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "isNullOrUndefined",
+          "declaration": {
+            "name": "isNullOrUndefined",
+            "module": "src/components/f-form-builder/utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "isEmptyArray",
+          "declaration": {
+            "name": "isEmptyArray",
+            "module": "src/components/f-form-builder/utils.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/default-validation-messages/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "messages",
+          "type": {
+            "text": "Record<string, string>"
+          },
+          "default": "{\n  required: \"{{name}} is required field\",\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "messages",
+            "module": "src/components/f-form-builder/default-validation-messages/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/fields/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "all",
+          "type": {
+            "text": "Record<string, FormBuilderFieldRenderFunction>"
+          },
+          "default": "{\n  text,\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "all",
+            "module": "src/components/f-form-builder/fields/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/fields/text.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "",
+          "parameters": [
+            {
+              "name": "field",
+              "type": {
+                "text": "FormBuilderField"
+              }
+            },
+            {
+              "name": "idx",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "fieldRef",
+              "type": {
+                "text": "Ref<HTMLInputElement>"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "",
+            "module": "src/components/f-form-builder/fields/text.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/validation-rules/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "all",
+          "type": {
+            "text": "Record<string, FormBuilderValidatorFunction>"
+          },
+          "default": "{\n  required,\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "all",
+            "module": "src/components/f-form-builder/validation-rules/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/validation-rules/required.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "requiredValidator",
+          "parameters": [
+            {
+              "name": "value",
+              "type": {
+                "text": "unknown"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "requiredValidator",
+            "module": "src/components/f-form-builder/validation-rules/required.ts"
+          }
+        }
+      ]
+    }
+  ]
+}

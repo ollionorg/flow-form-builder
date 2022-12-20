@@ -1,0 +1,50 @@
+import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
+import { html } from "lit-html";
+import fields from "./f-formbuilder-fields";
+
+<Meta
+  title="Components/f-form-builder"
+  parameters={{
+    controls: { hideNoControlsWarning: true },
+  }}
+/>
+
+# f-form-builder
+
+<br />
+<br />
+
+## Overview
+
+<f-divider></f-divider>
+
+<br />
+
+### [Playground](/story/components-f-form-builder--playground)
+
+<Canvas>
+  <Story
+    name="Playground"
+    argTypes={{
+      config: {
+        control: "object",
+      },
+    }}
+    args={{
+      ...fields,
+    }}
+  >
+    {(args) =>
+      html`<f-div direction="column" padding="x-large">
+        <f-form-builder
+          .config=${args.config}
+          .values=${{ abc: ["abcd", "1234"], xyz: "5678" }}
+        ></f-form-builder>
+      </f-div>`
+    }
+  </Story>
+</Canvas>
+
+<br />
+
+<ArgsTable of={"f-form-builder"} />

@@ -1,0 +1,7 @@
+// common mixins imported from this file
+@import "@cldcvr/flow-core/src/mixins/scss/mixins";
+
+:host {
+  // Important :  always include base mixins
+  @include base();
+}
