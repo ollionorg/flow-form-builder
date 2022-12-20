@@ -14,6 +14,14 @@
             "name": "*",
             "package": "\"./components/f-form-builder/f-form-builder\""
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-form-builder/f-form-builder-types\""
+          }
         }
       ]
     },
@@ -98,11 +106,13 @@
             },
             {
               "kind": "method",
-              "name": "handleFormChange"
+              "name": "handleFormChange",
+              "description": "handle input event of form"
             },
             {
               "kind": "method",
-              "name": "build"
+              "name": "build",
+              "description": "build/render form based on config"
             },
             {
               "kind": "method",
@@ -118,7 +128,8 @@
             },
             {
               "kind": "method",
-              "name": "checkAllIfs"
+              "name": "checkAllIfs",
+              "description": "check if condition is satisfying for any element"
             },
             {
               "kind": "method",
@@ -172,7 +183,8 @@
                     "text": "boolean"
                   }
                 }
-              ]
+              ],
+              "description": "Add/Display initial values given by user"
             },
             {
               "kind": "method",
@@ -184,7 +196,8 @@
                     "text": "HTMLInputElement | undefined"
                   }
                 }
-              ]
+              ],
+              "description": "validation rules listener added on `input` event."
             },
             {
               "kind": "method",
@@ -194,11 +207,13 @@
                   "name": "inputElement",
                   "type": {
                     "text": "HTMLInputElement"
-                  }
+                  },
+                  "description": "ref of field"
                 },
                 {
                   "name": "silent",
-                  "default": "false"
+                  "default": "false",
+                  "description": "if true then errors are not rendered, they are added in state only"
                 }
               ]
             }

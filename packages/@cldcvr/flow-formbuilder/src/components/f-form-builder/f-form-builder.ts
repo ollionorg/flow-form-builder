@@ -48,6 +48,9 @@ export class FFormBuilder extends FRoot {
   formRef!: Ref<HTMLFormElement>;
 
   render() {
+    /**
+     * Reset state when render called
+     */
     this.state = {
       isChanged: false,
       errors: {},
@@ -61,6 +64,9 @@ export class FFormBuilder extends FRoot {
     };
     return this.build();
   }
+  /**
+   * handle input event of form
+   */
   handleFormChange() {
     // setting isChanged to true in state
     this.state.isChanged = true;
@@ -72,6 +78,9 @@ export class FFormBuilder extends FRoot {
     this.checkAllIfs();
   }
 
+  /**
+   * build/render form based on config
+   */
   build() {
     this.formRef = createRef();
     return html`<form
@@ -98,9 +107,12 @@ export class FFormBuilder extends FRoot {
 
     this.validateForm();
 
-    console.log(this.values, this.state);
+    // TODO : emit submit event
   }
 
+  /**
+   * check if condition is satisfying for any element
+   */
   checkAllIfs() {
     this.state.ifs.forEach((ifFunction, field) => {
       const showField = ifFunction(this.values);
@@ -117,6 +129,7 @@ export class FFormBuilder extends FRoot {
 
   /**
    * validate whole form
+   * @param silent
    */
   validateForm(silent = false) {
     Object.entries(this.state.refs).forEach(([_name, elements]) => {
@@ -158,6 +171,10 @@ export class FFormBuilder extends FRoot {
     })}`;
   }
 
+  /**
+   * updated hook of lit element
+   * @param _changedProperties
+   */
   protected updated(
     _changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
   ): void {
@@ -182,6 +199,13 @@ export class FFormBuilder extends FRoot {
     this.checkAllIfs();
   }
 
+  /**
+   * Add/Display initial values given by user
+   * @param inputElement
+   * @param name
+   * @param index
+   * @param isMultiple
+   */
   bindValues(
     inputElement: HTMLInputElement | undefined,
     name: string,
@@ -203,6 +227,10 @@ export class FFormBuilder extends FRoot {
     }
   }
 
+  /**
+   * validation rules listener added on `input` event.
+   * @param inputElement
+   */
   bindValidation(inputElement: HTMLInputElement | undefined) {
     /**
      * Adding validation listener
@@ -228,10 +256,14 @@ export class FFormBuilder extends FRoot {
         if (this.state.rules[inputElement.name] !== undefined) {
           this.validateField(inputElement);
         }
-        //	   console.log(this.values, this.state.isValid);
       });
     }
   }
+  /**
+   *
+   * @param inputElement ref of field
+   * @param silent if true then errors are not rendered, they are added in state only
+   */
   validateField(inputElement: HTMLInputElement, silent = false) {
     const fieldIndex = Number(inputElement.dataset.multiFieldIndex);
     const { result, message } = validate(
