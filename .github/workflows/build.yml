@@ -2,7 +2,7 @@ name: Deploy storybook to amazon s3
 on:
   push:
     branches:
-      - main
+      - <modify-branch-name>
 defaults:
   run:
     shell: bash
