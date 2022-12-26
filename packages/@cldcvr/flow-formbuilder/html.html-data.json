@@ -3,7 +3,7 @@
   "tags": [
     {
       "name": "f-form-builder",
-      "description": "Attributes:\n\n  * `config` {`FormBuilderConfig`} - \n\n  * `values` - \n\nProperties:\n\n  * `config` {`FormBuilderConfig`} - \n\n  * `values` - \n\n  * `state` {`FormBuilderState`} - Internal state of formbuilder\n\n  * `formRef` - form reference\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `stateChange` {`CustomEvent<FormBuilderState>`} - \n\n  * `input` {`CustomEvent<{ [x: string]: Record<string, string | number | string[] | number[]>; }>`} - \n\n  * `submit` {`CustomEvent<FormBuilderValues>`} - \n\nAttributes:\n\n  * `config` {`FormBuilderConfig`} - \n\n  * `values` - \n\nProperties:\n\n  * `config` {`FormBuilderConfig`} - \n\n  * `values` - \n\n  * `state` {`FormBuilderState`} - Internal state of formbuilder\n\n  * `formRef` - form reference\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "config",
@@ -12,6 +12,18 @@
         {
           "name": "values",
           "description": "`values` - \n\nProperty: values"
+        },
+        {
+          "name": "onstateChange",
+          "description": "`stateChange` {`CustomEvent<FormBuilderState>`} - "
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<{ [x: string]: Record<string, string | number | string[] | number[]>; }>`} - "
+        },
+        {
+          "name": "onsubmit",
+          "description": "`submit` {`CustomEvent<FormBuilderValues>`} - "
         }
       ]
     }

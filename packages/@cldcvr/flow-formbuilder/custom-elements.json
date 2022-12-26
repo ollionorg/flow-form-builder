@@ -107,6 +107,14 @@
             {
               "kind": "method",
               "name": "handleFormChange",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "Event"
+                  }
+                }
+              ],
               "description": "handle input event of form"
             },
             {
@@ -128,7 +136,7 @@
             },
             {
               "kind": "method",
-              "name": "checkAllIfs",
+              "name": "checkAllShowConditions",
               "description": "check if condition is satisfying for any element"
             },
             {
@@ -147,9 +155,15 @@
               "name": "buildFields",
               "parameters": [
                 {
+                  "name": "groupname",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
                   "name": "fields",
                   "type": {
-                    "text": "FormBuilderField[]"
+                    "text": "Record<string, FormBuilderField>"
                   }
                 }
               ],
@@ -172,16 +186,10 @@
                   }
                 },
                 {
-                  "name": "index",
-                  "type": {
-                    "text": "number"
-                  }
+                  "name": "index"
                 },
                 {
-                  "name": "isMultiple",
-                  "type": {
-                    "text": "boolean"
-                  }
+                  "name": "isMultiple"
                 }
               ],
               "description": "Add/Display initial values given by user"
@@ -195,6 +203,12 @@
                   "type": {
                     "text": "HTMLInputElement | undefined"
                   }
+                },
+                {
+                  "name": "name",
+                  "type": {
+                    "text": "string"
+                  }
                 }
               ],
               "description": "validation rules listener added on `input` event."
@@ -203,6 +217,12 @@
               "kind": "method",
               "name": "validateField",
               "parameters": [
+                {
+                  "name": "name",
+                  "type": {
+                    "text": "string"
+                  }
+                },
                 {
                   "name": "inputElement",
                   "type": {
@@ -214,6 +234,13 @@
                   "name": "silent",
                   "default": "false",
                   "description": "if true then errors are not rendered, they are added in state only"
+                },
+                {
+                  "name": "filter",
+                  "optional": true,
+                  "type": {
+                    "text": "(r: FormBuilderGenericValidationRule) => boolean"
+                  }
                 }
               ]
             }
@@ -436,7 +463,13 @@
           "name": "",
           "parameters": [
             {
-              "name": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "_field",
               "type": {
                 "text": "FormBuilderField"
               }

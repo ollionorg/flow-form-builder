@@ -1,71 +1,64 @@
-import { FormBuilderConfig, FormBuilderValues } from "@cldcvr/flow-core/src";
+import {
+  FormBuilderConfig,
+  FormBuilderValues,
+} from "@cldcvr/flow-formbuilder/src";
 type SampleFormBuilder = {
   config: FormBuilderConfig;
 };
 
 const sampleFormBuilder: SampleFormBuilder = {
   config: {
-    groups: [
-      {
-        fields: [
-          {
+    groups: {
+      group1: {
+        fields: {
+          abc: {
             type: "text",
-            name: "abc",
             validationRules: [
               {
                 name: "required",
               },
             ],
           },
-          {
+          xyz: {
             type: "text",
-            name: "abc",
             validationRules: [
               {
                 name: "required",
               },
             ],
           },
-          {
-            type: "text",
-            name: "xyz",
-            validationRules: [
-              {
-                name: "required",
-              },
-            ],
-          },
-        ],
+        },
       },
-      {
-        fields: [
-          {
+      group2: {
+        show: (formValues: FormBuilderValues) => {
+          return formValues.group1.xyz === "show";
+        },
+        fields: {
+          username: {
             type: "text",
-            name: "group2abc",
             validationRules: [
               {
                 name: "required",
               },
             ],
-            if: (formValues: FormBuilderValues) => {
-              return formValues.xyz === "abc";
+          },
+          email: {
+            type: "text",
+            validationRules: [
+              {
+                name: "required",
+              },
+            ],
+            show: (formValues: FormBuilderValues) => {
+              return formValues.group2.username === "abc";
             },
           },
-          {
+          lastname: {
             type: "text",
-            name: "group2abc",
             validationRules: [
               {
                 name: "required",
-              },
-            ],
-          },
-          {
-            type: "text",
-            name: "surname",
-            validationRules: [
-              {
-                name: "required",
+                when: ["click"],
                 message: "The {{name}} is mandatory",
               },
               {
@@ -77,9 +70,9 @@ const sampleFormBuilder: SampleFormBuilder = {
               },
             ],
           },
-        ],
+        },
       },
-    ],
+    },
   },
 };
 export default sampleFormBuilder;

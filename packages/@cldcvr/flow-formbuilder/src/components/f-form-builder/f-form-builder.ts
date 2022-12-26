@@ -7,23 +7,26 @@ import {
   FormBuilderValues,
   FormBuilderValidationRules,
   FormBuilderField,
+  FormBuilderGenericValidationRule,
 } from "./f-form-builder-types";
 import eleStyle from "./f-form-builder.scss";
 import validate from "./f-form-validator";
 import { isEmptyObject } from "./utils";
-import { FDiv, FText } from "@cldcvr/flow-core";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
+import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import fieldRenderer from "./fields";
 const errorTemplate = (error: string) => html` <f-text state="danger"
   >${error}
 </f-text>`;
+
+const GROUP_FIELD_NAME_SEPARATOR = ".$";
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
   /**
    * css loaded from scss file
    */
-  static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles];
+  static styles = [unsafeCSS(eleStyle), unsafeCSS(flowCoreCSS)];
 
   /**
    * @attribute formbuilder config
@@ -57,7 +60,7 @@ export class FFormBuilder extends FRoot {
       refs: {},
       rules: {},
       errorRefs: {},
-      ifs: new Map(),
+      showFunctions: new Map(),
       get isValid() {
         return isEmptyObject(this.errors);
       },
@@ -67,7 +70,8 @@ export class FFormBuilder extends FRoot {
   /**
    * handle input event of form
    */
-  handleFormChange() {
+  handleFormChange(event: Event) {
+    event.stopPropagation();
     // setting isChanged to true in state
     this.state.isChanged = true;
 
@@ -75,7 +79,21 @@ export class FFormBuilder extends FRoot {
      * validate silently
      */
     this.validateForm(true);
-    this.checkAllIfs();
+    this.checkAllShowConditions();
+
+    const stateChange = new CustomEvent("stateChange", {
+      detail: this.state,
+      bubbles: true,
+      composed: true,
+    });
+    this.dispatchEvent(stateChange);
+
+    const input = new CustomEvent("input", {
+      detail: { ...this.values },
+      bubbles: true,
+      composed: true,
+    });
+    this.dispatchEvent(input);
   }
 
   /**
@@ -89,15 +107,30 @@ export class FFormBuilder extends FRoot {
       @input=${this.handleFormChange}
       ${ref(this.formRef)}
     >
-      ${this.config.groups.map((gr) => {
-        return html`<f-div
-          gap="medium"
-          padding="small"
-          .direction=${gr.direction === "horizontal" ? "row" : "column"}
-        >
-          ${this.buildFields(gr.fields)}
-        </f-div>`;
+      ${Object.entries(this.config.groups).map(([name, gr]) => {
+        const groupWrapperRef: Ref<HTMLElement> = createRef();
+        if (gr.show) {
+          this.state.showFunctions.set(groupWrapperRef, gr.show);
+        }
+        return html`
+          <f-div
+            gap="medium"
+            padding="small"
+            direction="column"
+            ${ref(groupWrapperRef)}
+          >
+            <f-text variant="heading">${name}</f-text>
+            <f-div
+              gap="medium"
+              .direction=${gr.direction === "horizontal" ? "row" : "column"}
+            >
+              ${this.buildFields(name, gr.fields)}
+            </f-div>
+          </f-div>
+          <f-divider></f-divider>
+        `;
       })}
+      <br />
       <input type="submit" value="Submit" />
     </form>`;
   }
@@ -106,22 +139,28 @@ export class FFormBuilder extends FRoot {
     event.preventDefault();
 
     this.validateForm();
-
-    // TODO : emit submit event
+    if (this.state.isValid) {
+      const event = new CustomEvent("submit", {
+        detail: this.values,
+        bubbles: true,
+        composed: true,
+      });
+      this.dispatchEvent(event);
+    }
   }
 
   /**
    * check if condition is satisfying for any element
    */
-  checkAllIfs() {
-    this.state.ifs.forEach((ifFunction, field) => {
-      const showField = ifFunction(this.values);
-      console.log(showField, this.values);
+  checkAllShowConditions() {
+    this.state.showFunctions.forEach((showFunction, field) => {
+      const showField = showFunction(this.values);
+
       if (field.value) {
         if (!showField) {
-          field.value.style.display = "none";
+          field.value.dataset.hidden = "true";
         } else {
-          field.value.style.display = "";
+          field.value.dataset.hidden = "false";
         }
       }
     });
@@ -132,42 +171,45 @@ export class FFormBuilder extends FRoot {
    * @param silent
    */
   validateForm(silent = false) {
-    Object.entries(this.state.refs).forEach(([_name, elements]) => {
-      elements.forEach((element) => {
-        const inputElement = element.value;
+    Object.entries(this.state.refs).forEach(([name, element]) => {
+      const inputElement = element.value;
 
-        if (inputElement && this.state.rules[inputElement.name] !== undefined) {
-          this.validateField(inputElement, silent);
-        }
-      });
+      if (inputElement && this.state.rules[name] !== undefined) {
+        this.validateField(name, inputElement, silent);
+      }
     });
   }
   /**
    * render field based on field config
    * @param fields
    */
-  buildFields(fields: FormBuilderField[]) {
-    return html`${fields.map((field, idx) => {
+  buildFields(groupname: string, fields: Record<string, FormBuilderField>) {
+    return html`${Object.entries(fields).map(([name, field], idx) => {
       const fieldRef: Ref<HTMLInputElement> = createRef();
-      if (!this.state.refs[field.name]) {
-        this.state.refs[field.name] = [];
-      }
+
       const fieldErrorRef: Ref<HTMLElement> = createRef();
-      if (!this.state.errorRefs[field.name]) {
-        this.state.errorRefs[field.name] = [];
-      }
-      this.state.refs[field.name].push(fieldRef);
-      this.state.errorRefs[field.name].push(fieldErrorRef);
-      this.state.rules[field.name] = field.validationRules;
-      if (field.if) {
-        this.state.ifs.set(fieldRef, field.if);
+      const relativeName = `${groupname}${GROUP_FIELD_NAME_SEPARATOR}${name}`;
+      this.state.refs[relativeName] = fieldRef;
+      this.state.errorRefs[relativeName] = fieldErrorRef;
+      this.state.rules[relativeName] = field.validationRules;
+
+      const fieldWrapperRef: Ref<HTMLElement> = createRef();
+      if (field.show) {
+        this.state.showFunctions.set(fieldWrapperRef, field.show);
       }
 
       /**
        * fieldRenderer is resposnsible to redner field based on type
        */
-      return html`${fieldRenderer[field.type](field, idx, fieldRef)}
-        <f-div direction="column" ${ref(fieldErrorRef)}></f-div> `;
+      return html`<f-div
+        ${ref(fieldWrapperRef)}
+        direction="column"
+        gap="x-small"
+      >
+        <f-text>${name}</f-text>
+        ${fieldRenderer[field.type](name, field, idx, fieldRef)}
+        <f-div direction="column" ${ref(fieldErrorRef)}></f-div>
+      </f-div>`;
     })}`;
   }
 
@@ -179,24 +221,16 @@ export class FFormBuilder extends FRoot {
     _changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
   ): void {
     // console.log(this.state.refs);
-    Object.entries(this.state.refs).forEach(([name, elements]) => {
-      let isMultiple = false;
-      if (elements.length > 1) {
-        isMultiple = true;
-      }
-      elements.forEach((element, idx) => {
-        const inputElement = element.value;
-        if (inputElement) {
-          inputElement.dataset.isMultiple = "" + isMultiple;
-        }
-        // console.log(inputElement);
-        this.bindValues(inputElement, name, idx, isMultiple);
+    Object.entries(this.state.refs).forEach(([name, element]) => {
+      const inputElement = element.value;
 
-        this.bindValidation(inputElement);
-      });
+      // console.log(inputElement);
+      this.bindValues(inputElement, name);
+
+      this.bindValidation(inputElement, name);
     });
 
-    this.checkAllIfs();
+    this.checkAllShowConditions();
   }
 
   /**
@@ -206,23 +240,19 @@ export class FFormBuilder extends FRoot {
    * @param index
    * @param isMultiple
    */
-  bindValues(
-    inputElement: HTMLInputElement | undefined,
-    name: string,
-    index: number,
-    isMultiple: boolean
-  ) {
+  bindValues(inputElement: HTMLInputElement | undefined, name: string) {
     if (inputElement) {
-      inputElement.dataset.multiFieldIndex = "" + index;
+      const [groupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
+
       /**
        * if value is array (i.e. multiple fields with same name)
        */
-      if (this.values && this.values[name]) {
-        if (isMultiple) {
-          inputElement.value = (this.values[name] as string[])[index];
-        } else {
-          inputElement.value = String(this.values[name]);
-        }
+      if (
+        this.values &&
+        this.values[groupname] &&
+        this.values[groupname][fieldname]
+      ) {
+        inputElement.value = String(this.values[groupname][fieldname]);
       }
     }
   }
@@ -231,32 +261,44 @@ export class FFormBuilder extends FRoot {
    * validation rules listener added on `input` event.
    * @param inputElement
    */
-  bindValidation(inputElement: HTMLInputElement | undefined) {
+  bindValidation(inputElement: HTMLInputElement | undefined, name: string) {
     /**
      * Adding validation listener
      */
     if (inputElement) {
-      inputElement.addEventListener("input", () => {
+      const [groupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
+      const validation = () => {
         // updating values in object
-        const fieldIndex = Number(inputElement.dataset.multiFieldIndex);
-        const isMultiple = inputElement.dataset.isMultiple === "true";
 
-        if (isMultiple) {
-          if (!this.values[inputElement.name]) {
-            this.values[inputElement.name] = [];
-          }
-
-          (this.values[inputElement.name] as string[])[fieldIndex] =
-            inputElement.value;
-        } else {
-          this.values[inputElement.name] = inputElement.value;
-        }
+        this.values[groupname][fieldname] = inputElement.value;
 
         // checking validaiton rules if any
-        if (this.state.rules[inputElement.name] !== undefined) {
-          this.validateField(inputElement);
+        if (this.state.rules[name] !== undefined) {
+          this.validateField(name, inputElement);
         }
-      });
+      };
+      inputElement.addEventListener("input", validation);
+
+      // on special events if user has specified
+      if (this.state.rules[name] !== undefined) {
+        this.state.rules[name]?.forEach((rule) => {
+          if (rule.when && rule.when.length > 0) {
+            rule.when.forEach((eventname) => {
+              inputElement.addEventListener(eventname, () => {
+                console.log(eventname);
+                this.validateField(
+                  name,
+                  inputElement,
+                  false,
+                  (r: FormBuilderGenericValidationRule) => {
+                    return r.name === rule.name;
+                  }
+                );
+              });
+            });
+          }
+        });
+      }
     }
   }
   /**
@@ -264,24 +306,32 @@ export class FFormBuilder extends FRoot {
    * @param inputElement ref of field
    * @param silent if true then errors are not rendered, they are added in state only
    */
-  validateField(inputElement: HTMLInputElement, silent = false) {
-    const fieldIndex = Number(inputElement.dataset.multiFieldIndex);
+  validateField(
+    name: string,
+    inputElement: HTMLInputElement,
+    silent = false,
+    filter?: (r: FormBuilderGenericValidationRule) => boolean
+  ) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [_groupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
+    const rulesToValidate = this.state.rules[name]?.filter(
+      filter ? filter : () => true
+    );
+
     const { result, message } = validate(
       inputElement.value,
-      this.state.rules[inputElement.name] as FormBuilderValidationRules,
-      inputElement.name
+      rulesToValidate as FormBuilderValidationRules,
+      fieldname
     );
-    const errorElement =
-      this.state.errorRefs[inputElement.name][fieldIndex].value;
-
-    if (!result && message) {
-      this.state.errors[inputElement.name] = message;
+    const errorElement = this.state.errorRefs[name].value;
+    if (!result && message && inputElement.offsetHeight > 0) {
+      this.state.errors[name] = message;
 
       if (errorElement && !silent) {
         render(errorTemplate(message), errorElement);
       }
     } else {
-      delete this.state.errors[inputElement.name];
+      delete this.state.errors[name];
       if (errorElement) {
         render("", errorElement);
       }

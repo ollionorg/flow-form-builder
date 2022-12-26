@@ -6,17 +6,14 @@ export type FormBuilderBaseField = {
   state?: "default" | "success" | "error" | "warning";
   className?: string; // any additional css class name
   dataQA?: string; // data dq attribute for qa automation
-  name: string; // name is required for form output values
   label?: FormBuilderLabel; // label of field
   description?: string; // description displayed at bottom of field
   canDuplicate?: boolean; // plus icon will displayed besides field to duplicate
   validationRules?: FormBuilderValidationRules; // validation rules to validate field
-  if?: FormBuilderFieldShowCondition;
+  show?: FormBuilderShowCondition;
 };
 
-export type FormBuilderFieldShowCondition = (
-  values: FormBuilderValues
-) => boolean;
+export type FormBuilderShowCondition = (values: FormBuilderValues) => boolean;
 
 // text input type field
 export type FormBuilderTextInputField = FormBuilderBaseField & {
@@ -63,7 +60,7 @@ export type FormBuilderGenericValidationRule =
   | FormBuilderCustomValidationRule;
 export type FormBuilderValidationRules = FormBuilderGenericValidationRule[];
 
-export type FormBuilderField = FormBuilderTextInputField; // add othe rfield types
+export type FormBuilderField = FormBuilderTextInputField; // add other field types
 export type FormBuilderGroup = {
   direction?: "vertical" | "horizontal";
   variant?: "normal" | "compact";
@@ -71,7 +68,8 @@ export type FormBuilderGroup = {
   isCollpased?: boolean;
   canDuplicate?: boolean;
   label?: FormBuilderLabel;
-  fields: FormBuilderField[];
+  fields: Record<string, FormBuilderField>;
+  show?: FormBuilderShowCondition;
 };
 
 export type FormBuilderConfig = {
@@ -79,25 +77,26 @@ export type FormBuilderConfig = {
   variant?: "fill" | "transparent";
   groupSeparator?: boolean;
   fieldSize?: "small" | "medium";
-  groups: FormBuilderGroup[];
+  groups: Record<string, FormBuilderGroup>;
 };
 
 export type FormBuilderState = {
   isValid: boolean;
   isChanged: boolean;
   errors: Record<string, string>;
-  refs: Record<string, Ref<HTMLInputElement>[]>;
+  refs: Record<string, Ref<HTMLInputElement>>;
   rules: Record<string, FormBuilderValidationRules | undefined>;
-  errorRefs: Record<string, Ref<HTMLElement>[]>;
-  ifs: Map<Ref<HTMLInputElement>, FormBuilderFieldShowCondition>;
+  errorRefs: Record<string, Ref<HTMLElement>>;
+  showFunctions: Map<Ref<HTMLElement>, FormBuilderShowCondition>;
 };
 
 export type FormBuilderValues = Record<
   string,
-  string | string[] | number | number[]
+  Record<string, string | string[] | number | number[]>
 >;
 
 export type FormBuilderFieldRenderFunction = (
+  name: string,
   field: FormBuilderField,
   idx: number,
   fieldRef: Ref<HTMLInputElement>,

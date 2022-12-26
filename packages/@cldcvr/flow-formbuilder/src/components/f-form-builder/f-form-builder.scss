@@ -4,4 +4,8 @@
 :host {
   // Important :  always include base mixins
   @include base();
+
+  [data-hidden="true"] {
+    display: none !important;
+  }
 }

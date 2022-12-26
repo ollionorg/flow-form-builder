@@ -34,14 +34,29 @@ import fields from "./f-formbuilder-fields";
       ...fields,
     }}
   >
-    {(args) =>
-      html`<f-div direction="column" padding="x-large">
+    {(args) => {
+      const handleSubmit = (event) => {
+        console.log("Submit event", event.detail);
+      };
+      const handleStateChange = (event) => {
+        console.log("State Change event", event.detail);
+      };
+      const handleInput = (event) => {
+        console.log("input event", event.detail);
+      };
+      return html`<f-div direction="column" padding="x-large">
         <f-form-builder
           .config=${args.config}
-          .values=${{ abc: ["abcd", "1234"], xyz: "5678" }}
+          .values=${{
+            group1: { abc: "abc", xyz: "5678" },
+            group2: { email: "x@test.com" },
+          }}
+          @submit=${handleSubmit}
+          @stateChange=${handleStateChange}
+          @input=${handleInput}
         ></f-form-builder>
-      </f-div>`
-    }
+      </f-div>`;
+    }}
   </Story>
 </Canvas>
 
