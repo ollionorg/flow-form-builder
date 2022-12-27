@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [0.0.2] - 2022-12-27
+
+### Features
+
+- releasing to test in `vue`. 
+
 ## [0.0.1] - 2022-12-20
 
 ### Initial release
