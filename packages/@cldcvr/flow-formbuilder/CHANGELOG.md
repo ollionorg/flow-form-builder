@@ -4,6 +4,13 @@
 
 # Change Log
 
+## [0.0.3] - 2022-12-27
+
+### Features
+
+- Default slot added to add extra eleemnts after groups.
+- `submit` method added to submit from using JS.
+- `state` value emiitted with new object.
 ## [0.0.2] - 2022-12-27
 
 ### Features

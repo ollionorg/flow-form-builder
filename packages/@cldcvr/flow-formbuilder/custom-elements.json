@@ -136,6 +136,10 @@
             },
             {
               "kind": "method",
+              "name": "submit"
+            },
+            {
+              "kind": "method",
               "name": "checkAllShowConditions",
               "description": "check if condition is satisfying for any element"
             },
@@ -168,6 +172,10 @@
                 }
               ],
               "description": "render field based on field config"
+            },
+            {
+              "kind": "method",
+              "name": "emitStateChange"
             },
             {
               "kind": "method",

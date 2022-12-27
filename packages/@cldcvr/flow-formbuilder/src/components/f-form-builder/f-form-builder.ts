@@ -74,19 +74,13 @@ export class FFormBuilder extends FRoot {
     event.stopPropagation();
     // setting isChanged to true in state
     this.state.isChanged = true;
-
+    this.checkAllShowConditions();
     /**
      * validate silently
      */
     this.validateForm(true);
-    this.checkAllShowConditions();
 
-    const stateChange = new CustomEvent("stateChange", {
-      detail: this.state,
-      bubbles: true,
-      composed: true,
-    });
-    this.dispatchEvent(stateChange);
+    this.emitStateChange();
 
     const input = new CustomEvent("input", {
       detail: { ...this.values },
@@ -131,13 +125,16 @@ export class FFormBuilder extends FRoot {
         `;
       })}
       <br />
-      <input type="submit" value="Submit" />
+      <slot></slot>
     </form>`;
   }
   onSubmit(event: SubmitEvent) {
     event.stopPropagation();
     event.preventDefault();
+    this.submit();
+  }
 
+  submit() {
     this.validateForm();
     if (this.state.isValid) {
       const event = new CustomEvent("submit", {
@@ -231,6 +228,16 @@ export class FFormBuilder extends FRoot {
     });
 
     this.checkAllShowConditions();
+
+    this.emitStateChange();
+  }
+  emitStateChange() {
+    const stateChange = new CustomEvent("stateChange", {
+      detail: { ...this.state },
+      bubbles: true,
+      composed: true,
+    });
+    this.dispatchEvent(stateChange);
   }
 
   /**
