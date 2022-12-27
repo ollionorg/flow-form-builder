@@ -284,8 +284,8 @@ export class FFormBuilder extends FRoot {
         this.state.rules[name]?.forEach((rule) => {
           if (rule.when && rule.when.length > 0) {
             rule.when.forEach((eventname) => {
+              this.values[groupname][fieldname] = inputElement.value;
               inputElement.addEventListener(eventname, () => {
-                console.log(eventname);
                 this.validateField(
                   name,
                   inputElement,
