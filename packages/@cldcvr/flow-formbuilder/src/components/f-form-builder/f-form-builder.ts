@@ -26,7 +26,7 @@ export class FFormBuilder extends FRoot {
   /**
    * css loaded from scss file
    */
-  static styles = [unsafeCSS(eleStyle), unsafeCSS(flowCoreCSS)];
+  static styles = [unsafeCSS(flowCoreCSS), unsafeCSS(eleStyle)];
 
   /**
    * @attribute formbuilder config

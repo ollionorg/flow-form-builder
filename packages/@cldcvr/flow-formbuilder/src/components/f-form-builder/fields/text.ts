@@ -9,7 +9,9 @@ export default function (
 ) {
   return html`<input
     type="text"
+    class="demo-input"
     id=${"form-ele" + idx}
+    autocomplete="off"
     name=${name}
     ${ref(fieldRef)}
   />`;

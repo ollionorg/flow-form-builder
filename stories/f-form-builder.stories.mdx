@@ -44,7 +44,7 @@ import fields from "./f-formbuilder-fields";
       const handleInput = (event) => {
         console.log("input event", event.detail);
       };
-      return html`<f-div direction="column" padding="x-large">
+      return html`<f-div direction="column" padding="x-large" width="50%">
         <f-form-builder
           .config=${args.config}
           .values=${{

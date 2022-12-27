@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [0.0.4] - 2022-12-27
+
+### Features
+
+- `input` styled with flow-core's variables.
 ## [0.0.3] - 2022-12-27
 
 ### Features
