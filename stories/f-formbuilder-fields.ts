@@ -10,6 +10,7 @@ const sampleFormBuilder: SampleFormBuilder = {
   config: {
     groups: {
       group1: {
+        direction: "horizontal",
         fields: {
           abc: {
             type: "text",

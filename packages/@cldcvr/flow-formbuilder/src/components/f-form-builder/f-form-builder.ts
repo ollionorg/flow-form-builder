@@ -101,31 +101,28 @@ export class FFormBuilder extends FRoot {
       @input=${this.handleFormChange}
       ${ref(this.formRef)}
     >
-      ${Object.entries(this.config.groups).map(([name, gr]) => {
-        const groupWrapperRef: Ref<HTMLElement> = createRef();
-        if (gr.show) {
-          this.state.showFunctions.set(groupWrapperRef, gr.show);
-        }
-        return html`
-          <f-div
-            gap="medium"
-            padding="small"
-            direction="column"
-            ${ref(groupWrapperRef)}
-          >
-            <f-text variant="heading">${name}</f-text>
-            <f-div
-              gap="medium"
-              .direction=${gr.direction === "horizontal" ? "row" : "column"}
-            >
-              ${this.buildFields(name, gr.fields)}
+      <f-div direction="column" gap="small">
+        ${Object.entries(this.config.groups).map(([name, gr]) => {
+          const groupWrapperRef: Ref<HTMLElement> = createRef();
+          if (gr.show) {
+            this.state.showFunctions.set(groupWrapperRef, gr.show);
+          }
+          return html`
+            <f-div gap="medium" direction="column" ${ref(groupWrapperRef)}>
+              <f-text variant="heading">${name}</f-text>
+              <f-div
+                gap="medium"
+                .direction=${gr.direction === "horizontal" ? "row" : "column"}
+              >
+                ${this.buildFields(name, gr.fields)}
+              </f-div>
+              <f-divider></f-divider>
             </f-div>
-          </f-div>
-          <f-divider></f-divider>
-        `;
-      })}
-      <br />
-      <slot></slot>
+          `;
+        })}
+        <br />
+        <slot></slot>
+      </f-div>
     </form>`;
   }
   onSubmit(event: SubmitEvent) {
