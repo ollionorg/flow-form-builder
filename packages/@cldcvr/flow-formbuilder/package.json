@@ -1,10 +1,10 @@
 {
   "name": "@cldcvr/flow-formbuilder",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Lineage dependency for flow design system",
   "module": "dist/flow-formbuilder.es.js",
   "main": "dist/flow-formbuilder.cjs.js",
-  "types": "dist/types/src/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "sideEffects": false,
   "scripts": {
     "prepublishOnly": "./compile.sh",

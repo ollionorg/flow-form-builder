@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [0.0.6] - 2023-01-04
+
+### Bug Fixes
+
+- types location updated in package.json.
+
 ## [0.0.5] - 2022-12-28
 
 ### Features

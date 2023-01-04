@@ -1,6 +1,25 @@
 import { TemplateResult } from "lit";
 import { Ref } from "lit-html/directives/ref.js";
 
+export type FormBuilderConfig = {
+  gap?: "small" | "medium" | "large";
+  variant?: "fill" | "transparent";
+  groupSeparator?: boolean;
+  fieldSize?: "small" | "medium";
+  groups: Record<string, FormBuilderGroup>;
+};
+
+export type FormBuilderGroup = {
+  direction?: "vertical" | "horizontal";
+  variant?: "normal" | "compact";
+  isCollapsible?: boolean;
+  isCollpased?: boolean;
+  canDuplicate?: boolean;
+  label?: FormBuilderLabel;
+  fields: Record<string, FormBuilderField>;
+  show?: FormBuilderShowCondition;
+};
+
 export type FormBuilderBaseField = {
   id?: string; // id to uniquely identify in DOM
   state?: "default" | "success" | "error" | "warning";
@@ -12,15 +31,16 @@ export type FormBuilderBaseField = {
   validationRules?: FormBuilderValidationRules; // validation rules to validate field
   show?: FormBuilderShowCondition;
 };
-
-export type FormBuilderShowCondition = (values: FormBuilderValues) => boolean;
-
 // text input type field
 export type FormBuilderTextInputField = FormBuilderBaseField & {
   type: "text";
   placeholder?: string;
   autoComplete?: boolean; // to disabled browser's auto-complete behavior
 };
+
+export type FormBuilderField = FormBuilderTextInputField; // add other field types
+
+export type FormBuilderShowCondition = (values: FormBuilderValues) => boolean;
 
 export type FormBuilderLabel = {
   title: string; // title of field/group/form
@@ -59,26 +79,6 @@ export type FormBuilderGenericValidationRule =
   | FormBuilderValidationRequiredRule
   | FormBuilderCustomValidationRule;
 export type FormBuilderValidationRules = FormBuilderGenericValidationRule[];
-
-export type FormBuilderField = FormBuilderTextInputField; // add other field types
-export type FormBuilderGroup = {
-  direction?: "vertical" | "horizontal";
-  variant?: "normal" | "compact";
-  isCollapsible?: boolean;
-  isCollpased?: boolean;
-  canDuplicate?: boolean;
-  label?: FormBuilderLabel;
-  fields: Record<string, FormBuilderField>;
-  show?: FormBuilderShowCondition;
-};
-
-export type FormBuilderConfig = {
-  gap?: "small" | "medium" | "large";
-  variant?: "fill" | "transparent";
-  groupSeparator?: boolean;
-  fieldSize?: "small" | "medium";
-  groups: Record<string, FormBuilderGroup>;
-};
 
 export type FormBuilderState = {
   isValid: boolean;
