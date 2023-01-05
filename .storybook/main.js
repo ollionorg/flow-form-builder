@@ -23,7 +23,7 @@ module.exports = {
       config.optimizeDeps = {};
     }
     if (configType === "PRODUCTION") {
-      config.base = "/flow-form-builder/";
+      config.base = "/form-builder/";
       config.resolve.alias = [
         {
           find: "@cldcvr/flow-form-builder/src",
