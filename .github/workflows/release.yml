@@ -48,7 +48,7 @@ jobs:
       # Remove original publishConfig in packages/flow-core/package.json
       - uses: sergeysova/jq-action@v2
         with:
-          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/@cldcvr/flow-formbuilder/package.json`" > packages/@cldcvr/flow-formbuilder/package.json
+          cmd: echo "`jq '.publishConfig.registry="https://npm.pkg.github.com"' packages/@cldcvr/flow-form-builder/package.json`" > packages/@cldcvr/flow-form-builder/package.json
       - uses: actions/setup-node@v2
         with:
           node-version: '16.x'

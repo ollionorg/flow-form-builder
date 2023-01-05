@@ -1,4 +1,4 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-yarn workspace @cldcvr/flow-formbuilder compile && yarn workspace @cldcvr/flow-formbuilder test-build  && git add -A
+yarn workspace @cldcvr/flow-form-builder compile && yarn workspace @cldcvr/flow-form-builder test-build  && git add -A

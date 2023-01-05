@@ -1,7 +1,7 @@
 import {
   FormBuilderConfig,
   FormBuilderValues,
-} from "@cldcvr/flow-formbuilder/src";
+} from "@cldcvr/flow-form-builder/src";
 type SampleFormBuilder = {
   config: FormBuilderConfig;
 };

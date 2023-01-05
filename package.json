@@ -1,7 +1,7 @@
 {
-  "name": "flow-formbuilder-storybook",
+  "name": "flow-form-builder-storybook",
   "version": "1.0.0",
-  "description": "Storybook project for <flow-formbuilder> component development",
+  "description": "Storybook project for <flow-form-builder> component development",
   "private": true,
   "sideEffects": false,
   "workspaces": [
@@ -12,8 +12,8 @@
     "storybook": "start-storybook -p 6012",
     "start": "yarn storybook",
     "build-storybook": "build-storybook",
-    "build-packages": "cd packages/@cldcvr/flow-formbuilder && yarn compile",
-    "release": "cp README.md packages/@cldcvr/flow-formbuilder && yarn build-packages && yarn changeset publish",
+    "build-packages": "cd packages/@cldcvr/flow-form-builder && yarn compile",
+    "release": "cp README.md packages/@cldcvr/flow-form-builder && yarn build-packages && yarn changeset publish",
     "prepare": "husky install"
   },
   "keywords": [

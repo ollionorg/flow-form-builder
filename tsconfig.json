@@ -32,6 +32,6 @@
     ]
   },
   "references": [
-    { "path": "./packages/@cldcvr/flow-formbuilder/tsconfig.node.json" }
+    { "path": "./packages/@cldcvr/flow-form-builder/tsconfig.node.json" }
   ]
 }

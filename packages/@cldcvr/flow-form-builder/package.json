@@ -1,9 +1,9 @@
 {
-  "name": "@cldcvr/flow-formbuilder",
-  "version": "0.0.6",
+  "name": "@cldcvr/flow-form-builder",
+  "version": "0.0.7",
   "description": "Lineage dependency for flow design system",
-  "module": "dist/flow-formbuilder.es.js",
-  "main": "dist/flow-formbuilder.cjs.js",
+  "module": "dist/flow-form-builder.es.js",
+  "main": "dist/flow-form-builder.cjs.js",
   "types": "dist/types/index.d.ts",
   "sideEffects": false,
   "scripts": {
@@ -59,7 +59,7 @@
   "repository": {
     "type": "git",
     "url": "git+ssh://github.com/cldcvr/flow-core.git",
-    "directory": "packages/@cldcvr/flow-formbuilder"
+    "directory": "packages/@cldcvr/flow-form-builder"
   },
   "publishConfig": {
     "access": "public",
@@ -67,9 +67,9 @@
   },
   "customElements": "custom-elements.json",
   "bugs": {
-    "url": "https://github.com/cldcvr/flow-formbuilder/issues"
+    "url": "https://github.com/cldcvr/flow-form-builder/issues"
   },
-  "homepage": "https://github.com/cldcvr/flow-formbuilder#readme",
+  "homepage": "https://github.com/cldcvr/flow-form-builder#readme",
   "author": "@cldcvr",
   "license": "MIT"
 }

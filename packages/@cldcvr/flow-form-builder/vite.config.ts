@@ -6,8 +6,8 @@ export default defineConfig({
   build: {
     lib: {
       entry: "src/index.ts",
-      name: "flow-formbuilder",
-      fileName: (format) => `flow-formbuilder.${format}.js`,
+      name: "flow-form-builder",
+      fileName: (format) => `flow-form-builder.${format}.js`,
       formats: ["es", "cjs"],
     },
     // outDir: "dist",

@@ -1,6 +1,6 @@
 import { html } from "lit-html";
 
-import "@cldcvr/flow-formbuilder/src";
+import "@cldcvr/flow-form-builder/src";
 import {
   setCustomElementsManifest,
   setCustomElements,
@@ -42,7 +42,7 @@ async function run() {
   const customElements = await (
     await fetch(
       new URL(
-        "../packages/@cldcvr/flow-formbuilder/custom-elements.json",
+        "../packages/@cldcvr/flow-form-builder/custom-elements.json",
         import.meta.url
       )
     )

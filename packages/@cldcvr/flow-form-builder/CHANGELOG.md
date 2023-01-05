@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [0.0.7] - 2023-01-05
+
+### Improvements
+
+- package renamed from `@cldcvr/flow-formbuilder` to `@cldcvr/flow-form-builder`
+
 ## [0.0.6] - 2023-01-04
 
 ### Bug Fixes

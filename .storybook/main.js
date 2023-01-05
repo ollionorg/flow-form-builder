@@ -23,13 +23,13 @@ module.exports = {
       config.optimizeDeps = {};
     }
     if (configType === "PRODUCTION") {
-      config.base = "/flow-formbuilder/";
+      config.base = "/flow-form-builder/";
       config.resolve.alias = [
         {
-          find: "@cldcvr/flow-formbuilder/src",
+          find: "@cldcvr/flow-form-builder/src",
           replacement: path.resolve(
             __dirname,
-            "../packages/@cldcvr/flow-formbuilder/src"
+            "../packages/@cldcvr/flow-form-builder/src"
           ),
         },
       ];
