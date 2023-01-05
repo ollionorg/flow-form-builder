@@ -2,7 +2,7 @@ name: Deploy storybook to amazon s3
 on:
   push:
     branches:
-      - <modify-branch-name>
+      - main
 defaults:
   run:
     shell: bash
@@ -44,7 +44,7 @@ jobs:
 
       - name: Copy files to the website with the AWS CLI
         run: |
-          aws s3 sync storybook-static/ s3://${{env.BUCKET_NAME}}/formbuilder/
+          aws s3 sync storybook-static/ s3://${{env.BUCKET_NAME}}/form-builder/
 
       - name: Invalidate CloudFront
         run: |
