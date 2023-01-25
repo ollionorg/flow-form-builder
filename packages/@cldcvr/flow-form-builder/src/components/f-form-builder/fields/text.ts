@@ -38,7 +38,7 @@ export default function (
         : ""}
       ${_field?.helperText
         ? html`<f-div slot="help">${_field?.helperText}</f-div>`
-        : html` <f-div slot="help" ${ref(fieldErrorRef)}></f-div>`}
+        : html` <f-div ${ref(fieldErrorRef)}></f-div>`}
       ${_field?.label?.iconTooltip
         ? html` <f-icon slot="icon-tooltip" source="i-question-filled" size="small"></f-icon> `
         : ""}

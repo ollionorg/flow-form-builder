@@ -11,14 +11,14 @@ export default function (
   params?: Record<string, unknown>
 ) {
   return html`
-    <f-div direction="column" .gap=${ifDefined(params?.gap)}>
+    <f-div direction="column">
       <f-checkbox-group
         name=${name}
         id=${"form-ele" + idx}
         ${ref(fieldRef)}
         .options=${_field.options}
-        gap=${ifDefined(params?.gap)}
-        .direction=${params?.direction}
+        gap=${ifDefined(params?.group?.gap)}
+        .direction=${params?.group?.direction}
         state=${ifDefined(_field.state)}
         helperText=${ifDefined(_field.helperText)}
       ></f-checkbox-group>

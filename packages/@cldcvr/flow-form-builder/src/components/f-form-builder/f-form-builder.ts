@@ -18,7 +18,7 @@ import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import fieldRenderer from "./fields";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 const errorTemplate = (error: string) =>
-  html` <f-text state="danger" variant="para" size="small" weight="regular">${error} </f-text>`;
+  html`<f-text state="danger" variant="para" size="small" weight="regular">${error} </f-text>`;
 
 const GROUP_FIELD_NAME_SEPARATOR = ".$";
 
@@ -233,7 +233,7 @@ export class FFormBuilder extends FRoot {
       this.state.refs[relativeName] = fieldRef;
       this.state.errorRefs[relativeName] = fieldErrorRef;
       this.state.rules[relativeName] = field.validationRules;
-      const params = { ...group };
+      const params = { group: { ...group } };
       if (field.show) {
         this.state.showFunctions.set(fieldRef, field.show);
       }
@@ -310,10 +310,6 @@ export class FFormBuilder extends FRoot {
       const validation = (e) => {
         // updating values in object
         this.values[groupname][fieldname] = inputElement?.value;
-        // this.values = {
-        //   ...this.values,
-        //   [groupname]: { ...this.values[groupname], [fieldname]: inputElement?.value },
-        // };
         // checking validaiton rules if any
         if (this.state.rules[name] !== undefined) {
           this.validateField(name, inputElement);

@@ -17,8 +17,8 @@ export default function (
         id=${"form-ele" + idx}
         ${ref(fieldRef)}
         .options=${_field.options}
-        gap=${ifDefined(params?.gap)}
-        .direction=${params?.direction}
+        gap=${ifDefined(params?.group?.gap)}
+        .direction=${params?.group?.direction}
         state=${ifDefined(_field.state)}
         helperText=${ifDefined(_field.helperText)}
       ></f-radio-group>
