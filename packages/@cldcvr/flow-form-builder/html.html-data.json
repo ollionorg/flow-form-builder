@@ -78,7 +78,7 @@
     },
     {
       "name": "f-form-builder",
-      "description": "Events:\n\n  * `input` {`CustomEvent<{ [x: string]: Record<string, string | number | string[] | number[]>; }>`} - \n\n  * `submit` {`CustomEvent<FormBuilderValues>`} - \n\n  * `stateChange` {`CustomEvent<{ isValid: boolean; isChanged: boolean; errors: Record<string, string>; refs: Record<string, Ref<HTMLInputElement>>; rules: Record<string, FormBuilderValidationRules | undefined>; errorRefs: Record<...>; showFunctions: Map<...>; }>`} - \n\nAttributes:\n\n  * `config` {`FormBuilderConfig`} - \n\n  * `values` - \n\nProperties:\n\n  * `config` {`FormBuilderConfig`} - \n\n  * `values` - \n\n  * `state` {`FormBuilderState`} - Internal state of formbuilder\n\n  * `formRef` - form reference\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ [x: string]: Record<string, string | number | string[] | number[]>; }>`} - \n\n  * `submit` {`CustomEvent<FormBuilderValues>`} - \n\n  * `stateChange` {`CustomEvent<{ isValid: boolean; isChanged: boolean; errors: Record<string, string>; refs: Record<string, Ref<HTMLInputElement>>; helperTexts: Record<string, string | undefined>; rules: Record<...>; errorRefs: Record<...>; showFunctions: Map<...>; }>`} - \n\nAttributes:\n\n  * `config` {`FormBuilderConfig`} - \n\n  * `values` - \n\nProperties:\n\n  * `config` {`FormBuilderConfig`} - \n\n  * `values` - \n\n  * `state` {`FormBuilderState`} - Internal state of formbuilder\n\n  * `formRef` - form reference\n\n  * `styles` {`CSSResult[]`} - css loaded from scss file",
       "attributes": [
         {
           "name": "config",
@@ -98,7 +98,7 @@
         },
         {
           "name": "onstateChange",
-          "description": "`stateChange` {`CustomEvent<{ isValid: boolean; isChanged: boolean; errors: Record<string, string>; refs: Record<string, Ref<HTMLInputElement>>; rules: Record<string, FormBuilderValidationRules | undefined>; errorRefs: Record<...>; showFunctions: Map<...>; }>`} - "
+          "description": "`stateChange` {`CustomEvent<{ isValid: boolean; isChanged: boolean; errors: Record<string, string>; refs: Record<string, Ref<HTMLInputElement>>; helperTexts: Record<string, string | undefined>; rules: Record<...>; errorRefs: Record<...>; showFunctions: Map<...>; }>`} - "
         }
       ]
     },

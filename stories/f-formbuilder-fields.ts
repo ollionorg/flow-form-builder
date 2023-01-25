@@ -1,4 +1,7 @@
-import { FormBuilderConfig, FormBuilderValues } from "@cldcvr/flow-form-builder/src";
+import {
+  FormBuilderConfig,
+  FormBuilderValues,
+} from "../../packages/flow-core/src/components/f-form-builder/f-form-builder-types";
 type SampleFormBuilder = {
   config: FormBuilderConfig;
 };

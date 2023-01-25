@@ -1,9 +1,10 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import fields from "./f-formbuilder-fields";
+import { useArgs } from "@storybook/client-api";
 
 <Meta
-  title="Components/f-form-builder"
+  title="Components2/f-form-builder"
   parameters={{
     controls: { hideNoControlsWarning: true },
   }}
@@ -29,12 +30,23 @@ import fields from "./f-formbuilder-fields";
       config: {
         control: "object",
       },
+      values: { control: "object" },
     }}
     args={{
       ...fields,
+      values: {
+        group7: { select: ["option 1", "option 2"] },
+        group1: { abc: "abc", xyz: "5678" },
+        group2: { email: "x@test.com" },
+        group3: { checkbox: ["1"] },
+        group5: { radio: "1" },
+        group6: { switchButton: "on" },
+        group4: { texthere: "" },
+      },
     }}
   >
     {(args) => {
+      const [_, updateArgs] = useArgs();
       const handleSubmit = (event) => {
         console.log("Submit event", event.detail);
       };
@@ -42,18 +54,12 @@ import fields from "./f-formbuilder-fields";
         console.log("State Change event", event.detail);
       };
       const handleInput = (event) => {
+        updateArgs({ values: event.detail });
         console.log("input event", event.detail);
       };
       return html` <f-form-builder
         .config=${args.config}
-        .values=${{
-          group7: { select: ["option 1", "option 2"] },
-          group1: { abc: "abc", xyz: "5678" },
-          group2: { email: "x@test.com" },
-          group3: { checkbox: ["1"] },
-          group5: { radio: "1" },
-          group6: { switchButton: "on" },
-        }}
+        .values=${args.values}
         @submit=${handleSubmit}
         @stateChange=${handleStateChange}
         @input=${handleInput}

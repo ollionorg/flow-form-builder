@@ -172,6 +172,7 @@ export type FormBuilderState = {
   isChanged: boolean;
   errors: Record<string, string>;
   refs: Record<string, Ref<HTMLInputElement>>;
+  helperTexts: Record<string, string | undefined>;
   rules: Record<string, FormBuilderValidationRules | undefined>;
   errorRefs: Record<string, Ref<HTMLElement>>;
   showFunctions: Map<Ref<HTMLElement>, FormBuilderShowCondition>;

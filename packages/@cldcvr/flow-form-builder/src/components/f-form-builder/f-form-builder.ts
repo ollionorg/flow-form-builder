@@ -18,7 +18,7 @@ import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import fieldRenderer from "./fields";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 const errorTemplate = (error: string) =>
-  html`<f-text state="danger" variant="para" size="small" weight="regular">${error} </f-text>`;
+  html` <f-text state="danger" variant="para" size="small" weight="regular">${error} </f-text>`;
 
 const GROUP_FIELD_NAME_SEPARATOR = ".$";
 
@@ -59,6 +59,7 @@ export class FFormBuilder extends FRoot {
       isChanged: false,
       errors: {},
       refs: {},
+      helperTexts: {},
       rules: {},
       errorRefs: {},
       showFunctions: new Map(),
@@ -133,7 +134,6 @@ export class FFormBuilder extends FRoot {
         const groupWrapperRef: Ref<HTMLElement> = createRef();
         if (gr.show) {
           this.state.showFunctions.set(groupWrapperRef, gr.show);
-          console.log(this.state.showFunctions.set(groupWrapperRef, gr.show));
         }
         return html`
           <f-form-group
@@ -233,7 +233,11 @@ export class FFormBuilder extends FRoot {
       this.state.refs[relativeName] = fieldRef;
       this.state.errorRefs[relativeName] = fieldErrorRef;
       this.state.rules[relativeName] = field.validationRules;
-      const params = { group: { ...group } };
+      if (field?.helperText) {
+        this.state.helperTexts[relativeName] = field.helperText;
+      }
+
+      const params = { ...group };
       if (field.show) {
         this.state.showFunctions.set(fieldRef, field.show);
       }
@@ -310,6 +314,11 @@ export class FFormBuilder extends FRoot {
       const validation = (e) => {
         // updating values in object
         this.values[groupname][fieldname] = inputElement?.value;
+
+        // this.values = {
+        //   ...this.values,
+        //   [groupname]: { ...this.values[groupname], [fieldname]: inputElement?.value },
+        // };
         // checking validaiton rules if any
         if (this.state.rules[name] !== undefined) {
           this.validateField(name, inputElement);
@@ -361,21 +370,23 @@ export class FFormBuilder extends FRoot {
       rulesToValidate as FormBuilderValidationRules,
       fieldname
     );
-    console.log(result, message);
     const errorElement = this.state.errorRefs[name].value;
     if (!result && message && inputElement.offsetHeight > 0) {
       this.state.errors[name] = message;
-      inputElement.state = "danger";
+      if (this.state.helperTexts[name] && !silent) {
+        inputElement.state = "danger";
+      }
       if (errorElement && !silent) {
         render(errorTemplate(message), errorElement);
+        inputElement.state = "danger";
       }
     } else {
       delete this.state.errors[name];
-      inputElement.state = "default";
 
       if (errorElement) {
         render("", errorElement);
       }
+      inputElement.state = "default";
     }
   }
 }
