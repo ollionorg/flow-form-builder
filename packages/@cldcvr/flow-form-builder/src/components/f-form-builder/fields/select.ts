@@ -22,7 +22,7 @@ export default function (
       ?checkbox=${_field.checkbox}
       ?clear=${_field.clear}
       .width=${_field.width}
-      .height=${_field.height}
+      height=${ifDefined(_field.height)}
       ?disabled=${_field.disabled}
       selection-limit=${ifDefined(_field.selectionLimit)}
       ?create-option=${_field.createOption}

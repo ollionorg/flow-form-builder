@@ -1146,13 +1146,6 @@
               "type": {
                 "text": "Ref<HTMLElement>"
               }
-            },
-            {
-              "name": "params",
-              "optional": true,
-              "type": {
-                "text": "Record<string, unknown>"
-              }
             }
           ]
         }

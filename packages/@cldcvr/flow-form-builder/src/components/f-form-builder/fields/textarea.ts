@@ -7,13 +7,11 @@ export default function (
   _field: FormBuilderTextAreaField,
   idx: number,
   fieldRef: Ref<HTMLInputElement>,
-  fieldErrorRef: Ref<HTMLElement>,
-  params?: Record<string, unknown>
+  fieldErrorRef: Ref<HTMLElement>
 ) {
   return html`
     <f-text-area
       name=${name}
-      .category=${(params?.variant as "fill" | "transparent" | "outline") ?? "fill"}
       ${ref(fieldRef)}
       id=${"form-ele" + idx}
       .placeholder=${_field.placeholder}
