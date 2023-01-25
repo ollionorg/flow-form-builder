@@ -1,32 +1,33 @@
 import { html } from "lit";
-import { FormBuilderTextInputField } from "../f-form-builder-types";
+import { FormBuilderSelectField } from "../f-form-builder-types";
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (
   name: string,
-  _field: FormBuilderTextInputField,
+  _field: FormBuilderSelectField,
   idx: number,
   fieldRef: Ref<HTMLInputElement>,
   fieldErrorRef: Ref<HTMLElement>
 ) {
   return html`
-    <f-input
+    <f-select
       name=${name}
-      .type=${_field.type}
       ${ref(fieldRef)}
       id=${"form-ele" + idx}
       .placeholder=${_field.placeholder}
-      .type=${_field.type}
-      icon-left=${ifDefined(_field?.iconLeft)}
-      icon-right=${ifDefined(_field?.iconRight)}
-      prefix=${ifDefined(_field?.prefix)}
-      suffix=${ifDefined(_field?.suffix)}
-      state=${ifDefined(_field?.state)}
-      max-length=${ifDefined(_field?.maxLength)}
-      ?loading=${_field?.loading ?? false}
-      ?disabled=${_field?.disabled ?? false}
-      ?clear=${_field?.clear ?? true}
-      ?read-only=${_field?.readonly ?? false}
+      .type=${_field.selection}
+      .state=${_field.state ?? "default"}
+      ?searchable=${_field.searchable}
+      .options=${_field.options}
+      ?checkbox=${_field.checkbox}
+      ?clear=${_field.clear}
+      .width=${_field.width}
+      .height=${_field.height}
+      ?disabled=${_field.disabled}
+      selection-limit=${ifDefined(_field.selectionLimit)}
+      ?create-option=${_field.createOption}
+      .option-template=${_field.optionTemplate}
+      icon-left=${ifDefined(_field.iconLeft)}
     >
       ${_field?.label?.title
         ? html` <f-div slot="label" padding="none" gap="none">${_field?.label?.title}</f-div>`
@@ -42,6 +43,6 @@ export default function (
       ${_field?.label?.iconTooltip
         ? html` <f-icon slot="icon-tooltip" source="i-question-filled" size="small"></f-icon> `
         : ""}
-    </f-input>
+    </f-select>
   `;
 }

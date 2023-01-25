@@ -22,6 +22,22 @@
             "name": "*",
             "package": "\"./components/f-form-builder/f-form-builder-types\""
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-checkbox-group/f-checkbox-group\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-radio-group/f-radio-group\""
+          }
         }
       ]
     },
@@ -52,6 +68,176 @@
           "declaration": {
             "name": "content",
             "module": "src/shims.d.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-checkbox-group/f-checkbox-group.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FCheckboxGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "CheckboxOptionsType"
+              },
+              "default": "[]",
+              "attribute": "options",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "array"
+              },
+              "default": "[]",
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "attribute": "direction",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "helperText",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "helperText",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "handleChange",
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "String"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "isChecked",
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "String"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "options",
+              "type": {
+                "text": "CheckboxOptionsType"
+              },
+              "default": "[]",
+              "fieldName": "options"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "array"
+              },
+              "default": "[]",
+              "fieldName": "value"
+            },
+            {
+              "name": "direction",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "fieldName": "direction"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "fieldName": "gap"
+            },
+            {
+              "name": "helperText",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "helperText"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-checkbox-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FCheckboxGroup",
+          "declaration": {
+            "name": "FCheckboxGroup",
+            "module": "src/components/f-checkbox-group/f-checkbox-group.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-checkbox-group",
+          "declaration": {
+            "name": "FCheckboxGroup",
+            "module": "src/components/f-checkbox-group/f-checkbox-group.ts"
           }
         }
       ]
@@ -156,6 +342,19 @@
             },
             {
               "kind": "method",
+              "name": "checkFieldType",
+              "parameters": [
+                {
+                  "name": "type",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ],
+              "description": "validate whole form"
+            },
+            {
+              "kind": "method",
               "name": "buildFields",
               "parameters": [
                 {
@@ -168,6 +367,12 @@
                   "name": "fields",
                   "type": {
                     "text": "Record<string, FormBuilderField>"
+                  }
+                },
+                {
+                  "name": "group",
+                  "type": {
+                    "text": "FormBuilderGroup"
                   }
                 }
               ],
@@ -184,7 +389,7 @@
                 {
                   "name": "inputElement",
                   "type": {
-                    "text": "HTMLInputElement | undefined"
+                    "text": "any"
                   }
                 },
                 {
@@ -416,6 +621,174 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-radio-group/f-radio-group.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FRadioGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "CheckboxOptionsType"
+              },
+              "default": "[]",
+              "attribute": "options",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "attribute": "direction",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "helperText",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "helperText",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "handleChange",
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "isChecked",
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "options",
+              "type": {
+                "text": "CheckboxOptionsType"
+              },
+              "default": "[]",
+              "fieldName": "options"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "direction",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "fieldName": "direction"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "fieldName": "gap"
+            },
+            {
+              "name": "helperText",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "helperText"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-radio-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FRadioGroup",
+          "declaration": {
+            "name": "FRadioGroup",
+            "module": "src/components/f-radio-group/f-radio-group.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-radio-group",
+          "declaration": {
+            "name": "FRadioGroup",
+            "module": "src/components/f-radio-group/f-radio-group.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-builder/default-validation-messages/index.ts",
       "declarations": [
         {
@@ -440,6 +813,65 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form-builder/fields/checkbox.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "",
+          "parameters": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "_field",
+              "type": {
+                "text": "FormBuilderCheckboxField"
+              }
+            },
+            {
+              "name": "idx",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "fieldRef",
+              "type": {
+                "text": "Ref<HTMLInputElement>"
+              }
+            },
+            {
+              "name": "fieldErrorRef",
+              "type": {
+                "text": "Ref<HTMLElement>"
+              }
+            },
+            {
+              "name": "params",
+              "optional": true,
+              "type": {
+                "text": "Record<string, unknown>"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "",
+            "module": "src/components/f-form-builder/fields/checkbox.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-builder/fields/index.ts",
       "declarations": [
         {
@@ -448,7 +880,7 @@
           "type": {
             "text": "Record<string, FormBuilderFieldRenderFunction>"
           },
-          "default": "{\n  text,\n}"
+          "default": "{\n  text,\n  checkbox,\n  textarea,\n  radio,\n  switchButton,\n  select,\n}"
         }
       ],
       "exports": [
@@ -458,6 +890,169 @@
           "declaration": {
             "name": "all",
             "module": "src/components/f-form-builder/fields/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/fields/radio.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "",
+          "parameters": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "_field",
+              "type": {
+                "text": "FormBuilderRadioField"
+              }
+            },
+            {
+              "name": "idx",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "fieldRef",
+              "type": {
+                "text": "Ref<HTMLInputElement>"
+              }
+            },
+            {
+              "name": "fieldErrorRef",
+              "type": {
+                "text": "Ref<HTMLElement>"
+              }
+            },
+            {
+              "name": "params",
+              "optional": true,
+              "type": {
+                "text": "Record<string, unknown>"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "",
+            "module": "src/components/f-form-builder/fields/radio.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/fields/select.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "",
+          "parameters": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "_field",
+              "type": {
+                "text": "FormBuilderSelectField"
+              }
+            },
+            {
+              "name": "idx",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "fieldRef",
+              "type": {
+                "text": "Ref<HTMLInputElement>"
+              }
+            },
+            {
+              "name": "fieldErrorRef",
+              "type": {
+                "text": "Ref<HTMLElement>"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "",
+            "module": "src/components/f-form-builder/fields/select.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/fields/switch.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "",
+          "parameters": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "_field",
+              "type": {
+                "text": "FormBuilderTextInputField"
+              }
+            },
+            {
+              "name": "idx",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "fieldRef",
+              "type": {
+                "text": "Ref<HTMLInputElement>"
+              }
+            },
+            {
+              "name": "fieldErrorRef",
+              "type": {
+                "text": "Ref<HTMLElement>"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "",
+            "module": "src/components/f-form-builder/fields/switch.ts"
           }
         }
       ]
@@ -479,7 +1074,7 @@
             {
               "name": "_field",
               "type": {
-                "text": "FormBuilderField"
+                "text": "FormBuilderTextInputField"
               }
             },
             {
@@ -493,6 +1088,12 @@
               "type": {
                 "text": "Ref<HTMLInputElement>"
               }
+            },
+            {
+              "name": "fieldErrorRef",
+              "type": {
+                "text": "Ref<HTMLElement>"
+              }
             }
           ]
         }
@@ -504,6 +1105,65 @@
           "declaration": {
             "name": "",
             "module": "src/components/f-form-builder/fields/text.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/fields/textarea.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "",
+          "parameters": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "_field",
+              "type": {
+                "text": "FormBuilderTextAreaField"
+              }
+            },
+            {
+              "name": "idx",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "fieldRef",
+              "type": {
+                "text": "Ref<HTMLInputElement>"
+              }
+            },
+            {
+              "name": "fieldErrorRef",
+              "type": {
+                "text": "Ref<HTMLElement>"
+              }
+            },
+            {
+              "name": "params",
+              "optional": true,
+              "type": {
+                "text": "Record<string, unknown>"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "",
+            "module": "src/components/f-form-builder/fields/textarea.ts"
           }
         }
       ]

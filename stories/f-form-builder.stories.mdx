@@ -44,18 +44,20 @@ import fields from "./f-formbuilder-fields";
       const handleInput = (event) => {
         console.log("input event", event.detail);
       };
-      return html`<f-div direction="column" padding="x-large" width="50%">
-        <f-form-builder
-          .config=${args.config}
-          .values=${{
-            group1: { abc: "abc", xyz: "5678" },
-            group2: { email: "x@test.com" },
-          }}
-          @submit=${handleSubmit}
-          @stateChange=${handleStateChange}
-          @input=${handleInput}
-        ></f-form-builder>
-      </f-div>`;
+      return html` <f-form-builder
+        .config=${args.config}
+        .values=${{
+          group7: { select: ["option 1", "option 2"] },
+          group1: { abc: "abc", xyz: "5678" },
+          group2: { email: "x@test.com" },
+          group3: { checkbox: ["1"] },
+          group5: { radio: "1" },
+          group6: { switchButton: "on" },
+        }}
+        @submit=${handleSubmit}
+        @stateChange=${handleStateChange}
+        @input=${handleInput}
+      ></f-form-builder>`;
     }}
   </Story>
 </Canvas>
