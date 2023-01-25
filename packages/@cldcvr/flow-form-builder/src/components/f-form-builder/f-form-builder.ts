@@ -309,11 +309,11 @@ export class FFormBuilder extends FRoot {
       const [groupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
       const validation = (e) => {
         // updating values in object
-        // this.values[groupname][fieldname] = inputElement?.value;
-        this.values = {
-          ...this.values,
-          [groupname]: { ...this.values[groupname], [fieldname]: inputElement?.value },
-        };
+        this.values[groupname][fieldname] = inputElement?.value;
+        // this.values = {
+        //   ...this.values,
+        //   [groupname]: { ...this.values[groupname], [fieldname]: inputElement?.value },
+        // };
         // checking validaiton rules if any
         if (this.state.rules[name] !== undefined) {
           this.validateField(name, inputElement);
