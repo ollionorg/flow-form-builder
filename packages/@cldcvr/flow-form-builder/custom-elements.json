@@ -1120,7 +1120,7 @@
             {
               "name": "_field",
               "type": {
-                "text": "FormBuilderTextAreaField"
+                "text": "FormBuilderField"
               }
             },
             {
@@ -1132,16 +1132,14 @@
             {
               "name": "fieldRef",
               "type": {
-                "text": "Ref<HTMLInputElement>"
-              }
-            },
-            {
-              "name": "fieldErrorRef",
-              "type": {
-                "text": "Ref<HTMLElement>"
+                "text": "Ref<FFormInputElements>"
               }
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": ""
         }
       ],
       "exports": [

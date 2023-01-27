@@ -1,39 +1,41 @@
 import { html } from "lit";
-import { FormBuilderTextAreaField } from "../f-form-builder-types";
+import {
+  FFormInputElements,
+  FormBuilderField,
+  FormBuilderTextAreaField,
+} from "../f-form-builder-types";
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (
   name: string,
-  _field: FormBuilderTextAreaField,
+  _field: FormBuilderField,
   idx: number,
-  fieldRef: Ref<HTMLInputElement>,
-  fieldErrorRef: Ref<HTMLElement>
+  fieldRef: Ref<FFormInputElements>
 ) {
+  const field = _field as FormBuilderTextAreaField;
   return html`
     <f-text-area
       name=${name}
       ${ref(fieldRef)}
       id=${"form-ele" + idx}
-      .placeholder=${_field.placeholder}
-      max-length=${ifDefined(_field?.maxLength)}
-      ?disabled=${_field?.disabled ?? false}
-      ?clear=${_field?.clear ?? true}
-      ?read-only=${_field?.readonly ?? false}
-      ?resizable=${_field?.resizable ?? false}
-      rows=${ifDefined(_field?.rows)}
+      .placeholder=${field.placeholder}
+      max-length=${ifDefined(field?.maxLength)}
+      ?disabled=${field?.disabled ?? false}
+      ?clear=${field?.clear ?? true}
+      ?read-only=${field?.readonly ?? false}
+      ?resizable=${field?.resizable ?? false}
+      rows=${ifDefined(field?.rows)}
     >
-      ${_field?.label?.title
-        ? html` <f-div slot="label" padding="none" gap="none">${_field?.label?.title}</f-div>`
+      ${field?.label?.title
+        ? html` <f-div slot="label" padding="none" gap="none">${field?.label?.title}</f-div>`
         : html`<f-div slot="label" padding="none" gap="none">${name}</f-div>`}
-      ${_field?.label?.description
+      ${field?.label?.description
         ? html` <f-div slot="description" padding="none" gap="none"
-            >${_field?.label?.description}</f-div
+            >${field?.label?.description}</f-div
           >`
         : ""}
-      ${_field?.helperText
-        ? html`<f-div slot="help">${_field?.helperText}</f-div>`
-        : html` <f-div slot="help" ${ref(fieldErrorRef)}></f-div>`}
-      ${_field?.label?.iconTooltip
+      ${field?.helperText ? html`<f-div slot="help">${field?.helperText}</f-div>` : html``}
+      ${field?.label?.iconTooltip
         ? html` <f-icon slot="icon-tooltip" source="i-question-filled" size="small"></f-icon> `
         : ""}
     </f-text-area>
