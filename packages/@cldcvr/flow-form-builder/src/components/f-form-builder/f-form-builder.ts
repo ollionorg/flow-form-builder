@@ -107,7 +107,7 @@ export class FFormBuilder extends FRoot {
       size=${ifDefined(this.config.fieldSize)}
       category=${ifDefined(this.config.category)}
       variant=${ifDefined(this.config.variant)}
-      ?seperator=${this.config.groupSeparator}
+      ?separator=${this.config.groupSeparator}
       gap=${ifDefined(this.config.gap)}
     >
       <f-div padding="none" gap="x-small" direction="column" width="fill-container">
@@ -388,7 +388,6 @@ export class FFormBuilder extends FRoot {
       }
       if (!silent && !this.state.helperTexts[name]) {
         if (inputElement.lastElementChild?.getAttribute("slot") !== "help") {
-          console.log(inputElement);
           inputElement.insertAdjacentHTML("beforeend", `<f-div slot="help">${message}</f-div>`);
         }
         // render(errorTemplate(message), errorElement);

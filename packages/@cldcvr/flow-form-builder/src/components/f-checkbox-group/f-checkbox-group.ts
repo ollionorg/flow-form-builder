@@ -72,7 +72,6 @@ export class FCheckboxGroup extends FRoot {
   }
 
   render() {
-    console.log(this.value);
     /**
      * Final html to render
      */
