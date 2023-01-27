@@ -22,6 +22,22 @@
             "name": "*",
             "package": "\"./components/f-form-builder/f-form-builder-types\""
           }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-checkbox-group/f-checkbox-group\""
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "package": "\"./components/f-radio-group/f-radio-group\""
+          }
         }
       ]
     },
