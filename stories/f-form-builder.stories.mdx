@@ -34,15 +34,7 @@ import { useArgs } from "@storybook/client-api";
     }}
     args={{
       ...fields,
-      values: {
-        group7: { select: ["option 1", "option 2"] },
-        group1: { abc: "abc", xyz: "5678" },
-        group2: { email: "x@test.com" },
-        group3: { checkbox: ["1"] },
-        group5: { radio: "1" },
-        group6: { switchButton: "on" },
-        group4: { texthere: "" },
-      },
+      values: {},
     }}
   >
     {(args) => {

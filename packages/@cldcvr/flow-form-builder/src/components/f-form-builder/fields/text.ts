@@ -1,45 +1,48 @@
 import { html } from "lit";
-import { FormBuilderTextInputField } from "../f-form-builder-types";
+import {
+  FFormInputElements,
+  FormBuilderField,
+  FormBuilderTextInputField,
+} from "../f-form-builder-types";
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
+import _ from "lodash";
 export default function (
   name: string,
-  _field: FormBuilderTextInputField,
+  _field: FormBuilderField,
   idx: number,
-  fieldRef: Ref<HTMLInputElement>,
-  fieldErrorRef: Ref<HTMLElement>
+  fieldRef: Ref<FFormInputElements>
 ) {
+  const field = _field as FormBuilderTextInputField;
   return html`
     <f-input
       name=${name}
-      .type=${_field.type}
+      .type=${field.type}
       ${ref(fieldRef)}
       id=${"form-ele" + idx}
-      .placeholder=${_field.placeholder}
-      .type=${_field.type}
-      icon-left=${ifDefined(_field?.iconLeft)}
-      icon-right=${ifDefined(_field?.iconRight)}
-      prefix=${ifDefined(_field?.prefix)}
-      suffix=${ifDefined(_field?.suffix)}
-      state=${ifDefined(_field?.state)}
-      max-length=${ifDefined(_field?.maxLength)}
-      ?loading=${_field?.loading ?? false}
-      ?disabled=${_field?.disabled ?? false}
-      ?clear=${_field?.clear ?? true}
-      ?read-only=${_field?.readonly ?? false}
+      .placeholder=${field.placeholder}
+      .type=${field.type}
+      icon-left=${ifDefined(field?.iconLeft)}
+      icon-right=${ifDefined(field?.iconRight)}
+      prefix=${ifDefined(field?.prefix)}
+      suffix=${ifDefined(field?.suffix)}
+      state=${ifDefined(field?.state)}
+      max-length=${ifDefined(field?.maxLength)}
+      ?loading=${field?.loading ?? false}
+      ?disabled=${field?.disabled ?? false}
+      ?clear=${field?.clear ?? true}
+      ?read-only=${field?.readonly ?? false}
     >
-      ${_field?.label?.title
-        ? html` <f-div slot="label" padding="none" gap="none">${_field?.label?.title}</f-div>`
+      ${field?.label?.title
+        ? html` <f-div slot="label" padding="none" gap="none">${field?.label?.title}</f-div>`
         : html`<f-div slot="label" padding="none" gap="none">${name}</f-div>`}
-      ${_field?.label?.description
+      ${field?.label?.description
         ? html` <f-div slot="description" padding="none" gap="none"
-            >${_field?.label?.description}</f-div
+            >${field?.label?.description}</f-div
           >`
         : ""}
-      ${_field?.helperText
-        ? html`<f-div slot="help">${_field?.helperText}</f-div>`
-        : html` <f-div ${ref(fieldErrorRef)}></f-div>`}
-      ${_field?.label?.iconTooltip
+      ${field?.helperText ? html`<f-div slot="help">${field?.helperText}</f-div>` : html``}
+      ${field?.label?.iconTooltip
         ? html` <f-icon slot="icon-tooltip" source="i-question-filled" size="small"></f-icon> `
         : ""}
     </f-input>

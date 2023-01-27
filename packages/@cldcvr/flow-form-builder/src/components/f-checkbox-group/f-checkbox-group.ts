@@ -1,12 +1,14 @@
-import { FRoot } from "@cldcvr/flow-core";
+// import { FRoot } from "@cldcvr/flow-core";
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { CheckboxOptionsType } from "../f-form-builder/f-form-builder-types";
 import eleStyle from "./f-checkbox-group.scss";
 
 // import { ref, createRef } from "lit/directives/ref.js";
-import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import { ifDefined } from "lit-html/directives/if-defined.js";
+import { FDiv, FRoot } from "@cldcvr/flow-core";
+
+export type FCheckboxGroupValue = string[];
 
 /**
  * @summary Text component includes Headings, titles, body texts and links.
@@ -16,7 +18,7 @@ export class FCheckboxGroup extends FRoot {
   /**
    * css loaded from scss file
    */
-  static styles = [unsafeCSS(flowCoreCSS), unsafeCSS(eleStyle)];
+  static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
 
   /**
    * @attribute Controls size of all input elements within the form
@@ -34,7 +36,7 @@ export class FCheckboxGroup extends FRoot {
    * @attribute Controls size of all input elements within the form
    */
   @property({ reflect: true, type: Array })
-  value? = [];
+  value?: FCheckboxGroupValue = [];
 
   /**
    * @attribute Decides the direction of the input elements within the group.
@@ -51,7 +53,7 @@ export class FCheckboxGroup extends FRoot {
   @property({ type: String, reflect: true })
   helperText?: string;
 
-  handleChange(id: String) {
+  handleChange(id: string) {
     let tempValues = this.value && this.value?.length > 0 ? [...this.value] : [];
     if (this.isChecked(id) === "unchecked") {
       tempValues.push(id);
@@ -105,23 +107,11 @@ export class FCheckboxGroup extends FRoot {
           )}
         </div>
         ${this?.helperText
-          ? html`<f-text variant="para" size="small" weight="regular" state=${ifDefined(
-              this.state
-            )}>${this?.helperText}</f-div>`
-          : html``}
+          ? html`<f-text variant="para" size="small" weight="regular" state=${ifDefined(this.state)}
+              >${this?.helperText}</f-text
+            >`
+          : html`<slot name="help"></slot>`}
       </f-div>
     `;
   }
 }
-
-/**
- * Required for typescript
- */
-declare global {
-  export interface HTMLElementTagNameMap {
-    "f-checkbox-group": FCheckboxGroup;
-  }
-}
-//   ${item?.helperText
-//     ? html`<f-div slot="help">${item?.helperText}</f-div>`
-//     : html` <f-div slot="help" ${ref(fieldErrorRef)}></f-div>`}

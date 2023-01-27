@@ -1,7 +1,7 @@
 import {
   FormBuilderConfig,
   FormBuilderValues,
-} from "../../packages/flow-core/src/components/f-form-builder/f-form-builder-types";
+} from "../packages/@cldcvr/flow-form-builder/src/components/f-form-builder/f-form-builder-types";
 type SampleFormBuilder = {
   config: FormBuilderConfig;
 };
@@ -94,7 +94,7 @@ const sampleFormBuilder: SampleFormBuilder = {
       },
       group2: {
         show: (formValues: FormBuilderValues) => {
-          return formValues.group1.xyz === "show";
+          return formValues?.group1?.xyz === "show";
         },
         fields: {
           username: {
@@ -113,7 +113,7 @@ const sampleFormBuilder: SampleFormBuilder = {
               },
             ],
             show: (formValues: FormBuilderValues) => {
-              return formValues.group2.username === "abc";
+              return formValues?.group2?.username === "abc";
             },
           },
           lastname: {

@@ -1,12 +1,12 @@
-import { FRoot } from "@cldcvr/flow-core";
+// import { FRoot } from "@cldcvr/flow-core";
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { CheckboxOptionsType } from "../f-form-builder/f-form-builder-types";
 import eleStyle from "./f-radio-group.scss";
 
 // import { ref, createRef } from "lit/directives/ref.js";
-import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import { ifDefined } from "lit-html/directives/if-defined.js";
+import { FDiv, FRoot } from "@cldcvr/flow-core";
 
 /**
  * @summary Text component includes Headings, titles, body texts and links.
@@ -16,7 +16,7 @@ export class FRadioGroup extends FRoot {
   /**
    * css loaded from scss file
    */
-  static styles = [unsafeCSS(flowCoreCSS), unsafeCSS(eleStyle)];
+  static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
 
   /**
    * @attribute Controls size of all input elements within the form
@@ -100,20 +100,8 @@ export class FRadioGroup extends FRoot {
           ? html`<f-text variant="para" size="small" weight="regular" state=${ifDefined(this.state)}
               >${this?.helperText}</f-text
             >`
-          : html``}
+          : html`<slot name="help"></slot>`}
       </f-div>
     `;
   }
 }
-
-/**
- * Required for typescript
- */
-declare global {
-  export interface HTMLElementTagNameMap {
-    "f-radio-group": FRadioGroup;
-  }
-}
-//   ${item?.helperText
-//     ? html`<f-div slot="help">${item?.helperText}</f-div>`
-//     : html` <f-div slot="help" ${ref(fieldErrorRef)}></f-div>`}

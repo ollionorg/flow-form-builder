@@ -171,7 +171,7 @@ export type FormBuilderState = {
   isValid: boolean;
   isChanged: boolean;
   errors: Record<string, string>;
-  refs: Record<string, Ref<HTMLInputElement>>;
+  refs: Record<string, Ref<FFormInputElements>>;
   helperTexts: Record<string, string | undefined>;
   rules: Record<string, FormBuilderValidationRules | undefined>;
   errorRefs: Record<string, Ref<HTMLElement>>;
@@ -180,16 +180,16 @@ export type FormBuilderState = {
 
 export type FormBuilderValues = Record<
   string,
-  Record<string, string | string[] | number | number[]>
+  Record<string, string | string[] | number | number[] | undefined>
 >;
 
 export type FormBuilderFieldRenderFunction = (
   name: string,
   field: FormBuilderField,
   idx: number,
-  fieldRef: Ref<HTMLInputElement>,
-  fieldErrorRef: Ref<HTMLElement>,
-  params?: Record<string, unknown>
+  fieldRef: Ref<FFormInputElements>,
+  params?: Record<string, unknown>,
+  fieldErrorRef?: Ref<HTMLElement>
 ) => TemplateResult;
 
 export type FFormInputElements =

@@ -105,7 +105,7 @@
               "kind": "field",
               "name": "value",
               "type": {
-                "text": "array"
+                "text": "FCheckboxGroupValue | undefined"
               },
               "default": "[]",
               "attribute": "value",
@@ -147,7 +147,7 @@
                 {
                   "name": "id",
                   "type": {
-                    "text": "String"
+                    "text": "string"
                   }
                 }
               ]
@@ -185,7 +185,7 @@
             {
               "name": "value",
               "type": {
-                "text": "array"
+                "text": "FCheckboxGroupValue | undefined"
               },
               "default": "[]",
               "fieldName": "value"
@@ -389,7 +389,7 @@
                 {
                   "name": "inputElement",
                   "type": {
-                    "text": "any"
+                    "text": "FFormInputElements | undefined"
                   }
                 },
                 {
@@ -414,7 +414,7 @@
                 {
                   "name": "inputElement",
                   "type": {
-                    "text": "HTMLInputElement | undefined"
+                    "text": "FFormInputElements | undefined"
                   }
                 },
                 {
@@ -439,7 +439,7 @@
                 {
                   "name": "inputElement",
                   "type": {
-                    "text": "HTMLInputElement"
+                    "text": "FFormInputElements"
                   },
                   "description": "ref of field"
                 },
@@ -828,7 +828,7 @@
             {
               "name": "_field",
               "type": {
-                "text": "FormBuilderCheckboxField"
+                "text": "FormBuilderField"
               }
             },
             {
@@ -840,13 +840,7 @@
             {
               "name": "fieldRef",
               "type": {
-                "text": "Ref<HTMLInputElement>"
-              }
-            },
-            {
-              "name": "fieldErrorRef",
-              "type": {
-                "text": "Ref<HTMLElement>"
+                "text": "Ref<FFormInputElements>"
               }
             },
             {
@@ -857,6 +851,14 @@
               }
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
         }
       ],
       "exports": [
@@ -911,7 +913,7 @@
             {
               "name": "_field",
               "type": {
-                "text": "FormBuilderRadioField"
+                "text": "FormBuilderField"
               }
             },
             {
@@ -923,13 +925,7 @@
             {
               "name": "fieldRef",
               "type": {
-                "text": "Ref<HTMLInputElement>"
-              }
-            },
-            {
-              "name": "fieldErrorRef",
-              "type": {
-                "text": "Ref<HTMLElement>"
+                "text": "Ref<FFormInputElements>"
               }
             },
             {
@@ -940,6 +936,14 @@
               }
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": ""
+        },
+        {
+          "kind": "function",
+          "name": ""
         }
       ],
       "exports": [
@@ -970,7 +974,7 @@
             {
               "name": "_field",
               "type": {
-                "text": "FormBuilderSelectField"
+                "text": "FormBuilderField"
               }
             },
             {
@@ -982,16 +986,14 @@
             {
               "name": "fieldRef",
               "type": {
-                "text": "Ref<HTMLInputElement>"
-              }
-            },
-            {
-              "name": "fieldErrorRef",
-              "type": {
-                "text": "Ref<HTMLElement>"
+                "text": "Ref<FFormInputElements>"
               }
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": ""
         }
       ],
       "exports": [
@@ -1022,7 +1024,7 @@
             {
               "name": "_field",
               "type": {
-                "text": "FormBuilderTextInputField"
+                "text": "FormBuilderField"
               }
             },
             {
@@ -1034,13 +1036,7 @@
             {
               "name": "fieldRef",
               "type": {
-                "text": "Ref<HTMLInputElement>"
-              }
-            },
-            {
-              "name": "fieldErrorRef",
-              "type": {
-                "text": "Ref<HTMLElement>"
+                "text": "Ref<FFormInputElements>"
               }
             }
           ]
@@ -1074,7 +1070,7 @@
             {
               "name": "_field",
               "type": {
-                "text": "FormBuilderTextInputField"
+                "text": "FormBuilderField"
               }
             },
             {
@@ -1086,16 +1082,14 @@
             {
               "name": "fieldRef",
               "type": {
-                "text": "Ref<HTMLInputElement>"
-              }
-            },
-            {
-              "name": "fieldErrorRef",
-              "type": {
-                "text": "Ref<HTMLElement>"
+                "text": "Ref<FFormInputElements>"
               }
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": ""
         }
       ],
       "exports": [
