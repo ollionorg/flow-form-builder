@@ -146,7 +146,7 @@ const sampleFormBuilder: SampleFormBuilder = {
         fields: {
           checkbox: {
             type: "checkbox",
-            // helperText: "This field is required",
+            helperText: "This field is required",
             options: [
               { id: "1", title: "Orange", iconTooltip: "hello" },
               {

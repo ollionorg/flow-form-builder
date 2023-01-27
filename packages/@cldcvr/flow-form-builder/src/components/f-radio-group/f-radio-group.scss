@@ -12,6 +12,33 @@ $gaps: (
   "x-small": 4px,
 );
 
+$states: (
+  "primary": (
+    "background": var(--color-primary-default),
+    "hover": var(--color-primary-default-hover),
+  ),
+  "default": (
+    "background": var(--color-primary-default),
+    "hover": var(--color-primary-default-hover),
+  ),
+  "success": (
+    "background": var(--color-success-default),
+    "hover": var(--color-success-default-hover),
+  ),
+  "warning": (
+    "background": var(--color-warning-default),
+    "hover": var(--color-warning-default-hover),
+  ),
+  "danger": (
+    "background": var(--color-danger-default),
+    "hover": var(--color-danger-default-hover),
+  ),
+  "inherit": (
+    "background": var(--color-checkbox-default),
+    "hover": var(--color-switch-default-hover),
+  ),
+);
+
 :host {
   .f-radio-group {
     @include base();
@@ -27,6 +54,14 @@ $gaps: (
     }
     &[direction="horizontal"] {
       flex-direction: row;
+    }
+  }
+}
+
+f-radio-group {
+  @each $state, $color in $states {
+    &[state="#{$state}"] {
+      @include input-color("danger");
     }
   }
 }

@@ -3,10 +3,7 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { CheckboxOptionsType } from "../f-form-builder/f-form-builder-types";
 import eleStyle from "./f-radio-group.scss";
-
-// import { ref, createRef } from "lit/directives/ref.js";
-import { ifDefined } from "lit-html/directives/if-defined.js";
-import { FDiv, FRoot } from "@cldcvr/flow-core";
+import { FDiv, FRoot, FText } from "@cldcvr/flow-core";
 
 /**
  * @summary Text component includes Headings, titles, body texts and links.
@@ -16,7 +13,7 @@ export class FRadioGroup extends FRoot {
   /**
    * css loaded from scss file
    */
-  static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
+  static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles];
 
   /**
    * @attribute Controls size of all input elements within the form
@@ -97,7 +94,7 @@ export class FRadioGroup extends FRoot {
           )}
         </div>
         ${this?.helperText
-          ? html`<f-text variant="para" size="small" weight="regular" state=${ifDefined(this.state)}
+          ? html`<f-text variant="para" size="small" weight="regular" .state=${this.state}
               >${this?.helperText}</f-text
             >`
           : html`<slot name="help"></slot>`}
