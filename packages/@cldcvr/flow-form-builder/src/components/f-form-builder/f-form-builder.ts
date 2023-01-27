@@ -19,8 +19,8 @@ import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import fieldRenderer from "./fields";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { FInput } from "@cldcvr/flow-core";
-const errorTemplate = (error: string) =>
-  html` <f-text state="danger" variant="para" size="small" weight="regular">${error} </f-text>`;
+// const errorTemplate = (error: string) =>
+//   html` <f-text state="danger" variant="para" size="small" weight="regular">${error} </f-text>`;
 
 const GROUP_FIELD_NAME_SEPARATOR = ".$";
 
