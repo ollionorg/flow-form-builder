@@ -6,7 +6,6 @@ import {
 } from "../f-form-builder-types";
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
-import _ from "lodash";
 export default function (
   name: string,
   _field: FormBuilderField,
