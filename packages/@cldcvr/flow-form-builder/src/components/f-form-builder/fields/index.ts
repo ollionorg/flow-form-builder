@@ -9,7 +9,6 @@ import textarea from "./textarea";
 const all: Record<string, FormBuilderFieldRenderFunction> = {
   text,
   checkbox,
-  textarea,
   radio,
   switchButton,
   select,

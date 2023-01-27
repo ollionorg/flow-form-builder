@@ -882,7 +882,7 @@
           "type": {
             "text": "Record<string, FormBuilderFieldRenderFunction>"
           },
-          "default": "{\n  text,\n  checkbox,\n  textarea,\n  radio,\n  switchButton,\n  select,\n}"
+          "default": "{\n  text,\n  checkbox,\n  radio,\n  switchButton,\n  select,\n}"
         }
       ],
       "exports": [

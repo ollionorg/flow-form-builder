@@ -3,7 +3,7 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { CheckboxOptionsType } from "../f-form-builder/f-form-builder-types";
 import eleStyle from "./f-checkbox-group.scss";
-import { FDiv, FRoot, FText } from "@cldcvr/flow-core";
+import { FRoot, FDiv, FText } from "@cldcvr/flow-core";
 
 export type FCheckboxGroupValue = string[];
 
