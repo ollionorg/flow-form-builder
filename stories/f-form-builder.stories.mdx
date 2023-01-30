@@ -41,6 +41,7 @@ import { useArgs } from "@storybook/client-api";
       const [_, updateArgs] = useArgs();
       const handleSubmit = (event) => {
         console.log("Submit event", event.detail);
+        window.alert("event submit successfully");
       };
       const handleStateChange = (event) => {
         console.log("State Change event", event.detail);
@@ -49,13 +50,16 @@ import { useArgs } from "@storybook/client-api";
         updateArgs({ values: event.detail });
         console.log("input event", event.detail);
       };
-      return html` <f-form-builder
-        .config=${args.config}
-        .values=${args.values}
-        @submit=${handleSubmit}
-        @stateChange=${handleStateChange}
-        @input=${handleInput}
-      ></f-form-builder>`;
+      return html` <f-div padding="medium">
+        <f-form-builder
+          .config=${args.config}
+          .values=${args.values}
+          @submit=${handleSubmit}
+          @stateChange=${handleStateChange}
+          @input=${handleInput}
+        >
+          <f-button label="submit"></f-button> </f-form-builder
+      ></f-div>`;
     }}
   </Story>
 </Canvas>

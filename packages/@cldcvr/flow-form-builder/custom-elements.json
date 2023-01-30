@@ -218,7 +218,6 @@
             "name": "FRoot",
             "package": "@cldcvr/flow-core"
           },
-          "summary": "Text component includes Headings, titles, body texts and links.",
           "tagName": "f-checkbox-group",
           "customElement": true
         }

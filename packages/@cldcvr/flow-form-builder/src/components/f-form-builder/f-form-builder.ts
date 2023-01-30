@@ -20,9 +20,6 @@ import fieldRenderer from "./fields";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { FInput } from "@cldcvr/flow-core";
 
-// const errorTemplate = (error: string) =>
-//   html` <f-text state="danger" variant="para" size="small" weight="regular">${error} </f-text>`;
-
 const GROUP_FIELD_NAME_SEPARATOR = ".$";
 
 @customElement("f-form-builder")
@@ -108,7 +105,7 @@ export class FFormBuilder extends FRoot {
       size=${ifDefined(this.config.fieldSize)}
       category=${ifDefined(this.config.category)}
       variant=${ifDefined(this.config.variant)}
-      ?seperator=${this.config.groupSeparator}
+      ?separator=${this.config.groupSeparator}
       gap=${ifDefined(this.config.gap)}
     >
       <f-div padding="none" gap="x-small" direction="column" width="fill-container">
@@ -150,7 +147,9 @@ export class FFormBuilder extends FRoot {
           </f-form-group>
         `;
       })}
-      <slot></slot>
+      <f-form-group>
+        <slot @click=${this.onSubmit}></slot>
+      </f-form-group>
     </f-form>`;
   }
   onSubmit(event: SubmitEvent) {
@@ -362,10 +361,12 @@ export class FFormBuilder extends FRoot {
               if (this.values[groupname]) {
                 this.values[groupname][fieldname] = (inputElement as FInput)?.value;
               } else {
-                this.values[groupname] = {
-                  ...this.values[groupname],
-                  [fieldname]: (inputElement as FInput)?.value,
-                };
+                if ((inputElement as FInput)?.value) {
+                  this.values[groupname] = {
+                    ...this.values[groupname],
+                    [fieldname]: (inputElement as FInput)?.value,
+                  };
+                }
               }
               inputElement.addEventListener(eventname, () => {
                 this.validateField(
@@ -411,10 +412,8 @@ export class FFormBuilder extends FRoot {
       }
       if (!silent && !this.state.helperTexts[name]) {
         if (inputElement.lastElementChild?.getAttribute("slot") !== "help") {
-          console.log(inputElement);
           inputElement.insertAdjacentHTML("beforeend", `<f-div slot="help">${message}</f-div>`);
         }
-        // render(errorTemplate(message), errorElement);
         inputElement.state = "danger";
       }
     } else {

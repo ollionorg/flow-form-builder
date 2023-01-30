@@ -56,7 +56,7 @@ const sampleFormBuilder: SampleFormBuilder = {
       },
       group1: {
         direction: "horizontal",
-        isCollapsible: true,
+        isCollapsible: false,
         isCollapsed: true,
         label: {
           title: "Group 1",
@@ -106,7 +106,7 @@ const sampleFormBuilder: SampleFormBuilder = {
             ],
           },
           email: {
-            type: "text",
+            type: "email",
             validationRules: [
               {
                 name: "required",

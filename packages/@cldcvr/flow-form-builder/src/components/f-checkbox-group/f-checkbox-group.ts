@@ -3,19 +3,16 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { CheckboxOptionsType } from "../f-form-builder/f-form-builder-types";
 import eleStyle from "./f-checkbox-group.scss";
-import { FRoot, FDiv, FText } from "@cldcvr/flow-core";
+import { FRoot, FDiv } from "@cldcvr/flow-core";
 
 export type FCheckboxGroupValue = string[];
 
-/**
- * @summary Text component includes Headings, titles, body texts and links.
- */
 @customElement("f-checkbox-group")
 export class FCheckboxGroup extends FRoot {
   /**
    * css loaded from scss file
    */
-  static styles = [unsafeCSS(eleStyle), ...FDiv.styles, FText.styles];
+  static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
 
   /**
    * @attribute Controls size of all input elements within the form
