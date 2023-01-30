@@ -47,7 +47,7 @@ export type FormBuilderBaseField = {
 };
 // text input type field
 export type FormBuilderTextInputField = FormBuilderBaseField & {
-  type: "text";
+  type: "text" | "email" | "password" | "url" | "tel" | "number";
   placeholder?: string;
   autoComplete?: boolean; // to disabled browser's auto-complete behavior
   helperText?: string;

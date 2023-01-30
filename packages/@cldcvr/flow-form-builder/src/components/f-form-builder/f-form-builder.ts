@@ -13,12 +13,13 @@ import {
 } from "./f-form-builder-types";
 import eleStyle from "./f-form-builder.scss";
 import validate from "./f-form-validator";
-import { isEmptyObject } from "./utils";
+import { isEmptyObject, isValidEmail, isValidHttpUrl } from "./utils";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import fieldRenderer from "./fields";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { FInput } from "@cldcvr/flow-core";
+
 // const errorTemplate = (error: string) =>
 //   html` <f-text state="danger" variant="para" size="small" weight="regular">${error} </f-text>`;
 
@@ -107,7 +108,7 @@ export class FFormBuilder extends FRoot {
       size=${ifDefined(this.config.fieldSize)}
       category=${ifDefined(this.config.category)}
       variant=${ifDefined(this.config.variant)}
-      ?separator=${this.config.groupSeparator}
+      ?seperator=${this.config.groupSeparator}
       gap=${ifDefined(this.config.gap)}
     >
       <f-div padding="none" gap="x-small" direction="column" width="fill-container">
@@ -234,7 +235,29 @@ export class FFormBuilder extends FRoot {
       const relativeName = `${groupname}${GROUP_FIELD_NAME_SEPARATOR}${name}`;
       this.state.refs[relativeName] = fieldRef;
       this.state.errorRefs[relativeName] = fieldErrorRef;
-      this.state.rules[relativeName] = field.validationRules;
+      const validations = field.validationRules ? [...field.validationRules] : [];
+      if (field.type === "email") {
+        validations.push({
+          name: "custom",
+          when: ["input"],
+          message: "Please Enter a valid Email Address",
+          validate: (value: unknown) => {
+            return isValidEmail(value as string) ? true : false;
+          },
+        });
+      }
+      if (field.type === "url") {
+        validations.push({
+          name: "custom",
+          when: ["keyup"],
+          message: "Please Enter a valid URL",
+          validate: (value: unknown) => {
+            return isValidHttpUrl(value as string) ? true : false;
+          },
+        });
+      }
+      this.state.rules[relativeName] = validations;
+
       if (field?.helperText) {
         this.state.helperTexts[relativeName] = field.helperText;
       }
@@ -388,6 +411,7 @@ export class FFormBuilder extends FRoot {
       }
       if (!silent && !this.state.helperTexts[name]) {
         if (inputElement.lastElementChild?.getAttribute("slot") !== "help") {
+          console.log(inputElement);
           inputElement.insertAdjacentHTML("beforeend", `<f-div slot="help">${message}</f-div>`);
         }
         // render(errorTemplate(message), errorElement);

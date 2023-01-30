@@ -590,6 +590,30 @@
               }
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": "isValidEmail",
+          "parameters": [
+            {
+              "name": "email",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "isValidHttpUrl",
+          "parameters": [
+            {
+              "name": "stringurl",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
         }
       ],
       "exports": [
@@ -614,6 +638,22 @@
           "name": "isEmptyArray",
           "declaration": {
             "name": "isEmptyArray",
+            "module": "src/components/f-form-builder/utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "isValidEmail",
+          "declaration": {
+            "name": "isValidEmail",
+            "module": "src/components/f-form-builder/utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "isValidHttpUrl",
+          "declaration": {
+            "name": "isValidHttpUrl",
             "module": "src/components/f-form-builder/utils.ts"
           }
         }
