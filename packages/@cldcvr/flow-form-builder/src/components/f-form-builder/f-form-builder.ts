@@ -8,6 +8,8 @@ import {
   FormBuilderValidationRules,
   FormBuilderField,
   FormBuilderGenericValidationRule,
+  FormBuilderGroup,
+  FFormInputElements,
 } from "./f-form-builder-types";
 import eleStyle from "./f-form-builder.scss";
 import validate from "./f-form-validator";
@@ -15,9 +17,9 @@ import { isEmptyObject } from "./utils";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import fieldRenderer from "./fields";
-const errorTemplate = (error: string) => html` <f-text state="danger"
-  >${error}
-</f-text>`;
+import { ifDefined } from "lit-html/directives/if-defined.js";
+import { FInput } from "@cldcvr/flow-core";
+import defaultValidations from "./default-validations/index";
 
 const GROUP_FIELD_NAME_SEPARATOR = ".$";
 
@@ -58,6 +60,7 @@ export class FFormBuilder extends FRoot {
       isChanged: false,
       errors: {},
       refs: {},
+      helperTexts: {},
       rules: {},
       errorRefs: {},
       showFunctions: new Map(),
@@ -95,35 +98,66 @@ export class FFormBuilder extends FRoot {
    */
   build() {
     this.formRef = createRef();
-    return html`<form
+    return html`<f-form
       name="sampleForm"
       @submit=${this.onSubmit}
       @input=${this.handleFormChange}
       ${ref(this.formRef)}
+      size=${ifDefined(this.config.fieldSize)}
+      category=${ifDefined(this.config.category)}
+      variant=${ifDefined(this.config.variant)}
+      ?separator=${this.config.groupSeparator}
+      gap=${ifDefined(this.config.gap)}
     >
-      <f-div direction="column" gap="small">
-        ${Object.entries(this.config.groups).map(([name, gr]) => {
-          const groupWrapperRef: Ref<HTMLElement> = createRef();
-          if (gr.show) {
-            this.state.showFunctions.set(groupWrapperRef, gr.show);
-          }
-          return html`
-            <f-div gap="medium" direction="column" ${ref(groupWrapperRef)}>
-              <f-text variant="heading">${name}</f-text>
-              <f-div
-                gap="medium"
-                .direction=${gr.direction === "horizontal" ? "row" : "column"}
-              >
-                ${this.buildFields(name, gr.fields)}
-              </f-div>
-              <f-divider></f-divider>
-            </f-div>
-          `;
-        })}
-        <br />
-        <slot></slot>
+      <f-div padding="none" gap="x-small" direction="column" width="fill-container">
+        <f-div padding="none" gap="small" direction="row" width="hug-content" height="hug-content">
+          <f-div padding="none" direction="row" width="hug-content" height="hug-content">
+            <f-text variant="heading" size="medium" weight="regular"
+              >${this.config?.label?.title}</f-text
+            >
+          </f-div>
+          ${this.config?.label?.iconTooltip
+            ? html` <f-icon
+                source="i-question-filled"
+                size="small"
+                state="default"
+                clickable
+              ></f-icon>`
+            : ""}
+        </f-div>
+        ${this.config?.label?.description
+          ? html` <f-text variant="para" size="medium" weight="regular"
+              >${this.config?.label?.description}</f-text
+            >`
+          : ""}
       </f-div>
-    </form>`;
+      ${Object.entries(this.config.groups).map(([name, gr]) => {
+        const groupWrapperRef: Ref<HTMLElement> = createRef();
+        if (gr.showWhen) {
+          this.state.showFunctions.set(groupWrapperRef, gr.showWhen);
+        }
+        return html`
+          <f-form-group
+            .direction=${gr.direction}
+            .variant=${gr.variant}
+            .label=${gr.label ?? { title: name }}
+            gap=${ifDefined(gr.gap)}
+            .collapse=${gr.isCollapsible ? "accordion" : "none"}
+            ${ref(groupWrapperRef)}
+          >
+            ${this.buildFields(name, gr.fields, gr)}
+          </f-form-group>
+        `;
+      })}
+      <f-form-group>
+        <slot @click=${this.checkSubmit}></slot>
+      </f-form-group>
+    </f-form>`;
+  }
+  checkSubmit(event: MouseEvent) {
+    if ((event.target as HTMLElement).getAttribute("type") === "submit") {
+      this.submit();
+    }
   }
   onSubmit(event: SubmitEvent) {
     event.stopPropagation();
@@ -174,36 +208,61 @@ export class FFormBuilder extends FRoot {
     });
   }
   /**
+   * validate whole form
+   * @param type
+   */
+  checkFieldType(type: string) {
+    if (
+      type === "text" ||
+      type === "tel" ||
+      type === "number" ||
+      type === "email" ||
+      type === "url" ||
+      type === "password"
+    ) {
+      return "text";
+    } else {
+      return type;
+    }
+  }
+  /**
    * render field based on field config
    * @param fields
    */
-  buildFields(groupname: string, fields: Record<string, FormBuilderField>) {
+  buildFields(
+    groupname: string,
+    fields: Record<string, FormBuilderField>,
+    group: FormBuilderGroup
+  ) {
     return html`${Object.entries(fields).map(([name, field], idx) => {
-      const fieldRef: Ref<HTMLInputElement> = createRef();
+      const fieldRef: Ref<FFormInputElements> = createRef();
 
       const fieldErrorRef: Ref<HTMLElement> = createRef();
       const relativeName = `${groupname}${GROUP_FIELD_NAME_SEPARATOR}${name}`;
       this.state.refs[relativeName] = fieldRef;
       this.state.errorRefs[relativeName] = fieldErrorRef;
-      this.state.rules[relativeName] = field.validationRules;
+      const validations = field.validationRules ? [...field.validationRules] : [];
+      defaultValidations(field.type, validations);
+      this.state.rules[relativeName] = validations;
 
-      const fieldWrapperRef: Ref<HTMLElement> = createRef();
-      if (field.show) {
-        this.state.showFunctions.set(fieldWrapperRef, field.show);
+      if (field?.helperText) {
+        this.state.helperTexts[relativeName] = field.helperText;
       }
-
+      const params = { group: { ...group } };
+      if (field.showWhen) {
+        this.state.showFunctions.set(fieldRef, field.showWhen);
+      }
       /**
        * fieldRenderer is resposnsible to redner field based on type
        */
-      return html`<f-div
-        ${ref(fieldWrapperRef)}
-        direction="column"
-        gap="x-small"
-      >
-        <f-text>${name}</f-text>
-        ${fieldRenderer[field.type](name, field, idx, fieldRef)}
-        <f-div direction="column" ${ref(fieldErrorRef)}></f-div>
-      </f-div>`;
+      return html` ${fieldRenderer[this.checkFieldType(field.type)](
+        name,
+        field,
+        idx,
+        fieldRef,
+        params,
+        fieldErrorRef
+      )}`;
     })}`;
   }
 
@@ -211,14 +270,15 @@ export class FFormBuilder extends FRoot {
    * updated hook of lit element
    * @param _changedProperties
    */
-  protected updated(
-    _changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-  ): void {
-    // console.log(this.state.refs);
+  protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+    let recordChanges: Record<PropertyKey, unknown> = {};
+    _changedProperties.forEach((oldValue, propName) => {
+      recordChanges = { ...recordChanges, [propName]: oldValue };
+    });
+
     Object.entries(this.state.refs).forEach(([name, element]) => {
       const inputElement = element.value;
 
-      // console.log(inputElement);
       this.bindValues(inputElement, name);
 
       this.bindValidation(inputElement, name);
@@ -226,7 +286,9 @@ export class FFormBuilder extends FRoot {
 
     this.checkAllShowConditions();
 
-    this.emitStateChange();
+    if (Object.keys(recordChanges).includes("config")) {
+      this.emitStateChange();
+    }
   }
   emitStateChange() {
     const stateChange = new CustomEvent("stateChange", {
@@ -244,19 +306,15 @@ export class FFormBuilder extends FRoot {
    * @param index
    * @param isMultiple
    */
-  bindValues(inputElement: HTMLInputElement | undefined, name: string) {
+  bindValues(inputElement: FFormInputElements | undefined, name: string) {
     if (inputElement) {
       const [groupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
 
       /**
        * if value is array (i.e. multiple fields with same name)
        */
-      if (
-        this.values &&
-        this.values[groupname] &&
-        this.values[groupname][fieldname]
-      ) {
-        inputElement.value = String(this.values[groupname][fieldname]);
+      if (this.values && this.values[groupname] && this.values[groupname][fieldname]) {
+        (inputElement.value as unknown) = this.values[groupname][fieldname];
       }
     }
   }
@@ -265,7 +323,7 @@ export class FFormBuilder extends FRoot {
    * validation rules listener added on `input` event.
    * @param inputElement
    */
-  bindValidation(inputElement: HTMLInputElement | undefined, name: string) {
+  bindValidation(inputElement: FFormInputElements | undefined, name: string) {
     /**
      * Adding validation listener
      */
@@ -273,22 +331,38 @@ export class FFormBuilder extends FRoot {
       const [groupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
       const validation = () => {
         // updating values in object
-
-        this.values[groupname][fieldname] = inputElement.value;
-
+        if (this.values[groupname] && this.values[groupname][fieldname]) {
+          this.values[groupname][fieldname] = (inputElement as FInput)?.value;
+        } else {
+          this.values[groupname] = {
+            ...this.values[groupname],
+            [fieldname]: (inputElement as FInput)?.value,
+          };
+        }
         // checking validaiton rules if any
         if (this.state.rules[name] !== undefined) {
           this.validateField(name, inputElement);
         }
       };
+
       inputElement.addEventListener("input", validation);
+      inputElement.addEventListener("blur", validation);
 
       // on special events if user has specified
       if (this.state.rules[name] !== undefined) {
         this.state.rules[name]?.forEach((rule) => {
           if (rule.when && rule.when.length > 0) {
             rule.when.forEach((eventname) => {
-              this.values[groupname][fieldname] = inputElement.value;
+              if (this.values[groupname]) {
+                this.values[groupname][fieldname] = (inputElement as FInput)?.value;
+              } else {
+                if ((inputElement as FInput)?.value) {
+                  this.values[groupname] = {
+                    ...this.values[groupname],
+                    [fieldname]: (inputElement as FInput)?.value,
+                  };
+                }
+              }
               inputElement.addEventListener(eventname, () => {
                 this.validateField(
                   name,
@@ -312,33 +386,43 @@ export class FFormBuilder extends FRoot {
    */
   validateField(
     name: string,
-    inputElement: HTMLInputElement,
+    inputElement: FFormInputElements,
     silent = false,
     filter?: (r: FormBuilderGenericValidationRule) => boolean
   ) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_groupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
-    const rulesToValidate = this.state.rules[name]?.filter(
-      filter ? filter : () => true
-    );
+    const rulesToValidate = this.state.rules[name]?.filter(filter ? filter : () => true);
 
     const { result, message } = validate(
-      inputElement.value,
+      (inputElement as FInput).value ?? "",
       rulesToValidate as FormBuilderValidationRules,
       fieldname
     );
     const errorElement = this.state.errorRefs[name].value;
     if (!result && message && inputElement.offsetHeight > 0) {
       this.state.errors[name] = message;
-
-      if (errorElement && !silent) {
-        render(errorTemplate(message), errorElement);
+      if (this.state.helperTexts[name] && !silent) {
+        inputElement.state = "danger";
+      }
+      if (!silent && !this.state.helperTexts[name]) {
+        if (inputElement.lastElementChild?.getAttribute("slot") !== "help") {
+          inputElement.insertAdjacentHTML("beforeend", `<f-div slot="help">${message}</f-div>`);
+        }
+        inputElement.state = "danger";
       }
     } else {
-      delete this.state.errors[name];
-      if (errorElement) {
-        render("", errorElement);
+      if (!this.state.helperTexts[name]) {
+        delete this.state.errors[name];
+        if (inputElement.lastElementChild?.getAttribute("slot") === "help") {
+          const child = inputElement.children[inputElement.children.length - 1];
+          child.remove();
+        }
+        if (errorElement) {
+          render("", errorElement);
+        }
       }
+      inputElement.state = "default";
     }
   }
 }

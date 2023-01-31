@@ -1315,6 +1315,17 @@
     rxjs "^7.5.7"
     validate-color "^2.2.1"
 
+"@cldcvr/flow-core@1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@cldcvr/flow-core/-/flow-core-1.2.0.tgz#dd1388cd720f00fcefd969cf81a9b066be75b39c"
+  integrity sha512-iDlldmijbXK3ADN4x/+A4WCaBrEB9xZ+hC0omy5FSULrCTROlndHEnfH5rNTzn9lMStJ+jRkmmSO3doni8GSRg==
+  dependencies:
+    "@floating-ui/dom" "^1.0.2"
+    axios "^0.27.2"
+    lit "^2.2.4"
+    rxjs "^7.5.7"
+    validate-color "^2.2.1"
+
 "@cldcvr/flow-system-icon@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@cldcvr/flow-system-icon/-/flow-system-icon-1.0.0.tgz#0deec668b328fba9700d83bd44cd288330de6f19"

@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [0.0.8] - 2023-01-31
+
+### Features
+
+- Form Input Elements integration.
+
 ## [0.0.7] - 2023-01-05
 
 ### Improvements
@@ -21,11 +27,13 @@
 ### Features
 
 - spacing updated between fields and groups.
+
 ## [0.0.4] - 2022-12-27
 
 ### Features
 
 - `input` styled with flow-core's variables.
+
 ## [0.0.3] - 2022-12-27
 
 ### Features
@@ -33,17 +41,15 @@
 - Default slot added to add extra eleemnts after groups.
 - `submit` method added to submit from using JS.
 - `state` value emiitted with new object.
+
 ## [0.0.2] - 2022-12-27
 
 ### Features
 
-- releasing to test in `vue`. 
+- releasing to test in `vue`.
 
 ## [0.0.1] - 2022-12-20
 
 ### Initial release
 
 - sample component added.
-
-
-

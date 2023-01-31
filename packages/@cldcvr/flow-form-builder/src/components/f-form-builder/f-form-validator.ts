@@ -16,7 +16,6 @@ export default function validate(
   for (const r of elementRules) {
     if (r.name !== "custom") {
       result = rules[r.name](value);
-
       if (!result) {
         message = getValidationMessage(r, { name, value });
         break;
@@ -38,10 +37,7 @@ export default function validate(
 
 function processCustomMessage(message: string, params: Record<string, string>) {
   for (const prop in params) {
-    message = message.replace(
-      new RegExp("{{" + prop + "}}", "g"),
-      params[prop]
-    );
+    message = message.replace(new RegExp("{{" + prop + "}}", "g"), params[prop]);
   }
   return message;
 }

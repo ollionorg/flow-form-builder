@@ -1,10 +1,7 @@
 import { html } from "lit-html";
 
 import "@cldcvr/flow-form-builder/src";
-import {
-  setCustomElementsManifest,
-  setCustomElements,
-} from "@storybook/web-components";
+import { setCustomElementsManifest, setCustomElements } from "@storybook/web-components";
 import "./storybook.css";
 import "@cldcvr/flow-core/dist/style.css";
 import "@cldcvr/flow-core";
@@ -41,10 +38,7 @@ export const decorators = [
 async function run() {
   const customElements = await (
     await fetch(
-      new URL(
-        "../packages/@cldcvr/flow-form-builder/custom-elements.json",
-        import.meta.url
-      )
+      new URL("../packages/@cldcvr/flow-form-builder/custom-elements.json", import.meta.url)
     )
   ).json();
 

@@ -1,6 +1,7 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
 import fields from "./f-formbuilder-fields";
+import { useArgs } from "@storybook/client-api";
 
 <Meta
   title="Components/f-form-builder"
@@ -29,33 +30,41 @@ import fields from "./f-formbuilder-fields";
       config: {
         control: "object",
       },
+      values: { control: "object" },
     }}
     args={{
       ...fields,
+      values: { group1: { abc: "abc" } },
     }}
   >
     {(args) => {
+      const [_, updateArgs] = useArgs();
       const handleSubmit = (event) => {
         console.log("Submit event", event.detail);
+        window.alert("event submit successfully");
       };
       const handleStateChange = (event) => {
         console.log("State Change event", event.detail);
       };
       const handleInput = (event) => {
+        updateArgs({ values: event.detail });
         console.log("input event", event.detail);
       };
-      return html`<f-div direction="column" padding="x-large" width="50%">
+      return html` <f-div padding="medium">
         <f-form-builder
           .config=${args.config}
-          .values=${{
-            group1: { abc: "abc", xyz: "5678" },
-            group2: { email: "x@test.com" },
-          }}
+          .values=${args.values}
           @submit=${handleSubmit}
           @stateChange=${handleStateChange}
           @input=${handleInput}
-        ></f-form-builder>
-      </f-div>`;
+        >
+          <f-button
+            label="submit"
+            type="submit"
+            .variant=${args.config.variant}
+            .category=${args.config.category}
+          ></f-button> </f-form-builder
+      ></f-div>`;
     }}
   </Story>
 </Canvas>
