@@ -283,6 +283,11 @@ export class FFormBuilder extends FRoot {
    * @param _changedProperties
    */
   protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+    const recordChanges: PropertyKey[] = [];
+    _changedProperties.forEach((oldValue, propName) => {
+      recordChanges.push(propName);
+    });
+
     Object.entries(this.state.refs).forEach(([name, element]) => {
       const inputElement = element.value;
 
@@ -292,8 +297,9 @@ export class FFormBuilder extends FRoot {
     });
 
     this.checkAllShowConditions();
-
-    this.emitStateChange();
+    if (recordChanges.includes("config")) {
+      this.emitStateChange();
+    }
   }
   emitStateChange() {
     const stateChange = new CustomEvent("stateChange", {
