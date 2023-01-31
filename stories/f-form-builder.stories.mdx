@@ -4,7 +4,7 @@ import fields from "./f-formbuilder-fields";
 import { useArgs } from "@storybook/client-api";
 
 <Meta
-  title="Components2/f-form-builder"
+  title="Components/f-form-builder"
   parameters={{
     controls: { hideNoControlsWarning: true },
   }}
@@ -34,7 +34,7 @@ import { useArgs } from "@storybook/client-api";
     }}
     args={{
       ...fields,
-      values: {},
+      values: { group1: { abc: "abc" } },
     }}
   >
     {(args) => {
