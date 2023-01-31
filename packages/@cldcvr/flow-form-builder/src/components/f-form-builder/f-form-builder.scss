@@ -9,3 +9,7 @@
     display: none !important;
   }
 }
+
+f-form-builder {
+  @include input-color("danger");
+}

@@ -4,6 +4,7 @@ import { customElement, property } from "lit/decorators.js";
 import { CheckboxOptionsType } from "../f-form-builder/f-form-builder-types";
 import eleStyle from "./f-checkbox-group.scss";
 import { FRoot, FDiv } from "@cldcvr/flow-core";
+import { FText } from "@cldcvr/flow-core";
 
 export type FCheckboxGroupValue = string[];
 
@@ -12,7 +13,7 @@ export class FCheckboxGroup extends FRoot {
   /**
    * css loaded from scss file
    */
-  static styles = [unsafeCSS(eleStyle), ...FDiv.styles];
+  static styles = [...FText.styles, unsafeCSS(eleStyle), ...FDiv.styles];
 
   /**
    * @attribute Controls size of all input elements within the form
@@ -74,7 +75,12 @@ export class FCheckboxGroup extends FRoot {
      */
     return html`
       <f-div .gap=${this.gap} direction="column">
-        <div class="f-checkbox-group" gap=${this.gap} direction=${this.direction}>
+        <div
+          class="f-checkbox-group"
+          gap=${this.gap}
+          direction=${this.direction}
+          state=${this.state}
+        >
           ${this.options?.map(
             (item) => html`
               <f-checkbox
