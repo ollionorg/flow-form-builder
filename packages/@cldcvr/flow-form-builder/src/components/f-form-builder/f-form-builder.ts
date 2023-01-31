@@ -271,11 +271,6 @@ export class FFormBuilder extends FRoot {
    * @param _changedProperties
    */
   protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-    let recordChanges: Record<PropertyKey, unknown> = {};
-    _changedProperties.forEach((oldValue, propName) => {
-      recordChanges = { ...recordChanges, [propName]: oldValue };
-    });
-
     Object.entries(this.state.refs).forEach(([name, element]) => {
       const inputElement = element.value;
 
@@ -286,9 +281,7 @@ export class FFormBuilder extends FRoot {
 
     this.checkAllShowConditions();
 
-    if (Object.keys(recordChanges).includes("config")) {
-      this.emitStateChange();
-    }
+    this.emitStateChange();
   }
   emitStateChange() {
     const stateChange = new CustomEvent("stateChange", {
@@ -412,8 +405,8 @@ export class FFormBuilder extends FRoot {
         inputElement.state = "danger";
       }
     } else {
+      delete this.state.errors[name];
       if (!this.state.helperTexts[name]) {
-        delete this.state.errors[name];
         if (inputElement.lastElementChild?.getAttribute("slot") === "help") {
           const child = inputElement.children[inputElement.children.length - 1];
           child.remove();
