@@ -150,7 +150,7 @@ export class FFormBuilder extends FRoot {
         `;
       })}
       <f-form-group>
-        <slot @click=${this.onSubmit}></slot>
+        <slot></slot>
       </f-form-group>
     </f-form>`;
   }
