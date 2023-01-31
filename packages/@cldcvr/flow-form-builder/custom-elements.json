@@ -309,6 +309,18 @@
             },
             {
               "kind": "method",
+              "name": "checkSubmit",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
               "name": "onSubmit",
               "parameters": [
                 {

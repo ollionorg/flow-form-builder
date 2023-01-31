@@ -150,9 +150,14 @@ export class FFormBuilder extends FRoot {
         `;
       })}
       <f-form-group>
-        <slot></slot>
+        <slot @click=${this.checkSubmit}></slot>
       </f-form-group>
     </f-form>`;
+  }
+  checkSubmit(event: MouseEvent) {
+    if ((event.target as HTMLElement).getAttribute("type") === "submit") {
+      this.submit();
+    }
   }
   onSubmit(event: SubmitEvent) {
     event.stopPropagation();

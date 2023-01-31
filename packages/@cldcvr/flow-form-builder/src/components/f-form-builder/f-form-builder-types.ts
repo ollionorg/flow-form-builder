@@ -43,6 +43,7 @@ export type FormBuilderBaseField = {
   canDuplicate?: boolean; // plus icon will displayed besides field to duplicate
   validationRules?: FormBuilderValidationRules; // validation rules to validate field
   disabled?: boolean;
+  helperText?: string;
   showWhen?: FormBuilderShowCondition;
 };
 // text input type field
@@ -50,7 +51,6 @@ export type FormBuilderTextInputField = FormBuilderBaseField & {
   type: "text" | "email" | "password" | "url" | "tel" | "number";
   placeholder?: string;
   autoComplete?: boolean; // to disabled browser's auto-complete behavior
-  helperText?: string;
   iconLeft?: string;
   iconRight?: string;
   prefix?: string;
@@ -64,28 +64,24 @@ export type FormBuilderTextInputField = FormBuilderBaseField & {
 // checkbox type field
 export type FormBuilderCheckboxField = FormBuilderBaseField & {
   type: "checkbox";
-  helperText?: string;
   options: CheckboxOptionsType;
 };
 
 // radio type field
 export type FormBuilderRadioField = FormBuilderBaseField & {
   type: "radio";
-  helperText?: string;
   options: CheckboxOptionsType;
 };
 
 // switch type field
 export type FormBuilderSwitchField = FormBuilderBaseField & {
   type: "switchButton";
-  helperText?: string;
 };
 
 //select type field
 export type FormBuilderSelectField = FormBuilderBaseField & {
   type: "select";
   selection: "single" | "multiple";
-  helperText?: string;
   placeholder?: string;
   options: FSelectOptions;
   optionTemplate?: string;
@@ -103,7 +99,6 @@ export type FormBuilderSelectField = FormBuilderBaseField & {
 export type FormBuilderTextAreaField = FormBuilderBaseField & {
   type: "textarea";
   placeholder?: string;
-  helperText?: string;
   maxLength?: number;
   readonly?: boolean;
   clear?: boolean;
