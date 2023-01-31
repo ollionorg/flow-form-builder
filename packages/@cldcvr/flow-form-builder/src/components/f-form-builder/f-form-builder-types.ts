@@ -113,6 +113,7 @@ export type CheckboxOptions = {
   iconTooltip?: string;
 };
 export type CheckboxOptionsType = CheckboxOptions[];
+export type RadioOptionsType = CheckboxOptionsType;
 
 export type FormBuilderField =
   | FormBuilderTextInputField

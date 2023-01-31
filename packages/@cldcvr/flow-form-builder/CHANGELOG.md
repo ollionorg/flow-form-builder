@@ -4,7 +4,11 @@
 
 # Change Log
 
-## [0.0.8] - 2023-01-31
+## [0.1.0] - 2023-01-31
+
+### Bug fixes
+
+- Redio Options type bug fixed.
 
 ### Features
 

@@ -1,7 +1,7 @@
 // import { FRoot } from "@cldcvr/flow-core";
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { CheckboxOptionsType } from "../f-form-builder/f-form-builder-types";
+import { RadioOptionsType } from "../f-form-builder/f-form-builder-types";
 import eleStyle from "./f-radio-group.scss";
 import { FDiv, FRoot, FText } from "@cldcvr/flow-core";
 
@@ -19,7 +19,7 @@ export class FRadioGroup extends FRoot {
    * @attribute Controls size of all input elements within the form
    */
   @property({ reflect: true, type: Array })
-  options: CheckboxOptionsType = [];
+  options: RadioOptionsType = [];
 
   /**
    * @attribute Controls size of all input elements within the form
@@ -77,8 +77,12 @@ export class FRadioGroup extends FRoot {
                 .state=${this.state}
               >
                 ${item?.title
-                  ? html` <f-div slot="label" padding="none" gap="none">${item?.title}</f-div>`
-                  : html`<f-div slot="label" padding="none" gap="none">${name}</f-div>`}
+                  ? html` <f-div slot="label" padding="none" gap="none"
+                      >${item?.title}</f-div
+                    >`
+                  : html`<f-div slot="label" padding="none" gap="none"
+                      >${name}</f-div
+                    >`}
                 ${item?.description
                   ? html` <f-div slot="description" padding="none" gap="none"
                       >${item?.description}</f-div
@@ -99,7 +103,11 @@ export class FRadioGroup extends FRoot {
           )}
         </div>
         ${this?.helperText
-          ? html`<f-text variant="para" size="small" weight="regular" .state=${this.state}
+          ? html`<f-text
+              variant="para"
+              size="small"
+              weight="regular"
+              .state=${this.state}
               >${this?.helperText}</f-text
             >`
           : html`<slot name="help"></slot>`}

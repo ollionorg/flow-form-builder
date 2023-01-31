@@ -1,6 +1,6 @@
 {
   "name": "@cldcvr/flow-form-builder",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "Lineage dependency for flow design system",
   "module": "dist/flow-form-builder.es.js",
   "main": "dist/flow-form-builder.cjs.js",
@@ -30,7 +30,7 @@
     "lit": "^2.2.4"
   },
   "devDependencies": {
-    "@cldcvr/custom-elements-manifest-to-types": "1.0.4",
+    "@cldcvr/custom-elements-manifest-to-types": "1.0.6",
     "@custom-elements-manifest/analyzer": "^0.5.7",
     "@open-wc/testing": "^3.1.5",
     "@types/eslint": "^8.4.3",
