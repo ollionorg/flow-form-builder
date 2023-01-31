@@ -138,7 +138,7 @@ export class FFormBuilder extends FRoot {
         return html`
           <f-form-group
             .direction=${gr.direction}
-            .label=${gr.label}
+            .label=${gr.label ?? { title: name }}
             gap=${ifDefined(gr.gap)}
             .collapse=${gr.isCollapsible ? "accordion" : "none"}
             ${ref(groupWrapperRef)}

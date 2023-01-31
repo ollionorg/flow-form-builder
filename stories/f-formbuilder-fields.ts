@@ -23,11 +23,6 @@ const sampleFormBuilder: SampleFormBuilder = {
         direction: "horizontal",
         isCollapsible: false,
         isCollapsed: true,
-        label: {
-          title: "Group 7",
-          description: "This is Group 1",
-          iconTooltip: "Hello",
-        },
         fields: {
           select: {
             selection: "multiple",

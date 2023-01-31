@@ -58,7 +58,11 @@ import { useArgs } from "@storybook/client-api";
           @stateChange=${handleStateChange}
           @input=${handleInput}
         >
-          <f-button label="submit"></f-button> </f-form-builder
+          <f-button
+            label="submit"
+            .variant=${args.config.variant}
+            .category=${args.config.category}
+          ></f-button> </f-form-builder
       ></f-div>`;
     }}
   </Story>
