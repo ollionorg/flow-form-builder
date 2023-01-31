@@ -19,7 +19,7 @@ const sampleFormBuilder: SampleFormBuilder = {
       iconTooltip: "Hello",
     },
     groups: {
-      group7: {
+      ["Group 7 New"]: {
         direction: "horizontal",
         isCollapsible: false,
         isCollapsed: true,
