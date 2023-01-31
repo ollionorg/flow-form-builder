@@ -88,7 +88,7 @@ const sampleFormBuilder: SampleFormBuilder = {
         },
       },
       group2: {
-        show: (formValues: FormBuilderValues) => {
+        showWhen: (formValues: FormBuilderValues) => {
           return formValues?.group1?.xyz === "show";
         },
         fields: {
@@ -107,7 +107,7 @@ const sampleFormBuilder: SampleFormBuilder = {
                 name: "required",
               },
             ],
-            show: (formValues: FormBuilderValues) => {
+            showWhen: (formValues: FormBuilderValues) => {
               return formValues?.group2?.username === "abc";
             },
           },

@@ -852,6 +852,40 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form-builder/default-validations/index.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "defaultValidations",
+          "parameters": [
+            {
+              "name": "fieldType",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "validations",
+              "type": {
+                "text": "FormBuilderValidationRules"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "defaultValidations",
+            "module": "src/components/f-form-builder/default-validations/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-builder/fields/checkbox.ts",
       "declarations": [
         {

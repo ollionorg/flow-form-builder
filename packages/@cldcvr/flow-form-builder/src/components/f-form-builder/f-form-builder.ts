@@ -13,12 +13,13 @@ import {
 } from "./f-form-builder-types";
 import eleStyle from "./f-form-builder.scss";
 import validate from "./f-form-validator";
-import { isEmptyObject, isValidEmail, isValidHttpUrl } from "./utils";
+import { isEmptyObject } from "./utils";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import fieldRenderer from "./fields";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { FInput } from "@cldcvr/flow-core";
+import defaultValidations from "./default-validations/index";
 
 const GROUP_FIELD_NAME_SEPARATOR = ".$";
 
@@ -132,12 +133,13 @@ export class FFormBuilder extends FRoot {
       </f-div>
       ${Object.entries(this.config.groups).map(([name, gr]) => {
         const groupWrapperRef: Ref<HTMLElement> = createRef();
-        if (gr.show) {
-          this.state.showFunctions.set(groupWrapperRef, gr.show);
+        if (gr.showWhen) {
+          this.state.showFunctions.set(groupWrapperRef, gr.showWhen);
         }
         return html`
           <f-form-group
             .direction=${gr.direction}
+            .variant=${gr.variant}
             .label=${gr.label ?? { title: name }}
             gap=${ifDefined(gr.gap)}
             .collapse=${gr.isCollapsible ? "accordion" : "none"}
@@ -235,34 +237,15 @@ export class FFormBuilder extends FRoot {
       this.state.refs[relativeName] = fieldRef;
       this.state.errorRefs[relativeName] = fieldErrorRef;
       const validations = field.validationRules ? [...field.validationRules] : [];
-      if (field.type === "email") {
-        validations.push({
-          name: "custom",
-          when: ["input"],
-          message: "Please Enter a valid Email Address",
-          validate: (value: unknown) => {
-            return isValidEmail(value as string) ? true : false;
-          },
-        });
-      }
-      if (field.type === "url") {
-        validations.push({
-          name: "custom",
-          when: ["keyup"],
-          message: "Please Enter a valid URL",
-          validate: (value: unknown) => {
-            return isValidHttpUrl(value as string) ? true : false;
-          },
-        });
-      }
+      defaultValidations(field.type, validations);
       this.state.rules[relativeName] = validations;
 
       if (field?.helperText) {
         this.state.helperTexts[relativeName] = field.helperText;
       }
       const params = { group: { ...group } };
-      if (field.show) {
-        this.state.showFunctions.set(fieldRef, field.show);
+      if (field.showWhen) {
+        this.state.showFunctions.set(fieldRef, field.showWhen);
       }
       /**
        * fieldRenderer is resposnsible to redner field based on type

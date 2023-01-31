@@ -30,7 +30,7 @@ export type FormBuilderGroup = {
   canDuplicate?: boolean;
   label?: FormBuilderLabel;
   fields: Record<string, FormBuilderField>;
-  show?: FormBuilderShowCondition;
+  showWhen?: FormBuilderShowCondition;
 };
 
 export type FormBuilderBaseField = {
@@ -43,7 +43,7 @@ export type FormBuilderBaseField = {
   canDuplicate?: boolean; // plus icon will displayed besides field to duplicate
   validationRules?: FormBuilderValidationRules; // validation rules to validate field
   disabled?: boolean;
-  show?: FormBuilderShowCondition;
+  showWhen?: FormBuilderShowCondition;
 };
 // text input type field
 export type FormBuilderTextInputField = FormBuilderBaseField & {
