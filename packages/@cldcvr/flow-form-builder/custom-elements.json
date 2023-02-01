@@ -510,6 +510,11 @@
             },
             {
               "kind": "method",
+              "name": "checkSuffixConditions",
+              "description": "check condition to display suffix or not"
+            },
+            {
+              "kind": "method",
               "name": "validateForm",
               "parameters": [
                 {

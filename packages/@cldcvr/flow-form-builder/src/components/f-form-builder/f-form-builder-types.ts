@@ -59,6 +59,7 @@ export type FormBuilderTextInputField = FormBuilderBaseField & {
   loading?: boolean;
   readonly?: boolean;
   clear?: boolean;
+  suffixWhen?: FormBuilderSuffixCondition;
 };
 
 // checkbox type field
@@ -125,6 +126,8 @@ export type FormBuilderField =
 
 export type FormBuilderShowCondition = (values: FormBuilderValues) => boolean;
 
+export type FormBuilderSuffixCondition = (value: string) => boolean;
+
 export type FormBuilderLabel = {
   title: string; // title of field/group/form
   description?: string; // more info about title (displayed at bottom of label)
@@ -172,6 +175,12 @@ export type FormBuilderState = {
   rules: Record<string, FormBuilderValidationRules | undefined>;
   errorRefs: Record<string, Ref<HTMLElement>>;
   showFunctions: Map<Ref<HTMLElement>, FormBuilderShowCondition>;
+  suffixFunctions?: Map<Ref<HTMLElement>, FomrBuilderSuffixStateObject>;
+};
+
+export type FomrBuilderSuffixStateObject = {
+  suffixFunction?: FormBuilderSuffixCondition;
+  suffix?: string;
 };
 
 export type FormBuilderValues = Record<

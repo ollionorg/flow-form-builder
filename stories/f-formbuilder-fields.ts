@@ -70,6 +70,10 @@ const sampleFormBuilder: SampleFormBuilder = {
             disabled: false,
             readonly: false,
             clear: true,
+            suffix: "Suggested",
+            suffixWhen: (value: string) => {
+              return value?.length === 0;
+            },
             validationRules: [
               {
                 name: "required",
