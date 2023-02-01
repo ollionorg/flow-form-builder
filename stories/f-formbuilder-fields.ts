@@ -72,7 +72,7 @@ const sampleFormBuilder: SampleFormBuilder = {
             clear: true,
             suffix: "Suggested",
             suffixWhen: (value: string) => {
-              return value?.length === 0;
+              return value === "test";
             },
             validationRules: [
               {
