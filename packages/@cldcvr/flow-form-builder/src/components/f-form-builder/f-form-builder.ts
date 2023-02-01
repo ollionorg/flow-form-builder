@@ -10,6 +10,7 @@ import {
   FormBuilderGenericValidationRule,
   FormBuilderGroup,
   FFormInputElements,
+  FormBuilderTextInputField,
 } from "./f-form-builder-types";
 import eleStyle from "./f-form-builder.scss";
 import validate from "./f-form-validator";
@@ -64,6 +65,7 @@ export class FFormBuilder extends FRoot {
       rules: {},
       errorRefs: {},
       showFunctions: new Map(),
+      suffixFunctions: new Map(),
       get isValid() {
         return isEmptyObject(this.errors);
       },
@@ -78,6 +80,7 @@ export class FFormBuilder extends FRoot {
     // setting isChanged to true in state
     this.state.isChanged = true;
     this.checkAllShowConditions();
+    this.checkSuffixConditions();
     /**
      * validate silently
      */
@@ -183,12 +186,31 @@ export class FFormBuilder extends FRoot {
   checkAllShowConditions() {
     this.state.showFunctions.forEach((showFunction, field) => {
       const showField = showFunction(this.values);
-
       if (field.value) {
         if (!showField) {
           field.value.dataset.hidden = "true";
         } else {
           field.value.dataset.hidden = "false";
+        }
+      }
+    });
+  }
+
+  /**
+   * check condition to display suffix or not
+   */
+  checkSuffixConditions() {
+    this.state.suffixFunctions?.forEach((suffixObject, field) => {
+      const suffixDefined = suffixObject.suffix;
+      const suffixFunction = suffixObject?.suffixFunction;
+      if (suffixDefined && suffixFunction) {
+        const suffixField = suffixFunction((field.value as FInput)?.value ?? "");
+        if (field.value) {
+          if (suffixField) {
+            field.value.setAttribute("suffix", suffixDefined);
+          } else {
+            field.value.setAttribute("suffix", "");
+          }
         }
       }
     });
@@ -252,6 +274,16 @@ export class FFormBuilder extends FRoot {
       if (field.showWhen) {
         this.state.showFunctions.set(fieldRef, field.showWhen);
       }
+      if (
+        (field as FormBuilderTextInputField).suffixWhen &&
+        this.checkFieldType(field.type) === "text" &&
+        (field as FormBuilderTextInputField)?.suffix
+      ) {
+        this.state.suffixFunctions?.set(fieldRef, {
+          suffixFunction: (field as FormBuilderTextInputField).suffixWhen,
+          suffix: (field as FormBuilderTextInputField)?.suffix,
+        });
+      }
       /**
        * fieldRenderer is resposnsible to redner field based on type
        */
@@ -271,11 +303,6 @@ export class FFormBuilder extends FRoot {
    * @param _changedProperties
    */
   protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-    let recordChanges: Record<PropertyKey, unknown> = {};
-    _changedProperties.forEach((oldValue, propName) => {
-      recordChanges = { ...recordChanges, [propName]: oldValue };
-    });
-
     Object.entries(this.state.refs).forEach(([name, element]) => {
       const inputElement = element.value;
 
@@ -285,10 +312,8 @@ export class FFormBuilder extends FRoot {
     });
 
     this.checkAllShowConditions();
-
-    if (Object.keys(recordChanges).includes("config")) {
-      this.emitStateChange();
-    }
+    this.checkSuffixConditions();
+    this.emitStateChange();
   }
   emitStateChange() {
     const stateChange = new CustomEvent("stateChange", {
@@ -412,8 +437,8 @@ export class FFormBuilder extends FRoot {
         inputElement.state = "danger";
       }
     } else {
+      delete this.state.errors[name];
       if (!this.state.helperTexts[name]) {
-        delete this.state.errors[name];
         if (inputElement.lastElementChild?.getAttribute("slot") === "help") {
           const child = inputElement.children[inputElement.children.length - 1];
           child.remove();

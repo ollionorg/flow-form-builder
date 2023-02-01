@@ -4,6 +4,16 @@
 
 # Change Log
 
+## [0.1.1] - 2023-01-01
+
+### Improvements
+
+- addition of `suffixWhen`conditional prop in schema to show suffix conditionaly.
+
+### Bug fixes
+
+- Vue specific bug fix for `sync` and two way data binding in `f-form-builder`
+
 ## [0.1.0] - 2023-01-31
 
 ### Bug fixes
