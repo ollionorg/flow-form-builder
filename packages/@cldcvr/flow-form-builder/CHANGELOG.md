@@ -4,7 +4,11 @@
 
 # Change Log
 
-## [0.1.1] - 2023-01-31
+## [0.1.1] - 2023-01-01
+
+### Improvements
+
+- addition of `suffixWhen`conditional prop in schema to show suffix conditionaly.
 
 ### Bug fixes
 
