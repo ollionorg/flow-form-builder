@@ -397,6 +397,7 @@ export class FFormBuilder extends FRoot {
   protected updated(
     _changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
   ): void {
+    super.updated(_changedProperties);
     Object.entries(this.state.refs).forEach(([name, element]) => {
       const inputElement = element.value as FFormInputElements;
 

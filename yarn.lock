@@ -1308,10 +1308,21 @@
   resolved "https://registry.yarnpkg.com/@cldcvr/custom-elements-manifest-to-types/-/custom-elements-manifest-to-types-1.0.6.tgz#53791ac6bde35ec8d01a6ea5884088ed41c2960c"
   integrity sha512-a02DcgYED6qpr6nQchXJSX1zUp05dq/QtKmB6gbNexuvyYIViqNNndlXXURTYG1R0XER/xgYVi2CV+NLQPuOpA==
 
-"@cldcvr/flow-core@*", "@cldcvr/flow-core@1.2.4":
+"@cldcvr/flow-core@*":
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/@cldcvr/flow-core/-/flow-core-1.2.4.tgz#01fe2d8c4e00a17291cc0dcec09730ffecb037d5"
   integrity sha512-9ZcXml4VODb/5bGKzBZrFlnT/g4HKmrzpl1z5H8lNumHlBb23tyqdWBx5IGsJ6lnqObfcBXvd/jb2YOa/rmxsw==
+  dependencies:
+    "@floating-ui/dom" "^1.0.2"
+    axios "^0.27.2"
+    lit "^2.2.4"
+    rxjs "^7.5.7"
+    validate-color "^2.2.1"
+
+"@cldcvr/flow-core@1.2.5":
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/@cldcvr/flow-core/-/flow-core-1.2.5.tgz#c7accefe55c4f0655276c44581b84283f6b3e9f6"
+  integrity sha512-2X7OQo28eeVBohC5eXWXhmKJeNvUPdvw0hmxRQjp1icm1ooZK8Q92Se3SRvXwZnUWM6JebEqMURrMfNX04tlQg==
   dependencies:
     "@floating-ui/dom" "^1.0.2"
     axios "^0.27.2"
