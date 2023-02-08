@@ -12,7 +12,7 @@ export default function (
   idx: number,
   fieldRef: Ref<FFormInputElements>
 ) {
-  const field = _field as FormBuilderTextInputField;
+  const field = _field as FormBuilderTextInputField & { valueIdx?: number };
   return html`
     <f-input
       name=${name}
@@ -27,23 +27,33 @@ export default function (
       suffix=${ifDefined(field?.suffix)}
       state=${ifDefined(field?.state)}
       max-length=${ifDefined(field?.maxLength)}
+      data-value-idx=${field.valueIdx}
       ?loading=${field?.loading ?? false}
       ?disabled=${field?.disabled ?? false}
       ?clear=${field?.clear ?? true}
       ?read-only=${field?.readonly ?? false}
     >
-      ${field?.label?.title
-        ? html` <f-div slot="label" padding="none" gap="none">${field?.label?.title}</f-div>`
+      ${field.label?.title
+        ? html` <f-div slot="label" padding="none" gap="none"
+            >${field.label.title}</f-div
+          >`
         : html`<f-div slot="label" padding="none" gap="none">${name}</f-div>`}
-      ${field?.label?.description
+      ${field.label?.description
         ? html` <f-div slot="description" padding="none" gap="none"
-            >${field?.label?.description}</f-div
+            >${field.label.description}</f-div
           >`
         : ""}
-      ${field?.helperText ? html`<f-div slot="help">${field?.helperText}</f-div>` : html``}
-      ${field?.label?.iconTooltip
+      ${field.helperText
+        ? html`<f-div slot="help">${field.helperText}</f-div>`
+        : ``}
+      ${field.label?.iconTooltip
         ? html`
-            <f-icon slot="icon-tooltip" source="i-question-filled" size="small" clickable></f-icon>
+            <f-icon
+              slot="icon-tooltip"
+              source="i-question-filled"
+              size="small"
+              clickable
+            ></f-icon>
           `
         : ""}
     </f-input>

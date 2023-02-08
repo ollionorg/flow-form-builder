@@ -27,7 +27,8 @@
   ],
   "dependencies": {
     "@cldcvr/flow-core": "*",
-    "lit": "^2.2.4"
+    "lit": "^2.2.4",
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@cldcvr/custom-elements-manifest-to-types": "1.0.6",

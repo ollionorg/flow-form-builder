@@ -243,6 +243,174 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-radio-group/f-radio-group.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FRadioGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "RadioOptionsType"
+              },
+              "default": "[]",
+              "attribute": "options",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "attribute": "direction",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "helperText",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "helperText",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "handleChange",
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "isChecked",
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "options",
+              "type": {
+                "text": "RadioOptionsType"
+              },
+              "default": "[]",
+              "fieldName": "options"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "direction",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "fieldName": "direction"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "fieldName": "gap"
+            },
+            {
+              "name": "helperText",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "helperText"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-radio-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FRadioGroup",
+          "declaration": {
+            "name": "FRadioGroup",
+            "module": "src/components/f-radio-group/f-radio-group.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-radio-group",
+          "declaration": {
+            "name": "FRadioGroup",
+            "module": "src/components/f-radio-group/f-radio-group.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-builder/f-form-builder-types.ts",
       "declarations": [],
       "exports": []
@@ -288,6 +456,33 @@
                 "text": "Ref<HTMLFormElement>"
               },
               "description": "form reference"
+            },
+            {
+              "kind": "field",
+              "name": "groups",
+              "type": {
+                "text": "(FormBuilderGroup & {\n    name: string;\n    fields: Record<string, FormBuilderField & { valueIdx?: number }>;\n  })[]"
+              },
+              "privacy": "private",
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "groupIndices",
+              "type": {
+                "text": "Record<string, number>"
+              },
+              "privacy": "private",
+              "default": "{}"
+            },
+            {
+              "kind": "field",
+              "name": "groupsHasArrayValues",
+              "type": {
+                "text": "string[]"
+              },
+              "privacy": "private",
+              "default": "[]"
             },
             {
               "kind": "method",
@@ -367,7 +562,7 @@
                   }
                 }
               ],
-              "description": "validate whole form"
+              "description": "check field type and return genric"
             },
             {
               "kind": "method",
@@ -430,7 +625,7 @@
                 {
                   "name": "inputElement",
                   "type": {
-                    "text": "FFormInputElements | undefined"
+                    "text": "FFormInputElements"
                   }
                 },
                 {
@@ -677,174 +872,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-radio-group/f-radio-group.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FRadioGroup",
-          "members": [
-            {
-              "kind": "field",
-              "name": "options",
-              "type": {
-                "text": "RadioOptionsType"
-              },
-              "default": "[]",
-              "attribute": "options",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "value",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "direction",
-              "type": {
-                "text": "\"vertical\" | \"horizontal\" | undefined"
-              },
-              "default": "\"vertical\"",
-              "attribute": "direction",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"small\"",
-              "attribute": "gap",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "helperText",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "helperText",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "handleChange",
-              "parameters": [
-                {
-                  "name": "id",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "isChecked",
-              "parameters": [
-                {
-                  "name": "id",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            }
-          ],
-          "attributes": [
-            {
-              "name": "options",
-              "type": {
-                "text": "RadioOptionsType"
-              },
-              "default": "[]",
-              "fieldName": "options"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "value",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "value"
-            },
-            {
-              "name": "direction",
-              "type": {
-                "text": "\"vertical\" | \"horizontal\" | undefined"
-              },
-              "default": "\"vertical\"",
-              "fieldName": "direction"
-            },
-            {
-              "name": "gap",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"small\"",
-              "fieldName": "gap"
-            },
-            {
-              "name": "helperText",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "helperText"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core"
-          },
-          "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-radio-group",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FRadioGroup",
-          "declaration": {
-            "name": "FRadioGroup",
-            "module": "src/components/f-radio-group/f-radio-group.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-radio-group",
-          "declaration": {
-            "name": "FRadioGroup",
-            "module": "src/components/f-radio-group/f-radio-group.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-form-builder/default-validation-messages/index.ts",
       "declarations": [
         {
@@ -897,6 +924,58 @@
           "declaration": {
             "name": "defaultValidations",
             "module": "src/components/f-form-builder/default-validations/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/validation-rules/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "all",
+          "type": {
+            "text": "Record<string, FormBuilderValidatorFunction>"
+          },
+          "default": "{\n  required,\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "all",
+            "module": "src/components/f-form-builder/validation-rules/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/validation-rules/required.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "requiredValidator",
+          "parameters": [
+            {
+              "name": "value",
+              "type": {
+                "text": "unknown"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "requiredValidator",
+            "module": "src/components/f-form-builder/validation-rules/required.ts"
           }
         }
       ]
@@ -1239,58 +1318,6 @@
           "declaration": {
             "name": "",
             "module": "src/components/f-form-builder/fields/textarea.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-builder/validation-rules/index.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "all",
-          "type": {
-            "text": "Record<string, FormBuilderValidatorFunction>"
-          },
-          "default": "{\n  required,\n}"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "all",
-            "module": "src/components/f-form-builder/validation-rules/index.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-builder/validation-rules/required.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "requiredValidator",
-          "parameters": [
-            {
-              "name": "value",
-              "type": {
-                "text": "unknown"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "requiredValidator",
-            "module": "src/components/f-form-builder/validation-rules/required.ts"
           }
         }
       ]

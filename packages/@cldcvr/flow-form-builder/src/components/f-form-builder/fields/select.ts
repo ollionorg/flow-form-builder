@@ -12,7 +12,7 @@ export default function (
   idx: number,
   fieldRef: Ref<FFormInputElements>
 ) {
-  const field = _field as FormBuilderSelectField;
+  const field = _field as FormBuilderSelectField & { valueIdx?: number };
   return html`
     <f-select
       name=${name}
@@ -32,19 +32,29 @@ export default function (
       ?create-option=${field.createOption}
       .option-template=${field.optionTemplate}
       icon-left=${ifDefined(field.iconLeft)}
+      data-value-idx=${field.valueIdx}
     >
       ${field?.label?.title
-        ? html` <f-div slot="label" padding="none" gap="none">${field?.label?.title}</f-div>`
+        ? html` <f-div slot="label" padding="none" gap="none"
+            >${field?.label?.title}</f-div
+          >`
         : html`<f-div slot="label" padding="none" gap="none">${name}</f-div>`}
       ${field?.label?.description
         ? html` <f-div slot="description" padding="none" gap="none"
             >${field?.label?.description}</f-div
           >`
         : ""}
-      ${field?.helperText ? html`<f-div slot="help">${field?.helperText}</f-div>` : html``}
+      ${field?.helperText
+        ? html`<f-div slot="help">${field?.helperText}</f-div>`
+        : html``}
       ${field?.label?.iconTooltip
         ? html`
-            <f-icon slot="icon-tooltip" source="i-question-filled" size="small" clickable></f-icon>
+            <f-icon
+              slot="icon-tooltip"
+              source="i-question-filled"
+              size="small"
+              clickable
+            ></f-icon>
           `
         : ""}
     </f-select>

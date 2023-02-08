@@ -34,7 +34,7 @@ import { useArgs, useState } from "@storybook/client-api";
     }}
     args={{
       ...fields,
-      values: {},
+      values: { group1: { xyz: ["test", "123"], abc: ["678", "000"] } },
     }}
   >
     {(args) => {
@@ -50,9 +50,13 @@ import { useArgs, useState } from "@storybook/client-api";
       };
       const handleInput = (event) => {
         {
-          /* updateArgs({ values: event.detail }); */
+          updateArgs({ values: event.detail });
         }
         console.log("input event", event.detail);
+      };
+      const handleKeydown = (event) => {
+        event.stopPropagation();
+        event.stopImmediatePropagation();
       };
       return html` <f-div padding="medium">
         <f-form-builder
@@ -61,6 +65,7 @@ import { useArgs, useState } from "@storybook/client-api";
           @submit=${handleSubmit}
           @stateChange=${handleStateChange}
           @input=${handleInput}
+          @keydown=${handleKeydown}
         >
           <f-button
             label="submit"

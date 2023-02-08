@@ -1,4 +1,4 @@
-import { html, PropertyValueMap, render, unsafeCSS } from "lit";
+import { html, PropertyValueMap, PropertyValues, render, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import {
@@ -21,8 +21,10 @@ import fieldRenderer from "./fields";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 import { FInput } from "@cldcvr/flow-core";
 import defaultValidations from "./default-validations/index";
+import { cloneDeep } from "lodash";
 
 const GROUP_FIELD_NAME_SEPARATOR = ".$";
+const CLONNED_GROUP_NAME_SEPARATOR = "_$";
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
@@ -40,7 +42,13 @@ export class FFormBuilder extends FRoot {
   /**
    * @attribute key value pair of values
    */
-  @property({ type: Object, reflect: true })
+  @property({
+    type: Object,
+    reflect: true,
+    hasChanged(newVal: FormBuilderValues, oldVal: FormBuilderValues) {
+      return JSON.stringify(newVal) !== JSON.stringify(oldVal);
+    },
+  })
   values!: FormBuilderValues;
 
   /**
@@ -52,6 +60,62 @@ export class FFormBuilder extends FRoot {
    * form reference
    */
   formRef!: Ref<HTMLFormElement>;
+
+  private groups: (FormBuilderGroup & {
+    name: string;
+    fields: Record<string, FormBuilderField & { valueIdx?: number }>;
+  })[] = [];
+  // hold group indices to splice when duplicate
+  private groupIndices: Record<string, number> = {};
+  private groupsHasArrayValues: string[] = [];
+
+  willUpdate(changedProperties: PropertyValues<this>) {
+    if (changedProperties.has("config") || changedProperties.has("values")) {
+      this.groups = [];
+      this.groupIndices = {};
+      this.groupsHasArrayValues = [];
+      Object.entries(this.config.groups).forEach(
+        ([groupName, groupConfig], idx) => {
+          this.groupIndices[groupName] = idx;
+          this.groups[idx] = { name: groupName, ...groupConfig };
+          Object.entries(this.groups[idx].fields).forEach(
+            ([_fieldName, fieldConfig]) => {
+              fieldConfig.valueIdx = 0;
+            }
+          );
+        }
+      );
+      Object.entries(this.values).forEach(([groupName, fields]) => {
+        let maxValueCount = 0;
+        Object.entries(fields).forEach(([fieldName, value]) => {
+          const fieldConfig = this.config.groups[groupName].fields[fieldName];
+          const fieldType = this.checkFieldType(fieldConfig.type);
+          if (fieldType === "text" && Array.isArray(value)) {
+            if (value.length > maxValueCount) {
+              maxValueCount = value.length;
+            }
+          }
+        });
+
+        for (let d = 1; d < maxValueCount; d++) {
+          this.groupsHasArrayValues.push(groupName);
+          const clonnedGroupName = `${groupName}${CLONNED_GROUP_NAME_SEPARATOR}${d}`;
+          const clonnedGroupIdx = this.groupIndices[groupName] + d;
+          this.groupIndices[groupName] = clonnedGroupIdx;
+          this.groups.splice(clonnedGroupIdx, 0, {
+            name: clonnedGroupName,
+            ...cloneDeep(this.config.groups[groupName]),
+          });
+
+          Object.entries(this.groups[clonnedGroupIdx].fields).forEach(
+            ([_fieldName, fieldConfig]) => {
+              fieldConfig.valueIdx = d;
+            }
+          );
+        }
+      });
+    }
+  }
 
   render() {
     /**
@@ -112,14 +176,33 @@ export class FFormBuilder extends FRoot {
       ?separator=${this.config.groupSeparator}
       gap=${ifDefined(this.config.gap)}
     >
-      <f-div padding="none" gap="x-small" direction="column" width="fill-container">
-        <f-div padding="none" gap="small" direction="row" width="hug-content" height="hug-content">
-          <f-div padding="none" direction="row" width="hug-content" height="hug-content">
+      <!--label,description and info icon-->
+      <f-div
+        padding="none"
+        gap="x-small"
+        direction="column"
+        width="fill-container"
+      >
+        <f-div
+          padding="none"
+          gap="small"
+          direction="row"
+          width="hug-content"
+          height="hug-content"
+        >
+          <!--label-->
+          <f-div
+            padding="none"
+            direction="row"
+            width="hug-content"
+            height="hug-content"
+          >
             <f-text variant="heading" size="medium" weight="regular"
-              >${this.config?.label?.title}</f-text
+              >${this.config.label?.title}</f-text
             >
           </f-div>
-          ${this.config?.label?.iconTooltip
+          <!--info icon-->
+          ${this.config.label?.iconTooltip
             ? html` <f-icon
                 source="i-question-filled"
                 size="small"
@@ -128,13 +211,15 @@ export class FFormBuilder extends FRoot {
               ></f-icon>`
             : ""}
         </f-div>
-        ${this.config?.label?.description
+        <!--field description-->
+        ${this.config.label?.description
           ? html` <f-text variant="para" size="medium" weight="regular"
-              >${this.config?.label?.description}</f-text
+              >${this.config.label?.description}</f-text
             >`
           : ""}
       </f-div>
-      ${Object.entries(this.config.groups).map(([name, gr]) => {
+      ${this.groups.map((gr) => {
+        const name = gr.name;
         const groupWrapperRef: Ref<HTMLElement> = createRef();
         if (gr.showWhen) {
           this.state.showFunctions.set(groupWrapperRef, gr.showWhen);
@@ -204,7 +289,9 @@ export class FFormBuilder extends FRoot {
       const suffixDefined = suffixObject.suffix;
       const suffixFunction = suffixObject?.suffixFunction;
       if (suffixDefined && suffixFunction) {
-        const suffixField = suffixFunction((field.value as FInput)?.value ?? "");
+        const suffixField = suffixFunction(
+          (field.value as FInput)?.value ?? ""
+        );
         if (field.value) {
           if (suffixField) {
             field.value.setAttribute("suffix", suffixDefined);
@@ -230,7 +317,7 @@ export class FFormBuilder extends FRoot {
     });
   }
   /**
-   * validate whole form
+   * check field type and return genric
    * @param type
    */
   checkFieldType(type: string) {
@@ -263,17 +350,22 @@ export class FFormBuilder extends FRoot {
       const relativeName = `${groupname}${GROUP_FIELD_NAME_SEPARATOR}${name}`;
       this.state.refs[relativeName] = fieldRef;
       this.state.errorRefs[relativeName] = fieldErrorRef;
-      const validations = field.validationRules ? [...field.validationRules] : [];
+      const validations = field.validationRules
+        ? [...field.validationRules]
+        : [];
       defaultValidations(field.type, validations);
       this.state.rules[relativeName] = validations;
 
-      if (field?.helperText) {
+      if (field.helperText) {
         this.state.helperTexts[relativeName] = field.helperText;
       }
       const params = { group: { ...group } };
       if (field.showWhen) {
         this.state.showFunctions.set(fieldRef, field.showWhen);
       }
+      /**
+       * check suffix for inputs
+       */
       if (
         (field as FormBuilderTextInputField).suffixWhen &&
         this.checkFieldType(field.type) === "text" &&
@@ -302,9 +394,11 @@ export class FFormBuilder extends FRoot {
    * updated hook of lit element
    * @param _changedProperties
    */
-  protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+  protected updated(
+    _changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+  ): void {
     Object.entries(this.state.refs).forEach(([name, element]) => {
-      const inputElement = element.value;
+      const inputElement = element.value as FFormInputElements;
 
       this.bindValues(inputElement, name);
 
@@ -333,13 +427,28 @@ export class FFormBuilder extends FRoot {
    */
   bindValues(inputElement: FFormInputElements | undefined, name: string) {
     if (inputElement) {
-      const [groupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
+      const [preGroupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
+
+      const [groupname] = preGroupname.split(CLONNED_GROUP_NAME_SEPARATOR);
 
       /**
        * if value is array (i.e. multiple fields with same name)
        */
-      if (this.values && this.values[groupname] && this.values[groupname][fieldname]) {
-        (inputElement.value as unknown) = this.values[groupname][fieldname];
+      if (
+        this.values &&
+        this.values[groupname] &&
+        this.values[groupname][fieldname]
+      ) {
+        if (
+          Array.isArray(this.values[groupname][fieldname]) &&
+          inputElement.dataset["valueIdx"]
+        ) {
+          (inputElement.value as unknown) = (
+            this.values[groupname][fieldname] as Array<unknown>
+          )[+inputElement.dataset["valueIdx"]];
+        } else {
+          (inputElement.value as unknown) = this.values[groupname][fieldname];
+        }
       }
     }
   }
@@ -348,30 +457,45 @@ export class FFormBuilder extends FRoot {
    * validation rules listener added on `input` event.
    * @param inputElement
    */
-  bindValidation(inputElement: FFormInputElements | undefined, name: string) {
+  bindValidation(inputElement: FFormInputElements, name: string) {
     /**
      * Adding validation listener
      */
     if (inputElement) {
-      const [groupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
+      const [preGroupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
+      const [groupname] = preGroupname.split(CLONNED_GROUP_NAME_SEPARATOR);
+
       const validation = () => {
-        // updating values in object
-        if (this.values[groupname] && this.values[groupname][fieldname]) {
-          this.values[groupname][fieldname] = (inputElement as FInput)?.value;
+        if (this.groupsHasArrayValues.includes(groupname)) {
+          if (!(this.values[groupname] && this.values[groupname][fieldname])) {
+            this.values[groupname][fieldname] = [];
+          }
+
+          (this.values[groupname][fieldname] as Array<unknown>)[
+            Number(inputElement.dataset["valueIdx"])
+          ] = inputElement.value;
         } else {
-          this.values[groupname] = {
-            ...this.values[groupname],
-            [fieldname]: (inputElement as FInput)?.value,
-          };
+          if (this.values[groupname] && this.values[groupname][fieldname]) {
+            this.values[groupname][fieldname] = (inputElement as FInput)?.value;
+          } else {
+            this.values[groupname] = {
+              ...this.values[groupname],
+              [fieldname]: (inputElement as FInput)?.value,
+            };
+          }
         }
+
         // checking validaiton rules if any
         if (this.state.rules[name] !== undefined) {
           this.validateField(name, inputElement);
         }
       };
 
-      inputElement.addEventListener("input", validation);
-      inputElement.addEventListener("blur", validation);
+      /**
+       * default event triggers for validation
+       */
+      inputElement.oninput = validation;
+      inputElement.onblur = validation;
 
       // on special events if user has specified
       if (this.state.rules[name] !== undefined) {
@@ -379,7 +503,9 @@ export class FFormBuilder extends FRoot {
           if (rule.when && rule.when.length > 0) {
             rule.when.forEach((eventname) => {
               if (this.values[groupname]) {
-                this.values[groupname][fieldname] = (inputElement as FInput)?.value;
+                this.values[groupname][fieldname] = (
+                  inputElement as FInput
+                )?.value;
               } else {
                 if ((inputElement as FInput)?.value) {
                   this.values[groupname] = {
@@ -388,7 +514,10 @@ export class FFormBuilder extends FRoot {
                   };
                 }
               }
-              inputElement.addEventListener(eventname, () => {
+              /**
+               * custom event triggers for validation
+               */
+              inputElement[`on${eventname}`] = () => {
                 this.validateField(
                   name,
                   inputElement,
@@ -397,7 +526,7 @@ export class FFormBuilder extends FRoot {
                     return r.name === rule.name;
                   }
                 );
-              });
+              };
             });
           }
         });
@@ -417,7 +546,9 @@ export class FFormBuilder extends FRoot {
   ) {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [_groupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
-    const rulesToValidate = this.state.rules[name]?.filter(filter ? filter : () => true);
+    const rulesToValidate = this.state.rules[name]?.filter(
+      filter ? filter : () => true
+    );
 
     const { result, message } = validate(
       (inputElement as FInput).value ?? "",
@@ -432,7 +563,10 @@ export class FFormBuilder extends FRoot {
       }
       if (!silent && !this.state.helperTexts[name]) {
         if (inputElement.lastElementChild?.getAttribute("slot") !== "help") {
-          inputElement.insertAdjacentHTML("beforeend", `<f-div slot="help">${message}</f-div>`);
+          inputElement.insertAdjacentHTML(
+            "beforeend",
+            `<f-div slot="help">${message}</f-div>`
+          );
         }
         inputElement.state = "danger";
       }

@@ -40,7 +40,6 @@ export type FormBuilderBaseField = {
   dataQA?: string; // data dq attribute for qa automation
   label?: FormBuilderLabel; // label of field
   description?: string; // description displayed at bottom of field
-  canDuplicate?: boolean; // plus icon will displayed besides field to duplicate
   validationRules?: FormBuilderValidationRules; // validation rules to validate field
   disabled?: boolean;
   helperText?: string;
