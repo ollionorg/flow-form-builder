@@ -476,15 +476,6 @@
               "default": "{}"
             },
             {
-              "kind": "field",
-              "name": "groupsHasArrayValues",
-              "type": {
-                "text": "string[]"
-              },
-              "privacy": "private",
-              "default": "[]"
-            },
-            {
               "kind": "method",
               "name": "handleFormChange",
               "parameters": [
@@ -930,6 +921,58 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form-builder/validation-rules/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "all",
+          "type": {
+            "text": "Record<string, FormBuilderValidatorFunction>"
+          },
+          "default": "{\n  required,\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "all",
+            "module": "src/components/f-form-builder/validation-rules/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/validation-rules/required.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "requiredValidator",
+          "parameters": [
+            {
+              "name": "value",
+              "type": {
+                "text": "unknown"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "requiredValidator",
+            "module": "src/components/f-form-builder/validation-rules/required.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-builder/fields/checkbox.ts",
       "declarations": [
         {
@@ -1266,58 +1309,6 @@
           "declaration": {
             "name": "",
             "module": "src/components/f-form-builder/fields/textarea.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-builder/validation-rules/index.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "all",
-          "type": {
-            "text": "Record<string, FormBuilderValidatorFunction>"
-          },
-          "default": "{\n  required,\n}"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "all",
-            "module": "src/components/f-form-builder/validation-rules/index.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-builder/validation-rules/required.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "requiredValidator",
-          "parameters": [
-            {
-              "name": "value",
-              "type": {
-                "text": "unknown"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "requiredValidator",
-            "module": "src/components/f-form-builder/validation-rules/required.ts"
           }
         }
       ]

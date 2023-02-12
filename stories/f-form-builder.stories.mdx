@@ -34,7 +34,12 @@ import { useArgs, useState } from "@storybook/client-api";
     }}
     args={{
       ...fields,
-      values: { group1: { xyz: ["test", "123"], abc: ["678", "000"] } },
+      values: {
+        group1: [
+          { xyz: "123", abc: "678" },
+          { xyz: "tyu", abc: "pqr" },
+        ],
+      },
     }}
   >
     {(args) => {

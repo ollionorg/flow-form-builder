@@ -10,8 +10,8 @@ const sampleFormBuilder: SampleFormBuilder = {
   config: {
     gap: "large",
     groupSeparator: true,
-    fieldSize: "small",
-    variant: "round",
+    fieldSize: "medium",
+    variant: "curved",
     category: "fill",
     label: {
       title: "Form",
@@ -20,6 +20,7 @@ const sampleFormBuilder: SampleFormBuilder = {
     },
     groups: {
       ["Group 7 New"]: {
+        type: "object",
         direction: "horizontal",
         isCollapsible: false,
         isCollapsed: true,
@@ -50,6 +51,7 @@ const sampleFormBuilder: SampleFormBuilder = {
         },
       },
       group1: {
+        type: "array",
         direction: "horizontal",
         isCollapsible: false,
         isCollapsed: true,
@@ -92,8 +94,12 @@ const sampleFormBuilder: SampleFormBuilder = {
         },
       },
       group2: {
+        type: "object",
         showWhen: (formValues: FormBuilderValues) => {
-          return formValues?.group1?.xyz === "show";
+          return (
+            (formValues["Group 7 New"] as Record<string, unknown>)?.xyz ===
+            "show"
+          );
         },
         fields: {
           username: {
@@ -112,7 +118,10 @@ const sampleFormBuilder: SampleFormBuilder = {
               },
             ],
             showWhen: (formValues: FormBuilderValues) => {
-              return formValues?.group2?.username === "abc";
+              return (
+                (formValues?.group2 as Record<string, unknown>)?.username ===
+                "abc"
+              );
             },
           },
           lastname: {
@@ -135,6 +144,7 @@ const sampleFormBuilder: SampleFormBuilder = {
         },
       },
       group3: {
+        type: "object",
         direction: "vertical",
         gap: "medium",
         label: {
@@ -163,6 +173,7 @@ const sampleFormBuilder: SampleFormBuilder = {
         },
       },
       group4: {
+        type: "object",
         direction: "vertical",
         label: {
           title: "Textarea",
@@ -186,6 +197,7 @@ const sampleFormBuilder: SampleFormBuilder = {
         },
       },
       group5: {
+        type: "object",
         direction: "vertical",
         gap: "medium",
         label: {
@@ -214,6 +226,7 @@ const sampleFormBuilder: SampleFormBuilder = {
         },
       },
       group6: {
+        type: "object",
         direction: "vertical",
         gap: "medium",
         label: {

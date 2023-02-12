@@ -21,17 +21,25 @@ export type FormBuilderConfig = {
   groups: Record<string, FormBuilderGroup>;
 };
 
-export type FormBuilderGroup = {
+export type FormBuilderBaseGroup = {
   direction?: "vertical" | "horizontal";
   gap?: "small" | "medium" | "large" | "x-small";
   variant?: "normal" | "compact";
   isCollapsible?: boolean;
   isCollapsed?: boolean;
-  canDuplicate?: boolean;
   label?: FormBuilderLabel;
   fields: Record<string, FormBuilderField>;
   showWhen?: FormBuilderShowCondition;
 };
+
+export type FormBuilderArrayGroup = FormBuilderBaseGroup & {
+  type: "array";
+  canDuplicate?: boolean;
+};
+export type FormBuilderObjectGroup = FormBuilderBaseGroup & {
+  type: "object";
+};
+export type FormBuilderGroup = FormBuilderArrayGroup | FormBuilderObjectGroup;
 
 export type FormBuilderBaseField = {
   id?: string; // id to uniquely identify in DOM
@@ -181,11 +189,24 @@ export type FomrBuilderSuffixStateObject = {
   suffixFunction?: FormBuilderSuffixCondition;
   suffix?: string;
 };
-
-export type FormBuilderValues = Record<
+export type FormBuilderObjectGroupValues = Record<
   string,
-  Record<string, string | string[] | number | number[] | undefined>
+  Record<
+    string,
+    string | string[] | number | number[] | unknown | unknown[] | undefined
+  >
 >;
+
+export type FormBuilderArrayGroupValues = Record<
+  string,
+  Record<
+    string,
+    string | string[] | number | number[] | unknown | unknown[] | undefined
+  >[]
+>;
+export type FormBuilderValues =
+  | FormBuilderObjectGroupValues
+  | FormBuilderArrayGroupValues;
 
 export type FormBuilderFieldRenderFunction = (
   name: string,

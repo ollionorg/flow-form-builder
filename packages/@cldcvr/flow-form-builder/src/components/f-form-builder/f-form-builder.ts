@@ -67,13 +67,12 @@ export class FFormBuilder extends FRoot {
   })[] = [];
   // hold group indices to splice when duplicate
   private groupIndices: Record<string, number> = {};
-  private groupsHasArrayValues: string[] = [];
 
   willUpdate(changedProperties: PropertyValues<this>) {
     if (changedProperties.has("config") || changedProperties.has("values")) {
       this.groups = [];
       this.groupIndices = {};
-      this.groupsHasArrayValues = [];
+
       Object.entries(this.config.groups).forEach(
         ([groupName, groupConfig], idx) => {
           this.groupIndices[groupName] = idx;
@@ -85,33 +84,24 @@ export class FFormBuilder extends FRoot {
           );
         }
       );
+
       Object.entries(this.values).forEach(([groupName, fields]) => {
-        let maxValueCount = 0;
-        Object.entries(fields).forEach(([fieldName, value]) => {
-          const fieldConfig = this.config.groups[groupName].fields[fieldName];
-          const fieldType = this.checkFieldType(fieldConfig.type);
-          if (fieldType === "text" && Array.isArray(value)) {
-            if (value.length > maxValueCount) {
-              maxValueCount = value.length;
-            }
+        if (this.config.groups[groupName].type === "array") {
+          for (let d = 1; d < (fields as unknown[]).length; d++) {
+            const clonnedGroupName = `${groupName}${CLONNED_GROUP_NAME_SEPARATOR}${d}`;
+            const clonnedGroupIdx = this.groupIndices[groupName] + d;
+            this.groupIndices[groupName] = clonnedGroupIdx;
+            this.groups.splice(clonnedGroupIdx, 0, {
+              name: clonnedGroupName,
+              ...cloneDeep(this.config.groups[groupName]),
+            });
+
+            Object.entries(this.groups[clonnedGroupIdx].fields).forEach(
+              ([_fieldName, fieldConfig]) => {
+                fieldConfig.valueIdx = d;
+              }
+            );
           }
-        });
-
-        for (let d = 1; d < maxValueCount; d++) {
-          this.groupsHasArrayValues.push(groupName);
-          const clonnedGroupName = `${groupName}${CLONNED_GROUP_NAME_SEPARATOR}${d}`;
-          const clonnedGroupIdx = this.groupIndices[groupName] + d;
-          this.groupIndices[groupName] = clonnedGroupIdx;
-          this.groups.splice(clonnedGroupIdx, 0, {
-            name: clonnedGroupName,
-            ...cloneDeep(this.config.groups[groupName]),
-          });
-
-          Object.entries(this.groups[clonnedGroupIdx].fields).forEach(
-            ([_fieldName, fieldConfig]) => {
-              fieldConfig.valueIdx = d;
-            }
-          );
         }
       });
     }
@@ -432,24 +422,25 @@ export class FFormBuilder extends FRoot {
 
       const [groupname] = preGroupname.split(CLONNED_GROUP_NAME_SEPARATOR);
 
-      /**
-       * if value is array (i.e. multiple fields with same name)
-       */
+      const groupConfig = this.config.groups[groupname];
       if (
+        groupConfig.type === "array" &&
+        this.values &&
+        this.values[groupname]
+      ) {
+        if (inputElement.dataset["valueIdx"]) {
+          (inputElement.value as unknown) = (
+            this.values[groupname] as Record<string, unknown>[]
+          )[+inputElement.dataset["valueIdx"]][fieldname];
+        }
+      } else if (
         this.values &&
         this.values[groupname] &&
-        this.values[groupname][fieldname]
+        (this.values[groupname] as Record<string, unknown>)[fieldname]
       ) {
-        if (
-          Array.isArray(this.values[groupname][fieldname]) &&
-          inputElement.dataset["valueIdx"]
-        ) {
-          (inputElement.value as unknown) = (
-            this.values[groupname][fieldname] as Array<unknown>
-          )[+inputElement.dataset["valueIdx"]];
-        } else {
-          (inputElement.value as unknown) = this.values[groupname][fieldname];
-        }
+        (inputElement.value as unknown) = (
+          this.values[groupname] as Record<string, unknown>
+        )[fieldname];
       }
     }
   }
@@ -465,19 +456,23 @@ export class FFormBuilder extends FRoot {
     if (inputElement) {
       const [preGroupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
       const [groupname] = preGroupname.split(CLONNED_GROUP_NAME_SEPARATOR);
+      const groupConfig = this.config.groups[groupname];
 
-      const validation = () => {
-        if (this.groupsHasArrayValues.includes(groupname)) {
-          if (!(this.values[groupname] && this.values[groupname][fieldname])) {
-            this.values[groupname][fieldname] = [];
+      const bindValues = () => {
+        if (groupConfig.type === "array") {
+          const groupValues = this.values[groupname] as Record<
+            string,
+            unknown
+          >[];
+          const idx = Number(inputElement.dataset["valueIdx"]);
+          if (!(groupValues && groupValues[idx])) {
+            groupValues[idx] = {};
           }
-
-          (this.values[groupname][fieldname] as Array<unknown>)[
-            Number(inputElement.dataset["valueIdx"])
-          ] = inputElement.value;
+          groupValues[idx][fieldname] = inputElement.value;
         } else {
-          if (this.values[groupname] && this.values[groupname][fieldname]) {
-            this.values[groupname][fieldname] = (inputElement as FInput)?.value;
+          const groupValues = this.values[groupname] as Record<string, unknown>;
+          if (groupValues && groupValues[fieldname]) {
+            groupValues[fieldname] = (inputElement as FInput)?.value;
           } else {
             this.values[groupname] = {
               ...this.values[groupname],
@@ -485,7 +480,9 @@ export class FFormBuilder extends FRoot {
             };
           }
         }
-
+      };
+      const validation = () => {
+        bindValues();
         // checking validaiton rules if any
         if (this.state.rules[name] !== undefined) {
           this.validateField(name, inputElement);
@@ -503,18 +500,7 @@ export class FFormBuilder extends FRoot {
         this.state.rules[name]?.forEach((rule) => {
           if (rule.when && rule.when.length > 0) {
             rule.when.forEach((eventname) => {
-              if (this.values[groupname]) {
-                this.values[groupname][fieldname] = (
-                  inputElement as FInput
-                )?.value;
-              } else {
-                if ((inputElement as FInput)?.value) {
-                  this.values[groupname] = {
-                    ...this.values[groupname],
-                    [fieldname]: (inputElement as FInput)?.value,
-                  };
-                }
-              }
+              bindValues();
               /**
                * custom event triggers for validation
                */
