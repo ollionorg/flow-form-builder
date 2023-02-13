@@ -37,7 +37,10 @@ export default function validate(
 
 function processCustomMessage(message: string, params: Record<string, string>) {
   for (const prop in params) {
-    message = message.replace(new RegExp("{{" + prop + "}}", "g"), params[prop]);
+    message = message.replace(
+      new RegExp("{{" + prop + "}}", "g"),
+      params[prop]
+    );
   }
   return message;
 }

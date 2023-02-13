@@ -39,7 +39,7 @@ const sampleFormBuilder: SampleFormBuilder = {
               },
             ],
           },
-          xyz: {
+          wxyz: {
             type: "text",
             helperText: "This field is a required field",
             validationRules: [
@@ -55,6 +55,7 @@ const sampleFormBuilder: SampleFormBuilder = {
         direction: "horizontal",
         isCollapsible: false,
         isCollapsed: true,
+        canDuplicate: true,
         label: {
           title: "Group 1",
           description: "This is Group 1",
@@ -97,7 +98,7 @@ const sampleFormBuilder: SampleFormBuilder = {
         type: "object",
         showWhen: (formValues: FormBuilderValues) => {
           return (
-            (formValues["Group 7 New"] as Record<string, unknown>)?.xyz ===
+            (formValues["Group 7 New"] as Record<string, unknown>)?.wxyz ===
             "show"
           );
         },

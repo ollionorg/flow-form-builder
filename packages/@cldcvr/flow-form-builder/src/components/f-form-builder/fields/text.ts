@@ -10,7 +10,8 @@ export default function (
   name: string,
   _field: FormBuilderField,
   idx: number,
-  fieldRef: Ref<FFormInputElements>
+  fieldRef: Ref<FFormInputElements>,
+  params?: any
 ) {
   const field = _field as FormBuilderTextInputField & { valueIdx?: number };
   return html`
@@ -18,7 +19,7 @@ export default function (
       name=${name}
       .type=${field.type}
       ${ref(fieldRef)}
-      id=${"form-ele" + idx}
+      id=${params.group.name + idx}
       .placeholder=${field.placeholder}
       .type=${field.type}
       icon-left=${ifDefined(field?.iconLeft)}

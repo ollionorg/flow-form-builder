@@ -26,7 +26,6 @@
     "lit"
   ],
   "dependencies": {
-    "@cldcvr/flow-core": "*",
     "lit": "^2.2.4",
     "lodash": "^4.17.21"
   },

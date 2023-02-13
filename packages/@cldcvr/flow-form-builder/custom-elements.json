@@ -461,19 +461,10 @@
               "kind": "field",
               "name": "groups",
               "type": {
-                "text": "(FormBuilderGroup & {\n    name: string;\n    fields: Record<string, FormBuilderField & { valueIdx?: number }>;\n  })[]"
+                "text": "InternalFormBuilderGroup[]"
               },
               "privacy": "private",
               "default": "[]"
-            },
-            {
-              "kind": "field",
-              "name": "groupIndices",
-              "type": {
-                "text": "Record<string, number>"
-              },
-              "privacy": "private",
-              "default": "{}"
             },
             {
               "kind": "method",
@@ -492,6 +483,36 @@
               "kind": "method",
               "name": "build",
               "description": "build/render form based on config"
+            },
+            {
+              "kind": "method",
+              "name": "handleGroupDuplicate",
+              "parameters": [
+                {
+                  "name": "group",
+                  "type": {
+                    "text": "InternalFormBuilderGroup"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "duplicateGroup",
+              "parameters": [
+                {
+                  "name": "groupName",
+                  "type": {
+                    "text": "string"
+                  }
+                },
+                {
+                  "name": "d",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
             },
             {
               "kind": "method",
@@ -1245,6 +1266,13 @@
               "name": "fieldRef",
               "type": {
                 "text": "Ref<FFormInputElements>"
+              }
+            },
+            {
+              "name": "params",
+              "optional": true,
+              "type": {
+                "text": "any"
               }
             }
           ]

@@ -11,6 +11,7 @@ import {
   FormBuilderGroup,
   FFormInputElements,
   FormBuilderTextInputField,
+  FormBuilderArrayGroup,
 } from "./f-form-builder-types";
 import eleStyle from "./f-form-builder.scss";
 import validate from "./f-form-validator";
@@ -25,7 +26,10 @@ import { cloneDeep } from "lodash";
 
 const GROUP_FIELD_NAME_SEPARATOR = ".$";
 const CLONNED_GROUP_NAME_SEPARATOR = "_$";
-
+type InternalFormBuilderGroup = FormBuilderGroup & {
+  name: string;
+  fields: Record<string, FormBuilderField & { valueIdx?: number }>;
+};
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
   /**
@@ -61,21 +65,14 @@ export class FFormBuilder extends FRoot {
    */
   formRef!: Ref<HTMLFormElement>;
 
-  private groups: (FormBuilderGroup & {
-    name: string;
-    fields: Record<string, FormBuilderField & { valueIdx?: number }>;
-  })[] = [];
-  // hold group indices to splice when duplicate
-  private groupIndices: Record<string, number> = {};
+  private groups: InternalFormBuilderGroup[] = [];
 
   willUpdate(changedProperties: PropertyValues<this>) {
     if (changedProperties.has("config") || changedProperties.has("values")) {
       this.groups = [];
-      this.groupIndices = {};
 
       Object.entries(this.config.groups).forEach(
         ([groupName, groupConfig], idx) => {
-          this.groupIndices[groupName] = idx;
           this.groups[idx] = { name: groupName, ...groupConfig };
           Object.entries(this.groups[idx].fields).forEach(
             ([_fieldName, fieldConfig]) => {
@@ -85,26 +82,15 @@ export class FFormBuilder extends FRoot {
         }
       );
 
-      Object.entries(this.values).forEach(([groupName, fields]) => {
+      Object.entries(this.values).forEach(([groupName, fieldValues]) => {
         if (this.config.groups[groupName].type === "array") {
-          for (let d = 1; d < (fields as unknown[]).length; d++) {
-            const clonnedGroupName = `${groupName}${CLONNED_GROUP_NAME_SEPARATOR}${d}`;
-            const clonnedGroupIdx = this.groupIndices[groupName] + d;
-            this.groupIndices[groupName] = clonnedGroupIdx;
-            this.groups.splice(clonnedGroupIdx, 0, {
-              name: clonnedGroupName,
-              ...cloneDeep(this.config.groups[groupName]),
-            });
-
-            Object.entries(this.groups[clonnedGroupIdx].fields).forEach(
-              ([_fieldName, fieldConfig]) => {
-                fieldConfig.valueIdx = d;
-              }
-            );
+          for (let d = 1; d < (fieldValues as unknown[]).length; d++) {
+            this.duplicateGroup(groupName, d);
           }
         }
       });
     }
+    super.willUpdate(changedProperties);
   }
 
   render() {
@@ -133,7 +119,7 @@ export class FFormBuilder extends FRoot {
     event.stopPropagation();
     // setting isChanged to true in state
     this.state.isChanged = true;
-    this.checkAllShowConditions();
+    // this.checkAllShowConditions();
     this.checkSuffixConditions();
     /**
      * validate silently
@@ -212,15 +198,20 @@ export class FFormBuilder extends FRoot {
       ${this.groups.map((gr) => {
         const name = gr.name;
         const groupWrapperRef: Ref<HTMLElement> = createRef();
-        if (gr.showWhen) {
-          this.state.showFunctions.set(groupWrapperRef, gr.showWhen);
-        }
+        // if (gr.showWhen) {
+        //   this.state.showFunctions.set(groupWrapperRef, gr.showWhen);
+        // }
+
         return html`
           <f-form-group
+            id=${gr.name}
             .direction=${gr.direction}
             .variant=${gr.variant}
-            .label=${gr.label ?? { title: name }}
-            gap=${ifDefined(gr.gap)}
+            .label=${gr.label}
+            gap=${gr.gap ?? "small"}
+            ?can-duplicate=${(gr as FormBuilderArrayGroup).canDuplicate ??
+            false}
+            @duplicate-group=${() => this.handleGroupDuplicate(gr)}
             .collapse=${gr.isCollapsible ? "accordion" : "none"}
             ${ref(groupWrapperRef)}
           >
@@ -233,6 +224,37 @@ export class FFormBuilder extends FRoot {
       </f-form-group>
     </f-form>`;
   }
+  handleGroupDuplicate(group: InternalFormBuilderGroup) {
+    const avialableGrps = this.groups.filter(
+      (gr) =>
+        gr.name.startsWith(group.name + CLONNED_GROUP_NAME_SEPARATOR) ||
+        gr.name === group.name
+    );
+    this.duplicateGroup(group.name, avialableGrps.length);
+  }
+  duplicateGroup(groupName: string, d: number) {
+    const clonnedGroupName = `${groupName}${CLONNED_GROUP_NAME_SEPARATOR}${d}`;
+
+    const grIdx = this.groups.findIndex((gr) => gr.name === groupName);
+    const clonnedGroupIdx = grIdx + d;
+
+    const clonnedGroup = {
+      name: clonnedGroupName,
+      ...cloneDeep(this.config.groups[groupName]),
+    };
+
+    clonnedGroup.label = undefined;
+    this.groups.splice(clonnedGroupIdx, 0, clonnedGroup);
+
+    Object.entries(this.groups[clonnedGroupIdx].fields).forEach(
+      ([_fieldName, fieldConfig]) => {
+        fieldConfig.valueIdx = d;
+      }
+    );
+
+    this.requestUpdate();
+  }
+
   checkSubmit(event: MouseEvent) {
     if ((event.target as HTMLElement).getAttribute("type") === "submit") {
       this.submit();
@@ -302,7 +324,11 @@ export class FFormBuilder extends FRoot {
     Object.entries(this.state.refs).forEach(([name, element]) => {
       const inputElement = element.value;
 
-      if (inputElement && this.state.rules[name] !== undefined) {
+      if (
+        inputElement &&
+        this.state.rules[name] !== undefined &&
+        this.state.rules[name]?.length
+      ) {
         this.validateField(name, inputElement, silent);
       }
     });
@@ -397,7 +423,7 @@ export class FFormBuilder extends FRoot {
       this.bindValidation(inputElement, name);
     });
 
-    this.checkAllShowConditions();
+    //this.checkAllShowConditions();
     this.checkSuffixConditions();
     this.emitStateChange();
   }
@@ -430,9 +456,12 @@ export class FFormBuilder extends FRoot {
         this.values[groupname]
       ) {
         if (inputElement.dataset["valueIdx"]) {
-          (inputElement.value as unknown) = (
+          const groupValues = (
             this.values[groupname] as Record<string, unknown>[]
-          )[+inputElement.dataset["valueIdx"]][fieldname];
+          )[+inputElement.dataset["valueIdx"]];
+          if (groupValues) {
+            (inputElement.value as unknown) = groupValues[fieldname];
+          }
         }
       } else if (
         this.values &&
@@ -473,11 +502,11 @@ export class FFormBuilder extends FRoot {
         } else {
           const groupValues = this.values[groupname] as Record<string, unknown>;
           if (groupValues && groupValues[fieldname]) {
-            groupValues[fieldname] = (inputElement as FInput)?.value;
+            groupValues[fieldname] = inputElement?.value;
           } else {
             this.values[groupname] = {
               ...this.values[groupname],
-              [fieldname]: (inputElement as FInput)?.value,
+              [fieldname]: inputElement?.value,
             };
           }
         }
@@ -545,7 +574,7 @@ export class FFormBuilder extends FRoot {
     );
 
     const { result, message } = validate(
-      (inputElement as FInput).value ?? "",
+      (inputElement.value as string) ?? "",
       rulesToValidate as FormBuilderValidationRules,
       fieldname
     );
