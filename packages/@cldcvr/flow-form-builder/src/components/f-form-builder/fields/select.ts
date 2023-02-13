@@ -52,6 +52,7 @@ export default function (
             <f-icon
               slot="icon-tooltip"
               source="i-question-filled"
+              .tooltip="${field.label?.iconTooltip}"
               size="small"
               clickable
             ></f-icon>

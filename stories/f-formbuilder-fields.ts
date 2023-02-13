@@ -223,6 +223,11 @@ const sampleFormBuilder: SampleFormBuilder = {
               },
             ],
           },
+          getButton: {
+            type: "button",
+            label: "get",
+            iconLeft: "i-arrow-rotate",
+          },
         },
       },
       group6: {

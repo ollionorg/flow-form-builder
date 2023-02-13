@@ -921,43 +921,41 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-form-builder/validation-rules/index.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "all",
-          "type": {
-            "text": "Record<string, FormBuilderValidatorFunction>"
-          },
-          "default": "{\n  required,\n}"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "all",
-            "module": "src/components/f-form-builder/validation-rules/index.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-builder/validation-rules/required.ts",
+      "path": "src/components/f-form-builder/fields/button.ts",
       "declarations": [
         {
           "kind": "function",
-          "name": "requiredValidator",
+          "name": "",
           "parameters": [
             {
-              "name": "value",
+              "name": "name",
               "type": {
-                "text": "unknown"
+                "text": "string"
+              }
+            },
+            {
+              "name": "_field",
+              "type": {
+                "text": "FormBuilderField"
+              }
+            },
+            {
+              "name": "idx",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "fieldRef",
+              "type": {
+                "text": "Ref<FFormInputElements>"
               }
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": ""
         }
       ],
       "exports": [
@@ -965,8 +963,8 @@
           "kind": "js",
           "name": "default",
           "declaration": {
-            "name": "requiredValidator",
-            "module": "src/components/f-form-builder/validation-rules/required.ts"
+            "name": "",
+            "module": "src/components/f-form-builder/fields/button.ts"
           }
         }
       ]
@@ -1042,7 +1040,7 @@
           "type": {
             "text": "Record<string, FormBuilderFieldRenderFunction>"
           },
-          "default": "{\n  text,\n  checkbox,\n  textarea,\n  radio,\n  switchButton,\n  select,\n}"
+          "default": "{\n  text,\n  checkbox,\n  textarea,\n  radio,\n  switchButton,\n  select,\n  button,\n}"
         }
       ],
       "exports": [
@@ -1200,6 +1198,10 @@
               }
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": ""
         }
       ],
       "exports": [
@@ -1309,6 +1311,58 @@
           "declaration": {
             "name": "",
             "module": "src/components/f-form-builder/fields/textarea.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/validation-rules/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "all",
+          "type": {
+            "text": "Record<string, FormBuilderValidatorFunction>"
+          },
+          "default": "{\n  required,\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "all",
+            "module": "src/components/f-form-builder/validation-rules/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/validation-rules/required.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "requiredValidator",
+          "parameters": [
+            {
+              "name": "value",
+              "type": {
+                "text": "unknown"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "requiredValidator",
+            "module": "src/components/f-form-builder/validation-rules/required.ts"
           }
         }
       ]

@@ -12,7 +12,7 @@ export default function (
   idx: number,
   fieldRef: Ref<FFormInputElements>
 ) {
-  const field = _field as FormBuilderTextAreaField;
+  const field = _field as FormBuilderTextAreaField & { valueIdx?: number };
   return html`
     <f-text-area
       name=${name}
@@ -24,20 +24,31 @@ export default function (
       ?clear=${field?.clear ?? true}
       ?read-only=${field?.readonly ?? false}
       ?resizable=${field?.resizable ?? false}
+      data-value-idx=${field.valueIdx}
       rows=${ifDefined(field?.rows)}
     >
       ${field?.label?.title
-        ? html` <f-div slot="label" padding="none" gap="none">${field?.label?.title}</f-div>`
+        ? html` <f-div slot="label" padding="none" gap="none"
+            >${field?.label?.title}</f-div
+          >`
         : html`<f-div slot="label" padding="none" gap="none">${name}</f-div>`}
       ${field?.label?.description
         ? html` <f-div slot="description" padding="none" gap="none"
             >${field?.label?.description}</f-div
           >`
         : ""}
-      ${field?.helperText ? html`<f-div slot="help">${field?.helperText}</f-div>` : html``}
+      ${field?.helperText
+        ? html`<f-div slot="help">${field?.helperText}</f-div>`
+        : html``}
       ${field?.label?.iconTooltip
         ? html`
-            <f-icon slot="icon-tooltip" source="i-question-filled" size="small" clickable></f-icon>
+            <f-icon
+              slot="icon-tooltip"
+              source="i-question-filled"
+              size="small"
+              .tooltip="${field.label?.iconTooltip}"
+              clickable
+            ></f-icon>
           `
         : ""}
     </f-text-area>

@@ -14,7 +14,7 @@ export default function (
   fieldRef: Ref<FFormInputElements>,
   params?: Record<string, unknown>
 ) {
-  const field = _field as FormBuilderCheckboxField;
+  const field = _field as FormBuilderCheckboxField & { valueIdx?: number };
   const group = params?.group as FormBuilderGroup;
   return html`
     <f-checkbox-group
@@ -26,6 +26,7 @@ export default function (
       direction=${ifDefined(group?.direction)}
       state=${ifDefined(field.state)}
       helperText=${ifDefined(field.helperText)}
+      data-value-idx=${field.valueIdx}
     >
     </f-checkbox-group>
   `;

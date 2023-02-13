@@ -1,6 +1,7 @@
 import { TemplateResult } from "lit";
 import { Ref } from "lit-html/directives/ref.js";
 import {
+  FButtonState,
   FCheckbox,
   FInput,
   FRadio,
@@ -114,6 +115,18 @@ export type FormBuilderTextAreaField = FormBuilderBaseField & {
   resizable?: boolean;
 };
 
+// button type field
+export type FormBuilderButtonField = Omit<FormBuilderBaseField, "label"> & {
+  type: "button";
+  label: string;
+  state?: FButtonState;
+  iconLeft?: string;
+  iconRight?: string;
+  counter?: string;
+  loading?: boolean;
+  disabled?: boolean;
+};
+
 export type CheckboxOptions = {
   id: string;
   title: string;
@@ -129,7 +142,8 @@ export type FormBuilderField =
   | FormBuilderTextAreaField
   | FormBuilderRadioField
   | FormBuilderSwitchField
-  | FormBuilderSelectField; // add other field types
+  | FormBuilderSelectField
+  | FormBuilderButtonField; // add other field types
 
 export type FormBuilderShowCondition = (values: FormBuilderValues) => boolean;
 

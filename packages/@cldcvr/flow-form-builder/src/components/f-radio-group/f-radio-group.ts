@@ -76,24 +76,25 @@ export class FRadioGroup extends FRoot {
                 @input=${() => this.handleChange(item.id)}
                 .state=${this.state}
               >
-                ${item?.title
+                ${item.title
                   ? html` <f-div slot="label" padding="none" gap="none"
-                      >${item?.title}</f-div
+                      >${item.title}</f-div
                     >`
                   : html`<f-div slot="label" padding="none" gap="none"
-                      >${name}</f-div
+                      >${item.id}</f-div
                     >`}
-                ${item?.description
+                ${item.description
                   ? html` <f-div slot="description" padding="none" gap="none"
-                      >${item?.description}</f-div
+                      >${item.description}</f-div
                     >`
                   : ""}
-                ${item?.iconTooltip
+                ${item.iconTooltip
                   ? html`
                       <f-icon
                         slot="icon-tooltip"
                         source="i-question-filled"
                         size="small"
+                        .tooltip="${item.iconTooltip}"
                         clickable
                       ></f-icon>
                     `

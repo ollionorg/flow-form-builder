@@ -49,7 +49,8 @@ export class FCheckboxGroup extends FRoot {
   helperText?: string;
 
   handleChange(id: string) {
-    let tempValues = this.value && this.value?.length > 0 ? [...this.value] : [];
+    let tempValues =
+      this.value && this.value?.length > 0 ? [...this.value] : [];
     if (this.isChecked(id) === "unchecked") {
       tempValues.push(id);
     } else {
@@ -89,8 +90,12 @@ export class FCheckboxGroup extends FRoot {
                 .state=${this.state}
               >
                 ${item?.title
-                  ? html` <f-div slot="label" padding="none" gap="none">${item?.title}</f-div>`
-                  : html`<f-div slot="label" padding="none" gap="none">${name}</f-div>`}
+                  ? html` <f-div slot="label" padding="none" gap="none"
+                      >${item?.title}</f-div
+                    >`
+                  : html`<f-div slot="label" padding="none" gap="none"
+                      >${item.id}</f-div
+                    >`}
                 ${item?.description
                   ? html` <f-div slot="description" padding="none" gap="none"
                       >${item?.description}</f-div
@@ -102,6 +107,7 @@ export class FCheckboxGroup extends FRoot {
                         slot="icon-tooltip"
                         source="i-question-filled"
                         size="small"
+                        .tooltip="${item.iconTooltip}"
                         clickable
                       ></f-icon>
                     `
@@ -111,7 +117,11 @@ export class FCheckboxGroup extends FRoot {
           )}
         </div>
         ${this?.helperText
-          ? html`<f-text variant="para" size="small" weight="regular" .state=${this.state}
+          ? html`<f-text
+              variant="para"
+              size="small"
+              weight="regular"
+              .state=${this.state}
               >${this?.helperText}</f-text
             >`
           : html`<slot name="help"></slot>`}

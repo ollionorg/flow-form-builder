@@ -1,5 +1,9 @@
 import { html } from "lit";
-import { FFormInputElements, FormBuilderField } from "../f-form-builder-types";
+import {
+  FFormInputElements,
+  FormBuilderField,
+  FormBuilderSwitchField,
+} from "../f-form-builder-types";
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (
@@ -8,21 +12,33 @@ export default function (
   idx: number,
   fieldRef: Ref<FFormInputElements>
 ) {
+  const field = _field as FormBuilderSwitchField & { valueIdx?: number };
   return html`
     <f-switch
       name=${name}
       ${ref(fieldRef)}
       id=${"form-ele" + idx}
-      state=${ifDefined(_field?.state)}
-      ?disabled=${_field?.disabled ?? false}
+      state=${ifDefined(field.state)}
+      data-value-idx=${field.valueIdx}
+      ?disabled=${field.disabled ?? false}
     >
-      ${_field?.label?.title
-        ? html` <f-div slot="label" padding="none" gap="none">${_field?.label?.title}</f-div>`
+      ${field?.label?.title
+        ? html` <f-div slot="label" padding="none" gap="none"
+            >${field.label?.title}</f-div
+          >`
         : html`<f-div slot="label" padding="none" gap="none">${name}</f-div>`}
-      ${_field?.helperText ? html`<f-div slot="help">${_field?.helperText}</f-div>` : html``}
-      ${_field?.label?.iconTooltip
+      ${field.helperText
+        ? html`<f-div slot="help">${field.helperText}</f-div>`
+        : html``}
+      ${field.label?.iconTooltip
         ? html`
-            <f-icon slot="icon-tooltip" source="i-question-filled" size="small" clickable></f-icon>
+            <f-icon
+              slot="icon-tooltip"
+              source="i-question-filled"
+              size="small"
+              .tooltip="${field.label?.iconTooltip}"
+              clickable
+            ></f-icon>
           `
         : ""}
     </f-switch>

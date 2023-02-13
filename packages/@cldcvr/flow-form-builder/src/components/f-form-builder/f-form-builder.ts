@@ -197,6 +197,7 @@ export class FFormBuilder extends FRoot {
                 source="i-question-filled"
                 size="small"
                 state="default"
+                .tooltip="${this.config.label?.iconTooltip}"
                 clickable
               ></f-icon>`
             : ""}
@@ -484,7 +485,10 @@ export class FFormBuilder extends FRoot {
       const validation = () => {
         bindValues();
         // checking validaiton rules if any
-        if (this.state.rules[name] !== undefined) {
+        if (
+          this.state.rules[name] !== undefined &&
+          this.state.rules[name]?.length
+        ) {
           this.validateField(name, inputElement);
         }
       };
@@ -496,7 +500,10 @@ export class FFormBuilder extends FRoot {
       inputElement.onblur = validation;
 
       // on special events if user has specified
-      if (this.state.rules[name] !== undefined) {
+      if (
+        this.state.rules[name] !== undefined &&
+        this.state.rules[name]?.length
+      ) {
         this.state.rules[name]?.forEach((rule) => {
           if (rule.when && rule.when.length > 0) {
             rule.when.forEach((eventname) => {

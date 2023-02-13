@@ -14,7 +14,7 @@ export default function (
   fieldRef: Ref<FFormInputElements>,
   params?: Record<string, unknown>
 ) {
-  const field = _field as FormBuilderRadioField;
+  const field = _field as FormBuilderRadioField & { valueIdx?: number };
   const group = params?.group as FormBuilderGroup;
   return html`
     <f-radio-group
@@ -26,6 +26,7 @@ export default function (
       .direction=${group?.direction}
       state=${ifDefined(field.state)}
       helperText=${ifDefined(field.helperText)}
+      data-value-idx=${field.valueIdx}
     ></f-radio-group>
   `;
 }
