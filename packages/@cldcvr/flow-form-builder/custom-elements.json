@@ -243,6 +243,157 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form-builder/f-form-builder-bind-validation.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "validateForm",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FFormBuilder"
+              }
+            },
+            {
+              "name": "silent",
+              "default": "false"
+            }
+          ],
+          "description": "validate whole form"
+        },
+        {
+          "kind": "function",
+          "name": "bindValidation",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FFormBuilder"
+              }
+            },
+            {
+              "name": "inputElement",
+              "type": {
+                "text": "FFormInputElements"
+              }
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            }
+          ],
+          "description": "validation rules listener added on `input` event."
+        },
+        {
+          "kind": "function",
+          "name": "validateField",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FFormBuilder"
+              }
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "inputElement",
+              "type": {
+                "text": "FFormInputElements"
+              },
+              "description": "ref of field"
+            },
+            {
+              "name": "silent",
+              "default": "false",
+              "description": "if true then errors are not rendered, they are added in state only"
+            },
+            {
+              "name": "filter",
+              "optional": true,
+              "type": {
+                "text": "(r: FormBuilderGenericValidationRule) => boolean"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "validateForm",
+          "declaration": {
+            "name": "validateForm",
+            "module": "src/components/f-form-builder/f-form-builder-bind-validation.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "bindValidation",
+          "declaration": {
+            "name": "bindValidation",
+            "module": "src/components/f-form-builder/f-form-builder-bind-validation.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "validateField",
+          "declaration": {
+            "name": "validateField",
+            "module": "src/components/f-form-builder/f-form-builder-bind-validation.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/f-form-builder-constants.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "GROUP_FIELD_NAME_SEPARATOR",
+          "type": {
+            "text": "string"
+          },
+          "default": "\".$\""
+        },
+        {
+          "kind": "variable",
+          "name": "CLONNED_GROUP_NAME_SEPARATOR",
+          "type": {
+            "text": "string"
+          },
+          "default": "\"_$\""
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "GROUP_FIELD_NAME_SEPARATOR",
+          "declaration": {
+            "name": "GROUP_FIELD_NAME_SEPARATOR",
+            "module": "src/components/f-form-builder/f-form-builder-constants.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "CLONNED_GROUP_NAME_SEPARATOR",
+          "declaration": {
+            "name": "CLONNED_GROUP_NAME_SEPARATOR",
+            "module": "src/components/f-form-builder/f-form-builder-constants.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-builder/f-form-builder-types.ts",
       "declarations": [],
       "exports": []
@@ -411,17 +562,6 @@
             },
             {
               "kind": "method",
-              "name": "validateForm",
-              "parameters": [
-                {
-                  "name": "silent",
-                  "default": "false"
-                }
-              ],
-              "description": "validate whole form"
-            },
-            {
-              "kind": "method",
               "name": "checkFieldType",
               "parameters": [
                 {
@@ -488,54 +628,25 @@
               "description": "Add/Display initial values given by user"
             },
             {
-              "kind": "method",
-              "name": "bindValidation",
-              "parameters": [
-                {
-                  "name": "inputElement",
-                  "type": {
-                    "text": "FFormInputElements"
-                  }
-                },
-                {
-                  "name": "name",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ],
-              "description": "validation rules listener added on `input` event."
+              "kind": "field",
+              "name": "validateField",
+              "type": {
+                "text": "(\n    this: FFormBuilder,\n    name: string,\n    inputElement: FFormInputElements,\n    silent?: boolean,\n    filter?: ((r: FormBuilderGenericValidationRule) => boolean) | undefined\n  ) => void"
+              }
             },
             {
-              "kind": "method",
-              "name": "validateField",
-              "parameters": [
-                {
-                  "name": "name",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "inputElement",
-                  "type": {
-                    "text": "FFormInputElements"
-                  },
-                  "description": "ref of field"
-                },
-                {
-                  "name": "silent",
-                  "default": "false",
-                  "description": "if true then errors are not rendered, they are added in state only"
-                },
-                {
-                  "name": "filter",
-                  "optional": true,
-                  "type": {
-                    "text": "(r: FormBuilderGenericValidationRule) => boolean"
-                  }
-                }
-              ]
+              "kind": "field",
+              "name": "validateForm",
+              "type": {
+                "text": "(this: FFormBuilder, silent?: boolean) => void"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "bindValidation",
+              "type": {
+                "text": "(\n    this: FFormBuilder,\n    inputElement: FFormInputElements,\n    name: string\n  ) => void"
+              }
             }
           ],
           "attributes": [
