@@ -91,6 +91,7 @@ export class FFormBuilder extends FRoot {
        * reset groups array
        */
       this.groups = [];
+      this.removedGroupName = undefined;
 
       /**
        * check given group config add it to groups array
@@ -318,7 +319,6 @@ export class FFormBuilder extends FRoot {
       ];
     }
     this.removedGroupName = groupName;
-    //this.requestUpdate();
   }
 
   checkSubmit(event: MouseEvent) {
