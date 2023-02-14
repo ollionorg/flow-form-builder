@@ -243,6 +243,174 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-radio-group/f-radio-group.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FRadioGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "RadioOptionsType"
+              },
+              "default": "[]",
+              "attribute": "options",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "attribute": "direction",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "helperText",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "helperText",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "handleChange",
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "isChecked",
+              "parameters": [
+                {
+                  "name": "id",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "options",
+              "type": {
+                "text": "RadioOptionsType"
+              },
+              "default": "[]",
+              "fieldName": "options"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "direction",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "fieldName": "direction"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "fieldName": "gap"
+            },
+            {
+              "name": "helperText",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "helperText"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-radio-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FRadioGroup",
+          "declaration": {
+            "name": "FRadioGroup",
+            "module": "src/components/f-radio-group/f-radio-group.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-radio-group",
+          "declaration": {
+            "name": "FRadioGroup",
+            "module": "src/components/f-radio-group/f-radio-group.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-builder/f-form-builder-bind-validation.ts",
       "declarations": [
         {
@@ -394,6 +562,74 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form-builder/f-form-builder-renderer.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "renderGroups",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FFormBuilder"
+              }
+            }
+          ],
+          "description": "build/render form based on config"
+        },
+        {
+          "kind": "function",
+          "name": "renderFields",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FFormBuilder"
+              }
+            },
+            {
+              "name": "groupname",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "fields",
+              "type": {
+                "text": "Record<string, FormBuilderField>"
+              }
+            },
+            {
+              "name": "group",
+              "type": {
+                "text": "FormBuilderGroup"
+              }
+            }
+          ],
+          "description": "render field based on field config"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "renderGroups",
+          "declaration": {
+            "name": "renderGroups",
+            "module": "src/components/f-form-builder/f-form-builder-renderer.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "renderFields",
+          "declaration": {
+            "name": "renderFields",
+            "module": "src/components/f-form-builder/f-form-builder-renderer.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-builder/f-form-builder-types.ts",
       "declarations": [],
       "exports": []
@@ -446,7 +682,7 @@
               "type": {
                 "text": "InternalFormBuilderGroup[]"
               },
-              "privacy": "private",
+              "privacy": "protected",
               "default": "[]"
             },
             {
@@ -474,11 +710,6 @@
                 }
               ],
               "description": "handle input event of form"
-            },
-            {
-              "kind": "method",
-              "name": "build",
-              "description": "build/render form based on config"
             },
             {
               "kind": "method",
@@ -575,31 +806,6 @@
             },
             {
               "kind": "method",
-              "name": "buildFields",
-              "parameters": [
-                {
-                  "name": "groupname",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "fields",
-                  "type": {
-                    "text": "Record<string, FormBuilderField>"
-                  }
-                },
-                {
-                  "name": "group",
-                  "type": {
-                    "text": "FormBuilderGroup"
-                  }
-                }
-              ],
-              "description": "render field based on field config"
-            },
-            {
-              "kind": "method",
               "name": "emitStateChange"
             },
             {
@@ -646,6 +852,20 @@
               "name": "bindValidation",
               "type": {
                 "text": "(\n    this: FFormBuilder,\n    inputElement: FFormInputElements,\n    name: string\n  ) => void"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "renderFields",
+              "type": {
+                "text": "(\n    groupname: string,\n    fields: Record<string, FormBuilderField>,\n    group: FormBuilderGroup\n  ) => void"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "renderGroups",
+              "type": {
+                "text": "() => void"
               }
             }
           ],
@@ -846,174 +1066,6 @@
           "declaration": {
             "name": "isValidHttpUrl",
             "module": "src/components/f-form-builder/utils.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-radio-group/f-radio-group.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FRadioGroup",
-          "members": [
-            {
-              "kind": "field",
-              "name": "options",
-              "type": {
-                "text": "RadioOptionsType"
-              },
-              "default": "[]",
-              "attribute": "options",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "value",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "direction",
-              "type": {
-                "text": "\"vertical\" | \"horizontal\" | undefined"
-              },
-              "default": "\"vertical\"",
-              "attribute": "direction",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"small\"",
-              "attribute": "gap",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "helperText",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "helperText",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "handleChange",
-              "parameters": [
-                {
-                  "name": "id",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "isChecked",
-              "parameters": [
-                {
-                  "name": "id",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            }
-          ],
-          "attributes": [
-            {
-              "name": "options",
-              "type": {
-                "text": "RadioOptionsType"
-              },
-              "default": "[]",
-              "fieldName": "options"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "value",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "value"
-            },
-            {
-              "name": "direction",
-              "type": {
-                "text": "\"vertical\" | \"horizontal\" | undefined"
-              },
-              "default": "\"vertical\"",
-              "fieldName": "direction"
-            },
-            {
-              "name": "gap",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"small\"",
-              "fieldName": "gap"
-            },
-            {
-              "name": "helperText",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "helperText"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core"
-          },
-          "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-radio-group",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FRadioGroup",
-          "declaration": {
-            "name": "FRadioGroup",
-            "module": "src/components/f-radio-group/f-radio-group.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-radio-group",
-          "declaration": {
-            "name": "FRadioGroup",
-            "module": "src/components/f-radio-group/f-radio-group.ts"
           }
         }
       ]

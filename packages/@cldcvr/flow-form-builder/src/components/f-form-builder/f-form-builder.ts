@@ -1,27 +1,24 @@
 import { html, PropertyValueMap, PropertyValues, unsafeCSS } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
-import { ref, createRef, Ref } from "lit/directives/ref.js";
+import { Ref } from "lit/directives/ref.js";
 import {
   FormBuilderConfig,
   FormBuilderState,
   FormBuilderValues,
-  FormBuilderField,
   FormBuilderGenericValidationRule,
-  FormBuilderGroup,
   FFormInputElements,
-  FormBuilderTextInputField,
-  FormBuilderArrayGroup,
   FormBuilderArrayGroupValues,
+  InternalFormBuilderGroup,
+  FormBuilderField,
+  FormBuilderGroup,
 } from "./f-form-builder-types";
 import eleStyle from "./f-form-builder.scss";
 
 import { isEmptyObject } from "./utils";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
-import fieldRenderer from "./fields";
-import { ifDefined } from "lit-html/directives/if-defined.js";
+
 import { FButton, FInput } from "@cldcvr/flow-core";
-import defaultValidations from "./default-validations/index";
 import { cloneDeep } from "lodash";
 import {
   bindValidation,
@@ -32,11 +29,8 @@ import {
   CLONNED_GROUP_NAME_SEPARATOR,
   GROUP_FIELD_NAME_SEPARATOR,
 } from "./f-form-builder-constants";
+import { renderFields, renderGroups } from "./f-form-builder-renderer";
 
-type InternalFormBuilderGroup = FormBuilderGroup & {
-  name: string;
-  fields: Record<string, FormBuilderField & { valueIdx?: number }>;
-};
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
   /**
@@ -72,7 +66,7 @@ export class FFormBuilder extends FRoot {
    */
   formRef!: Ref<HTMLFormElement>;
 
-  private groups: InternalFormBuilderGroup[] = [];
+  protected groups: InternalFormBuilderGroup[] = [];
 
   /**
    * holds name of last deleted group
@@ -130,8 +124,8 @@ export class FFormBuilder extends FRoot {
      */
     this.resetState();
     return this.groups.length % 2
-      ? html`${this.build()}`
-      : html`${this.build()}`;
+      ? html`${this.renderGroups()}`
+      : html`${this.renderGroups()}`;
   }
 
   resetState() {
@@ -173,94 +167,6 @@ export class FFormBuilder extends FRoot {
     this.dispatchEvent(input);
   }
 
-  /**
-   * build/render form based on config
-   */
-  build() {
-    this.formRef = createRef();
-    return html`<f-form
-      name="sampleForm"
-      @submit=${this.onSubmit}
-      @input=${this.handleFormChange}
-      ${ref(this.formRef)}
-      size=${ifDefined(this.config.fieldSize)}
-      category=${ifDefined(this.config.category)}
-      variant=${ifDefined(this.config.variant)}
-      ?separator=${this.config.groupSeparator}
-      gap=${ifDefined(this.config.gap)}
-    >
-      <!--label,description and info icon-->
-      <f-div
-        padding="none"
-        gap="x-small"
-        direction="column"
-        width="fill-container"
-      >
-        <f-div
-          padding="none"
-          gap="small"
-          direction="row"
-          width="hug-content"
-          height="hug-content"
-        >
-          <!--label-->
-          <f-div
-            padding="none"
-            direction="row"
-            width="hug-content"
-            height="hug-content"
-          >
-            <f-text variant="heading" size="medium" weight="regular"
-              >${this.config.label?.title}</f-text
-            >
-          </f-div>
-          <!--info icon-->
-          ${this.config.label?.iconTooltip
-            ? html` <f-icon
-                source="i-question-filled"
-                size="small"
-                state="default"
-                .tooltip="${this.config.label?.iconTooltip}"
-                clickable
-              ></f-icon>`
-            : ""}
-        </f-div>
-        <!--field description-->
-        ${this.config.label?.description
-          ? html` <f-text variant="para" size="medium" weight="regular"
-              >${this.config.label?.description}</f-text
-            >`
-          : ""}
-      </f-div>
-      ${this.groups.map((gr) => {
-        const name = gr.name;
-        const groupWrapperRef: Ref<HTMLElement> = createRef();
-        if (gr.showWhen) {
-          this.state.showFunctions.set(groupWrapperRef, gr.showWhen);
-        }
-
-        return html`
-          <f-form-group
-            id=${gr.name}
-            .direction=${gr.direction}
-            .variant=${gr.variant}
-            .label=${gr.label}
-            gap=${gr.gap ?? "small"}
-            ?can-duplicate=${(gr as FormBuilderArrayGroup).canDuplicate ??
-            false}
-            @duplicate-group=${() => this.handleGroupDuplicate(gr)}
-            .collapse=${gr.isCollapsible ? "accordion" : "none"}
-            ${ref(groupWrapperRef)}
-          >
-            ${this.buildFields(name, gr.fields, gr)}
-          </f-form-group>
-        `;
-      })}
-      <f-form-group>
-        <slot @click=${this.checkSubmit}></slot>
-      </f-form-group>
-    </f-form>`;
-  }
   handleGroupDuplicate(group: InternalFormBuilderGroup) {
     const clonnedGroupIdices = this.groups.map((gr) => {
       if (gr.name.startsWith(group.name + CLONNED_GROUP_NAME_SEPARATOR)) {
@@ -406,61 +312,6 @@ export class FFormBuilder extends FRoot {
       return type;
     }
   }
-  /**
-   * render field based on field config
-   * @param fields
-   */
-  buildFields(
-    groupname: string,
-    fields: Record<string, FormBuilderField>,
-    group: FormBuilderGroup
-  ) {
-    return html`${Object.entries(fields).map(([name, field], idx) => {
-      const fieldRef: Ref<FFormInputElements> = createRef();
-
-      const fieldErrorRef: Ref<HTMLElement> = createRef();
-      const relativeName = `${groupname}${GROUP_FIELD_NAME_SEPARATOR}${name}`;
-      this.state.refs[relativeName] = fieldRef;
-      this.state.errorRefs[relativeName] = fieldErrorRef;
-      const validations = field.validationRules
-        ? [...field.validationRules]
-        : [];
-      defaultValidations(field.type, validations);
-      this.state.rules[relativeName] = validations;
-
-      if (field.helperText) {
-        this.state.helperTexts[relativeName] = field.helperText;
-      }
-      const params = { group: { ...group } };
-      if (field.showWhen) {
-        this.state.showFunctions.set(fieldRef, field.showWhen);
-      }
-      /**
-       * check suffix for inputs
-       */
-      if (
-        (field as FormBuilderTextInputField).suffixWhen &&
-        this.checkFieldType(field.type) === "text" &&
-        (field as FormBuilderTextInputField)?.suffix
-      ) {
-        this.state.suffixFunctions?.set(fieldRef, {
-          suffixFunction: (field as FormBuilderTextInputField).suffixWhen,
-          suffix: (field as FormBuilderTextInputField)?.suffix,
-        });
-      }
-      /**
-       * fieldRenderer is resposnsible to redner field based on type
-       */
-      return html` ${fieldRenderer[this.checkFieldType(field.type)](
-        name,
-        field,
-        idx,
-        fieldRef,
-        params,
-        fieldErrorRef
-      )}`;
-    })}`;
-  }
 
   /**
    * updated hook of lit element
@@ -548,8 +399,17 @@ export class FFormBuilder extends FRoot {
     inputElement: FFormInputElements,
     name: string
   ) => void;
+
+  renderFields!: (
+    groupname: string,
+    fields: Record<string, FormBuilderField>,
+    group: FormBuilderGroup
+  ) => void;
+  renderGroups!: () => void;
 }
 
 FFormBuilder.prototype.validateForm = validateForm;
 FFormBuilder.prototype.validateField = validateField;
 FFormBuilder.prototype.bindValidation = bindValidation;
+FFormBuilder.prototype.renderFields = renderFields;
+FFormBuilder.prototype.renderGroups = renderGroups;

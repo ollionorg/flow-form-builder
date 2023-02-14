@@ -249,3 +249,7 @@ export type FFormInputElements =
   | FTextArea
   | FSelect
   | FCheckboxGroup;
+export type InternalFormBuilderGroup = FormBuilderGroup & {
+  name: string;
+  fields: Record<string, FormBuilderField & { valueIdx?: number }>;
+};
