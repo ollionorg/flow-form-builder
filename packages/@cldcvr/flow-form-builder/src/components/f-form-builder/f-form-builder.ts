@@ -17,16 +17,12 @@ import { isEmptyObject } from "./utils";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 
-import { FButton } from "@cldcvr/flow-core";
 import {
   bindValidation,
   validateField,
   validateForm,
 } from "./f-form-builder-bind-validation";
-import {
-  CLONNED_GROUP_NAME_SEPARATOR,
-  GROUP_FIELD_NAME_SEPARATOR,
-} from "./f-form-builder-constants";
+
 import { renderFields, renderGroups } from "./f-form-builder-renderer";
 import {
   duplicateGroup,
@@ -34,10 +30,15 @@ import {
   removeGroup,
 } from "./f-form-builder-group-manager";
 import {
+  bindValues,
   checkAllShowConditions,
   checkFieldType,
   checkSubmit,
   checkSuffixConditions,
+  emitStateChange,
+  handleFormChange,
+  onSubmit,
+  submit,
 } from "./f-form-builder-helpers";
 
 @customElement("f-form-builder")
@@ -154,47 +155,6 @@ export class FFormBuilder extends FRoot {
       },
     };
   }
-  /**
-   * handle input event of form
-   */
-  handleFormChange(event: Event) {
-    event.stopPropagation();
-    // setting isChanged to true in state
-    this.state.isChanged = true;
-    this.checkAllShowConditions();
-    this.checkSuffixConditions();
-    /**
-     * validate silently
-     */
-    this.validateForm(true);
-
-    this.emitStateChange();
-
-    const input = new CustomEvent("input", {
-      detail: { ...this.values },
-      bubbles: true,
-      composed: true,
-    });
-    this.dispatchEvent(input);
-  }
-
-  onSubmit(event: SubmitEvent) {
-    event.stopPropagation();
-    event.preventDefault();
-    this.submit();
-  }
-
-  submit() {
-    this.validateForm();
-    if (this.state.isValid) {
-      const event = new CustomEvent("submit", {
-        detail: this.values,
-        bubbles: true,
-        composed: true,
-      });
-      this.dispatchEvent(event);
-    }
-  }
 
   /**
    * updated hook of lit element
@@ -219,54 +179,6 @@ export class FFormBuilder extends FRoot {
       this.validateForm(true);
       this.emitStateChange();
     }, 100);
-  }
-
-  emitStateChange() {
-    const stateChange = new CustomEvent("stateChange", {
-      detail: { ...this.state },
-      bubbles: true,
-      composed: true,
-    });
-    this.dispatchEvent(stateChange);
-  }
-
-  /**
-   * Add/Display initial values given by user
-   * @param inputElement
-   * @param name
-   * @param index
-   * @param isMultiple
-   */
-  bindValues(inputElement: FFormInputElements | undefined, name: string) {
-    if (inputElement && !(inputElement instanceof FButton)) {
-      const [preGroupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
-
-      const [groupname] = preGroupname.split(CLONNED_GROUP_NAME_SEPARATOR);
-
-      const groupConfig = this.config.groups[groupname];
-      if (
-        groupConfig.type === "array" &&
-        this.values &&
-        this.values[groupname]
-      ) {
-        if (inputElement.dataset["valueIdx"]) {
-          const groupValues = (
-            this.values[groupname] as Record<string, unknown>[]
-          )[+inputElement.dataset["valueIdx"]];
-          if (groupValues) {
-            (inputElement.value as unknown) = groupValues[fieldname];
-          }
-        }
-      } else if (
-        this.values &&
-        this.values[groupname] &&
-        (this.values[groupname] as Record<string, unknown>)[fieldname]
-      ) {
-        (inputElement.value as unknown) = (
-          this.values[groupname] as Record<string, unknown>
-        )[fieldname];
-      }
-    }
   }
 
   validateField!: (
@@ -296,6 +208,14 @@ export class FFormBuilder extends FRoot {
   checkFieldType!: (type: string) => string;
   checkSuffixConditions!: () => void;
   checkAllShowConditions!: () => void;
+  submit!: () => void;
+  onSubmit!: (event: SubmitEvent) => void;
+  handleFormChange!: (event: Event) => void;
+  bindValues!: (
+    inputElement: FFormInputElements | undefined,
+    name: string
+  ) => void;
+  emitStateChange!: () => void;
 }
 
 FFormBuilder.prototype.validateForm = validateForm;
@@ -310,3 +230,8 @@ FFormBuilder.prototype.checkSubmit = checkSubmit;
 FFormBuilder.prototype.checkFieldType = checkFieldType;
 FFormBuilder.prototype.checkSuffixConditions = checkSuffixConditions;
 FFormBuilder.prototype.checkAllShowConditions = checkAllShowConditions;
+FFormBuilder.prototype.submit = submit;
+FFormBuilder.prototype.onSubmit = onSubmit;
+FFormBuilder.prototype.handleFormChange = handleFormChange;
+FFormBuilder.prototype.bindValues = bindValues;
+FFormBuilder.prototype.emitStateChange = emitStateChange;

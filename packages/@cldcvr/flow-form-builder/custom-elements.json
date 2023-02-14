@@ -719,6 +719,98 @@
             }
           ],
           "description": "check if submit trigger is added"
+        },
+        {
+          "kind": "function",
+          "name": "emitStateChange",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FFormBuilder"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "bindValues",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FFormBuilder"
+              }
+            },
+            {
+              "name": "inputElement",
+              "type": {
+                "text": "FFormInputElements | undefined"
+              }
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "index"
+            },
+            {
+              "name": "isMultiple"
+            }
+          ],
+          "description": "Add/Display initial values given by user"
+        },
+        {
+          "kind": "function",
+          "name": "handleFormChange",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FFormBuilder"
+              }
+            },
+            {
+              "name": "event",
+              "type": {
+                "text": "Event"
+              }
+            }
+          ],
+          "description": "handle input event of form"
+        },
+        {
+          "kind": "function",
+          "name": "onSubmit",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FFormBuilder"
+              }
+            },
+            {
+              "name": "event",
+              "type": {
+                "text": "SubmitEvent"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "submit",
+          "parameters": [
+            {
+              "name": "this",
+              "type": {
+                "text": "FFormBuilder"
+              }
+            }
+          ]
         }
       ],
       "exports": [
@@ -751,6 +843,46 @@
           "name": "checkSubmit",
           "declaration": {
             "name": "checkSubmit",
+            "module": "src/components/f-form-builder/f-form-builder-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "emitStateChange",
+          "declaration": {
+            "name": "emitStateChange",
+            "module": "src/components/f-form-builder/f-form-builder-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "bindValues",
+          "declaration": {
+            "name": "bindValues",
+            "module": "src/components/f-form-builder/f-form-builder-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "handleFormChange",
+          "declaration": {
+            "name": "handleFormChange",
+            "module": "src/components/f-form-builder/f-form-builder-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "onSubmit",
+          "declaration": {
+            "name": "onSubmit",
+            "module": "src/components/f-form-builder/f-form-builder-helpers.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "submit",
+          "declaration": {
+            "name": "submit",
             "module": "src/components/f-form-builder/f-form-builder-helpers.ts"
           }
         }
@@ -896,64 +1028,6 @@
               "description": "resetting internal state"
             },
             {
-              "kind": "method",
-              "name": "handleFormChange",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "Event"
-                  }
-                }
-              ],
-              "description": "handle input event of form"
-            },
-            {
-              "kind": "method",
-              "name": "onSubmit",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "SubmitEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "submit"
-            },
-            {
-              "kind": "method",
-              "name": "emitStateChange"
-            },
-            {
-              "kind": "method",
-              "name": "bindValues",
-              "parameters": [
-                {
-                  "name": "inputElement",
-                  "type": {
-                    "text": "FFormInputElements | undefined"
-                  }
-                },
-                {
-                  "name": "name",
-                  "type": {
-                    "text": "string"
-                  }
-                },
-                {
-                  "name": "index"
-                },
-                {
-                  "name": "isMultiple"
-                }
-              ],
-              "description": "Add/Display initial values given by user"
-            },
-            {
               "kind": "field",
               "name": "validateField",
               "type": {
@@ -1033,6 +1107,41 @@
             {
               "kind": "field",
               "name": "checkAllShowConditions",
+              "type": {
+                "text": "() => void"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "submit",
+              "type": {
+                "text": "() => void"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "onSubmit",
+              "type": {
+                "text": "(event: SubmitEvent) => void"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "handleFormChange",
+              "type": {
+                "text": "(event: Event) => void"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "bindValues",
+              "type": {
+                "text": "(\n    inputElement: FFormInputElements | undefined,\n    name: string\n  ) => void"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "emitStateChange",
               "type": {
                 "text": "() => void"
               }
