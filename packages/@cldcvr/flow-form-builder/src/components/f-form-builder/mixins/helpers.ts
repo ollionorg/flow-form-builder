@@ -1,5 +1,5 @@
 import { FButton, FInput } from "@cldcvr/flow-core";
-import { FFormBuilder } from "./f-form-builder";
+import { FFormBuilder } from "./../f-form-builder";
 import {
   CLONNED_GROUP_NAME_SEPARATOR,
   GROUP_FIELD_NAME_SEPARATOR,
