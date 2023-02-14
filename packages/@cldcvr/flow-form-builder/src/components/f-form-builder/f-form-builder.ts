@@ -17,7 +17,7 @@ import { isEmptyObject } from "./utils";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 
-import { FButton, FInput } from "@cldcvr/flow-core";
+import { FButton } from "@cldcvr/flow-core";
 import {
   bindValidation,
   validateField,
@@ -33,6 +33,12 @@ import {
   handleGroupDuplicate,
   removeGroup,
 } from "./f-form-builder-group-manager";
+import {
+  checkAllShowConditions,
+  checkFieldType,
+  checkSubmit,
+  checkSuffixConditions,
+} from "./f-form-builder-helpers";
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
@@ -130,7 +136,9 @@ export class FFormBuilder extends FRoot {
       ? html`${this.renderGroups()}`
       : html`${this.renderGroups()}`;
   }
-
+  /**
+   * resetting internal state
+   */
   resetState() {
     this.state = {
       isChanged: false,
@@ -170,11 +178,6 @@ export class FFormBuilder extends FRoot {
     this.dispatchEvent(input);
   }
 
-  checkSubmit(event: MouseEvent) {
-    if ((event.target as HTMLElement).getAttribute("type") === "submit") {
-      this.submit();
-    }
-  }
   onSubmit(event: SubmitEvent) {
     event.stopPropagation();
     event.preventDefault();
@@ -190,63 +193,6 @@ export class FFormBuilder extends FRoot {
         composed: true,
       });
       this.dispatchEvent(event);
-    }
-  }
-
-  /**
-   * check if condition is satisfying for any element
-   */
-  checkAllShowConditions() {
-    this.state.showFunctions.forEach((showFunction, field) => {
-      const showField = showFunction(this.values);
-      if (field.value) {
-        if (!showField) {
-          field.value.dataset.hidden = "true";
-        } else {
-          field.value.dataset.hidden = "false";
-        }
-      }
-    });
-  }
-
-  /**
-   * check condition to display suffix or not
-   */
-  checkSuffixConditions() {
-    this.state.suffixFunctions?.forEach((suffixObject, field) => {
-      const suffixDefined = suffixObject.suffix;
-      const suffixFunction = suffixObject?.suffixFunction;
-      if (suffixDefined && suffixFunction) {
-        const suffixField = suffixFunction(
-          (field.value as FInput)?.value ?? ""
-        );
-        if (field.value) {
-          if (suffixField) {
-            field.value.setAttribute("suffix", suffixDefined);
-          } else {
-            field.value.setAttribute("suffix", "");
-          }
-        }
-      }
-    });
-  }
-
-  /**
-   * check field type and return genric
-   * @param type
-   */
-  checkFieldType(type: string) {
-    if (
-      type === "text" ||
-      type === "tel" ||
-      type === "number" ||
-      type === "email" ||
-      type === "url" ||
-      type === "password"
-    ) {
-      return "text";
-    } else {
-      return type;
     }
   }
 
@@ -346,6 +292,10 @@ export class FFormBuilder extends FRoot {
   removeGroup!: (groupName: string) => void;
   duplicateGroup!: (groupName: string, d: number) => void;
   handleGroupDuplicate!: (group: InternalFormBuilderGroup) => void;
+  checkSubmit!: (event: MouseEvent) => void;
+  checkFieldType!: (type: string) => string;
+  checkSuffixConditions!: () => void;
+  checkAllShowConditions!: () => void;
 }
 
 FFormBuilder.prototype.validateForm = validateForm;
@@ -356,3 +306,7 @@ FFormBuilder.prototype.renderGroups = renderGroups;
 FFormBuilder.prototype.removeGroup = removeGroup;
 FFormBuilder.prototype.duplicateGroup = duplicateGroup;
 FFormBuilder.prototype.handleGroupDuplicate = handleGroupDuplicate;
+FFormBuilder.prototype.checkSubmit = checkSubmit;
+FFormBuilder.prototype.checkFieldType = checkFieldType;
+FFormBuilder.prototype.checkSuffixConditions = checkSuffixConditions;
+FFormBuilder.prototype.checkAllShowConditions = checkAllShowConditions;
