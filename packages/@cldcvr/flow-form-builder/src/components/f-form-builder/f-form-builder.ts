@@ -1,5 +1,5 @@
 import { html, PropertyValueMap, PropertyValues, render, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, state } from "lit/decorators.js";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import {
   FormBuilderConfig,
@@ -12,6 +12,7 @@ import {
   FFormInputElements,
   FormBuilderTextInputField,
   FormBuilderArrayGroup,
+  FormBuilderArrayGroupValues,
 } from "./f-form-builder-types";
 import eleStyle from "./f-form-builder.scss";
 import validate from "./f-form-validator";
@@ -20,7 +21,7 @@ import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import fieldRenderer from "./fields";
 import { ifDefined } from "lit-html/directives/if-defined.js";
-import { FInput } from "@cldcvr/flow-core";
+import { FButton, FInput } from "@cldcvr/flow-core";
 import defaultValidations from "./default-validations/index";
 import { cloneDeep } from "lodash";
 
@@ -67,10 +68,33 @@ export class FFormBuilder extends FRoot {
 
   private groups: InternalFormBuilderGroup[] = [];
 
+  /**
+   * holds name of last deleted group
+   */
+  @state()
+  removedGroupName: string | undefined = undefined;
+
+  /**
+   *
+   * @param changedProperties lifecycle hook is called before render
+   */
   willUpdate(changedProperties: PropertyValues<this>) {
-    if (changedProperties.has("config") || changedProperties.has("values")) {
+    /**
+     * re-calculate groups only if following properties are changed
+     */
+    if (
+      changedProperties.has("config") ||
+      changedProperties.has("values") ||
+      changedProperties.has("removedGroupName")
+    ) {
+      /**
+       * reset groups array
+       */
       this.groups = [];
 
+      /**
+       * check given group config add it to groups array
+       */
       Object.entries(this.config.groups).forEach(
         ([groupName, groupConfig], idx) => {
           this.groups[idx] = { name: groupName, ...groupConfig };
@@ -231,12 +255,15 @@ export class FFormBuilder extends FRoot {
     </f-form>`;
   }
   handleGroupDuplicate(group: InternalFormBuilderGroup) {
-    const avialableGrps = this.groups.filter(
-      (gr) =>
-        gr.name.startsWith(group.name + CLONNED_GROUP_NAME_SEPARATOR) ||
-        gr.name === group.name
-    );
-    this.duplicateGroup(group.name, avialableGrps.length);
+    const clonnedGroupIdices = this.groups.map((gr) => {
+      if (gr.name.startsWith(group.name + CLONNED_GROUP_NAME_SEPARATOR)) {
+        return +gr.name.split(CLONNED_GROUP_NAME_SEPARATOR)[1];
+      }
+      return 0;
+    });
+
+    const newIndex = Math.max(...clonnedGroupIdices) + 1;
+    this.duplicateGroup(group.name, newIndex);
   }
   duplicateGroup(groupName: string, d: number) {
     const clonnedGroupName = `${groupName}${CLONNED_GROUP_NAME_SEPARATOR}${d}`;
@@ -249,6 +276,14 @@ export class FFormBuilder extends FRoot {
       ...cloneDeep(this.config.groups[groupName]),
     };
 
+    clonnedGroup.fields["remove_"] = {
+      type: "button",
+      label: "remove",
+      onClick: () => {
+        this.removeGroup(clonnedGroupName);
+      },
+    };
+
     clonnedGroup.label = undefined;
     this.groups.splice(clonnedGroupIdx, 0, clonnedGroup);
 
@@ -258,7 +293,32 @@ export class FFormBuilder extends FRoot {
       }
     );
 
+    if (
+      this.values[groupName] &&
+      !(this.values as FormBuilderArrayGroupValues)[groupName][d]
+    ) {
+      (this.values as FormBuilderArrayGroupValues)[groupName][d] = {};
+    }
     this.requestUpdate();
+  }
+
+  removeGroup(groupName: string) {
+    const idxToRemove = this.groups.findIndex((gr) => gr.name === groupName);
+    this.groups.splice(idxToRemove, 1);
+
+    const [maingroupname, valueIdx] = groupName.split(
+      CLONNED_GROUP_NAME_SEPARATOR
+    );
+
+    if (this.values[maingroupname]) {
+      this.values[maingroupname] = [
+        ...(this.values[maingroupname] as []).filter(
+          (_val, idx) => idx !== +valueIdx
+        ),
+      ];
+    }
+    this.removedGroupName = groupName;
+    //this.requestUpdate();
   }
 
   checkSubmit(event: MouseEvent) {
@@ -329,13 +389,14 @@ export class FFormBuilder extends FRoot {
   validateForm(silent = false) {
     Object.entries(this.state.refs).forEach(([name, element]) => {
       const inputElement = element.value;
-
-      if (
-        inputElement &&
-        this.state.rules[name] !== undefined &&
-        this.state.rules[name]?.length
-      ) {
-        this.validateField(name, inputElement, silent);
+      if (!(inputElement instanceof FButton)) {
+        if (
+          inputElement &&
+          this.state.rules[name] !== undefined &&
+          this.state.rules[name]?.length
+        ) {
+          this.validateField(name, inputElement, silent);
+        }
       }
     });
   }
@@ -454,7 +515,7 @@ export class FFormBuilder extends FRoot {
    * @param isMultiple
    */
   bindValues(inputElement: FFormInputElements | undefined, name: string) {
-    if (inputElement) {
+    if (inputElement && !(inputElement instanceof FButton)) {
       const [preGroupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
 
       const [groupname] = preGroupname.split(CLONNED_GROUP_NAME_SEPARATOR);
@@ -493,18 +554,18 @@ export class FFormBuilder extends FRoot {
     /**
      * Adding validation listener
      */
-    if (inputElement) {
+    if (inputElement && !(inputElement instanceof FButton)) {
       const [preGroupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
       const [groupname] = preGroupname.split(CLONNED_GROUP_NAME_SEPARATOR);
       const groupConfig = this.config.groups[groupname];
 
       const bindValues = () => {
         if (groupConfig.type === "array") {
-          const groupValues = this.values[groupname] as Record<
-            string,
-            unknown
-          >[];
+          let groupValues = this.values[groupname] as Record<string, unknown>[];
           const idx = Number(inputElement.dataset["valueIdx"]);
+          if (!groupValues) {
+            this.values[groupname] = groupValues = [];
+          }
           if (!(groupValues && groupValues[idx])) {
             groupValues[idx] = {};
           }

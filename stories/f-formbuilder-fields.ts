@@ -50,6 +50,50 @@ const sampleFormBuilder: SampleFormBuilder = {
           },
         },
       },
+      eventtest: {
+        type: "object",
+        direction: "horizontal",
+        isCollapsible: false,
+        isCollapsed: true,
+        label: {
+          title: "Event test",
+          description: "Open console to see what events emitted",
+          iconTooltip:
+            "This group is created to verify all event handlers are triggerring",
+        },
+        fields: {
+          etest: {
+            type: "text",
+            helperText: "This field is a required field",
+            validationRules: [
+              {
+                name: "required",
+              },
+            ],
+            onClick: (event: PointerEvent) => {
+              console.log("onClick callback triggered", event);
+            },
+            onInput: (event: Event) => {
+              console.log("onInput callback triggered", event);
+            },
+            onFocus: (event: FocusEvent) => {
+              console.log("onFocus callback triggered", event);
+            },
+            onKeyPress: (event: KeyboardEvent) => {
+              console.log("onKeyPress callback triggered", event);
+            },
+            onKeyDown: (event: KeyboardEvent) => {
+              console.log("onKeyDown callback triggered", event);
+            },
+            onKeyUp: (event: KeyboardEvent) => {
+              console.log("onKeyUp callback triggered", event);
+            },
+            onMouseOver: (event: MouseEvent) => {
+              console.log("onMouseOver callback triggered", event);
+            },
+          },
+        },
+      },
       group1: {
         type: "array",
         direction: "horizontal",
@@ -174,8 +218,9 @@ const sampleFormBuilder: SampleFormBuilder = {
         },
       },
       group4: {
-        type: "object",
+        type: "array",
         direction: "vertical",
+        canDuplicate: true,
         label: {
           title: "Textarea",
           description: "This is A textarea",

@@ -26,6 +26,14 @@ export default function (
       ?disabled=${field.disabled ?? false}
       ?loading=${field.loading ?? false}
       data-value-idx=${field.valueIdx}
+      @click=${ifDefined(field.onClick)}
+      @focus=${ifDefined(field.onFocus)}
+      @input=${ifDefined(field.onInput)}
+      @keypress=${ifDefined(field.onKeyPress)}
+      @keydown=${ifDefined(field.onKeyDown)}
+      @keyup=${ifDefined(field.onKeyUp)}
+      @mouseover=${ifDefined(field.onMouseOver)}
+      @mouseleave=${ifDefined(field.onMouseLeave)}
     >
     </f-button>
   `;

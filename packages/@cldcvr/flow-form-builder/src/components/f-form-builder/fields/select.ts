@@ -33,6 +33,13 @@ export default function (
       .option-template=${field.optionTemplate}
       icon-left=${ifDefined(field.iconLeft)}
       data-value-idx=${field.valueIdx}
+      @click=${ifDefined(field.onClick)}
+      @focus=${ifDefined(field.onFocus)}
+      @input=${ifDefined(field.onInput)}
+      @keypress=${ifDefined(field.onKeyPress)}
+      @keydown=${ifDefined(field.onKeyDown)}
+      @keyup=${ifDefined(field.onKeyUp)}
+      @mouseover=${ifDefined(field.onMouseOver)}
     >
       ${field?.label?.title
         ? html` <f-div slot="label" padding="none" gap="none"

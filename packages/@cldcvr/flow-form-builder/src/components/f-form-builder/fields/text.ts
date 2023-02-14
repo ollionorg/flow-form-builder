@@ -33,6 +33,13 @@ export default function (
       ?disabled=${field?.disabled ?? false}
       ?clear=${field?.clear ?? true}
       ?read-only=${field?.readonly ?? false}
+      @click=${ifDefined(field.onClick)}
+      @focus=${ifDefined(field.onFocus)}
+      @input=${ifDefined(field.onInput)}
+      @keypress=${ifDefined(field.onKeyPress)}
+      @keydown=${ifDefined(field.onKeyDown)}
+      @keyup=${ifDefined(field.onKeyUp)}
+      @mouseover=${ifDefined(field.onMouseOver)}
     >
       ${field.label?.title
         ? html` <f-div slot="label" padding="none" gap="none"

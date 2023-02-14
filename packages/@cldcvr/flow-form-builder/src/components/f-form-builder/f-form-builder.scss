@@ -13,3 +13,9 @@
 f-form-builder {
   @include input-color("danger");
 }
+
+f-form-group {
+  f-button[name="remove_"] {
+    align-self: center;
+  }
+}

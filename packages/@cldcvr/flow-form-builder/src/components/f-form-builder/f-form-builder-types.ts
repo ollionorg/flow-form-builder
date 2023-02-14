@@ -42,6 +42,15 @@ export type FormBuilderObjectGroup = FormBuilderBaseGroup & {
 };
 export type FormBuilderGroup = FormBuilderArrayGroup | FormBuilderObjectGroup;
 
+export type FormBuilderFieldEvents = {
+  onClick?: (event: PointerEvent) => void;
+  onInput?: (event: Event) => void;
+  onFocus?: (event: FocusEvent) => void;
+  onKeyPress?: (event: KeyboardEvent) => void;
+  onKeyDown?: (event: KeyboardEvent) => void;
+  onKeyUp?: (event: KeyboardEvent) => void;
+  onMouseOver?: (event: MouseEvent) => void;
+};
 export type FormBuilderBaseField = {
   id?: string; // id to uniquely identify in DOM
   state?: "default" | "success" | "danger" | "warning" | "primary";
@@ -53,7 +62,7 @@ export type FormBuilderBaseField = {
   disabled?: boolean;
   helperText?: string;
   showWhen?: FormBuilderShowCondition;
-};
+} & FormBuilderFieldEvents;
 // text input type field
 export type FormBuilderTextInputField = FormBuilderBaseField & {
   type: "text" | "email" | "password" | "url" | "tel" | "number";
@@ -125,6 +134,7 @@ export type FormBuilderButtonField = Omit<FormBuilderBaseField, "label"> & {
   counter?: string;
   loading?: boolean;
   disabled?: boolean;
+  onMouseLeave?: (event: MouseEvent) => void;
 };
 
 export type CheckboxOptions = {

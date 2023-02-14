@@ -27,6 +27,13 @@ export default function (
       state=${ifDefined(field.state)}
       helperText=${ifDefined(field.helperText)}
       data-value-idx=${field.valueIdx}
+      @click=${ifDefined(field.onClick)}
+      @focus=${ifDefined(field.onFocus)}
+      @input=${ifDefined(field.onInput)}
+      @keypress=${ifDefined(field.onKeyPress)}
+      @keydown=${ifDefined(field.onKeyDown)}
+      @keyup=${ifDefined(field.onKeyUp)}
+      @mouseover=${ifDefined(field.onMouseOver)}
     ></f-radio-group>
   `;
 }

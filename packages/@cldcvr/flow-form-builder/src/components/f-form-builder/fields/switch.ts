@@ -21,6 +21,13 @@ export default function (
       state=${ifDefined(field.state)}
       data-value-idx=${field.valueIdx}
       ?disabled=${field.disabled ?? false}
+      @click=${ifDefined(field.onClick)}
+      @focus=${ifDefined(field.onFocus)}
+      @input=${ifDefined(field.onInput)}
+      @keypress=${ifDefined(field.onKeyPress)}
+      @keydown=${ifDefined(field.onKeyDown)}
+      @keyup=${ifDefined(field.onKeyUp)}
+      @mouseover=${ifDefined(field.onMouseOver)}
     >
       ${field?.label?.title
         ? html` <f-div slot="label" padding="none" gap="none"
