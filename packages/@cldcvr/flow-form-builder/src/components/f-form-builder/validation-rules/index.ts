@@ -1,4 +1,4 @@
-import { FormBuilderValidatorFunction } from "../f-form-builder-types";
+import { FormBuilderValidatorFunction } from "../mixins/types";
 import required from "./required";
 
 const all: Record<string, FormBuilderValidatorFunction> = {

@@ -4,7 +4,7 @@ import {
   FormBuilderCheckboxField,
   FormBuilderField,
   FormBuilderGroup,
-} from "../f-form-builder-types";
+} from "../mixins/types";
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (

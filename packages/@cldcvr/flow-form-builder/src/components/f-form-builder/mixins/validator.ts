@@ -1,10 +1,10 @@
 import {
   FormBuilderGenericValidationRule,
   FormBuilderValidationRules,
-} from "./f-form-builder-types";
+} from "./types";
 
-import rules from "./validation-rules";
-import defaultMessages from "./default-validation-messages";
+import rules from "./../validation-rules";
+import defaultMessages from "./../default-validation-messages";
 
 export default function validate(
   value: string,

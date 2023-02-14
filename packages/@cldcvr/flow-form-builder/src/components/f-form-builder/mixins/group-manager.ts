@@ -1,10 +1,7 @@
 import { cloneDeep } from "lodash";
-import { FFormBuilder } from "./f-form-builder";
-import { CLONNED_GROUP_NAME_SEPARATOR } from "./f-form-builder-constants";
-import {
-  FormBuilderArrayGroupValues,
-  InternalFormBuilderGroup,
-} from "./f-form-builder-types";
+import { FFormBuilder } from "./../f-form-builder";
+import { CLONNED_GROUP_NAME_SEPARATOR } from "./constants";
+import { FormBuilderArrayGroupValues, InternalFormBuilderGroup } from "./types";
 
 export function handleGroupDuplicate(
   this: FFormBuilder,

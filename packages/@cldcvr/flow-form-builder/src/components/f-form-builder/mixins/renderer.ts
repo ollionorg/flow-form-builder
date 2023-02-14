@@ -6,12 +6,12 @@ import {
   FormBuilderGroup,
   FormBuilderTextInputField,
   InternalFormBuilderGroup,
-} from "./f-form-builder-types";
+} from "./types";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
-import { GROUP_FIELD_NAME_SEPARATOR } from "./f-form-builder-constants";
-import { FFormBuilder } from "./f-form-builder";
-import defaultValidations from "./default-validations";
-import fieldRenderer from "./fields";
+import { GROUP_FIELD_NAME_SEPARATOR } from "./constants";
+import { FFormBuilder } from "./../f-form-builder";
+import defaultValidations from "./../default-validations";
+import fieldRenderer from "./../fields";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 
 /**

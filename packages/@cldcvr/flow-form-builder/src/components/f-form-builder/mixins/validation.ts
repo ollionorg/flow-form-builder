@@ -1,16 +1,16 @@
 import { FButton } from "@cldcvr/flow-core";
 import { render } from "lit";
-import { FFormBuilder } from "./f-form-builder";
+import { FFormBuilder } from "./../f-form-builder";
 import {
   CLONNED_GROUP_NAME_SEPARATOR,
   GROUP_FIELD_NAME_SEPARATOR,
-} from "./f-form-builder-constants";
+} from "./constants";
 import {
   FFormInputElements,
   FormBuilderGenericValidationRule,
   FormBuilderValidationRules,
-} from "./f-form-builder-types";
-import validate from "./f-form-validator";
+} from "./types";
+import validate from "./validator";
 
 /**
  * validate whole form

@@ -4,7 +4,7 @@ import radio from "./radio";
 import switchButton from "./switch";
 import select from "./select";
 import button from "./button";
-import { FormBuilderFieldRenderFunction } from "../f-form-builder-types";
+import { FormBuilderFieldRenderFunction } from "../mixins/types";
 import textarea from "./textarea";
 
 const all: Record<string, FormBuilderFieldRenderFunction> = {

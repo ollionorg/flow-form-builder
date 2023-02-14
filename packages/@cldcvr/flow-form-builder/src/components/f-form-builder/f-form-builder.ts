@@ -10,7 +10,7 @@ import {
   InternalFormBuilderGroup,
   FormBuilderField,
   FormBuilderGroup,
-} from "./f-form-builder-types";
+} from "./mixins/types";
 import eleStyle from "./f-form-builder.scss";
 
 import { isEmptyObject } from "./utils";
@@ -21,14 +21,14 @@ import {
   bindValidation,
   validateField,
   validateForm,
-} from "./f-form-builder-bind-validation";
+} from "./mixins/validation";
 
-import { renderFields, renderGroups } from "./f-form-builder-renderer";
+import { renderFields, renderGroups } from "./mixins/renderer";
 import {
   duplicateGroup,
   handleGroupDuplicate,
   removeGroup,
-} from "./f-form-builder-group-manager";
+} from "./mixins/group-manager";
 import {
   bindValues,
   checkAllShowConditions,
@@ -39,7 +39,7 @@ import {
   handleFormChange,
   onSubmit,
   submit,
-} from "./f-form-builder-helpers";
+} from "./mixins/helpers";
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {

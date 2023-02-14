@@ -3,8 +3,8 @@ import { FFormBuilder } from "./f-form-builder";
 import {
   CLONNED_GROUP_NAME_SEPARATOR,
   GROUP_FIELD_NAME_SEPARATOR,
-} from "./f-form-builder-constants";
-import { FFormInputElements } from "./f-form-builder-types";
+} from "./constants";
+import { FFormInputElements } from "./types";
 
 /**
  * check if condition is satisfying for any element

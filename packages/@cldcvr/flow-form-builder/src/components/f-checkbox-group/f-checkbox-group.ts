@@ -1,7 +1,7 @@
 // import { FRoot } from "@cldcvr/flow-core";
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { CheckboxOptionsType } from "../f-form-builder/f-form-builder-types";
+import { CheckboxOptionsType } from "../f-form-builder/mixins/types";
 import eleStyle from "./f-checkbox-group.scss";
 import { FRoot, FDiv, FText } from "@cldcvr/flow-core";
 export type FCheckboxGroupValue = string[];

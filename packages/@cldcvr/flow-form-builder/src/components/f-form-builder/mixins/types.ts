@@ -10,7 +10,7 @@ import {
   FSwitch,
   FTextArea,
 } from "@cldcvr/flow-core";
-import { FCheckboxGroup } from "../f-checkbox-group/f-checkbox-group";
+import { FCheckboxGroup } from "../../f-checkbox-group/f-checkbox-group";
 
 export type FormBuilderConfig = {
   gap?: "small" | "medium" | "large" | "x-small";
