@@ -19,7 +19,7 @@ export default function (
       name=${name}
       .type=${field.type}
       ${ref(fieldRef)}
-      id=${params.group.name + idx}
+      id=${params.group.name + name + idx}
       .placeholder=${field.placeholder}
       .type=${field.type}
       icon-left=${ifDefined(field?.iconLeft)}

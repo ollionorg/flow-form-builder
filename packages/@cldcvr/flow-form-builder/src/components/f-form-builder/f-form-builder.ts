@@ -97,6 +97,13 @@ export class FFormBuilder extends FRoot {
     /**
      * Reset state when render called
      */
+    this.resetState();
+    return this.groups.length % 2
+      ? html`${this.build()}`
+      : html`${this.build()}`;
+  }
+
+  resetState() {
     this.state = {
       isChanged: false,
       errors: {},
@@ -110,7 +117,6 @@ export class FFormBuilder extends FRoot {
         return isEmptyObject(this.errors);
       },
     };
-    return this.build();
   }
   /**
    * handle input event of form
@@ -119,7 +125,7 @@ export class FFormBuilder extends FRoot {
     event.stopPropagation();
     // setting isChanged to true in state
     this.state.isChanged = true;
-    // this.checkAllShowConditions();
+    this.checkAllShowConditions();
     this.checkSuffixConditions();
     /**
      * validate silently
@@ -198,9 +204,9 @@ export class FFormBuilder extends FRoot {
       ${this.groups.map((gr) => {
         const name = gr.name;
         const groupWrapperRef: Ref<HTMLElement> = createRef();
-        // if (gr.showWhen) {
-        //   this.state.showFunctions.set(groupWrapperRef, gr.showWhen);
-        // }
+        if (gr.showWhen) {
+          this.state.showFunctions.set(groupWrapperRef, gr.showWhen);
+        }
 
         return html`
           <f-form-group
@@ -423,9 +429,13 @@ export class FFormBuilder extends FRoot {
       this.bindValidation(inputElement, name);
     });
 
-    //this.checkAllShowConditions();
+    this.checkAllShowConditions();
     this.checkSuffixConditions();
-    this.emitStateChange();
+    setTimeout(async () => {
+      await this.updateComplete;
+      this.validateForm(true);
+      this.emitStateChange();
+    }, 100);
   }
   emitStateChange() {
     const stateChange = new CustomEvent("stateChange", {

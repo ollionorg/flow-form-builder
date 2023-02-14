@@ -10,14 +10,15 @@ export default function (
   name: string,
   _field: FormBuilderField,
   idx: number,
-  fieldRef: Ref<FFormInputElements>
+  fieldRef: Ref<FFormInputElements>,
+  params?: any
 ) {
   const field = _field as FormBuilderTextAreaField & { valueIdx?: number };
   return html`
     <f-text-area
       name=${name}
       ${ref(fieldRef)}
-      id=${"form-ele" + idx}
+      id=${params.group.name + name + idx}
       .placeholder=${field.placeholder}
       max-length=${ifDefined(field?.maxLength)}
       ?disabled=${field?.disabled ?? false}
