@@ -7,7 +7,6 @@ import {
   FormBuilderValues,
   FormBuilderGenericValidationRule,
   FFormInputElements,
-  FormBuilderArrayGroupValues,
   InternalFormBuilderGroup,
   FormBuilderField,
   FormBuilderGroup,
@@ -19,7 +18,6 @@ import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 
 import { FButton, FInput } from "@cldcvr/flow-core";
-import { cloneDeep } from "lodash";
 import {
   bindValidation,
   validateField,
@@ -30,6 +28,11 @@ import {
   GROUP_FIELD_NAME_SEPARATOR,
 } from "./f-form-builder-constants";
 import { renderFields, renderGroups } from "./f-form-builder-renderer";
+import {
+  duplicateGroup,
+  handleGroupDuplicate,
+  removeGroup,
+} from "./f-form-builder-group-manager";
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
@@ -165,72 +168,6 @@ export class FFormBuilder extends FRoot {
       composed: true,
     });
     this.dispatchEvent(input);
-  }
-
-  handleGroupDuplicate(group: InternalFormBuilderGroup) {
-    const clonnedGroupIdices = this.groups.map((gr) => {
-      if (gr.name.startsWith(group.name + CLONNED_GROUP_NAME_SEPARATOR)) {
-        return +gr.name.split(CLONNED_GROUP_NAME_SEPARATOR)[1];
-      }
-      return 0;
-    });
-
-    const newIndex = Math.max(...clonnedGroupIdices) + 1;
-    this.duplicateGroup(group.name, newIndex);
-  }
-  duplicateGroup(groupName: string, d: number) {
-    const clonnedGroupName = `${groupName}${CLONNED_GROUP_NAME_SEPARATOR}${d}`;
-
-    const grIdx = this.groups.findIndex((gr) => gr.name === groupName);
-    const clonnedGroupIdx = grIdx + d;
-
-    const clonnedGroup = {
-      name: clonnedGroupName,
-      ...cloneDeep(this.config.groups[groupName]),
-    };
-
-    clonnedGroup.fields["remove_"] = {
-      type: "button",
-      label: "remove",
-      onClick: () => {
-        this.removeGroup(clonnedGroupName);
-      },
-    };
-
-    clonnedGroup.label = undefined;
-    this.groups.splice(clonnedGroupIdx, 0, clonnedGroup);
-
-    Object.entries(this.groups[clonnedGroupIdx].fields).forEach(
-      ([_fieldName, fieldConfig]) => {
-        fieldConfig.valueIdx = d;
-      }
-    );
-
-    if (
-      this.values[groupName] &&
-      !(this.values as FormBuilderArrayGroupValues)[groupName][d]
-    ) {
-      (this.values as FormBuilderArrayGroupValues)[groupName][d] = {};
-    }
-    this.requestUpdate();
-  }
-
-  removeGroup(groupName: string) {
-    const idxToRemove = this.groups.findIndex((gr) => gr.name === groupName);
-    this.groups.splice(idxToRemove, 1);
-
-    const [maingroupname, valueIdx] = groupName.split(
-      CLONNED_GROUP_NAME_SEPARATOR
-    );
-
-    if (this.values[maingroupname]) {
-      this.values[maingroupname] = [
-        ...(this.values[maingroupname] as []).filter(
-          (_val, idx) => idx !== +valueIdx
-        ),
-      ];
-    }
-    this.removedGroupName = groupName;
   }
 
   checkSubmit(event: MouseEvent) {
@@ -406,6 +343,9 @@ export class FFormBuilder extends FRoot {
     group: FormBuilderGroup
   ) => void;
   renderGroups!: () => void;
+  removeGroup!: (groupName: string) => void;
+  duplicateGroup!: (groupName: string, d: number) => void;
+  handleGroupDuplicate!: (group: InternalFormBuilderGroup) => void;
 }
 
 FFormBuilder.prototype.validateForm = validateForm;
@@ -413,3 +353,6 @@ FFormBuilder.prototype.validateField = validateField;
 FFormBuilder.prototype.bindValidation = bindValidation;
 FFormBuilder.prototype.renderFields = renderFields;
 FFormBuilder.prototype.renderGroups = renderGroups;
+FFormBuilder.prototype.removeGroup = removeGroup;
+FFormBuilder.prototype.duplicateGroup = duplicateGroup;
+FFormBuilder.prototype.handleGroupDuplicate = handleGroupDuplicate;
