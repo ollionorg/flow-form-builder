@@ -4,6 +4,20 @@
 
 # Change Log
 
+## [1.0.0] - 2023-02-15
+
+### Improvements
+
+- `button`, `icon-button` field types added.
+- `canDuplicate` feature implemented.
+- `type` property added to group which will have either 2 values `object` | `array`.
+- `iconTooltip` implemented.
+- All code segregated.
+- few unit tests added.
+- `email`, `between` validation rules added.
+- reactivity added for group addition or deletion from consumer.
+- multiple event binding issue fixed.
+
 ## [0.1.1] - 2023-01-01
 
 ### Improvements
