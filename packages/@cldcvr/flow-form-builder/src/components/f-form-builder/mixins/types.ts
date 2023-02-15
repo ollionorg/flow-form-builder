@@ -11,6 +11,7 @@ import {
   FTextArea,
 } from "@cldcvr/flow-core";
 import { FCheckboxGroup } from "../../f-checkbox-group/f-checkbox-group";
+import { BetweenParams } from "../validation-rules/between";
 
 export type FormBuilderConfig = {
   gap?: "small" | "medium" | "large" | "x-small";
@@ -176,9 +177,19 @@ export type FormBuilderValidationRuleTriggers =
 export type FormBuilderValidationRule = {
   when?: FormBuilderValidationRuleTriggers[]; // if not specified then validation triggers on @input event.
   message?: string; // custom message by using variables in message e.x. {{name}} is required field.
+  params?: Record<string, unknown>;
 };
 export type FormBuilderValidationRequiredRule = FormBuilderValidationRule & {
   name: "required";
+};
+
+export type FormBuilderValidationEmailRule = FormBuilderValidationRule & {
+  name: "email";
+};
+
+export type FormBuilderValidationBetweenRule = FormBuilderValidationRule & {
+  name: "between";
+  params: BetweenParams;
 };
 
 export type FormBuilderCustomValidationRule = FormBuilderValidationRule & {
@@ -187,14 +198,16 @@ export type FormBuilderCustomValidationRule = FormBuilderValidationRule & {
   validate: FormBuilderValidatorFunction;
 };
 
-export type FormBuilderValidatorFunction = (
-  value: string | unknown[],
-  params?: Record<string, unknown>
-) => boolean;
+export type FormBuilderValidatorFunction<
+  TValue = string | unknown[],
+  TParams = Record<string, unknown>
+> = (value: TValue, params?: TParams) => boolean;
 
 export type FormBuilderGenericValidationRule =
   | FormBuilderValidationRequiredRule
-  | FormBuilderCustomValidationRule;
+  | FormBuilderCustomValidationRule
+  | FormBuilderValidationEmailRule
+  | FormBuilderValidationBetweenRule;
 export type FormBuilderValidationRules = FormBuilderGenericValidationRule[];
 
 export type FormBuilderState = {

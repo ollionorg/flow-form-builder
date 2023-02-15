@@ -1,5 +1,4 @@
 import { FButton } from "@cldcvr/flow-core";
-import { render } from "lit";
 import { FFormBuilder } from "./../f-form-builder";
 import {
   CLONNED_GROUP_NAME_SEPARATOR,
@@ -151,32 +150,38 @@ export function validateField(
     rulesToValidate as FormBuilderValidationRules,
     fieldname
   );
-  const errorElement = this.state.errorRefs[name].value;
+
   if (!result && message && inputElement.offsetHeight > 0) {
     this.state.errors[name] = message;
-    if (this.state.helperTexts[name] && !silent) {
-      inputElement.state = "danger";
-    }
-    if (!silent && !this.state.helperTexts[name]) {
-      if (inputElement.lastElementChild?.getAttribute("slot") !== "help") {
-        inputElement.insertAdjacentHTML(
-          "beforeend",
-          `<f-div slot="help">${message}</f-div>`
-        );
-      }
+    if (!silent) {
+      updateMesasge(inputElement, message);
       inputElement.state = "danger";
     }
   } else {
     delete this.state.errors[name];
-    if (!this.state.helperTexts[name]) {
-      if (inputElement.lastElementChild?.getAttribute("slot") === "help") {
-        const child = inputElement.children[inputElement.children.length - 1];
-        child.remove();
-      }
-      if (errorElement) {
-        render("", errorElement);
-      }
+    const slotName = inputElement.lastElementChild?.getAttribute("slot");
+    if (this.state.helperTexts[name]) {
+      updateMesasge(inputElement, this.state.helperTexts[name] as string);
+    } else if (slotName === "help") {
+      const child = inputElement.children[inputElement.children.length - 1];
+      child.remove();
     }
     inputElement.state = "default";
+  }
+}
+
+function updateMesasge(element: HTMLElement, message: string) {
+  if (element.lastElementChild?.getAttribute("slot") === "help") {
+    const child = element.children[element.children.length - 1];
+    child.remove();
+    element.insertAdjacentHTML(
+      "beforeend",
+      `<f-div slot="help">${message}</f-div>`
+    );
+  } else {
+    element.insertAdjacentHTML(
+      "beforeend",
+      `<f-div slot="help">${message}</f-div>`
+    );
   }
 }

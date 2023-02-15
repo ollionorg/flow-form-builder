@@ -15,13 +15,13 @@ export default function validate(
   let message = null;
   for (const r of elementRules) {
     if (r.name !== "custom") {
-      result = rules[r.name](value);
+      result = rules[r.name](value, r.params);
       if (!result) {
         message = getValidationMessage(r, { name, value });
         break;
       }
     } else {
-      result = r.validate(value);
+      result = r.validate(value, r.params);
       if (!result) {
         message = getValidationMessage(r, { name, value });
         break;
@@ -50,11 +50,16 @@ function getValidationMessage(
   { name, value }: Record<string, string>
 ) {
   if (r.message) {
-    return processCustomMessage(r.message, { name, value });
+    return processCustomMessage(r.message, {
+      name,
+      value,
+      ...(r.params as Record<string, string>),
+    });
   } else if (defaultMessages[r.name]) {
     return processCustomMessage(defaultMessages[r.name], {
       name,
       value,
+      ...(r.params as Record<string, string>),
     });
   } else {
     return "Validation failed";

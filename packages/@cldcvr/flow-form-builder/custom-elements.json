@@ -542,6 +542,41 @@
               }
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": "getSingleParam",
+          "parameters": [
+            {
+              "name": "params",
+              "type": {
+                "text": "[TParam] | Record<string, TParam>"
+              }
+            },
+            {
+              "name": "paramName",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "isEmpty",
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          },
+          "parameters": [
+            {
+              "name": "value",
+              "type": {
+                "text": "unknown"
+              }
+            }
+          ]
         }
       ],
       "exports": [
@@ -582,6 +617,22 @@
           "name": "isValidHttpUrl",
           "declaration": {
             "name": "isValidHttpUrl",
+            "module": "src/components/f-form-builder/utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "getSingleParam",
+          "declaration": {
+            "name": "getSingleParam",
+            "module": "src/components/f-form-builder/utils.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "isEmpty",
+          "declaration": {
+            "name": "isEmpty",
             "module": "src/components/f-form-builder/utils.ts"
           }
         }
@@ -765,7 +816,7 @@
           "type": {
             "text": "Record<string, string>"
           },
-          "default": "{\n  required: \"{{name}} is required field\",\n}"
+          "default": "{\n  required: \"{{name}} is required field\",\n  email: \"{{name}} is not a valid email address\",\n  between: \"{{name}} must be between {{min}} and {{max}}\",\n}"
         }
       ],
       "exports": [
@@ -1846,15 +1897,76 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form-builder/validation-rules/between.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "betweenValidator",
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          },
+          "parameters": [
+            {
+              "name": "value"
+            },
+            {
+              "name": "params"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "betweenValidator",
+            "module": "src/components/f-form-builder/validation-rules/between.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/validation-rules/email.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "emailValidator",
+          "parameters": [
+            {
+              "name": "value",
+              "type": {
+                "text": "unknown"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "emailValidator",
+            "module": "src/components/f-form-builder/validation-rules/email.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-builder/validation-rules/index.ts",
       "declarations": [
         {
           "kind": "variable",
           "name": "all",
           "type": {
-            "text": "Record<string, FormBuilderValidatorFunction>"
+            "text": "Record<string, FormBuilderValidatorFunction<unknown, any>>"
           },
-          "default": "{\n  required,\n}"
+          "default": "{\n  required,\n  email,\n  between,\n}"
         }
       ],
       "exports": [

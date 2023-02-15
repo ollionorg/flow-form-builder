@@ -1,5 +1,9 @@
 export function isEmptyObject(obj: Object) {
-  return obj && Object.keys(obj).length === 0 && Object.getPrototypeOf(obj) === Object.prototype;
+  return (
+    obj &&
+    Object.keys(obj).length === 0 &&
+    Object.getPrototypeOf(obj) === Object.prototype
+  );
 }
 
 export function isNullOrUndefined(value: unknown): value is undefined | null {
@@ -27,4 +31,22 @@ export function isValidHttpUrl(stringurl: string) {
     return false;
   }
   return url.protocol === "http:" || url.protocol === "https:";
+}
+export function getSingleParam<TParam = unknown>(
+  params: [TParam] | Record<string, TParam>,
+  paramName: string
+) {
+  return Array.isArray(params) ? params[0] : params[paramName];
+}
+
+export function isEmpty(value: unknown): boolean {
+  if (value === null || value === undefined || value === "") {
+    return true;
+  }
+
+  if (Array.isArray(value) && value.length === 0) {
+    return true;
+  }
+
+  return false;
 }
