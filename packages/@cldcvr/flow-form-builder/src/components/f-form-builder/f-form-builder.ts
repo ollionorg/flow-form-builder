@@ -40,6 +40,7 @@ import {
   onSubmit,
   submit,
 } from "./mixins/helpers";
+import { getGroupsProxy } from "./mixins/proxies";
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
@@ -82,7 +83,7 @@ export class FFormBuilder extends FRoot {
    * holds name of last deleted group
    */
   @state()
-  removedGroupName: string | undefined = undefined;
+  updateTriggerId: string | undefined = undefined;
 
   /**
    *
@@ -95,35 +96,52 @@ export class FFormBuilder extends FRoot {
     if (
       changedProperties.has("config") ||
       changedProperties.has("values") ||
-      changedProperties.has("removedGroupName")
+      changedProperties.has("updateTriggerId")
     ) {
       /**
        * reset groups array
        */
       this.groups = [];
-      this.removedGroupName = undefined;
+      this.updateTriggerId = undefined;
 
       /**
        * check given group config add it to groups array
        */
-      Object.entries(this.config.groups).forEach(
-        ([groupName, groupConfig], idx) => {
-          this.groups[idx] = { name: groupName, ...groupConfig };
-          Object.entries(this.groups[idx].fields).forEach(
-            ([_fieldName, fieldConfig]) => {
-              fieldConfig.valueIdx = 0;
-            }
-          );
-        }
-      );
 
-      Object.entries(this.values).forEach(([groupName, fieldValues]) => {
-        if (this.config.groups[groupName].type === "array") {
-          for (let d = 1; d < (fieldValues as unknown[]).length; d++) {
-            this.duplicateGroup(groupName, d);
+      try {
+        Object.entries(this.config.groups).forEach(
+          ([groupName, groupConfig], idx) => {
+            this.groups[idx] = { name: groupName, ...groupConfig };
+            Object.entries(this.groups[idx].fields).forEach(
+              ([_fieldName, fieldConfig]) => {
+                fieldConfig.valueIdx = 0;
+              }
+            );
           }
-        }
-      });
+        );
+      } catch (e) {
+        console.error("No groups specified", e);
+      }
+      try {
+        Object.entries(this.values).forEach(([groupName, fieldValues]) => {
+          if (this.config.groups[groupName].type === "array") {
+            for (let d = 1; d < (fieldValues as unknown[]).length; d++) {
+              this.duplicateGroup(groupName, d);
+            }
+          }
+        });
+      } catch (e) {
+        console.warn("No values given");
+      }
+    }
+
+    if (changedProperties.has("config")) {
+      if (this.config.groups && !this.config.groups.__isProxy) {
+        this.config.groups = new Proxy(
+          this.config.groups,
+          getGroupsProxy(this)
+        );
+      }
     }
     super.willUpdate(changedProperties);
   }

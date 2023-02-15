@@ -73,5 +73,5 @@ export function removeGroup(this: FFormBuilder, groupName: string) {
       ),
     ];
   }
-  this.removedGroupName = groupName;
+  this.updateTriggerId = groupName;
 }

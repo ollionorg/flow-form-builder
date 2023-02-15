@@ -49,27 +49,35 @@ export function bindValidation(
     const groupConfig = this.config.groups[groupname];
 
     const bindValues = () => {
+      let values = this.values;
+
+      if (!values) {
+        values = {};
+      }
+
       if (groupConfig.type === "array") {
-        let groupValues = this.values[groupname] as Record<string, unknown>[];
+        let groupValues = values[groupname] as Record<string, unknown>[];
         const idx = Number(inputElement.dataset["valueIdx"]);
         if (!groupValues) {
-          this.values[groupname] = groupValues = [];
+          values[groupname] = groupValues = [];
         }
         if (!(groupValues && groupValues[idx])) {
           groupValues[idx] = {};
         }
         groupValues[idx][fieldname] = inputElement.value;
       } else {
-        const groupValues = this.values[groupname] as Record<string, unknown>;
+        const groupValues = values[groupname] as Record<string, unknown>;
         if (groupValues && groupValues[fieldname]) {
           groupValues[fieldname] = inputElement?.value;
         } else {
-          this.values[groupname] = {
-            ...this.values[groupname],
+          values[groupname] = {
+            ...values[groupname],
             [fieldname]: inputElement?.value,
           };
         }
       }
+
+      this.values = values;
     };
     const validation = () => {
       bindValues();

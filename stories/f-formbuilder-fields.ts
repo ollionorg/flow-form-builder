@@ -1,7 +1,7 @@
 import {
   FormBuilderConfig,
   FormBuilderValues,
-} from "../packages/@cldcvr/flow-form-builder/src/components/f-form-builder/f-form-builder-types";
+} from "../packages/@cldcvr/flow-form-builder/src/components/f-form-builder/mixins/types";
 type SampleFormBuilder = {
   config: FormBuilderConfig;
 };
