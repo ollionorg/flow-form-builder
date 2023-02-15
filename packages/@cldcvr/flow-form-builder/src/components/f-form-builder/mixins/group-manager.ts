@@ -32,14 +32,6 @@ export function duplicateGroup(
     ...cloneDeep(this.config.groups[groupName]),
   };
 
-  clonnedGroup.fields["remove_"] = {
-    type: "button",
-    label: "remove",
-    onClick: () => {
-      this.removeGroup(clonnedGroupName);
-    },
-  };
-
   clonnedGroup.label = undefined;
   this.groups.splice(clonnedGroupIdx, 0, clonnedGroup);
 

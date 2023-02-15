@@ -977,6 +977,56 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form-builder/fields/icon-button.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "",
+          "parameters": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "_field",
+              "type": {
+                "text": "FormBuilderField"
+              }
+            },
+            {
+              "name": "idx",
+              "type": {
+                "text": "number"
+              }
+            },
+            {
+              "name": "fieldRef",
+              "type": {
+                "text": "Ref<FFormInputElements>"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": ""
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "",
+            "module": "src/components/f-form-builder/fields/icon-button.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-builder/fields/index.ts",
       "declarations": [
         {
@@ -985,7 +1035,7 @@
           "type": {
             "text": "Record<string, FormBuilderFieldRenderFunction>"
           },
-          "default": "{\n  text,\n  checkbox,\n  textarea,\n  radio,\n  switchButton,\n  select,\n  button,\n}"
+          "default": "{\n  text,\n  checkbox,\n  textarea,\n  radio,\n  switchButton,\n  select,\n  button,\n  [\"icon-button\"]: iconButton,\n}"
         }
       ],
       "exports": [

@@ -6,6 +6,7 @@ import select from "./select";
 import button from "./button";
 import { FormBuilderFieldRenderFunction } from "../mixins/types";
 import textarea from "./textarea";
+import iconButton from "./icon-button";
 
 const all: Record<string, FormBuilderFieldRenderFunction> = {
   text,
@@ -15,6 +16,7 @@ const all: Record<string, FormBuilderFieldRenderFunction> = {
   switchButton,
   select,
   button,
+  ["icon-button"]: iconButton,
 };
 
 export default all;

@@ -37,7 +37,7 @@ const sampleFormBuilder: SampleFormBuilder = {
         fields: {
           required: {
             type: "text",
-            helperText: "This field is a required field",
+            helperText: "Click Submit to validate",
             validationRules: [
               {
                 name: "required",
@@ -54,7 +54,7 @@ const sampleFormBuilder: SampleFormBuilder = {
           },
           email: {
             type: "text",
-            helperText: "E.g vikas@cldcvr.com",
+            helperText: "Type invalid email address to trigger validation",
             validationRules: [
               {
                 name: "email",
@@ -66,7 +66,8 @@ const sampleFormBuilder: SampleFormBuilder = {
           },
           port: {
             type: "number",
-            helperText: "Valid port number",
+            helperText:
+              "Type value less than 10 or greater than 20 to trigger validation",
             validationRules: [
               {
                 name: "between",

@@ -3,6 +3,7 @@ import { Ref } from "lit-html/directives/ref.js";
 import {
   FButtonState,
   FCheckbox,
+  FIconButtonState,
   FInput,
   FRadio,
   FSelect,
@@ -138,6 +139,17 @@ export type FormBuilderButtonField = Omit<FormBuilderBaseField, "label"> & {
   onMouseLeave?: (event: MouseEvent) => void;
 };
 
+// button type field
+export type FormBuilderIconButtonField = Omit<FormBuilderBaseField, "label"> & {
+  type: "icon-button";
+  icon: string;
+  state?: FIconButtonState;
+  counter?: string;
+  loading?: boolean;
+  disabled?: boolean;
+  onMouseLeave?: (event: MouseEvent) => void;
+};
+
 export type CheckboxOptions = {
   id: string;
   title: string;
@@ -154,7 +166,8 @@ export type FormBuilderField =
   | FormBuilderRadioField
   | FormBuilderSwitchField
   | FormBuilderSelectField
-  | FormBuilderButtonField; // add other field types
+  | FormBuilderButtonField
+  | FormBuilderIconButtonField; // add other field types
 
 export type FormBuilderShowCondition = (values: FormBuilderValues) => boolean;
 

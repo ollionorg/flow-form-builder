@@ -8,7 +8,10 @@ import {
   InternalFormBuilderGroup,
 } from "./types";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
-import { GROUP_FIELD_NAME_SEPARATOR } from "./constants";
+import {
+  CLONNED_GROUP_NAME_SEPARATOR,
+  GROUP_FIELD_NAME_SEPARATOR,
+} from "./constants";
 import { FFormBuilder } from "./../f-form-builder";
 import defaultValidations from "./../default-validations";
 import fieldRenderer from "./../fields";
@@ -93,6 +96,17 @@ export function renderGroups(this: FFormBuilder) {
           ${ref(groupWrapperRef)}
         >
           ${this.renderFields(name, gr.fields, gr)}
+          ${gr.name.includes(CLONNED_GROUP_NAME_SEPARATOR)
+            ? html` <f-icon-button
+                slot="action"
+                icon="i-delete"
+                type="packed"
+                state="danger"
+                @click=${() => {
+                  this.removeGroup(gr.name);
+                }}
+              ></f-icon-button>`
+            : ``}
         </f-form-group>
       `;
     })}
