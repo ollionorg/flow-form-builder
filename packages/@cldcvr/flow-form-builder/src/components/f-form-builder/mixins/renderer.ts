@@ -9,7 +9,7 @@ import {
 } from "./types";
 import { ref, createRef, Ref } from "lit/directives/ref.js";
 import {
-  CLONNED_GROUP_NAME_SEPARATOR,
+  CLONED_GROUP_NAME_SEPARATOR,
   GROUP_FIELD_NAME_SEPARATOR,
 } from "./constants";
 import { FFormBuilder } from "./../f-form-builder";
@@ -96,7 +96,7 @@ export function renderGroups(this: FFormBuilder) {
           ${ref(groupWrapperRef)}
         >
           ${this.renderFields(name, gr.fields, gr)}
-          ${gr.name.includes(CLONNED_GROUP_NAME_SEPARATOR)
+          ${gr.name.includes(CLONED_GROUP_NAME_SEPARATOR)
             ? html` <f-icon-button
                 slot="action"
                 icon="i-delete"

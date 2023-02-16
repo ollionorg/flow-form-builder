@@ -1,7 +1,7 @@
 import { FButton, FInput } from "@cldcvr/flow-core";
 import { FFormBuilder } from "./../f-form-builder";
 import {
-  CLONNED_GROUP_NAME_SEPARATOR,
+  CLONED_GROUP_NAME_SEPARATOR,
   GROUP_FIELD_NAME_SEPARATOR,
 } from "./constants";
 import { FFormInputElements } from "./types";
@@ -93,7 +93,7 @@ export function bindValues(
   if (inputElement && !(inputElement instanceof FButton)) {
     const [preGroupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
 
-    const [groupname] = preGroupname.split(CLONNED_GROUP_NAME_SEPARATOR);
+    const [groupname] = preGroupname.split(CLONED_GROUP_NAME_SEPARATOR);
 
     const groupConfig = this.config.groups[groupname];
     if (groupConfig.type === "array" && this.values && this.values[groupname]) {

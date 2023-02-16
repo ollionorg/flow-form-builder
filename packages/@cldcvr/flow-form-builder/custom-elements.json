@@ -308,122 +308,88 @@
             },
             {
               "kind": "field",
-              "name": "validateField",
-              "type": {
-                "text": "(\n    this: FFormBuilder,\n    name: string,\n    inputElement: FFormInputElements,\n    silent?: boolean,\n    filter?: ((r: FormBuilderGenericValidationRule) => boolean) | undefined\n  ) => void"
-              }
+              "name": "duplicateGroup",
+              "default": "duplicateGroup"
             },
             {
               "kind": "field",
               "name": "validateForm",
-              "type": {
-                "text": "(this: FFormBuilder, silent?: boolean) => void"
-              }
+              "default": "validateForm"
+            },
+            {
+              "kind": "field",
+              "name": "validateField",
+              "default": "validateField"
             },
             {
               "kind": "field",
               "name": "bindValidation",
-              "type": {
-                "text": "(\n    this: FFormBuilder,\n    inputElement: FFormInputElements,\n    name: string\n  ) => void"
-              }
+              "default": "bindValidation"
             },
             {
               "kind": "field",
               "name": "renderFields",
-              "type": {
-                "text": "(\n    groupname: string,\n    fields: Record<string, FormBuilderField>,\n    group: FormBuilderGroup\n  ) => void"
-              }
+              "default": "renderFields"
             },
             {
               "kind": "field",
               "name": "renderGroups",
-              "type": {
-                "text": "() => void"
-              }
+              "default": "renderGroups"
             },
             {
               "kind": "field",
               "name": "removeGroup",
-              "type": {
-                "text": "(groupName: string) => void"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "duplicateGroup",
-              "type": {
-                "text": "(groupName: string, d: number) => void"
-              }
+              "default": "removeGroup"
             },
             {
               "kind": "field",
               "name": "handleGroupDuplicate",
-              "type": {
-                "text": "(group: InternalFormBuilderGroup) => void"
-              }
+              "default": "handleGroupDuplicate"
             },
             {
               "kind": "field",
               "name": "checkSubmit",
-              "type": {
-                "text": "(event: MouseEvent) => void"
-              }
+              "default": "checkSubmit"
             },
             {
               "kind": "field",
               "name": "checkFieldType",
-              "type": {
-                "text": "(type: string) => string"
-              }
+              "default": "checkFieldType"
             },
             {
               "kind": "field",
               "name": "checkSuffixConditions",
-              "type": {
-                "text": "() => void"
-              }
+              "default": "checkSuffixConditions"
             },
             {
               "kind": "field",
               "name": "checkAllShowConditions",
-              "type": {
-                "text": "() => void"
-              }
+              "default": "checkAllShowConditions"
             },
             {
               "kind": "field",
               "name": "submit",
-              "type": {
-                "text": "() => void"
-              }
+              "default": "submit"
             },
             {
               "kind": "field",
               "name": "onSubmit",
-              "type": {
-                "text": "(event: SubmitEvent) => void"
-              }
+              "default": "onSubmit"
             },
             {
               "kind": "field",
               "name": "handleFormChange",
-              "type": {
-                "text": "(event: Event) => void"
-              }
+              "default": "handleFormChange"
             },
             {
               "kind": "field",
               "name": "bindValues",
-              "type": {
-                "text": "(\n    inputElement: FFormInputElements | undefined,\n    name: string\n  ) => void"
-              }
+              "default": "bindValues"
             },
             {
               "kind": "field",
               "name": "emitStateChange",
-              "type": {
-                "text": "() => void"
-              }
+              "default": "emitStateChange"
             }
           ],
           "attributes": [
@@ -1338,7 +1304,7 @@
         },
         {
           "kind": "variable",
-          "name": "CLONNED_GROUP_NAME_SEPARATOR",
+          "name": "CLONED_GROUP_NAME_SEPARATOR",
           "type": {
             "text": "string"
           },
@@ -1356,9 +1322,9 @@
         },
         {
           "kind": "js",
-          "name": "CLONNED_GROUP_NAME_SEPARATOR",
+          "name": "CLONED_GROUP_NAME_SEPARATOR",
           "declaration": {
-            "name": "CLONNED_GROUP_NAME_SEPARATOR",
+            "name": "CLONED_GROUP_NAME_SEPARATOR",
             "module": "src/components/f-form-builder/mixins/constants.ts"
           }
         }

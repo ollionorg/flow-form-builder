@@ -5,11 +5,8 @@ import {
   FormBuilderConfig,
   FormBuilderState,
   FormBuilderValues,
-  FormBuilderGenericValidationRule,
   FFormInputElements,
   InternalFormBuilderGroup,
-  FormBuilderField,
-  FormBuilderGroup,
 } from "./mixins/types";
 import eleStyle from "./f-form-builder.scss";
 
@@ -199,57 +196,21 @@ export class FFormBuilder extends FRoot {
     }, 100);
   }
 
-  validateField!: (
-    this: FFormBuilder,
-    name: string,
-    inputElement: FFormInputElements,
-    silent?: boolean,
-    filter?: ((r: FormBuilderGenericValidationRule) => boolean) | undefined
-  ) => void;
-  validateForm!: (this: FFormBuilder, silent?: boolean) => void;
-  bindValidation!: (
-    this: FFormBuilder,
-    inputElement: FFormInputElements,
-    name: string
-  ) => void;
-
-  renderFields!: (
-    groupname: string,
-    fields: Record<string, FormBuilderField>,
-    group: FormBuilderGroup
-  ) => void;
-  renderGroups!: () => void;
-  removeGroup!: (groupName: string) => void;
-  duplicateGroup!: (groupName: string, d: number) => void;
-  handleGroupDuplicate!: (group: InternalFormBuilderGroup) => void;
-  checkSubmit!: (event: MouseEvent) => void;
-  checkFieldType!: (type: string) => string;
-  checkSuffixConditions!: () => void;
-  checkAllShowConditions!: () => void;
-  submit!: () => void;
-  onSubmit!: (event: SubmitEvent) => void;
-  handleFormChange!: (event: Event) => void;
-  bindValues!: (
-    inputElement: FFormInputElements | undefined,
-    name: string
-  ) => void;
-  emitStateChange!: () => void;
+  duplicateGroup = duplicateGroup;
+  validateForm = validateForm;
+  validateField = validateField;
+  bindValidation = bindValidation;
+  renderFields = renderFields;
+  renderGroups = renderGroups;
+  removeGroup = removeGroup;
+  handleGroupDuplicate = handleGroupDuplicate;
+  checkSubmit = checkSubmit;
+  checkFieldType = checkFieldType;
+  checkSuffixConditions = checkSuffixConditions;
+  checkAllShowConditions = checkAllShowConditions;
+  submit = submit;
+  onSubmit = onSubmit;
+  handleFormChange = handleFormChange;
+  bindValues = bindValues;
+  emitStateChange = emitStateChange;
 }
-
-FFormBuilder.prototype.validateForm = validateForm;
-FFormBuilder.prototype.validateField = validateField;
-FFormBuilder.prototype.bindValidation = bindValidation;
-FFormBuilder.prototype.renderFields = renderFields;
-FFormBuilder.prototype.renderGroups = renderGroups;
-FFormBuilder.prototype.removeGroup = removeGroup;
-FFormBuilder.prototype.duplicateGroup = duplicateGroup;
-FFormBuilder.prototype.handleGroupDuplicate = handleGroupDuplicate;
-FFormBuilder.prototype.checkSubmit = checkSubmit;
-FFormBuilder.prototype.checkFieldType = checkFieldType;
-FFormBuilder.prototype.checkSuffixConditions = checkSuffixConditions;
-FFormBuilder.prototype.checkAllShowConditions = checkAllShowConditions;
-FFormBuilder.prototype.submit = submit;
-FFormBuilder.prototype.onSubmit = onSubmit;
-FFormBuilder.prototype.handleFormChange = handleFormChange;
-FFormBuilder.prototype.bindValues = bindValues;
-FFormBuilder.prototype.emitStateChange = emitStateChange;

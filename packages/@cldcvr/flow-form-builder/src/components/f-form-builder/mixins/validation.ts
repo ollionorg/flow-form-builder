@@ -1,7 +1,7 @@
 import { FButton } from "@cldcvr/flow-core";
 import { FFormBuilder } from "./../f-form-builder";
 import {
-  CLONNED_GROUP_NAME_SEPARATOR,
+  CLONED_GROUP_NAME_SEPARATOR,
   GROUP_FIELD_NAME_SEPARATOR,
 } from "./constants";
 import {
@@ -44,7 +44,7 @@ export function bindValidation(
    */
   if (inputElement && !(inputElement instanceof FButton)) {
     const [preGroupname, fieldname] = name.split(GROUP_FIELD_NAME_SEPARATOR);
-    const [groupname] = preGroupname.split(CLONNED_GROUP_NAME_SEPARATOR);
+    const [groupname] = preGroupname.split(CLONED_GROUP_NAME_SEPARATOR);
     const groupConfig = this.config.groups[groupname];
 
     const bindValues = () => {
@@ -78,6 +78,7 @@ export function bindValidation(
 
       this.values = values;
     };
+
     const validation = () => {
       bindValues();
       // checking validaiton rules if any
@@ -103,13 +104,11 @@ export function bindValidation(
       this.state.rules[name]?.forEach(
         (rule: FormBuilderGenericValidationRule) => {
           if (rule.when && rule.when.length > 0) {
-            rule.when.forEach((eventname: any) => {
+            rule.when.forEach((eventname) => {
               bindValues();
               /**
                * custom event triggers for validation
                */
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              //@ts-ignore
               inputElement[`on${eventname}`] = () => {
                 this.validateField(
                   name,
@@ -154,14 +153,14 @@ export function validateField(
   if (!result && message && inputElement.offsetHeight > 0) {
     this.state.errors[name] = message;
     if (!silent) {
-      updateMesasge(inputElement, message);
+      updateMessage(inputElement, message);
       inputElement.state = "danger";
     }
   } else {
     delete this.state.errors[name];
     const slotName = inputElement.lastElementChild?.getAttribute("slot");
     if (this.state.helperTexts[name]) {
-      updateMesasge(inputElement, this.state.helperTexts[name] as string);
+      updateMessage(inputElement, this.state.helperTexts[name] as string);
     } else if (slotName === "help") {
       const child = inputElement.children[inputElement.children.length - 1];
       child.remove();
@@ -170,7 +169,7 @@ export function validateField(
   }
 }
 
-function updateMesasge(element: HTMLElement, message: string) {
+function updateMessage(element: HTMLElement, message: string) {
   if (element.lastElementChild?.getAttribute("slot") === "help") {
     const child = element.children[element.children.length - 1];
     child.remove();
