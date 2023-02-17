@@ -9,16 +9,13 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (
   name: string,
   _field: FormBuilderField,
-  idx: number,
-  fieldRef: Ref<FFormInputElements>,
-  params?: any
+  fieldRef: Ref<FFormInputElements>
 ) {
   const field = _field as FormBuilderTextAreaField & { valueIdx?: number };
   return html`
     <f-text-area
       name=${name}
       ${ref(fieldRef)}
-      id=${params.group.name + name + idx}
       .placeholder=${field.placeholder}
       max-length=${ifDefined(field?.maxLength)}
       ?disabled=${field?.disabled ?? false}

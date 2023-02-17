@@ -10,7 +10,6 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (
   name: string,
   _field: FormBuilderField,
-  idx: number,
   fieldRef: Ref<FFormInputElements>,
   params?: Record<string, unknown>
 ) {
@@ -19,7 +18,6 @@ export default function (
   return html`
     <f-radio-group
       name=${name}
-      id=${"form-ele" + idx}
       ${ref(fieldRef)}
       .options=${field.options}
       gap=${ifDefined(group?.gap)}

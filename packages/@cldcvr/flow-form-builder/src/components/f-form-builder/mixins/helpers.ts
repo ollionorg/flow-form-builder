@@ -43,24 +43,6 @@ export function checkSuffixConditions(this: FFormBuilder) {
 }
 
 /**
- * check field type and return genric
- * @param type
- */
-export function checkFieldType(this: FFormBuilder, type: string) {
-  if (
-    type === "text" ||
-    type === "tel" ||
-    type === "number" ||
-    type === "email" ||
-    type === "url" ||
-    type === "password"
-  ) {
-    return "text";
-  } else {
-    return type;
-  }
-}
-/**
  * check if submit trigger is added
  */
 export function checkSubmit(this: FFormBuilder, event: MouseEvent) {

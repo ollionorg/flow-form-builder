@@ -1,0 +1,9 @@
+@use "sass:map";
+// common mixins imported from this file
+@import "@cldcvr/flow-core/src/mixins/scss/mixins";
+
+:host {
+  @include base();
+  display: flex;
+  flex: 1 0 auto;
+}

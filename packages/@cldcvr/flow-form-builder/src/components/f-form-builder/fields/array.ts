@@ -1,8 +1,8 @@
 import { html } from "lit";
 import {
   FFormInputElements,
-  FormBuilderIconButtonField,
   FormBuilderField,
+  FormBuilderArrayField,
 } from "../mixins/types";
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
@@ -11,17 +11,13 @@ export default function (
   _field: FormBuilderField,
   fieldRef: Ref<FFormInputElements>
 ) {
-  const field = _field as FormBuilderIconButtonField & { valueIdx?: number };
+  const field = _field as FormBuilderArrayField & { valueIdx?: number };
   return html`
-    <f-icon-button
+    <f-form-array
       name=${name}
       ${ref(fieldRef)}
-      .state=${field.state ?? "primary"}
-      .icon=${field.icon}
-      type="packed"
-      .counter=${ifDefined(field.counter)}
-      ?disabled=${field.disabled ?? false}
-      ?loading=${field.loading ?? false}
+      .config=${field}
+      state=${ifDefined(field.state)}
       data-value-idx=${field.valueIdx}
       @click=${ifDefined(field.onClick)}
       @focus=${ifDefined(field.onFocus)}
@@ -30,8 +26,7 @@ export default function (
       @keydown=${ifDefined(field.onKeyDown)}
       @keyup=${ifDefined(field.onKeyUp)}
       @mouseover=${ifDefined(field.onMouseOver)}
-      @mouseleave=${ifDefined(field.onMouseLeave)}
     >
-    </f-icon-button>
+    </f-form-array>
   `;
 }

@@ -9,7 +9,6 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (
   name: string,
   _field: FormBuilderField,
-  idx: number,
   fieldRef: Ref<FFormInputElements>
 ) {
   const field = _field as FormBuilderSwitchField & { valueIdx?: number };
@@ -17,7 +16,6 @@ export default function (
     <f-switch
       name=${name}
       ${ref(fieldRef)}
-      id=${"form-ele" + idx}
       state=${ifDefined(field.state)}
       data-value-idx=${field.valueIdx}
       ?disabled=${field.disabled ?? false}

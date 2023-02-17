@@ -9,14 +9,12 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (
   name: string,
   _field: FormBuilderField,
-  idx: number,
   fieldRef: Ref<FFormInputElements>
 ) {
   const field = _field as FormBuilderButtonField & { valueIdx?: number };
   return html`
     <f-button
       name=${name}
-      id=${"form-ele" + idx}
       ${ref(fieldRef)}
       .state=${field.state ?? "primary"}
       .label=${ifDefined(field.label)}

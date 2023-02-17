@@ -13,6 +13,7 @@ import {
 } from "@cldcvr/flow-core";
 import { FCheckboxGroup } from "../../f-checkbox-group/f-checkbox-group";
 import { BetweenParams } from "../validation-rules/between";
+import { FFormArray } from "src/components/f-form-array/f-form-array";
 
 export type FormBuilderConfig = {
   gap?: "small" | "medium" | "large" | "x-small";
@@ -65,6 +66,11 @@ export type FormBuilderBaseField = {
   helperText?: string;
   showWhen?: FormBuilderShowCondition;
 } & FormBuilderFieldEvents;
+
+export type FormBuilderArrayField = FormBuilderBaseField & {
+  type: "array";
+  field: FormBuilderField;
+};
 // text input type field
 export type FormBuilderTextInputField = FormBuilderBaseField & {
   type: "text" | "email" | "password" | "url" | "tel" | "number";
@@ -167,7 +173,8 @@ export type FormBuilderField =
   | FormBuilderSwitchField
   | FormBuilderSelectField
   | FormBuilderButtonField
-  | FormBuilderIconButtonField; // add other field types
+  | FormBuilderIconButtonField
+  | FormBuilderArrayField; // add other field types
 
 export type FormBuilderShowCondition = (values: FormBuilderValues) => boolean;
 
@@ -230,7 +237,6 @@ export type FormBuilderState = {
   refs: Record<string, Ref<FFormInputElements>>;
   helperTexts: Record<string, string | undefined>;
   rules: Record<string, FormBuilderValidationRules | undefined>;
-  errorRefs: Record<string, Ref<HTMLElement>>;
   showFunctions: Map<Ref<HTMLElement>, FormBuilderShowCondition>;
   suffixFunctions?: Map<Ref<HTMLElement>, FomrBuilderSuffixStateObject>;
 };
@@ -261,10 +267,8 @@ export type FormBuilderValues =
 export type FormBuilderFieldRenderFunction = (
   name: string,
   field: FormBuilderField,
-  idx: number,
   fieldRef: Ref<FFormInputElements>,
-  params?: Record<string, unknown>,
-  fieldErrorRef?: Ref<HTMLElement>
+  params?: Record<string, unknown>
 ) => TemplateResult;
 
 export type FFormInputElements =
@@ -274,7 +278,8 @@ export type FFormInputElements =
   | FSwitch
   | FTextArea
   | FSelect
-  | FCheckboxGroup;
+  | FCheckboxGroup
+  | FFormArray;
 export type InternalFormBuilderGroup = FormBuilderGroup & {
   name: string;
   fields: Record<string, FormBuilderField & { valueIdx?: number }>;

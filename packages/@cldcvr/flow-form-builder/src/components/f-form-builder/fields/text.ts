@@ -9,9 +9,7 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (
   name: string,
   _field: FormBuilderField,
-  idx: number,
-  fieldRef: Ref<FFormInputElements>,
-  params?: any
+  fieldRef: Ref<FFormInputElements>
 ) {
   const field = _field as FormBuilderTextInputField & { valueIdx?: number };
   return html`
@@ -19,7 +17,6 @@ export default function (
       name=${name}
       .type=${field.type}
       ${ref(fieldRef)}
-      id=${params.group.name + name + idx}
       .placeholder=${field.placeholder}
       .type=${field.type}
       icon-left=${ifDefined(field?.iconLeft)}

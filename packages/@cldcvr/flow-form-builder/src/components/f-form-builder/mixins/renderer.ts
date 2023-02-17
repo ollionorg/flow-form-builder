@@ -14,7 +14,7 @@ import {
 } from "./constants";
 import { FFormBuilder } from "./../f-form-builder";
 import defaultValidations from "./../default-validations";
-import fieldRenderer from "./../fields";
+import fieldRenderer, { checkFieldType } from "./../fields";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 
 /**
@@ -125,13 +125,11 @@ export function renderFields(
   fields: Record<string, FormBuilderField>,
   group: FormBuilderGroup
 ) {
-  return html`${Object.entries(fields).map(([name, field], idx) => {
+  return html`${Object.entries(fields).map(([name, field], _idx) => {
     const fieldRef: Ref<FFormInputElements> = createRef();
 
-    const fieldErrorRef: Ref<HTMLElement> = createRef();
     const relativeName = `${groupname}${GROUP_FIELD_NAME_SEPARATOR}${name}`;
     this.state.refs[relativeName] = fieldRef;
-    this.state.errorRefs[relativeName] = fieldErrorRef;
     const validations = field.validationRules ? [...field.validationRules] : [];
     defaultValidations(field.type, validations);
     this.state.rules[relativeName] = validations;
@@ -148,7 +146,7 @@ export function renderFields(
      */
     if (
       (field as FormBuilderTextInputField).suffixWhen &&
-      this.checkFieldType(field.type) === "text" &&
+      checkFieldType(field.type) === "text" &&
       (field as FormBuilderTextInputField)?.suffix
     ) {
       this.state.suffixFunctions?.set(fieldRef, {
@@ -159,13 +157,11 @@ export function renderFields(
     /**
      * fieldRenderer is resposnsible to redner field based on type
      */
-    return html` ${fieldRenderer[this.checkFieldType(field.type)](
+    return html` ${fieldRenderer[checkFieldType(field.type)](
       name,
       field,
-      idx,
       fieldRef,
-      params,
-      fieldErrorRef
+      params
     )}`;
   })}`;
 }

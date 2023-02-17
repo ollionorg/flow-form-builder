@@ -29,7 +29,6 @@ import {
 import {
   bindValues,
   checkAllShowConditions,
-  checkFieldType,
   checkSubmit,
   checkSuffixConditions,
   emitStateChange,
@@ -162,7 +161,6 @@ export class FFormBuilder extends FRoot {
       refs: {},
       helperTexts: {},
       rules: {},
-      errorRefs: {},
       showFunctions: new Map(),
       suffixFunctions: new Map(),
       get isValid() {
@@ -205,7 +203,6 @@ export class FFormBuilder extends FRoot {
   removeGroup = removeGroup;
   handleGroupDuplicate = handleGroupDuplicate;
   checkSubmit = checkSubmit;
-  checkFieldType = checkFieldType;
   checkSuffixConditions = checkSuffixConditions;
   checkAllShowConditions = checkAllShowConditions;
   submit = submit;
