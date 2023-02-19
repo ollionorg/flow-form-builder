@@ -11,7 +11,7 @@ export default function (
   _field: FormBuilderField,
   fieldRef: Ref<FFormInputElements>
 ) {
-  const field = _field as FormBuilderSelectField & { valueIdx?: number };
+  const field = _field as FormBuilderSelectField;
   return html`
     <f-select
       name=${name}
@@ -30,7 +30,6 @@ export default function (
       ?create-option=${field.createOption}
       .option-template=${field.optionTemplate}
       icon-left=${ifDefined(field.iconLeft)}
-      data-value-idx=${field.valueIdx}
       @click=${ifDefined(field.onClick)}
       @focus=${ifDefined(field.onFocus)}
       @input=${ifDefined(field.onInput)}

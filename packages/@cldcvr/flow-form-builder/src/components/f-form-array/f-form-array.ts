@@ -6,12 +6,11 @@ import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import {
   FFormInputElements,
   FormBuilderArrayField,
+  FormBuilderValue,
 } from "../f-form-builder/mixins/types";
 import fieldRenderer, { checkFieldType } from "../f-form-builder/fields";
 import { createRef, Ref } from "lit/directives/ref.js";
 import { isEmptyArray } from "../f-form-builder/utils";
-import { FSelectOptions } from "@cldcvr/flow-core";
-import { FCheckboxGroupValue } from "../f-checkbox-group/f-checkbox-group";
 
 export type ArrayValueType = (
   | string
@@ -160,12 +159,7 @@ export class FFormArray extends FRoot {
 
       this.fieldRefs.forEach((ref, idx) => {
         if (ref.value && this.value) {
-          ref.value.value = this.value[idx] as
-            | string
-            | ArrayValueType
-            | FSelectOptions
-            | FCheckboxGroupValue
-            | undefined;
+          ref.value.value = this.value[idx] as FormBuilderValue;
           ref.value.requestUpdate();
         }
         if (ref.value) {

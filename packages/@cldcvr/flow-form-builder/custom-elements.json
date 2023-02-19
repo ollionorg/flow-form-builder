@@ -498,155 +498,47 @@
           "members": [
             {
               "kind": "field",
-              "name": "config",
+              "name": "field",
               "type": {
-                "text": "FormBuilderConfig"
+                "text": "FormBuilderField"
               },
-              "attribute": "config"
+              "attribute": "field"
             },
             {
               "kind": "field",
-              "name": "values",
+              "name": "value",
               "type": {
-                "text": "FormBuilderValues"
+                "text": "FormBuilderValue | undefined"
               },
-              "attribute": "values",
+              "attribute": "value",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "state",
+              "name": "fieldRef",
               "type": {
-                "text": "FormBuilderState"
-              },
-              "description": "Internal state of formbuilder"
-            },
-            {
-              "kind": "field",
-              "name": "formRef",
-              "type": {
-                "text": "Ref<HTMLFormElement>"
-              },
-              "description": "form reference"
-            },
-            {
-              "kind": "field",
-              "name": "groups",
-              "type": {
-                "text": "InternalFormBuilderGroup[]"
-              },
-              "privacy": "protected",
-              "default": "[]"
-            },
-            {
-              "kind": "field",
-              "name": "updateTriggerId",
-              "type": {
-                "text": "string | undefined"
-              },
-              "default": "undefined",
-              "description": "holds name of last deleted group"
+                "text": "Ref<FFormInputElements>"
+              }
             },
             {
               "kind": "method",
-              "name": "resetState",
-              "description": "resetting internal state"
-            },
-            {
-              "kind": "field",
-              "name": "duplicateGroup",
-              "default": "duplicateGroup"
-            },
-            {
-              "kind": "field",
-              "name": "validateForm",
-              "default": "validateForm"
-            },
-            {
-              "kind": "field",
-              "name": "validateField",
-              "default": "validateField"
-            },
-            {
-              "kind": "field",
-              "name": "bindValidation",
-              "default": "bindValidation"
-            },
-            {
-              "kind": "field",
-              "name": "renderFields",
-              "default": "renderFields"
-            },
-            {
-              "kind": "field",
-              "name": "renderGroups",
-              "default": "renderGroups"
-            },
-            {
-              "kind": "field",
-              "name": "removeGroup",
-              "default": "removeGroup"
-            },
-            {
-              "kind": "field",
-              "name": "handleGroupDuplicate",
-              "default": "handleGroupDuplicate"
-            },
-            {
-              "kind": "field",
-              "name": "checkSubmit",
-              "default": "checkSubmit"
-            },
-            {
-              "kind": "field",
-              "name": "checkSuffixConditions",
-              "default": "checkSuffixConditions"
-            },
-            {
-              "kind": "field",
-              "name": "checkAllShowConditions",
-              "default": "checkAllShowConditions"
-            },
-            {
-              "kind": "field",
-              "name": "submit",
-              "default": "submit"
-            },
-            {
-              "kind": "field",
-              "name": "onSubmit",
-              "default": "onSubmit"
-            },
-            {
-              "kind": "field",
-              "name": "handleFormChange",
-              "default": "handleFormChange"
-            },
-            {
-              "kind": "field",
-              "name": "bindValues",
-              "default": "bindValues"
-            },
-            {
-              "kind": "field",
-              "name": "emitStateChange",
-              "default": "emitStateChange"
+              "name": "dispatchInputEvent"
             }
           ],
           "attributes": [
             {
-              "name": "config",
+              "name": "field",
               "type": {
-                "text": "FormBuilderConfig"
+                "text": "FormBuilderField"
               },
-              "fieldName": "config"
+              "fieldName": "field"
             },
             {
-              "name": "values",
+              "name": "value",
               "type": {
-                "text": "FormBuilderValues"
+                "text": "FormBuilderValue | undefined"
               },
-              "fieldName": "values"
+              "fieldName": "value"
             }
           ],
           "superclass": {
@@ -1184,19 +1076,8 @@
               "type": {
                 "text": "Ref<FFormInputElements>"
               }
-            },
-            {
-              "name": "params",
-              "optional": true,
-              "type": {
-                "text": "Record<string, unknown>"
-              }
             }
           ]
-        },
-        {
-          "kind": "function",
-          "name": ""
         },
         {
           "kind": "function",
@@ -1372,19 +1253,8 @@
               "type": {
                 "text": "Ref<FFormInputElements>"
               }
-            },
-            {
-              "name": "params",
-              "optional": true,
-              "type": {
-                "text": "Record<string, unknown>"
-              }
             }
           ]
-        },
-        {
-          "kind": "function",
-          "name": ""
         },
         {
           "kind": "function",
@@ -1580,443 +1450,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-form-builder/mixins/constants.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "GROUP_FIELD_NAME_SEPARATOR",
-          "type": {
-            "text": "string"
-          },
-          "default": "\".$\""
-        },
-        {
-          "kind": "variable",
-          "name": "CLONED_GROUP_NAME_SEPARATOR",
-          "type": {
-            "text": "string"
-          },
-          "default": "\"_$\""
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "GROUP_FIELD_NAME_SEPARATOR",
-          "declaration": {
-            "name": "GROUP_FIELD_NAME_SEPARATOR",
-            "module": "src/components/f-form-builder/mixins/constants.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "CLONED_GROUP_NAME_SEPARATOR",
-          "declaration": {
-            "name": "CLONED_GROUP_NAME_SEPARATOR",
-            "module": "src/components/f-form-builder/mixins/constants.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-builder/mixins/group-manager.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "handleGroupDuplicate",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            },
-            {
-              "name": "group",
-              "type": {
-                "text": "InternalFormBuilderGroup"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "duplicateGroup",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            },
-            {
-              "name": "groupName",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "d",
-              "type": {
-                "text": "number"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "removeGroup",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            },
-            {
-              "name": "groupName",
-              "type": {
-                "text": "string"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "handleGroupDuplicate",
-          "declaration": {
-            "name": "handleGroupDuplicate",
-            "module": "src/components/f-form-builder/mixins/group-manager.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "duplicateGroup",
-          "declaration": {
-            "name": "duplicateGroup",
-            "module": "src/components/f-form-builder/mixins/group-manager.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "removeGroup",
-          "declaration": {
-            "name": "removeGroup",
-            "module": "src/components/f-form-builder/mixins/group-manager.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-builder/mixins/helpers.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "checkAllShowConditions",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            }
-          ],
-          "description": "check if condition is satisfying for any element"
-        },
-        {
-          "kind": "function",
-          "name": "checkSuffixConditions",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            }
-          ],
-          "description": "check condition to display suffix or not"
-        },
-        {
-          "kind": "function",
-          "name": "checkSubmit",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            },
-            {
-              "name": "event",
-              "type": {
-                "text": "MouseEvent"
-              }
-            }
-          ],
-          "description": "check if submit trigger is added"
-        },
-        {
-          "kind": "function",
-          "name": "emitStateChange",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "bindValues",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            },
-            {
-              "name": "inputElement",
-              "type": {
-                "text": "FFormInputElements | undefined"
-              }
-            },
-            {
-              "name": "name",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "index"
-            },
-            {
-              "name": "isMultiple"
-            }
-          ],
-          "description": "Add/Display initial values given by user"
-        },
-        {
-          "kind": "function",
-          "name": "handleFormChange",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            },
-            {
-              "name": "event",
-              "type": {
-                "text": "Event"
-              }
-            }
-          ],
-          "description": "handle input event of form"
-        },
-        {
-          "kind": "function",
-          "name": "onSubmit",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            },
-            {
-              "name": "event",
-              "type": {
-                "text": "SubmitEvent"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "submit",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "checkAllShowConditions",
-          "declaration": {
-            "name": "checkAllShowConditions",
-            "module": "src/components/f-form-builder/mixins/helpers.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "checkSuffixConditions",
-          "declaration": {
-            "name": "checkSuffixConditions",
-            "module": "src/components/f-form-builder/mixins/helpers.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "checkSubmit",
-          "declaration": {
-            "name": "checkSubmit",
-            "module": "src/components/f-form-builder/mixins/helpers.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "emitStateChange",
-          "declaration": {
-            "name": "emitStateChange",
-            "module": "src/components/f-form-builder/mixins/helpers.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "bindValues",
-          "declaration": {
-            "name": "bindValues",
-            "module": "src/components/f-form-builder/mixins/helpers.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "handleFormChange",
-          "declaration": {
-            "name": "handleFormChange",
-            "module": "src/components/f-form-builder/mixins/helpers.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "onSubmit",
-          "declaration": {
-            "name": "onSubmit",
-            "module": "src/components/f-form-builder/mixins/helpers.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "submit",
-          "declaration": {
-            "name": "submit",
-            "module": "src/components/f-form-builder/mixins/helpers.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-builder/mixins/proxies.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "getGroupsProxy",
-          "parameters": [
-            {
-              "name": "element",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "getGroupsProxy",
-          "declaration": {
-            "name": "getGroupsProxy",
-            "module": "src/components/f-form-builder/mixins/proxies.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-builder/mixins/renderer.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "renderGroups",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            }
-          ],
-          "description": "build/render form based on config"
-        },
-        {
-          "kind": "function",
-          "name": "renderFields",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            },
-            {
-              "name": "groupname",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "fields",
-              "type": {
-                "text": "Record<string, FormBuilderField>"
-              }
-            },
-            {
-              "name": "group",
-              "type": {
-                "text": "FormBuilderGroup"
-              }
-            }
-          ],
-          "description": "render field based on field config"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "renderGroups",
-          "declaration": {
-            "name": "renderGroups",
-            "module": "src/components/f-form-builder/mixins/renderer.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "renderFields",
-          "declaration": {
-            "name": "renderFields",
-            "module": "src/components/f-form-builder/mixins/renderer.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-form-builder/mixins/types.ts",
       "declarations": [],
       "exports": []
@@ -2024,109 +1457,12 @@
     {
       "kind": "javascript-module",
       "path": "src/components/f-form-builder/mixins/validation.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "validateForm",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            },
-            {
-              "name": "silent",
-              "default": "false"
-            }
-          ],
-          "description": "validate whole form"
-        },
-        {
-          "kind": "function",
-          "name": "bindValidation",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            },
-            {
-              "name": "inputElement",
-              "type": {
-                "text": "FFormInputElements"
-              }
-            },
-            {
-              "name": "name",
-              "type": {
-                "text": "string"
-              }
-            }
-          ],
-          "description": "validation rules listener added on `input` event."
-        },
-        {
-          "kind": "function",
-          "name": "validateField",
-          "parameters": [
-            {
-              "name": "this",
-              "type": {
-                "text": "FFormBuilder"
-              }
-            },
-            {
-              "name": "name",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "inputElement",
-              "type": {
-                "text": "FFormInputElements"
-              },
-              "description": "ref of field"
-            },
-            {
-              "name": "silent",
-              "default": "false",
-              "description": "if true then errors are not rendered, they are added in state only"
-            },
-            {
-              "name": "filter",
-              "optional": true,
-              "type": {
-                "text": "(r: FormBuilderGenericValidationRule) => boolean"
-              }
-            }
-          ]
-        }
-      ],
+      "declarations": [],
       "exports": [
         {
           "kind": "js",
-          "name": "validateForm",
+          "name": "default",
           "declaration": {
-            "name": "validateForm",
-            "module": "src/components/f-form-builder/mixins/validation.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "bindValidation",
-          "declaration": {
-            "name": "bindValidation",
-            "module": "src/components/f-form-builder/mixins/validation.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "validateField",
-          "declaration": {
-            "name": "validateField",
             "module": "src/components/f-form-builder/mixins/validation.ts"
           }
         }

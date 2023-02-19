@@ -1,48 +1,26 @@
 import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
-import { FormBuilderConfig } from "@cldcvr/flow-form-builder/src/components/f-form-builder/mixins/types";
+import { FormBuilderField } from "@cldcvr/flow-form-builder/src/components/f-form-builder/mixins/types";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
 
 export default {
   title: "Features/Array field",
   argTypes: {
-    config: {
+    field: {
       control: false,
     },
   },
 } as Meta;
 
 type SampleFormBuilder = {
-  config: FormBuilderConfig;
+  field: FormBuilderField;
 };
 
 const sampleFormBuilder: SampleFormBuilder = {
-  config: {
-    gap: "large",
-    groupSeparator: true,
-    fieldSize: "medium",
-    variant: "curved",
-    category: "fill",
-    label: {
-      title: "Form",
-      description: "Wait for 5 seconds, it will add a group",
-      iconTooltip: "Hello",
-    },
-    groups: {
-      firstGroup: {
-        type: "object",
-        direction: "horizontal",
-        isCollapsible: false,
-        isCollapsed: true,
-        fields: {
-          username: {
-            type: "array",
-            field: {
-              type: "text",
-            },
-          },
-        },
-      },
+  field: {
+    type: "array",
+    field: {
+      type: "text",
     },
   },
 };
@@ -61,20 +39,15 @@ const Template: Story<unknown> = (args: any) => {
   return html`
     <f-div padding="medium" direction="column" gap="large">
       <f-form-builder
-        .config=${args.config}
-        .values=${args.values}
+        .field=${args.field}
+        .value=${args.value}
         @keydown=${handleKeydown}
         @input=${handleInput}
       >
-        <f-button
-          label="submit"
-          type="submit"
-          .variant=${args.config.variant}
-          .category=${args.config.category}
-        ></f-button>
+        <f-button label="submit" type="submit"></f-button>
       </f-form-builder>
 
-      <code><pre ${ref(fieldRef)}>${JSON.stringify(args.values)}</pre></code>
+      <code><pre ${ref(fieldRef)}>${JSON.stringify(args.value)}</pre></code>
     </f-div>
   `;
 };
@@ -82,10 +55,6 @@ const Template: Story<unknown> = (args: any) => {
 export const basic = Template.bind({});
 
 basic.args = {
-  config: sampleFormBuilder.config,
-  values: {
-    firstGroup: {
-      username: ["username1", "username2"],
-    },
-  },
+  field: sampleFormBuilder.field,
+  value: ["username1", "username2"],
 };

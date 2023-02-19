@@ -9,10 +9,8 @@ import { createRef, Ref } from "lit/directives/ref.js";
 import {
   FFormInputElements,
   FormBuilderObjectField,
+  FormBuilderValue,
 } from "../f-form-builder/mixins/types";
-import { FSelectOptions } from "@cldcvr/flow-core";
-import { FCheckboxGroupValue } from "../f-checkbox-group/f-checkbox-group";
-import { ArrayValueType } from "../f-form-array/f-form-array";
 
 export type ObjectValueType = Record<
   string,
@@ -64,45 +62,6 @@ export class FFormObject extends FRoot {
     });
 
     return html` <f-div gap="small" direction="column" width="100%">
-      ${this.config.label
-        ? html`<f-div gap="x-small" direction="column" width="fill-container">
-            <f-div
-              padding="none"
-              gap="small"
-              direction="row"
-              width="hug-content"
-              height="hug-content"
-            >
-              <!--label-->
-              <f-div
-                padding="none"
-                direction="row"
-                width="hug-content"
-                height="hug-content"
-              >
-                <f-text variant="heading" size="medium" weight="regular"
-                  >${this.config.label?.title}</f-text
-                >
-              </f-div>
-              <!--info icon-->
-              ${this.config.label?.iconTooltip
-                ? html` <f-icon
-                    source="i-question-filled"
-                    size="small"
-                    state="default"
-                    .tooltip="${this.config.label?.iconTooltip}"
-                    clickable
-                  ></f-icon>`
-                : ""}
-            </f-div>
-            <!--field description-->
-            ${this.config.label?.description
-              ? html` <f-text variant="para" size="medium" weight="regular"
-                  >${this.config.label?.description}</f-text
-                >`
-              : ""}
-          </f-div>`
-        : ``}
       <f-form-group
         .direction=${this.config.direction}
         .variant=${this.config.variant}
@@ -138,12 +97,7 @@ export class FFormObject extends FRoot {
 
       Object.entries(this.fieldRefs).forEach(([name, ref]) => {
         if (ref.value && this.value) {
-          ref.value.value = this.value[name] as
-            | string
-            | FSelectOptions
-            | FCheckboxGroupValue
-            | ArrayValueType
-            | undefined;
+          ref.value.value = this.value[name] as FormBuilderValue;
 
           ref.value.requestUpdate();
         }

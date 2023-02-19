@@ -1,6 +1,6 @@
 import { Meta, Story, Canvas, ArgsTable } from "@storybook/addon-docs";
 import { html } from "lit-html";
-import fields from "./f-formbuilder-fields";
+import field from "./f-formbuilder-field";
 import { useArgs, useState } from "@storybook/client-api";
 
 <Meta
@@ -27,19 +27,14 @@ import { useArgs, useState } from "@storybook/client-api";
   <Story
     name="Playground"
     argTypes={{
-      config: {
+      field: {
         control: "object",
       },
-      values: { control: "object" },
+      value: { control: "object" },
     }}
     args={{
-      ...fields,
-      values: {
-        group1: [
-          { xyz: "123", abc: "678" },
-          { xyz: "tyu", abc: "pqr" },
-        ],
-      },
+      field,
+      value: {},
     }}
   >
     {(args) => {
@@ -48,10 +43,6 @@ import { useArgs, useState } from "@storybook/client-api";
       const handleSubmit = (event) => {
         console.log("Submit event", event.detail);
         window.alert("event submit successfully");
-      };
-      const handleStateChange = (event) => {
-        setState(event.detail);
-        console.log("State Change event", event.detail);
       };
       const handleInput = (event) => {
         {
@@ -65,20 +56,13 @@ import { useArgs, useState } from "@storybook/client-api";
       };
       return html` <f-div padding="medium">
         <f-form-builder
-          .config=${args.config}
-          .values=${args.values}
+          .field=${args.field}
+          .value=${args.value}
           @submit=${handleSubmit}
-          @stateChange=${handleStateChange}
           @input=${handleInput}
           @keydown=${handleKeydown}
         >
-          <f-button
-            label="submit"
-            type="submit"
-            .variant=${args.config.variant}
-            .category=${args.config.category}
-            ?disabled=${!state.isValid}
-          ></f-button> </f-form-builder
+          <f-button label="submit" type="submit"></f-button> </f-form-builder
       ></f-div>`;
     }}
   </Story>

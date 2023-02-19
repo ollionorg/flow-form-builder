@@ -11,7 +11,7 @@ export default function (
   _field: FormBuilderField,
   fieldRef: Ref<FFormInputElements>
 ) {
-  const field = _field as FormBuilderIconButtonField & { valueIdx?: number };
+  const field = _field as FormBuilderIconButtonField;
   return html`
     <f-icon-button
       name=${name}
@@ -22,7 +22,6 @@ export default function (
       .counter=${ifDefined(field.counter)}
       ?disabled=${field.disabled ?? false}
       ?loading=${field.loading ?? false}
-      data-value-idx=${field.valueIdx}
       @click=${ifDefined(field.onClick)}
       @focus=${ifDefined(field.onFocus)}
       @input=${ifDefined(field.onInput)}

@@ -83,7 +83,7 @@
     },
     {
       "name": "f-form-array",
-      "description": "Events:\n\n  * `input` {`CustomEvent<ArrayValueType>`} - \n\nAttributes:\n\n  * `config` {`FormBuilderArrayField`} - \n\n  * `value` {`ArrayValueType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `config` {`FormBuilderArrayField`} - \n\n  * `value` {`ArrayValueType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `fieldRefs` {`Ref<any>[]`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `input` {`CustomEvent<ArrayValueType>`} - \n\nAttributes:\n\n  * `config` {`FormBuilderArrayField`} - \n\n  * `value` {`ArrayValueType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `config` {`FormBuilderArrayField`} - \n\n  * `value` {`ArrayValueType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `fieldRefs` {`Ref<FFormInputElements>[]`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "config",
@@ -127,21 +127,26 @@
     },
     {
       "name": "f-form-builder",
-      "description": "Attributes:\n\n  * `config` {`FormBuilderConfig`} - \n\n  * `values` - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `config` {`FormBuilderConfig`} - \n\n  * `values` - \n\n  * `state` {`FormBuilderState`} - Internal state of formbuilder\n\n  * `formRef` - form reference\n\n  * `groups` {`InternalFormBuilderGroup[]`} - \n\n  * `updateTriggerId` {`string | undefined`} - holds name of last deleted group\n\n  * `duplicateGroup` - \n\n  * `validateForm` - \n\n  * `validateField` - \n\n  * `bindValidation` - \n\n  * `renderFields` - \n\n  * `renderGroups` - \n\n  * `removeGroup` - \n\n  * `handleGroupDuplicate` - \n\n  * `checkSubmit` - \n\n  * `checkSuffixConditions` - \n\n  * `checkAllShowConditions` - \n\n  * `submit` - \n\n  * `onSubmit` - \n\n  * `handleFormChange` - \n\n  * `bindValues` - \n\n  * `emitStateChange` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `input` {`CustomEvent<string | number | string[] | number[] | Record<string, unknown> | Record<string, unknown>[]>`} - \n\nAttributes:\n\n  * `field` {`FormBuilderField`} - \n\n  * `value` - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `field` {`FormBuilderField`} - \n\n  * `value` - \n\n  * `fieldRef` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
-          "name": "config",
-          "description": "`config` {`FormBuilderConfig`} - \n\nProperty: config"
+          "name": "field",
+          "description": "`field` {`FormBuilderField`} - \n\nProperty: field",
+          "values": []
         },
         {
-          "name": "values",
-          "description": "`values` - \n\nProperty: values",
+          "name": "value",
+          "description": "`value` - \n\nProperty: value",
           "values": []
         },
         {
           "name": "tooltip",
           "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
           "values": []
+        },
+        {
+          "name": "oninput",
+          "description": "`input` {`CustomEvent<string | number | string[] | number[] | Record<string, unknown> | Record<string, unknown>[]>`} - "
         }
       ]
     },

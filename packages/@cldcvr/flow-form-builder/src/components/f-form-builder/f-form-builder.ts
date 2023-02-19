@@ -1,42 +1,16 @@
-import { html, PropertyValueMap, PropertyValues, unsafeCSS } from "lit";
-import { customElement, property, state } from "lit/decorators.js";
-import { Ref } from "lit/directives/ref.js";
+import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { customElement, property } from "lit/decorators.js";
 import {
-  FormBuilderConfig,
-  FormBuilderState,
-  FormBuilderValues,
+  FormBuilderField,
   FFormInputElements,
-  InternalFormBuilderGroup,
+  FormBuilderValue,
 } from "./mixins/types";
 import eleStyle from "./f-form-builder.scss";
 
-import { isEmptyObject } from "./utils";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
-
-import {
-  bindValidation,
-  validateField,
-  validateForm,
-} from "./mixins/validation";
-
-import { renderFields, renderGroups } from "./mixins/renderer";
-import {
-  duplicateGroup,
-  handleGroupDuplicate,
-  removeGroup,
-} from "./mixins/group-manager";
-import {
-  bindValues,
-  checkAllShowConditions,
-  checkSubmit,
-  checkSuffixConditions,
-  emitStateChange,
-  handleFormChange,
-  onSubmit,
-  submit,
-} from "./mixins/helpers";
-import { getGroupsProxy } from "./mixins/proxies";
+import { Ref, createRef } from "lit/directives/ref.js";
+import fieldRenderer, { checkFieldType } from "./fields";
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
@@ -49,7 +23,7 @@ export class FFormBuilder extends FRoot {
    * @attribute formbuilder config
    */
   @property({ type: Object, reflect: false })
-  config!: FormBuilderConfig;
+  field!: FormBuilderField;
 
   /**
    * @attribute key value pair of values
@@ -57,116 +31,27 @@ export class FFormBuilder extends FRoot {
   @property({
     type: Object,
     reflect: true,
-    hasChanged(newVal: FormBuilderValues, oldVal: FormBuilderValues) {
+    hasChanged(newVal: FormBuilderValue, oldVal: FormBuilderValue) {
       return JSON.stringify(newVal) !== JSON.stringify(oldVal);
     },
   })
-  values!: FormBuilderValues;
+  value?: FormBuilderValue;
 
-  /**
-   * Internal state of formbuilder
-   */
-  state!: FormBuilderState;
-
-  /**
-   * form reference
-   */
-  formRef!: Ref<HTMLFormElement>;
-
-  protected groups: InternalFormBuilderGroup[] = [];
-
-  /**
-   * holds name of last deleted group
-   */
-  @state()
-  updateTriggerId: string | undefined = undefined;
-
-  /**
-   *
-   * @param changedProperties lifecycle hook is called before render
-   */
-  willUpdate(changedProperties: PropertyValues<this>) {
-    /**
-     * re-calculate groups only if following properties are changed
-     */
-    if (
-      changedProperties.has("config") ||
-      changedProperties.has("values") ||
-      changedProperties.has("updateTriggerId")
-    ) {
-      /**
-       * reset groups array
-       */
-      this.groups = [];
-      this.updateTriggerId = undefined;
-
-      /**
-       * check given group config add it to groups array
-       */
-
-      try {
-        Object.entries(this.config.groups).forEach(
-          ([groupName, groupConfig], idx) => {
-            this.groups[idx] = { name: groupName, ...groupConfig };
-            Object.entries(this.groups[idx].fields).forEach(
-              ([_fieldName, fieldConfig]) => {
-                fieldConfig.valueIdx = 0;
-              }
-            );
-          }
-        );
-      } catch (e) {
-        console.error("No groups specified", e);
-      }
-      try {
-        Object.entries(this.values).forEach(([groupName, fieldValues]) => {
-          if (this.config.groups[groupName].type === "array") {
-            for (let d = 1; d < (fieldValues as unknown[]).length; d++) {
-              this.duplicateGroup(groupName, d);
-            }
-          }
-        });
-      } catch (e) {
-        console.warn("No values given");
-      }
-    }
-
-    if (changedProperties.has("config")) {
-      if (this.config.groups && !this.config.groups.__isProxy) {
-        this.config.groups = new Proxy(
-          this.config.groups,
-          getGroupsProxy(this)
-        );
-      }
-    }
-    super.willUpdate(changedProperties);
-  }
+  fieldRef!: Ref<FFormInputElements>;
 
   render() {
-    /**
-     * Reset state when render called
-     */
-    this.resetState();
-    return this.groups.length % 2
-      ? html`${this.renderGroups()}`
-      : html`${this.renderGroups()}`;
-  }
-  /**
-   * resetting internal state
-   */
-  resetState() {
-    this.state = {
-      isChanged: false,
-      errors: {},
-      refs: {},
-      helperTexts: {},
-      rules: {},
-      showFunctions: new Map(),
-      suffixFunctions: new Map(),
-      get isValid() {
-        return isEmptyObject(this.errors);
-      },
-    };
+    this.fieldRef = createRef();
+
+    return html`
+      <f-div direction="column" width="100%" gap="medium">
+        ${fieldRenderer[checkFieldType(this.field.type)](
+          "root",
+          this.field,
+          this.fieldRef
+        )}
+        <slot></slot>
+      </f-div>
+    `;
   }
 
   /**
@@ -177,37 +62,35 @@ export class FFormBuilder extends FRoot {
     _changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
   ): void {
     super.updated(_changedProperties);
-    Object.entries(this.state.refs).forEach(([name, element]) => {
-      const inputElement = element.value as FFormInputElements;
 
-      this.bindValues(inputElement, name);
-
-      this.bindValidation(inputElement, name);
-    });
-
-    this.checkAllShowConditions();
-    this.checkSuffixConditions();
     setTimeout(async () => {
       await this.updateComplete;
-      this.validateForm(true);
-      this.emitStateChange();
+      const ref = this.fieldRef;
+
+      if (ref.value && this.value) {
+        ref.value.value = this.value;
+
+        ref.value.requestUpdate();
+      }
+      if (ref.value) {
+        ref.value.oninput = (event: Event) => {
+          event.stopPropagation();
+          if (!this.value) {
+            this.value = {};
+          }
+          this.value = ref.value?.value;
+          this.dispatchInputEvent();
+        };
+      }
     }, 100);
   }
 
-  duplicateGroup = duplicateGroup;
-  validateForm = validateForm;
-  validateField = validateField;
-  bindValidation = bindValidation;
-  renderFields = renderFields;
-  renderGroups = renderGroups;
-  removeGroup = removeGroup;
-  handleGroupDuplicate = handleGroupDuplicate;
-  checkSubmit = checkSubmit;
-  checkSuffixConditions = checkSuffixConditions;
-  checkAllShowConditions = checkAllShowConditions;
-  submit = submit;
-  onSubmit = onSubmit;
-  handleFormChange = handleFormChange;
-  bindValues = bindValues;
-  emitStateChange = emitStateChange;
+  dispatchInputEvent() {
+    const input = new CustomEvent("input", {
+      detail: this.value,
+      bubbles: true,
+      composed: true,
+    });
+    this.dispatchEvent(input);
+  }
 }

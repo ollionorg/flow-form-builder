@@ -11,7 +11,7 @@ export default function (
   _field: FormBuilderField,
   fieldRef: Ref<FFormInputElements>
 ) {
-  const field = _field as FormBuilderTextAreaField & { valueIdx?: number };
+  const field = _field as FormBuilderTextAreaField;
   return html`
     <f-text-area
       name=${name}
@@ -22,7 +22,6 @@ export default function (
       ?clear=${field?.clear ?? true}
       ?read-only=${field?.readonly ?? false}
       ?resizable=${field?.resizable ?? false}
-      data-value-idx=${field.valueIdx}
       rows=${ifDefined(field?.rows)}
       @click=${ifDefined(field.onClick)}
       @focus=${ifDefined(field.onFocus)}

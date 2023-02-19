@@ -11,13 +11,12 @@ export default function (
   _field: FormBuilderField,
   fieldRef: Ref<FFormInputElements>
 ) {
-  const field = _field as FormBuilderSwitchField & { valueIdx?: number };
+  const field = _field as FormBuilderSwitchField;
   return html`
     <f-switch
       name=${name}
       ${ref(fieldRef)}
       state=${ifDefined(field.state)}
-      data-value-idx=${field.valueIdx}
       ?disabled=${field.disabled ?? false}
       @click=${ifDefined(field.onClick)}
       @focus=${ifDefined(field.onFocus)}

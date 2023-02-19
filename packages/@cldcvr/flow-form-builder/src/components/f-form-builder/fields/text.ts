@@ -11,7 +11,7 @@ export default function (
   _field: FormBuilderField,
   fieldRef: Ref<FFormInputElements>
 ) {
-  const field = _field as FormBuilderTextInputField & { valueIdx?: number };
+  const field = _field as FormBuilderTextInputField;
   return html`
     <f-input
       name=${name}
@@ -25,7 +25,6 @@ export default function (
       suffix=${ifDefined(field?.suffix)}
       state=${ifDefined(field?.state)}
       max-length=${ifDefined(field?.maxLength)}
-      data-value-idx=${field.valueIdx}
       ?loading=${field?.loading ?? false}
       ?disabled=${field?.disabled ?? false}
       ?clear=${field?.clear ?? true}

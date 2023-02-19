@@ -1,49 +1,11 @@
-import { TemplateResult } from "lit";
+import { LitElement, TemplateResult } from "lit";
 import { Ref } from "lit-html/directives/ref.js";
 import {
   FButtonState,
-  FCheckbox,
   FIconButtonState,
-  FInput,
-  FRadio,
-  FSelect,
   FSelectOptions,
-  FSwitch,
-  FTextArea,
 } from "@cldcvr/flow-core";
-import { FCheckboxGroup } from "../../f-checkbox-group/f-checkbox-group";
 import { BetweenParams } from "../validation-rules/between";
-import { FFormArray } from "src/components/f-form-array/f-form-array";
-
-export type FormBuilderConfig = {
-  gap?: "small" | "medium" | "large" | "x-small";
-  variant?: "round" | "curved" | "block";
-  category?: "fill" | "transparent" | "outline";
-  groupSeparator?: boolean;
-  fieldSize?: "small" | "medium";
-  label?: FormBuilderLabel;
-  groups: Record<string, FormBuilderGroup>;
-};
-
-export type FormBuilderBaseGroup = {
-  direction?: "vertical" | "horizontal";
-  gap?: "small" | "medium" | "large" | "x-small";
-  variant?: "normal" | "compact";
-  isCollapsible?: boolean;
-  isCollapsed?: boolean;
-  label?: FormBuilderLabel;
-  fields: Record<string, FormBuilderField>;
-  showWhen?: FormBuilderShowCondition;
-};
-
-export type FormBuilderArrayGroup = FormBuilderBaseGroup & {
-  type: "array";
-  canDuplicate?: boolean;
-};
-export type FormBuilderObjectGroup = FormBuilderBaseGroup & {
-  type: "object";
-};
-export type FormBuilderGroup = FormBuilderArrayGroup | FormBuilderObjectGroup;
 
 export type FormBuilderFieldEvents = {
   onClick?: (event: PointerEvent) => void;
@@ -186,7 +148,7 @@ export type FormBuilderField =
   | FormBuilderArrayField
   | FormBuilderObjectField; // add other field types
 
-export type FormBuilderShowCondition = (values: FormBuilderValues) => boolean;
+export type FormBuilderShowCondition = (value: FormBuilderValue) => boolean;
 
 export type FormBuilderSuffixCondition = (value: string) => boolean;
 
@@ -240,39 +202,10 @@ export type FormBuilderGenericValidationRule =
   | FormBuilderValidationBetweenRule;
 export type FormBuilderValidationRules = FormBuilderGenericValidationRule[];
 
-export type FormBuilderState = {
-  isValid: boolean;
-  isChanged: boolean;
-  errors: Record<string, string>;
-  refs: Record<string, Ref<FFormInputElements>>;
-  helperTexts: Record<string, string | undefined>;
-  rules: Record<string, FormBuilderValidationRules | undefined>;
-  showFunctions: Map<Ref<HTMLElement>, FormBuilderShowCondition>;
-  suffixFunctions?: Map<Ref<HTMLElement>, FomrBuilderSuffixStateObject>;
-};
-
 export type FomrBuilderSuffixStateObject = {
   suffixFunction?: FormBuilderSuffixCondition;
   suffix?: string;
 };
-export type FormBuilderObjectGroupValues = Record<
-  string,
-  Record<
-    string,
-    string | string[] | number | number[] | unknown | unknown[] | undefined
-  >
->;
-
-export type FormBuilderArrayGroupValues = Record<
-  string,
-  Record<
-    string,
-    string | string[] | number | number[] | unknown | unknown[] | undefined
-  >[]
->;
-export type FormBuilderValues =
-  | FormBuilderObjectGroupValues
-  | FormBuilderArrayGroupValues;
 
 export type FormBuilderFieldRenderFunction = (
   name: string,
@@ -281,16 +214,14 @@ export type FormBuilderFieldRenderFunction = (
   params?: Record<string, unknown>
 ) => TemplateResult;
 
-export type FFormInputElements =
-  | FInput
-  | FCheckbox
-  | FRadio
-  | FSwitch
-  | FTextArea
-  | FSelect
-  | FCheckboxGroup
-  | FFormArray;
-export type InternalFormBuilderGroup = FormBuilderGroup & {
-  name: string;
-  fields: Record<string, FormBuilderField & { valueIdx?: number }>;
-};
+export type FFormInputElements = {
+  value: FormBuilderValue;
+} & LitElement;
+
+export type FormBuilderValue =
+  | Record<string, unknown>
+  | Record<string, unknown>[]
+  | string[]
+  | string
+  | number
+  | number[];
