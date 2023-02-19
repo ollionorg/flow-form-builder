@@ -6,6 +6,7 @@ import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import {
   FFormInputElements,
   FormBuilderArrayField,
+  FormBuilderValidationPromise,
   FormBuilderValue,
 } from "../f-form-builder/mixins/types";
 import fieldRenderer, { checkFieldType } from "../f-form-builder/fields";
@@ -38,7 +39,12 @@ export class FFormArray extends FRoot {
   /**
    * @attribute value
    */
-  @property({ type: Object })
+  @property({
+    type: Object,
+    hasChanged(newVal: ArrayValueType, oldVal: ArrayValueType) {
+      return JSON.stringify(newVal) !== JSON.stringify(oldVal);
+    },
+  })
   value!: ArrayValueType;
 
   @property({ reflect: true, type: String })
@@ -76,13 +82,13 @@ export class FFormArray extends FRoot {
           ${i === 0
             ? html` <f-icon-button
                 icon="i-plus"
-                size="small"
+                size="x-small"
                 state="neutral"
                 @click=${this.addField}
               />`
             : html` <f-icon-button
                 icon="i-minus"
-                size="small"
+                size="x-small"
                 state="danger"
                 @click=${() => {
                   this.removeField(i);
@@ -147,6 +153,28 @@ export class FFormArray extends FRoot {
     </f-div>`;
   }
 
+  async validate() {
+    const fieldConfig = this.config.field;
+    const allValidations: FormBuilderValidationPromise[] = [];
+    this.fieldRefs.forEach(async (fieldRef) => {
+      if (
+        (fieldConfig.type === "object" || fieldConfig.type === "array") &&
+        fieldRef.value
+      ) {
+        allValidations.push((fieldRef.value as FFormInputElements).validate());
+      } else {
+        allValidations.push(
+          validateField(
+            this.config.field,
+            fieldRef.value as FFormInputElements,
+            false
+          )
+        );
+      }
+    });
+
+    return Promise.all(allValidations);
+  }
   /**
    * updated hook of lit element
    * @param _changedProperties

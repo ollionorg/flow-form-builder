@@ -2,11 +2,13 @@ import {
   FFormInputElements,
   FormBuilderField,
   FormBuilderGenericValidationRule,
+  FormBuilderValidationPromise,
   FormBuilderValidationRules,
 } from "./types";
 
 import rules from "./../validation-rules";
 import defaultMessages from "./../default-validation-messages";
+import { FButton, FIconButton } from "@cldcvr/flow-core";
 
 export default function validate(
   value: string,
@@ -15,17 +17,20 @@ export default function validate(
 ) {
   let result = true;
   let message = null;
+  let rule!: FormBuilderGenericValidationRule["name"];
   if (elementRules) {
     for (const r of elementRules) {
       if (r.name !== "custom") {
         result = rules[r.name](value, r.params);
         if (!result) {
+          rule = r.name;
           message = getValidationMessage(r, { name, value });
           break;
         }
       } else {
         result = r.validate(value, r.params);
         if (!result) {
+          rule = r.name;
           message = getValidationMessage(r, { name, value });
           break;
         }
@@ -36,6 +41,8 @@ export default function validate(
   return {
     result,
     message,
+    rule,
+    name,
   };
 }
 
@@ -70,19 +77,19 @@ function getValidationMessage(
   }
 }
 
-export function validateField(
+export async function validateField(
   field: FormBuilderField,
   element: FFormInputElements,
   silent = false,
   filter?: (r: FormBuilderGenericValidationRule) => boolean
-) {
+): FormBuilderValidationPromise {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
   const rulesToValidate = field.validationRules?.filter(
     filter ? filter : () => true
   );
 
-  const { result, message } = validate(
+  const { result, message, rule, name } = validate(
     (element.value as string) ?? "",
     rulesToValidate as FormBuilderValidationRules,
     element.getAttribute("name") ?? "This"
@@ -101,8 +108,12 @@ export function validateField(
       const child = element.children[element.children.length - 1];
       child.remove();
     }
-    element.state = "default";
+
+    if (!(element instanceof FButton) && !(element instanceof FIconButton)) {
+      element.state = "default";
+    }
   }
+  return { result, message, rule, name };
 }
 
 function updateMessage(element: HTMLElement, message: string) {

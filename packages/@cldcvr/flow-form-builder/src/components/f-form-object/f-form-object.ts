@@ -9,6 +9,7 @@ import { createRef, Ref } from "lit/directives/ref.js";
 import {
   FFormInputElements,
   FormBuilderObjectField,
+  FormBuilderValidationPromise,
   FormBuilderValue,
 } from "../f-form-builder/mixins/types";
 import { validateField } from "../f-form-builder/mixins/validator";
@@ -88,6 +89,31 @@ export class FFormObject extends FRoot {
           >`
         : html`<slot name="help"></slot>`}
     </f-div>`;
+  }
+
+  async validate() {
+    const allValidations: FormBuilderValidationPromise[] = [];
+    Object.entries(this.config.fields).forEach(
+      async ([fieldname, fieldConfig]) => {
+        if (
+          (fieldConfig.type === "object" || fieldConfig.type === "array") &&
+          this.fieldRefs[fieldname].value
+        ) {
+          allValidations.push(
+            (this.fieldRefs[fieldname].value as FFormInputElements).validate()
+          );
+        } else {
+          allValidations.push(
+            validateField(
+              fieldConfig,
+              this.fieldRefs[fieldname].value as FFormInputElements,
+              false
+            )
+          );
+        }
+      }
+    );
+    return Promise.all(allValidations);
   }
 
   /**

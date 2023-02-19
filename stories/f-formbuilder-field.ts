@@ -113,6 +113,30 @@ const field: FormBuilderField = {
         },
       ],
     },
+    nestedObject: {
+      type: "object",
+      fields: {
+        username: {
+          type: "text",
+          validationRules: [{ name: "required" }],
+        },
+        email: {
+          type: "text",
+          validationRules: [{ name: "required" }, { name: "email" }],
+        },
+      },
+    },
+    nestedArray: {
+      type: "array",
+      field: {
+        type: "text",
+        validationRules: [
+          {
+            name: "required",
+          },
+        ],
+      },
+    },
     getButton: {
       type: "button",
       label: "get",

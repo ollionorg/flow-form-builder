@@ -217,8 +217,15 @@ export type FormBuilderFieldRenderFunction = (
 export type FFormInputElements = {
   value: FormBuilderValue;
   state?: "primary" | "default" | "success" | "warning" | "danger";
+  validate: () => FormBuilderValidationPromise;
 } & LitElement;
 
+export type FormBuilderValidationPromise = Promise<{
+  result: boolean;
+  message: string | null;
+  name: string;
+  rule: FormBuilderGenericValidationRule["name"];
+}>;
 export type FormBuilderValue =
   | Record<string, unknown>
   | Record<string, unknown>[]

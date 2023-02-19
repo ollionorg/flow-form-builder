@@ -4,6 +4,7 @@ import {
   FormBuilderField,
   FFormInputElements,
   FormBuilderValue,
+  FormBuilderValidationPromise,
 } from "./mixins/types";
 import eleStyle from "./f-form-builder.scss";
 
@@ -115,15 +116,15 @@ export class FFormBuilder extends FRoot {
   }
 
   submit(this: FFormBuilder) {
-    //this.validateForm();
-    // if (this.state.isValid) {
-    const event = new CustomEvent("submit", {
-      detail: this.value,
-      bubbles: true,
-      composed: true,
+    this.validateForm().then((all) => {
+      console.log(all);
+      const event = new CustomEvent("submit", {
+        detail: this.value,
+        bubbles: true,
+        composed: true,
+      });
+      this.dispatchEvent(event);
     });
-    this.dispatchEvent(event);
-    // }
   }
 
   /**
@@ -158,6 +159,26 @@ export class FFormBuilder extends FRoot {
     }, 100);
   }
 
+  async validateForm() {
+    const allValidations: FormBuilderValidationPromise[] = [];
+    if (
+      (this.field.type === "object" || this.field.type === "array") &&
+      this.fieldRef.value
+    ) {
+      allValidations.push(this.fieldRef.value.validate());
+    } else {
+      allValidations.push(
+        validateField(
+          this.field,
+          this.fieldRef.value as FFormInputElements,
+          false
+        )
+      );
+    }
+
+    return Promise.all(allValidations);
+  }
+
   dispatchInputEvent() {
     const input = new CustomEvent("input", {
       detail: this.value,
@@ -173,7 +194,7 @@ export class FFormBuilder extends FRoot {
     } catch (e) {
       /**
        * Nothing to worry!
-       * catching weird lit error while disconnecting in storybook stories
+       * catching weird lit error while disconnected hook in storybook stories
        */
     }
   }

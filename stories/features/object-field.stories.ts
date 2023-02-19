@@ -28,16 +28,11 @@ const sampleFormBuilder: SampleFormBuilder = {
       iconTooltip: "Simple object with 2 fields `firstname` & `lastname` ",
     },
     fields: {
-      username: {
-        type: "object",
-        fields: {
-          firstname: {
-            type: "text",
-          },
-          lastname: {
-            type: "text",
-          },
-        },
+      firstname: {
+        type: "text",
+      },
+      lastname: {
+        type: "text",
       },
     },
   },
@@ -78,9 +73,7 @@ export const basic = Template.bind({});
 basic.args = {
   field: sampleFormBuilder.field,
   value: {
-    username: {
-      firstname: "Tony",
-      lastname: "Stark",
-    },
+    firstname: "Tony",
+    lastname: "Stark",
   },
 };

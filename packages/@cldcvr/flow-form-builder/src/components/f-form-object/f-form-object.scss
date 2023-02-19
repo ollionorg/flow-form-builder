@@ -8,3 +8,8 @@
   flex: 1 0 auto;
   width: unset;
 }
+f-div[direction="column"] {
+  f-form-object {
+    width: 100%;
+  }
+}
