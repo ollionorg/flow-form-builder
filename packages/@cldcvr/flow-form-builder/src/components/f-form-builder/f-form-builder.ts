@@ -9,8 +9,10 @@ import eleStyle from "./f-form-builder.scss";
 
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
-import { Ref, createRef } from "lit/directives/ref.js";
+import { Ref, createRef, ref } from "lit/directives/ref.js";
 import fieldRenderer, { checkFieldType } from "./fields";
+import { validateField } from "./mixins/validator";
+import { FForm } from "@cldcvr/flow-core";
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
@@ -18,6 +20,12 @@ export class FFormBuilder extends FRoot {
    * css loaded from scss file
    */
   static styles = [unsafeCSS(flowCoreCSS), unsafeCSS(eleStyle)];
+
+  /**
+   * @attribute formbuilder name
+   */
+  @property({ type: String, reflect: true })
+  name!: string;
 
   /**
    * @attribute formbuilder config
@@ -37,21 +45,85 @@ export class FFormBuilder extends FRoot {
   })
   value?: FormBuilderValue;
 
+  /**
+   * @attribute Controls size of all input elements within the form
+   */
+  @property({ reflect: true, type: String })
+  size?: "medium" | "small" = "medium";
+
+  /**
+   * @attribute Variants are various visual representations of all elements inside form.
+   */
+  @property({ reflect: true, type: String })
+  variant?: "curved" | "round" | "block" = "curved";
+
+  /**
+   * @attribute Categories are various visual representations of all elements inside form.
+   */
+  @property({ reflect: true, type: String })
+  category?: "fill" | "outline" | "transparent" = "fill";
+
+  /**
+   * @attribute Gap is used to define the gap between the elements
+   */
+  @property({ reflect: true, type: String })
+  gap?: "large" | "medium" | "small" | "x-small" = "medium";
+
+  /**
+   * @attribute group separator
+   */
+  @property({ reflect: true, type: Boolean })
+  separator?: boolean = false;
+
   fieldRef!: Ref<FFormInputElements>;
+  formRef!: Ref<FForm>;
 
   render() {
     this.fieldRef = createRef();
 
     return html`
-      <f-div direction="column" width="100%" gap="medium">
+      <f-form
+        name="sampleForm"
+        @submit=${this.onSubmit}
+        ${ref(this.formRef)}
+        size=${this.size}
+        category=${this.category}
+        variant=${this.variant}
+        ?separator=${this.separator}
+        gap=${this.gap}
+      >
         ${fieldRenderer[checkFieldType(this.field.type)](
-          "root",
+          this.name,
           this.field,
           this.fieldRef
         )}
-        <slot></slot>
-      </f-div>
+        <slot @click=${this.checkSubmit}></slot>
+      </f-form>
     `;
+  }
+
+  checkSubmit(event: MouseEvent) {
+    if ((event.target as HTMLElement).getAttribute("type") === "submit") {
+      this.submit();
+    }
+  }
+
+  onSubmit(event: SubmitEvent) {
+    event.stopPropagation();
+    event.preventDefault();
+    this.submit();
+  }
+
+  submit(this: FFormBuilder) {
+    //this.validateForm();
+    // if (this.state.isValid) {
+    const event = new CustomEvent("submit", {
+      detail: this.value,
+      bubbles: true,
+      composed: true,
+    });
+    this.dispatchEvent(event);
+    // }
   }
 
   /**
@@ -62,7 +134,6 @@ export class FFormBuilder extends FRoot {
     _changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
   ): void {
     super.updated(_changedProperties);
-
     setTimeout(async () => {
       await this.updateComplete;
       const ref = this.fieldRef;
@@ -79,6 +150,8 @@ export class FFormBuilder extends FRoot {
             this.value = {};
           }
           this.value = ref.value?.value;
+
+          validateField(this.field, ref.value as FFormInputElements, false);
           this.dispatchInputEvent();
         };
       }
@@ -92,5 +165,16 @@ export class FFormBuilder extends FRoot {
       composed: true,
     });
     this.dispatchEvent(input);
+  }
+
+  disconnectedCallback(): void {
+    try {
+      super.disconnectedCallback();
+    } catch (e) {
+      /**
+       * Nothing to worry!
+       * catching weird lit error while disconnecting in storybook stories
+       */
+    }
   }
 }

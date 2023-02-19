@@ -216,6 +216,7 @@ export type FormBuilderFieldRenderFunction = (
 
 export type FFormInputElements = {
   value: FormBuilderValue;
+  state?: "primary" | "default" | "success" | "warning" | "danger";
 } & LitElement;
 
 export type FormBuilderValue =

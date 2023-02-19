@@ -11,6 +11,7 @@ import {
 import fieldRenderer, { checkFieldType } from "../f-form-builder/fields";
 import { createRef, Ref } from "lit/directives/ref.js";
 import { isEmptyArray } from "../f-form-builder/utils";
+import { validateField } from "../f-form-builder/mixins/validator";
 
 export type ArrayValueType = (
   | string
@@ -167,6 +168,13 @@ export class FFormArray extends FRoot {
             event.stopPropagation();
 
             this.value[idx] = ref.value?.value;
+
+            validateField(
+              this.config.field,
+              ref.value as FFormInputElements,
+              false
+            );
+
             this.dispatchInputEvent();
           };
         }

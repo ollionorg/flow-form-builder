@@ -33,21 +33,24 @@ const Template: Story<unknown> = (args: any) => {
   const fieldRef: Ref<HTMLElement> = createRef();
   const handleInput = (event: CustomEvent) => {
     if (fieldRef.value) {
-      fieldRef.value.innerHTML = JSON.stringify(event.detail);
+      fieldRef.value.innerHTML = JSON.stringify(event.detail, undefined, 8);
     }
   };
   return html`
-    <f-div padding="medium" direction="column" gap="large">
+    <f-div padding="medium" dicrection="column" gap="large">
       <f-form-builder
         .field=${args.field}
         .value=${args.value}
         @keydown=${handleKeydown}
         @input=${handleInput}
       >
-        <f-button label="submit" type="submit"></f-button>
+        <f-div>
+          <f-button label="submit" type="submit"></f-button>
+        </f-div>
       </f-form-builder>
-
-      <code><pre ${ref(fieldRef)}>${JSON.stringify(args.value)}</pre></code>
+      <f-div>
+        <pre ${ref(fieldRef)}>${JSON.stringify(args.value, undefined, 8)}</pre>
+      </f-div>
     </f-div>
   `;
 };

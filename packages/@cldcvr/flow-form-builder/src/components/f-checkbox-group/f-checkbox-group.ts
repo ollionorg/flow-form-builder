@@ -28,8 +28,14 @@ export class FCheckboxGroup extends FRoot {
   /**
    * @attribute Controls size of all input elements within the form
    */
-  @property({ reflect: true, type: Array })
-  value?: FCheckboxGroupValue = [];
+  @property({
+    reflect: true,
+    type: Array,
+    hasChanged(newVal: FCheckboxGroupValue, oldVal: FCheckboxGroupValue) {
+      return JSON.stringify(newVal) !== JSON.stringify(oldVal);
+    },
+  })
+  value?: FCheckboxGroupValue;
 
   /**
    * @attribute Decides the direction of the input elements within the group.
@@ -46,7 +52,8 @@ export class FCheckboxGroup extends FRoot {
   @property({ type: String, reflect: true })
   helperText?: string;
 
-  handleChange(id: string) {
+  handleChange(e: CustomEvent, id: string) {
+    e.stopPropagation();
     let tempValues =
       this.value && this.value?.length > 0 ? [...this.value] : [];
     if (this.isChecked(id) === "unchecked") {
@@ -84,7 +91,8 @@ export class FCheckboxGroup extends FRoot {
             (item) => html`
               <f-checkbox
                 .value=${this.isChecked(item.id)}
-                @input=${() => this.handleChange(item.id)}
+                @input=${(event: CustomEvent) =>
+                  this.handleChange(event, item.id)}
                 .state=${this.state}
               >
                 ${item?.title

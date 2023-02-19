@@ -11,6 +11,7 @@ import {
   FormBuilderObjectField,
   FormBuilderValue,
 } from "../f-form-builder/mixins/types";
+import { validateField } from "../f-form-builder/mixins/validator";
 
 export type ObjectValueType = Record<
   string,
@@ -32,7 +33,12 @@ export class FFormObject extends FRoot {
   /**
    * @attribute value
    */
-  @property({ type: Object })
+  @property({
+    type: Object,
+    hasChanged(newVal: ObjectValueType, oldVal: ObjectValueType) {
+      return JSON.stringify(newVal) !== JSON.stringify(oldVal);
+    },
+  })
   value!: ObjectValueType;
 
   @property({ reflect: true, type: String })
@@ -66,7 +72,7 @@ export class FFormObject extends FRoot {
         .direction=${this.config.direction}
         .variant=${this.config.variant}
         .label=${this.config.label}
-        gap=${this.config.gap ?? "small"}
+        gap=${this.config.gap ?? "medium"}
         .collapse=${this.config.isCollapsible ? "accordion" : "none"}
       >
         ${fieldTemplates}
@@ -99,7 +105,9 @@ export class FFormObject extends FRoot {
         if (ref.value && this.value) {
           ref.value.value = this.value[name] as FormBuilderValue;
 
-          ref.value.requestUpdate();
+          if (this.value[name]) {
+            ref.value.requestUpdate();
+          }
         }
         if (ref.value) {
           ref.value.oninput = (event: Event) => {
@@ -109,6 +117,12 @@ export class FFormObject extends FRoot {
             }
             this.value[name] = ref.value?.value;
             this.dispatchInputEvent();
+
+            validateField(
+              this.config.fields[name],
+              ref.value as FFormInputElements,
+              false
+            );
           };
         }
       });

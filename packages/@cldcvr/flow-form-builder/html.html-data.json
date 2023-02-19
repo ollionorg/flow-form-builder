@@ -32,7 +32,7 @@
         },
         {
           "name": "value",
-          "description": "`value` {`FCheckboxGroupValue | undefined`} - \n\nProperty: value\n\nDefault: ",
+          "description": "`value` {`FCheckboxGroupValue | undefined`} - \n\nProperty: value",
           "values": []
         },
         {
@@ -127,8 +127,12 @@
     },
     {
       "name": "f-form-builder",
-      "description": "Events:\n\n  * `input` {`CustomEvent<string | number | string[] | number[] | Record<string, unknown> | Record<string, unknown>[]>`} - \n\nAttributes:\n\n  * `field` {`FormBuilderField`} - \n\n  * `value` - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `field` {`FormBuilderField`} - \n\n  * `value` - \n\n  * `fieldRef` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `submit` {`CustomEvent<string | number | string[] | number[] | Record<string, unknown> | Record<string, unknown>[]>`} - \n\n  * `input` {`CustomEvent<string | number | string[] | number[] | Record<string, unknown> | Record<string, unknown>[]>`} - \n\nAttributes:\n\n  * `name` {`string`} - \n\n  * `field` {`FormBuilderField`} - \n\n  * `value` - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `variant` {`\"curved\" | \"round\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `separator` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `name` {`string`} - \n\n  * `field` {`FormBuilderField`} - \n\n  * `value` - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `variant` {`\"curved\" | \"round\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `separator` {`boolean | undefined`} - \n\n  * `fieldRef` - \n\n  * `formRef` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
+        {
+          "name": "name",
+          "description": "`name` {`string`} - \n\nProperty: name"
+        },
         {
           "name": "field",
           "description": "`field` {`FormBuilderField`} - \n\nProperty: field",
@@ -140,9 +144,78 @@
           "values": []
         },
         {
+          "name": "size",
+          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size\n\nDefault: medium",
+          "values": [
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            }
+          ]
+        },
+        {
+          "name": "variant",
+          "description": "`variant` {`\"curved\" | \"round\" | \"block\" | undefined`} - \n\nProperty: variant\n\nDefault: curved",
+          "values": [
+            {
+              "name": "curved"
+            },
+            {
+              "name": "round"
+            },
+            {
+              "name": "block"
+            }
+          ]
+        },
+        {
+          "name": "category",
+          "description": "`category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\nProperty: category\n\nDefault: fill",
+          "values": [
+            {
+              "name": "fill"
+            },
+            {
+              "name": "outline"
+            },
+            {
+              "name": "transparent"
+            }
+          ]
+        },
+        {
+          "name": "gap",
+          "description": "`gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\nProperty: gap\n\nDefault: medium",
+          "values": [
+            {
+              "name": "large"
+            },
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            },
+            {
+              "name": "x-small"
+            }
+          ]
+        },
+        {
+          "name": "separator",
+          "description": "`separator` {`boolean | undefined`} - \n\nProperty: separator\n\nDefault: false",
+          "values": []
+        },
+        {
           "name": "tooltip",
           "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
           "values": []
+        },
+        {
+          "name": "onsubmit",
+          "description": "`submit` {`CustomEvent<string | number | string[] | number[] | Record<string, unknown> | Record<string, unknown>[]>`} - "
         },
         {
           "name": "oninput",
