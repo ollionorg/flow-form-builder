@@ -2,7 +2,7 @@ import { html } from "lit";
 import {
   FFormInputElements,
   FormBuilderField,
-  FormBuilderArrayField,
+  FormBuilderObjectField,
 } from "../mixins/types";
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
@@ -11,9 +11,9 @@ export default function (
   _field: FormBuilderField,
   fieldRef: Ref<FFormInputElements>
 ) {
-  const field = _field as FormBuilderArrayField;
+  const field = _field as FormBuilderObjectField;
   return html`
-    <f-form-array
+    <f-form-object
       name=${name}
       ${ref(fieldRef)}
       .config=${field}
@@ -26,6 +26,6 @@ export default function (
       @keyup=${ifDefined(field.onKeyUp)}
       @mouseover=${ifDefined(field.onMouseOver)}
     >
-    </f-form-array>
+    </f-form-object>
   `;
 }

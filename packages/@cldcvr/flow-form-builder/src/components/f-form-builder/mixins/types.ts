@@ -71,6 +71,15 @@ export type FormBuilderArrayField = FormBuilderBaseField & {
   type: "array";
   field: FormBuilderField;
 };
+export type FormBuilderObjectField = FormBuilderBaseField & {
+  type: "object";
+  direction?: "vertical" | "horizontal";
+  gap?: "small" | "medium" | "large" | "x-small";
+  variant?: "normal" | "compact";
+  isCollapsible?: boolean;
+  isCollapsed?: boolean;
+  fields: Record<string, FormBuilderField>;
+};
 // text input type field
 export type FormBuilderTextInputField = FormBuilderBaseField & {
   type: "text" | "email" | "password" | "url" | "tel" | "number";
@@ -174,7 +183,8 @@ export type FormBuilderField =
   | FormBuilderSelectField
   | FormBuilderButtonField
   | FormBuilderIconButtonField
-  | FormBuilderArrayField; // add other field types
+  | FormBuilderArrayField
+  | FormBuilderObjectField; // add other field types
 
 export type FormBuilderShowCondition = (values: FormBuilderValues) => boolean;
 

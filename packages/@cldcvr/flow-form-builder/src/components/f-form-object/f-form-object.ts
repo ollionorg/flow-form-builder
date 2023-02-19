@@ -1,29 +1,25 @@
-import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { html, PropertyValueMap, TemplateResult, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
-import eleStyle from "./f-form-array.scss";
+import eleStyle from "./f-form-object.scss";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
-import {
-  FFormInputElements,
-  FormBuilderArrayField,
-} from "../f-form-builder/mixins/types";
+
 import fieldRenderer, { checkFieldType } from "../f-form-builder/fields";
 import { createRef, Ref } from "lit/directives/ref.js";
-import { isEmptyArray } from "../f-form-builder/utils";
+import {
+  FFormInputElements,
+  FormBuilderObjectField,
+} from "../f-form-builder/mixins/types";
 import { FSelectOptions } from "@cldcvr/flow-core";
 import { FCheckboxGroupValue } from "../f-checkbox-group/f-checkbox-group";
+import { ArrayValueType } from "../f-form-array/f-form-array";
 
-export type ArrayValueType = (
-  | string
-  | string[]
-  | number
-  | number[]
-  | unknown
-  | unknown[]
-  | undefined
-)[];
-@customElement("f-form-array")
-export class FFormArray extends FRoot {
+export type ObjectValueType = Record<
+  string,
+  string | string[] | number | number[] | unknown | unknown[] | undefined
+>;
+@customElement("f-form-object")
+export class FFormObject extends FRoot {
   /**
    * css loaded from scss file
    */
@@ -33,64 +29,39 @@ export class FFormArray extends FRoot {
    * @attribute comments baout title
    */
   @property({ type: Object })
-  config!: FormBuilderArrayField;
+  config!: FormBuilderObjectField;
 
   /**
    * @attribute value
    */
   @property({ type: Object })
-  value!: ArrayValueType;
+  value!: ObjectValueType;
 
   @property({ reflect: true, type: String })
   state?: "primary" | "default" | "success" | "warning" | "danger" = "default";
 
-  fieldRefs: Ref<FFormInputElements>[] = [];
+  fieldRefs: Record<string, Ref<FFormInputElements>> = {};
 
   render() {
-    this.fieldRefs = [];
-
-    let valueCount = 1;
-
-    if (this.value && !isEmptyArray(this.value)) {
-      valueCount = this.value.length;
-    } else {
-      this.value = [null];
-    }
-
-    return html`${this.buildFields(valueCount)}`;
+    return html`${this.buildFields()}`;
   }
 
-  buildFields(valueCount: number) {
-    const fieldTemplates = [];
-    for (let i = 0; i < valueCount; i++) {
+  buildFields() {
+    const fieldTemplates: TemplateResult[] = [];
+    Object.entries(this.config.fields).forEach(([fieldname, fieldConfig]) => {
       const fieldRef: Ref<FFormInputElements> = createRef();
 
-      this.fieldRefs.push(fieldRef);
+      this.fieldRefs[fieldname] = fieldRef;
       fieldTemplates.push(
-        html` <f-div gap="small" overflow="scroll"
-          >${fieldRenderer[checkFieldType(this.config.field.type)](
-            this.getAttribute("name") as string,
-            this.config.field,
+        html`
+          ${fieldRenderer[checkFieldType(fieldConfig.type)](
+            fieldname,
+            fieldConfig,
             fieldRef
           )}
-          ${i === 0
-            ? html` <f-icon-button
-                icon="i-plus"
-                size="small"
-                state="neutral"
-                @click=${this.addField}
-              />`
-            : html` <f-icon-button
-                icon="i-minus"
-                size="small"
-                state="danger"
-                @click=${() => {
-                  this.removeField(i);
-                }}
-              />`}
-        </f-div>`
+        `
       );
-    }
+    });
 
     return html` <f-div gap="small" direction="column" width="100%">
       ${this.config.label
@@ -132,8 +103,15 @@ export class FFormArray extends FRoot {
               : ""}
           </f-div>`
         : ``}
-
-      <f-div gap="small" direction="column"> ${fieldTemplates} </f-div>
+      <f-form-group
+        .direction=${this.config.direction}
+        .variant=${this.config.variant}
+        .label=${this.config.label}
+        gap=${this.config.gap ?? "small"}
+        .collapse=${this.config.isCollapsible ? "accordion" : "none"}
+      >
+        ${fieldTemplates}
+      </f-form-group>
 
       ${this.config.helperText
         ? html`<f-text
@@ -158,21 +136,24 @@ export class FFormArray extends FRoot {
     setTimeout(async () => {
       await this.updateComplete;
 
-      this.fieldRefs.forEach((ref, idx) => {
+      Object.entries(this.fieldRefs).forEach(([name, ref]) => {
         if (ref.value && this.value) {
-          ref.value.value = this.value[idx] as
+          ref.value.value = this.value[name] as
             | string
-            | ArrayValueType
             | FSelectOptions
             | FCheckboxGroupValue
+            | ArrayValueType
             | undefined;
+
           ref.value.requestUpdate();
         }
         if (ref.value) {
           ref.value.oninput = (event: Event) => {
             event.stopPropagation();
-
-            this.value[idx] = ref.value?.value;
+            if (!this.value) {
+              this.value = {};
+            }
+            this.value[name] = ref.value?.value;
             this.dispatchInputEvent();
           };
         }
@@ -180,17 +161,6 @@ export class FFormArray extends FRoot {
     }, 100);
   }
 
-  addField() {
-    this.value.push(null);
-    this.dispatchInputEvent();
-    this.requestUpdate();
-  }
-
-  removeField(idx: number) {
-    this.value.splice(idx, 1);
-    this.dispatchInputEvent();
-    this.requestUpdate();
-  }
   dispatchInputEvent() {
     const input = new CustomEvent("input", {
       detail: this.value,

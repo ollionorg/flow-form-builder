@@ -8,6 +8,7 @@ import { FormBuilderFieldRenderFunction } from "../mixins/types";
 import textarea from "./textarea";
 import iconButton from "./icon-button";
 import array from "./array";
+import object from "./object";
 
 const all: Record<string, FormBuilderFieldRenderFunction> = {
   text,
@@ -18,6 +19,7 @@ const all: Record<string, FormBuilderFieldRenderFunction> = {
   select,
   button,
   array,
+  object,
   ["icon-button"]: iconButton,
 };
 
