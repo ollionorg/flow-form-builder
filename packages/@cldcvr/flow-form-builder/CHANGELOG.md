@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.1.3] - 2023-02-20
+
+### Bug Fix
+
+- setting reflect false on value prop of formbuilder
+
 ## [1.1.2] - 2023-02-20
 
 ### Bug Fix

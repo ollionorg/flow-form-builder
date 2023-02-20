@@ -42,12 +42,9 @@ export class FFormBuilder extends FRoot {
 	 */
 	@property({
 		type: Object,
-		reflect: false,
-		hasChanged(newVal: FormBuilderValue, oldVal: FormBuilderValue) {
-			return JSON.stringify(newVal) !== JSON.stringify(oldVal);
-		}
+		reflect: false
 	})
-	value?: FormBuilderValue;
+	value!: FormBuilderValue;
 
 	/**
 	 * @attribute Controls size of all input elements within the form
@@ -167,7 +164,7 @@ export class FFormBuilder extends FRoot {
 					if (!this.value) {
 						this.value = {};
 					}
-					this.value = ref.value?.value;
+					this.value = ref.value?.value as FormBuilderValue;
 					this.state.isChanged = true;
 					validateField(this.field, ref.value as FFormInputElements, false);
 					await this.validateForm(true).then(all => {
