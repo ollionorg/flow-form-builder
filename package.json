@@ -27,6 +27,7 @@
   ],
   "devDependencies": {
     "@changesets/cli": "^2.25.0",
+    "@cldcvr/prettier-config": "^1.0.3",
     "@storybook/addon-actions": "^6.5.7",
     "@storybook/addon-essentials": "^6.5.7",
     "@storybook/addon-links": "^6.5.7",

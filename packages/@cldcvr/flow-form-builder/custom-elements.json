@@ -503,7 +503,7 @@
               "type": {
                 "text": "FormBuilderState"
               },
-              "default": "{\n    get isValid() {\n      return this.errors?.length === 0;\n    },\n    isChanged: false,\n  }"
+              "default": "{\n\t\tget isValid() {\n\t\t\treturn this.errors?.length === 0;\n\t\t},\n\t\tisChanged: false\n\t}"
             },
             {
               "kind": "method",
@@ -565,7 +565,8 @@
             },
             {
               "kind": "method",
-              "name": "dispatchInputEvent"
+              "name": "dispatchInputEvent",
+              "description": "dispatching form-builder input event"
             },
             {
               "kind": "method",
@@ -1122,7 +1123,7 @@
           "type": {
             "text": "Record<string, string>"
           },
-          "default": "{\n  required: \"{{name}} is required field\",\n  email: \"{{name}} is not a valid email address\",\n  between: \"{{name}} must be between {{min}} and {{max}}\",\n}"
+          "default": "{\n\trequired: \"{{name}} is required field\",\n\temail: \"{{name}} is not a valid email address\",\n\tbetween: \"{{name}} must be between {{min}} and {{max}}\"\n}"
         }
       ],
       "exports": [
@@ -1356,7 +1357,7 @@
           "type": {
             "text": "Record<string, FormBuilderFieldRenderFunction>"
           },
-          "default": "{\n  text,\n  checkbox,\n  textarea,\n  radio,\n  switchButton,\n  select,\n  button,\n  array,\n  object,\n  [\"icon-button\"]: iconButton,\n}"
+          "default": "{\n\ttext,\n\tcheckbox,\n\ttextarea,\n\tradio,\n\tswitchButton,\n\tselect,\n\tbutton,\n\tarray,\n\tobject,\n\t[\"icon-button\"]: iconButton\n}"
         },
         {
           "kind": "function",

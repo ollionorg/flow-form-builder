@@ -1,12 +1,12 @@
 import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import {
-  FormBuilderField,
-  FFormInputElements,
-  FormBuilderValue,
-  FormBuilderValidationPromise,
-  ValidationResults,
-  FormBuilderState,
+	FormBuilderField,
+	FFormInputElements,
+	FormBuilderValue,
+	FormBuilderValidationPromise,
+	ValidationResults,
+	FormBuilderState
 } from "./mixins/types";
 import eleStyle from "./f-form-builder.scss";
 
@@ -19,217 +19,207 @@ import { FForm } from "@cldcvr/flow-core";
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
-  /**
-   * css loaded from scss file
-   */
-  static styles = [unsafeCSS(flowCoreCSS), unsafeCSS(eleStyle)];
+	/**
+	 * css loaded from scss file
+	 */
+	static styles = [unsafeCSS(flowCoreCSS), unsafeCSS(eleStyle)];
 
-  /**
-   * @attribute formbuilder name
-   */
-  @property({ type: String, reflect: true })
-  name!: string;
+	/**
+	 * @attribute formbuilder name
+	 */
+	@property({ type: String, reflect: true })
+	name!: string;
 
-  /**
-   * @attribute formbuilder config
-   */
-  @property({ type: Object, reflect: false })
-  field!: FormBuilderField;
+	/**
+	 * @attribute formbuilder config
+	 */
+	@property({ type: Object, reflect: false })
+	field!: FormBuilderField;
 
-  /**
-   * @attribute key value pair of values
-   */
-  @property({
-    type: Object,
-    reflect: true,
-    hasChanged(newVal: FormBuilderValue, oldVal: FormBuilderValue) {
-      return JSON.stringify(newVal) !== JSON.stringify(oldVal);
-    },
-  })
-  value?: FormBuilderValue;
+	/**
+	 * @attribute key value pair of values
+	 */
+	@property({
+		type: Object,
+		reflect: true,
+		hasChanged(newVal: FormBuilderValue, oldVal: FormBuilderValue) {
+			return JSON.stringify(newVal) !== JSON.stringify(oldVal);
+		}
+	})
+	value?: FormBuilderValue;
 
-  /**
-   * @attribute Controls size of all input elements within the form
-   */
-  @property({ reflect: true, type: String })
-  size?: "medium" | "small" = "medium";
+	/**
+	 * @attribute Controls size of all input elements within the form
+	 */
+	@property({ reflect: true, type: String })
+	size?: "medium" | "small" = "medium";
 
-  /**
-   * @attribute Variants are various visual representations of all elements inside form.
-   */
-  @property({ reflect: true, type: String })
-  variant?: "curved" | "round" | "block" = "curved";
+	/**
+	 * @attribute Variants are various visual representations of all elements inside form.
+	 */
+	@property({ reflect: true, type: String })
+	variant?: "curved" | "round" | "block" = "curved";
 
-  /**
-   * @attribute Categories are various visual representations of all elements inside form.
-   */
-  @property({ reflect: true, type: String })
-  category?: "fill" | "outline" | "transparent" = "fill";
+	/**
+	 * @attribute Categories are various visual representations of all elements inside form.
+	 */
+	@property({ reflect: true, type: String })
+	category?: "fill" | "outline" | "transparent" = "fill";
 
-  /**
-   * @attribute Gap is used to define the gap between the elements
-   */
-  @property({ reflect: true, type: String })
-  gap?: "large" | "medium" | "small" | "x-small" = "medium";
+	/**
+	 * @attribute Gap is used to define the gap between the elements
+	 */
+	@property({ reflect: true, type: String })
+	gap?: "large" | "medium" | "small" | "x-small" = "medium";
 
-  /**
-   * @attribute group separator
-   */
-  @property({ reflect: true, type: Boolean })
-  separator?: boolean = false;
+	/**
+	 * @attribute group separator
+	 */
+	@property({ reflect: true, type: Boolean })
+	separator?: boolean = false;
 
-  fieldRef!: Ref<FFormInputElements>;
-  formRef!: Ref<FForm>;
+	fieldRef!: Ref<FFormInputElements>;
+	formRef!: Ref<FForm>;
 
-  state: FormBuilderState = {
-    get isValid() {
-      return this.errors?.length === 0;
-    },
-    isChanged: false,
-  };
+	state: FormBuilderState = {
+		get isValid() {
+			return this.errors?.length === 0;
+		},
+		isChanged: false
+	};
 
-  render() {
-    this.fieldRef = createRef();
+	render() {
+		this.fieldRef = createRef();
 
-    return html`
-      <f-form
-        name="sampleForm"
-        @submit=${this.onSubmit}
-        ${ref(this.formRef)}
-        size=${this.size}
-        category=${this.category}
-        variant=${this.variant}
-        ?separator=${this.separator}
-        gap=${this.gap}
-      >
-        ${fieldRenderer[checkFieldType(this.field.type)](
-          this.name,
-          this.field,
-          this.fieldRef
-        )}
-        <slot @click=${this.checkSubmit}></slot>
-      </f-form>
-    `;
-  }
+		return html`
+			<f-form
+				name="sampleForm"
+				@submit=${this.onSubmit}
+				${ref(this.formRef)}
+				size=${this.size}
+				category=${this.category}
+				variant=${this.variant}
+				?separator=${this.separator}
+				gap=${this.gap}
+			>
+				${fieldRenderer[checkFieldType(this.field.type)](this.name, this.field, this.fieldRef)}
+				<slot @click=${this.checkSubmit}></slot>
+			</f-form>
+		`;
+	}
 
-  checkSubmit(event: MouseEvent) {
-    if ((event.target as HTMLElement).getAttribute("type") === "submit") {
-      this.submit();
-    }
-  }
+	checkSubmit(event: MouseEvent) {
+		if ((event.target as HTMLElement).getAttribute("type") === "submit") {
+			this.submit();
+		}
+	}
 
-  onSubmit(event: SubmitEvent) {
-    event.stopPropagation();
-    event.preventDefault();
-    this.submit();
-  }
+	onSubmit(event: SubmitEvent) {
+		event.stopPropagation();
+		event.preventDefault();
+		this.submit();
+	}
 
-  submit(this: FFormBuilder) {
-    this.validateForm().then((all) => {
-      this.updateValidaitonState(all);
-      if (this.state.errors?.length === 0) {
-        const event = new CustomEvent("submit", {
-          detail: this.value,
-          bubbles: true,
-          composed: true,
-        });
-        this.dispatchEvent(event);
-      }
-    });
-  }
+	submit(this: FFormBuilder) {
+		this.validateForm().then(all => {
+			this.updateValidaitonState(all);
+			if (this.state.errors?.length === 0) {
+				const event = new CustomEvent("submit", {
+					detail: this.value,
+					bubbles: true,
+					composed: true
+				});
+				this.dispatchEvent(event);
+			}
+		});
+	}
 
-  updateValidaitonState(all: ValidationResults) {
-    console.log(this.state);
-    this.state.errors = extractValidationState(all);
-    this.dispatchStateChangeEvent();
-  }
+	updateValidaitonState(all: ValidationResults) {
+		console.log(this.state);
+		this.state.errors = extractValidationState(all);
+		this.dispatchStateChangeEvent();
+	}
 
-  /**
-   * updated hook of lit element
-   * @param _changedProperties
-   */
-  protected updated(
-    _changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
-  ): void {
-    super.updated(_changedProperties);
-    setTimeout(async () => {
-      await this.updateComplete;
-      const ref = this.fieldRef;
+	/**
+	 * updated hook of lit element
+	 * @param _changedProperties
+	 */
+	protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+		super.updated(_changedProperties);
+		setTimeout(async () => {
+			await this.updateComplete;
+			const ref = this.fieldRef;
 
-      if (ref.value && this.value) {
-        ref.value.value = this.value;
+			if (ref.value && this.value) {
+				ref.value.value = this.value;
 
-        ref.value.requestUpdate();
-      }
-      if (ref.value) {
-        ref.value.oninput = async (event: Event) => {
-          event.stopPropagation();
-          if (!this.value) {
-            this.value = {};
-          }
-          this.value = ref.value?.value;
-          this.state.isChanged = true;
-          validateField(this.field, ref.value as FFormInputElements, false);
-          await this.validateForm(true).then((all) => {
-            this.updateValidaitonState(all);
-          });
-          this.dispatchInputEvent();
-        };
-      }
-      /**
-       * silent validation and store in state
-       */
-      await this.validateForm(true).then((all) => {
-        this.updateValidaitonState(all);
-      });
-    }, 100);
-  }
+				ref.value.requestUpdate();
+			}
+			if (ref.value) {
+				ref.value.oninput = async (event: Event) => {
+					event.stopPropagation();
+					if (!this.value) {
+						this.value = {};
+					}
+					this.value = ref.value?.value;
+					this.state.isChanged = true;
+					validateField(this.field, ref.value as FFormInputElements, false);
+					await this.validateForm(true).then(all => {
+						this.updateValidaitonState(all);
+					});
+					this.dispatchInputEvent();
+				};
+			}
+			/**
+			 * silent validation and store in state
+			 */
+			await this.validateForm(true).then(all => {
+				this.updateValidaitonState(all);
+			});
+		}, 100);
+	}
 
-  async validateForm(silent = false) {
-    const allValidations: FormBuilderValidationPromise[] = [];
-    if (
-      (this.field.type === "object" || this.field.type === "array") &&
-      this.fieldRef.value
-    ) {
-      allValidations.push(this.fieldRef.value.validate(silent));
-    } else {
-      allValidations.push(
-        validateField(
-          this.field,
-          this.fieldRef.value as FFormInputElements,
-          silent
-        )
-      );
-    }
+	async validateForm(silent = false) {
+		const allValidations: FormBuilderValidationPromise[] = [];
+		if ((this.field.type === "object" || this.field.type === "array") && this.fieldRef.value) {
+			allValidations.push(this.fieldRef.value.validate(silent));
+		} else {
+			allValidations.push(
+				validateField(this.field, this.fieldRef.value as FFormInputElements, silent)
+			);
+		}
 
-    return Promise.all(allValidations);
-  }
+		return Promise.all(allValidations);
+	}
 
-  dispatchInputEvent() {
-    const input = new CustomEvent("input", {
-      detail: this.value,
-      bubbles: true,
-      composed: true,
-    });
-    this.dispatchEvent(input);
-  }
-  dispatchStateChangeEvent() {
-    const stateChange = new CustomEvent("stateChange", {
-      detail: this.state,
-      bubbles: true,
-      composed: true,
-    });
-    this.dispatchEvent(stateChange);
-  }
+	/**
+	 * dispatching form-builder input event
+	 */
+	dispatchInputEvent() {
+		const input = new CustomEvent("input", {
+			detail: this.value,
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(input);
+	}
+	dispatchStateChangeEvent() {
+		const stateChange = new CustomEvent("stateChange", {
+			detail: this.state,
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(stateChange);
+	}
 
-  disconnectedCallback(): void {
-    try {
-      super.disconnectedCallback();
-    } catch (e) {
-      /**
-       * Nothing to worry!
-       * catching weird lit error while disconnected hook in storybook stories
-       */
-    }
-  }
+	disconnectedCallback(): void {
+		try {
+			super.disconnectedCallback();
+		} catch (e) {
+			/**
+			 * Nothing to worry!
+			 * catching weird lit error while disconnected hook in storybook stories
+			 */
+		}
+	}
 }

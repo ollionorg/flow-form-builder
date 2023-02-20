@@ -27,6 +27,31 @@ export default function (
       @keydown=${ifDefined(field.onKeyDown)}
       @keyup=${ifDefined(field.onKeyUp)}
       @mouseover=${ifDefined(field.onMouseOver)}
-    ></f-radio-group>
+    >
+      ${field.label?.title
+        ? html` <f-div slot="label" padding="none" gap="none"
+            >${field.label.title}</f-div
+          >`
+        : html`<f-div slot="label" padding="none" gap="none">${name}</f-div>`}
+      ${field.label?.description
+        ? html` <f-div slot="description" padding="none" gap="none"
+            >${field.label.description}</f-div
+          >`
+        : ""}
+      ${field.helperText
+        ? html`<f-div slot="help">${field.helperText}</f-div>`
+        : ``}
+      ${field.label?.iconTooltip
+        ? html`
+            <f-icon
+              slot="icon-tooltip"
+              source="i-question-filled"
+              size="small"
+              .tooltip="${field.label?.iconTooltip}"
+              clickable
+            ></f-icon>
+          `
+        : ""}</f-radio-group
+    >
   `;
 }

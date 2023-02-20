@@ -11,16 +11,16 @@ import array from "./array";
 import object from "./object";
 
 const all: Record<string, FormBuilderFieldRenderFunction> = {
-  text,
-  checkbox,
-  textarea,
-  radio,
-  switchButton,
-  select,
-  button,
-  array,
-  object,
-  ["icon-button"]: iconButton,
+	text,
+	checkbox,
+	textarea,
+	radio,
+	switchButton,
+	select,
+	button,
+	array,
+	object,
+	["icon-button"]: iconButton
 };
 
 export default all;
@@ -30,16 +30,16 @@ export default all;
  * @param type
  */
 export function checkFieldType(type: string) {
-  if (
-    type === "text" ||
-    type === "tel" ||
-    type === "number" ||
-    type === "email" ||
-    type === "url" ||
-    type === "password"
-  ) {
-    return "text";
-  } else {
-    return type;
-  }
+	if (
+		type === "text" ||
+		type === "tel" ||
+		type === "number" ||
+		type === "email" ||
+		type === "url" ||
+		type === "password"
+	) {
+		return "text";
+	} else {
+		return type;
+	}
 }
