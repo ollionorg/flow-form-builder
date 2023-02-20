@@ -442,8 +442,7 @@
               "type": {
                 "text": "FormBuilderValue | undefined"
               },
-              "attribute": "value",
-              "reflects": true
+              "attribute": "value"
             },
             {
               "kind": "field",
@@ -862,131 +861,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-form-object/f-form-object.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FFormObject",
-          "members": [
-            {
-              "kind": "field",
-              "name": "config",
-              "type": {
-                "text": "FormBuilderObjectField"
-              },
-              "attribute": "config"
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "ObjectValueType"
-              },
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "fieldRefs",
-              "type": {
-                "text": "Record<string, Ref<FFormInputElements>>"
-              },
-              "default": "{}"
-            },
-            {
-              "kind": "field",
-              "name": "showWhenSubject",
-              "type": {
-                "text": "Subject<FormBuilderValue>"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "buildFields"
-            },
-            {
-              "kind": "method",
-              "name": "validate",
-              "parameters": [
-                {
-                  "name": "silent",
-                  "default": "false"
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "dispatchInputEvent"
-            },
-            {
-              "kind": "method",
-              "name": "dispatchShowWhenEvent",
-              "description": "dispatch showWhen event so that root will publish new form values"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "config",
-              "type": {
-                "text": "FormBuilderObjectField"
-              },
-              "fieldName": "config"
-            },
-            {
-              "name": "value",
-              "type": {
-                "text": "ObjectValueType"
-              },
-              "fieldName": "value"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-form-object",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FFormObject",
-          "declaration": {
-            "name": "FFormObject",
-            "module": "src/components/f-form-object/f-form-object.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-form-object",
-          "declaration": {
-            "name": "FFormObject",
-            "module": "src/components/f-form-object/f-form-object.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-radio-group/f-radio-group.ts",
       "declarations": [
         {
@@ -1155,6 +1029,131 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form-object/f-form-object.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FFormObject",
+          "members": [
+            {
+              "kind": "field",
+              "name": "config",
+              "type": {
+                "text": "FormBuilderObjectField"
+              },
+              "attribute": "config"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "ObjectValueType"
+              },
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fieldRefs",
+              "type": {
+                "text": "Record<string, Ref<FFormInputElements>>"
+              },
+              "default": "{}"
+            },
+            {
+              "kind": "field",
+              "name": "showWhenSubject",
+              "type": {
+                "text": "Subject<FormBuilderValue>"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "buildFields"
+            },
+            {
+              "kind": "method",
+              "name": "validate",
+              "parameters": [
+                {
+                  "name": "silent",
+                  "default": "false"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "dispatchInputEvent"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchShowWhenEvent",
+              "description": "dispatch showWhen event so that root will publish new form values"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "config",
+              "type": {
+                "text": "FormBuilderObjectField"
+              },
+              "fieldName": "config"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "ObjectValueType"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-form-object",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FFormObject",
+          "declaration": {
+            "name": "FFormObject",
+            "module": "src/components/f-form-object/f-form-object.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-form-object",
+          "declaration": {
+            "name": "FFormObject",
+            "module": "src/components/f-form-object/f-form-object.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-builder/default-validation-messages/index.ts",
       "declarations": [
         {
@@ -1207,6 +1206,114 @@
           "declaration": {
             "name": "defaultValidations",
             "module": "src/components/f-form-builder/default-validations/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/mixins/types.ts",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/mixins/validator.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "validate",
+          "parameters": [
+            {
+              "name": "value",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "elementRules",
+              "type": {
+                "text": "FormBuilderValidationRules"
+              }
+            },
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "validateField",
+          "return": {
+            "type": {
+              "text": "FormBuilderValidationPromise"
+            }
+          },
+          "parameters": [
+            {
+              "name": "field",
+              "type": {
+                "text": "FormBuilderField"
+              }
+            },
+            {
+              "name": "element",
+              "type": {
+                "text": "FFormInputElements"
+              }
+            },
+            {
+              "name": "silent",
+              "default": "false"
+            },
+            {
+              "name": "filter",
+              "optional": true,
+              "type": {
+                "text": "(r: FormBuilderGenericValidationRule) => boolean"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": "extractValidationState",
+          "parameters": [
+            {
+              "name": "allResults",
+              "type": {
+                "text": "ValidationResults"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "validate",
+            "module": "src/components/f-form-builder/mixins/validator.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "validateField",
+          "declaration": {
+            "name": "validateField",
+            "module": "src/components/f-form-builder/mixins/validator.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "extractValidationState",
+          "declaration": {
+            "name": "extractValidationState",
+            "module": "src/components/f-form-builder/mixins/validator.ts"
           }
         }
       ]
@@ -1692,114 +1799,6 @@
           "declaration": {
             "name": "",
             "module": "src/components/f-form-builder/fields/textarea.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-builder/mixins/types.ts",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-builder/mixins/validator.ts",
-      "declarations": [
-        {
-          "kind": "function",
-          "name": "validate",
-          "parameters": [
-            {
-              "name": "value",
-              "type": {
-                "text": "string"
-              }
-            },
-            {
-              "name": "elementRules",
-              "type": {
-                "text": "FormBuilderValidationRules"
-              }
-            },
-            {
-              "name": "name",
-              "type": {
-                "text": "string"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "validateField",
-          "return": {
-            "type": {
-              "text": "FormBuilderValidationPromise"
-            }
-          },
-          "parameters": [
-            {
-              "name": "field",
-              "type": {
-                "text": "FormBuilderField"
-              }
-            },
-            {
-              "name": "element",
-              "type": {
-                "text": "FFormInputElements"
-              }
-            },
-            {
-              "name": "silent",
-              "default": "false"
-            },
-            {
-              "name": "filter",
-              "optional": true,
-              "type": {
-                "text": "(r: FormBuilderGenericValidationRule) => boolean"
-              }
-            }
-          ]
-        },
-        {
-          "kind": "function",
-          "name": "extractValidationState",
-          "parameters": [
-            {
-              "name": "allResults",
-              "type": {
-                "text": "ValidationResults"
-              }
-            }
-          ]
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "validate",
-            "module": "src/components/f-form-builder/mixins/validator.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "validateField",
-          "declaration": {
-            "name": "validateField",
-            "module": "src/components/f-form-builder/mixins/validator.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "extractValidationState",
-          "declaration": {
-            "name": "extractValidationState",
-            "module": "src/components/f-form-builder/mixins/validator.ts"
           }
         }
       ]
