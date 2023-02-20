@@ -3,6 +3,7 @@ import { LitElement, TemplateResult } from "lit";
 import { Ref } from "lit-html/directives/ref.js";
 import { FButtonState, FIconButtonState, FSelectOptions } from "@cldcvr/flow-core";
 import { BetweenParams } from "../validation-rules/between";
+import { Subject } from "rxjs";
 
 export type FormBuilderFieldEvents = {
 	onClick?: (event: PointerEvent) => void;
@@ -220,6 +221,7 @@ export type FFormInputElements = {
 	value: FormBuilderValue;
 	state?: "primary" | "default" | "success" | "warning" | "danger";
 	validate: (silent: boolean) => FormBuilderValidationPromise;
+	showWhenSubject: Subject<FormBuilderValue>;
 } & LitElement;
 
 export type FormBuilderValidationPromise = Promise<{

@@ -16,6 +16,7 @@ import { Ref, createRef, ref } from "lit/directives/ref.js";
 import fieldRenderer, { checkFieldType } from "./fields";
 import { extractValidationState, validateField } from "./mixins/validator";
 import { FForm } from "@cldcvr/flow-core";
+import { Subject } from "rxjs";
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
@@ -88,6 +89,8 @@ export class FFormBuilder extends FRoot {
 		isChanged: false
 	};
 
+	showWhenSubject!: Subject<FormBuilderValue>;
+
 	render() {
 		this.fieldRef = createRef();
 
@@ -95,6 +98,7 @@ export class FFormBuilder extends FRoot {
 			<f-form
 				name="sampleForm"
 				@submit=${this.onSubmit}
+				@showWhen=${this.onShowWhen}
 				${ref(this.formRef)}
 				size=${this.size}
 				category=${this.category}
@@ -147,6 +151,8 @@ export class FFormBuilder extends FRoot {
 		super.updated(_changedProperties);
 		setTimeout(async () => {
 			await this.updateComplete;
+
+			this.showWhenSubject = new Subject<FormBuilderValue>();
 			const ref = this.fieldRef;
 
 			if (ref.value && this.value) {
@@ -155,6 +161,7 @@ export class FFormBuilder extends FRoot {
 				ref.value.requestUpdate();
 			}
 			if (ref.value) {
+				ref.value.showWhenSubject = this.showWhenSubject;
 				ref.value.oninput = async (event: Event) => {
 					event.stopPropagation();
 					if (!this.value) {
@@ -168,6 +175,24 @@ export class FFormBuilder extends FRoot {
 					});
 					this.dispatchInputEvent();
 				};
+
+				if (this.field.showWhen) {
+					/**
+					 * subsscribe to show when subject, whenever new values are there in formbuilder then show when will execute
+					 */
+					this.showWhenSubject.subscribe(values => {
+						if (this.field.showWhen && ref.value) {
+							const showField = this.field.showWhen(values);
+							if (!showField) {
+								ref.value.dataset.hidden = "true";
+							} else {
+								ref.value.dataset.hidden = "false";
+							}
+						}
+					});
+
+					this.dispatchShowWhenEvent();
+				}
 			}
 			/**
 			 * silent validation and store in state
@@ -176,6 +201,10 @@ export class FFormBuilder extends FRoot {
 				this.updateValidaitonState(all);
 			});
 		}, 100);
+	}
+
+	onShowWhen() {
+		this.showWhenSubject.next(this.value ?? {});
 	}
 
 	async validateForm(silent = false) {
@@ -195,6 +224,7 @@ export class FFormBuilder extends FRoot {
 	 * dispatching form-builder input event
 	 */
 	dispatchInputEvent() {
+		this.showWhenSubject.next(this.value ?? {});
 		const input = new CustomEvent("input", {
 			detail: this.value,
 			bubbles: true,
@@ -209,6 +239,17 @@ export class FFormBuilder extends FRoot {
 			composed: true
 		});
 		this.dispatchEvent(stateChange);
+	}
+	/**
+	 * dispatch showWhen event so that root will publish new form values
+	 */
+	dispatchShowWhenEvent() {
+		const showWhen = new CustomEvent("showWhen", {
+			detail: true,
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(showWhen);
 	}
 
 	disconnectedCallback(): void {

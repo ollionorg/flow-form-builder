@@ -8,6 +8,9 @@
 	flex: 1 0 auto;
 	width: unset;
 	align-items: flex-start;
+	[data-hidden="true"] {
+		display: none !important;
+	}
 }
 f-div[direction="column"] {
 	f-form-object {

@@ -14,6 +14,7 @@ import fieldRenderer, { checkFieldType } from "../f-form-builder/fields";
 import { createRef, Ref } from "lit/directives/ref.js";
 import { isEmptyArray } from "../f-form-builder/utils";
 import { validateField } from "../f-form-builder/mixins/validator";
+import { Subject } from "rxjs";
 
 export type ArrayValueType = (
 	| string
@@ -52,6 +53,8 @@ export class FFormArray extends FRoot {
 	state?: "primary" | "default" | "success" | "warning" | "danger" = "default";
 
 	fieldRefs: Ref<FFormInputElements>[] = [];
+
+	showWhenSubject!: Subject<FormBuilderValue>;
 
 	render() {
 		this.fieldRefs = [];
@@ -175,6 +178,7 @@ export class FFormArray extends FRoot {
 					ref.value.requestUpdate();
 				}
 				if (ref.value) {
+					ref.value.showWhenSubject = this.showWhenSubject;
 					ref.value.oninput = (event: Event) => {
 						event.stopPropagation();
 
@@ -184,6 +188,24 @@ export class FFormArray extends FRoot {
 
 						this.dispatchInputEvent();
 					};
+
+					const fieldConfig = this.config.field;
+					if (fieldConfig.showWhen) {
+						/**
+						 * subsscribe to show when subject, whenever new values are there in formbuilder then show when will execute
+						 */
+						this.showWhenSubject.subscribe(values => {
+							if (fieldConfig.showWhen && ref.value) {
+								const showField = fieldConfig.showWhen(values);
+								if (!showField) {
+									ref.value.dataset.hidden = "true";
+								} else {
+									ref.value.dataset.hidden = "false";
+								}
+							}
+						});
+						this.dispatchShowWhenEvent();
+					}
 				}
 			});
 		}, 100);
@@ -199,6 +221,17 @@ export class FFormArray extends FRoot {
 		this.value.splice(idx, 1);
 		this.dispatchInputEvent();
 		this.requestUpdate();
+	}
+	/**
+	 * dispatch showWhen event so that root will publish new form values
+	 */
+	dispatchShowWhenEvent() {
+		const showWhen = new CustomEvent("showWhen", {
+			detail: true,
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(showWhen);
 	}
 	dispatchInputEvent() {
 		const input = new CustomEvent("input", {

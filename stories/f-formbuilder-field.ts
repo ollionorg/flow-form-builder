@@ -36,6 +36,10 @@ const field: FormBuilderField = {
 					name: "required"
 				}
 			],
+			showWhen: values => {
+				console.log(values, (values as Record<string, string>)?.textField === "vikas");
+				return (values as Record<string, string>)?.textField === "vikas";
+			},
 			onClick: (event: PointerEvent) => {
 				console.log("onClick callback triggered", event);
 			},

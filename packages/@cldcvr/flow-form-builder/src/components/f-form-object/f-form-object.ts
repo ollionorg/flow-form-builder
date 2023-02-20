@@ -13,6 +13,7 @@ import {
 	FormBuilderValue
 } from "../f-form-builder/mixins/types";
 import { validateField } from "../f-form-builder/mixins/validator";
+import { Subject } from "rxjs";
 
 export type ObjectValueType = Record<
 	string,
@@ -47,6 +48,8 @@ export class FFormObject extends FRoot {
 
 	fieldRefs: Record<string, Ref<FFormInputElements>> = {};
 
+	showWhenSubject!: Subject<FormBuilderValue>;
+
 	render() {
 		return html`${this.buildFields()}`;
 	}
@@ -60,7 +63,9 @@ export class FFormObject extends FRoot {
 			fieldTemplates.push(
 				html`
 					${fieldRenderer[checkFieldType(fieldConfig.type)](fieldname, fieldConfig, fieldRef)}
-					${this.config.fieldSeparator ? html`<f-divider></f-divider>` : ""}
+					${this.config.fieldSeparator
+						? html`<f-divider id="${fieldname}-divider"></f-divider>`
+						: ""}
 				`
 			);
 		});
@@ -121,6 +126,7 @@ export class FFormObject extends FRoot {
 					}
 				}
 				if (ref.value) {
+					ref.value.showWhenSubject = this.showWhenSubject;
 					ref.value.oninput = (event: Event) => {
 						event.stopPropagation();
 						if (!this.value) {
@@ -131,6 +137,32 @@ export class FFormObject extends FRoot {
 
 						validateField(this.config.fields[name], ref.value as FFormInputElements, false);
 					};
+					const fieldConfig = this.config.fields[name];
+					if (fieldConfig.showWhen) {
+						this.showWhenSubject.subscribe(values => {
+							if (fieldConfig.showWhen && ref.value) {
+								const showField = fieldConfig.showWhen(values);
+								if (!showField) {
+									ref.value.dataset.hidden = "true";
+									const divider = this.shadowRoot?.querySelector<HTMLElement>(
+										`#${ref.value.getAttribute("name")}-divider`
+									);
+									if (divider) {
+										divider.dataset.hidden = "true";
+									}
+								} else {
+									ref.value.dataset.hidden = "false";
+									const divider = this.shadowRoot?.querySelector<HTMLElement>(
+										`#${ref.value.getAttribute("name")}-divider`
+									);
+									if (divider) {
+										divider.dataset.hidden = "false";
+									}
+								}
+							}
+						});
+						this.dispatchShowWhenEvent();
+					}
 				}
 			});
 		}, 100);
@@ -143,5 +175,17 @@ export class FFormObject extends FRoot {
 			composed: true
 		});
 		this.dispatchEvent(input);
+	}
+
+	/**
+	 * dispatch showWhen event so that root will publish new form values
+	 */
+	dispatchShowWhenEvent() {
+		const showWhen = new CustomEvent("showWhen", {
+			detail: true,
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(showWhen);
 	}
 }
