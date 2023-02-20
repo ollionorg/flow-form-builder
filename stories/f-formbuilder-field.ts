@@ -89,6 +89,7 @@ const field: FormBuilderField = {
 
 		checkboxField: {
 			type: "checkbox",
+			direction: "horizontal",
 			label: {
 				title: "Check/Uncheck options",
 				description: "this my checkbox"

@@ -3,13 +3,14 @@
 @import "@cldcvr/flow-core/src/mixins/scss/mixins";
 
 :host {
-  @include base();
-  display: flex;
-  flex: 1 0 auto;
-  width: unset;
+	@include base();
+	display: flex;
+	flex: 1 0 auto;
+	width: unset;
+	align-items: flex-start;
 }
 f-div[direction="column"] {
-  f-form-object {
-    width: 100%;
-  }
+	f-form-object {
+		width: 100%;
+	}
 }

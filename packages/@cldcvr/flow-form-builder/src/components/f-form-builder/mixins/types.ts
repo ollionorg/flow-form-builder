@@ -60,12 +60,16 @@ export type FormBuilderTextInputField = FormBuilderBaseField & {
 export type FormBuilderCheckboxField = FormBuilderBaseField & {
 	type: "checkbox";
 	options: CheckboxOptionsType;
+	direction?: "vertical" | "horizontal";
+	gap?: "large" | "medium" | "small" | "x-small";
 };
 
 // radio type field
 export type FormBuilderRadioField = FormBuilderBaseField & {
 	type: "radio";
 	options: CheckboxOptionsType;
+	direction?: "vertical" | "horizontal";
+	gap?: "large" | "medium" | "small" | "x-small";
 };
 
 // switch type field

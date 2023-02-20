@@ -80,7 +80,7 @@ export class FFormObject extends FRoot {
 				? html`<f-text variant="para" size="small" weight="regular" .state=${this.config.state}
 						>${this.config?.helperText}</f-text
 				  >`
-				: html`<slot name="help"></slot>`}
+				: ""}
 		</f-div>`;
 	}
 
