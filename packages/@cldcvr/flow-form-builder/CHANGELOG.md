@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.1.0] - 2023-02-20
+
+### Improvements
+
+- Schema and architecture changed
 ## [1.0.0] - 2023-02-15
 
 ### Improvements
