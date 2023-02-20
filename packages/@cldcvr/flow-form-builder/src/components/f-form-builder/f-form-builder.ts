@@ -42,6 +42,7 @@ export class FFormBuilder extends FRoot {
 	 */
 	@property({
 		type: Object,
+		reflect: false,
 		hasChanged(newVal: FormBuilderValue, oldVal: FormBuilderValue) {
 			return JSON.stringify(newVal) !== JSON.stringify(oldVal);
 		}
