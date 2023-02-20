@@ -4,6 +4,8 @@ import {
   FormBuilderGenericValidationRule,
   FormBuilderValidationPromise,
   FormBuilderValidationRules,
+  ValidationResult,
+  ValidationResults,
 } from "./types";
 
 import rules from "./../validation-rules";
@@ -130,4 +132,17 @@ function updateMessage(element: HTMLElement, message: string) {
       `<f-div slot="help">${message}</f-div>`
     );
   }
+}
+
+export function extractValidationState(allResults: ValidationResults) {
+  const errors: ValidationResult[] = [];
+  allResults.forEach((rs) => {
+    if (!Array.isArray(rs) && !rs.result) {
+      errors.push(rs);
+    } else if (Array.isArray(rs)) {
+      errors.push(...extractValidationState(rs));
+    }
+  });
+
+  return errors;
 }

@@ -5,6 +5,8 @@ import {
   FFormInputElements,
   FormBuilderValue,
   FormBuilderValidationPromise,
+  ValidationResults,
+  FormBuilderState,
 } from "./mixins/types";
 import eleStyle from "./f-form-builder.scss";
 
@@ -12,7 +14,7 @@ import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import fieldRenderer, { checkFieldType } from "./fields";
-import { validateField } from "./mixins/validator";
+import { extractValidationState, validateField } from "./mixins/validator";
 import { FForm } from "@cldcvr/flow-core";
 
 @customElement("f-form-builder")
@@ -79,6 +81,13 @@ export class FFormBuilder extends FRoot {
   fieldRef!: Ref<FFormInputElements>;
   formRef!: Ref<FForm>;
 
+  state: FormBuilderState = {
+    get isValid() {
+      return this.errors?.length === 0;
+    },
+    isChanged: false,
+  };
+
   render() {
     this.fieldRef = createRef();
 
@@ -117,14 +126,22 @@ export class FFormBuilder extends FRoot {
 
   submit(this: FFormBuilder) {
     this.validateForm().then((all) => {
-      console.log(all);
-      const event = new CustomEvent("submit", {
-        detail: this.value,
-        bubbles: true,
-        composed: true,
-      });
-      this.dispatchEvent(event);
+      this.updateValidaitonState(all);
+      if (this.state.errors?.length === 0) {
+        const event = new CustomEvent("submit", {
+          detail: this.value,
+          bubbles: true,
+          composed: true,
+        });
+        this.dispatchEvent(event);
+      }
     });
+  }
+
+  updateValidaitonState(all: ValidationResults) {
+    console.log(this.state);
+    this.state.errors = extractValidationState(all);
+    this.dispatchStateChangeEvent();
   }
 
   /**
@@ -145,33 +162,42 @@ export class FFormBuilder extends FRoot {
         ref.value.requestUpdate();
       }
       if (ref.value) {
-        ref.value.oninput = (event: Event) => {
+        ref.value.oninput = async (event: Event) => {
           event.stopPropagation();
           if (!this.value) {
             this.value = {};
           }
           this.value = ref.value?.value;
-
+          this.state.isChanged = true;
           validateField(this.field, ref.value as FFormInputElements, false);
+          await this.validateForm(true).then((all) => {
+            this.updateValidaitonState(all);
+          });
           this.dispatchInputEvent();
         };
       }
+      /**
+       * silent validation and store in state
+       */
+      await this.validateForm(true).then((all) => {
+        this.updateValidaitonState(all);
+      });
     }, 100);
   }
 
-  async validateForm() {
+  async validateForm(silent = false) {
     const allValidations: FormBuilderValidationPromise[] = [];
     if (
       (this.field.type === "object" || this.field.type === "array") &&
       this.fieldRef.value
     ) {
-      allValidations.push(this.fieldRef.value.validate());
+      allValidations.push(this.fieldRef.value.validate(silent));
     } else {
       allValidations.push(
         validateField(
           this.field,
           this.fieldRef.value as FFormInputElements,
-          false
+          silent
         )
       );
     }
@@ -186,6 +212,14 @@ export class FFormBuilder extends FRoot {
       composed: true,
     });
     this.dispatchEvent(input);
+  }
+  dispatchStateChangeEvent() {
+    const stateChange = new CustomEvent("stateChange", {
+      detail: this.state,
+      bubbles: true,
+      composed: true,
+    });
+    this.dispatchEvent(stateChange);
   }
 
   disconnectedCallback(): void {

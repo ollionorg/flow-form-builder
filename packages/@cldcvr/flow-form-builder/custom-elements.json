@@ -318,7 +318,13 @@
             },
             {
               "kind": "method",
-              "name": "validate"
+              "name": "validate",
+              "parameters": [
+                {
+                  "name": "silent",
+                  "default": "false"
+                }
+              ]
             },
             {
               "kind": "method",
@@ -492,6 +498,14 @@
               }
             },
             {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FormBuilderState"
+              },
+              "default": "{\n    get isValid() {\n      return this.errors?.length === 0;\n    },\n    isChanged: false,\n  }"
+            },
+            {
               "kind": "method",
               "name": "checkSubmit",
               "parameters": [
@@ -529,11 +543,33 @@
             },
             {
               "kind": "method",
-              "name": "validateForm"
+              "name": "updateValidaitonState",
+              "parameters": [
+                {
+                  "name": "all",
+                  "type": {
+                    "text": "ValidationResults"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "validateForm",
+              "parameters": [
+                {
+                  "name": "silent",
+                  "default": "false"
+                }
+              ]
             },
             {
               "kind": "method",
               "name": "dispatchInputEvent"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchStateChangeEvent"
             }
           ],
           "attributes": [
@@ -1012,7 +1048,13 @@
             },
             {
               "kind": "method",
-              "name": "validate"
+              "name": "validate",
+              "parameters": [
+                {
+                  "name": "silent",
+                  "default": "false"
+                }
+              ]
             },
             {
               "kind": "method",
@@ -1680,6 +1722,18 @@
               }
             }
           ]
+        },
+        {
+          "kind": "function",
+          "name": "extractValidationState",
+          "parameters": [
+            {
+              "name": "allResults",
+              "type": {
+                "text": "ValidationResults"
+              }
+            }
+          ]
         }
       ],
       "exports": [
@@ -1696,6 +1750,14 @@
           "name": "validateField",
           "declaration": {
             "name": "validateField",
+            "module": "src/components/f-form-builder/mixins/validator.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "extractValidationState",
+          "declaration": {
+            "name": "extractValidationState",
             "module": "src/components/f-form-builder/mixins/validator.ts"
           }
         }

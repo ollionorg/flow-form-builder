@@ -217,7 +217,7 @@ export type FormBuilderFieldRenderFunction = (
 export type FFormInputElements = {
   value: FormBuilderValue;
   state?: "primary" | "default" | "success" | "warning" | "danger";
-  validate: () => FormBuilderValidationPromise;
+  validate: (silent: boolean) => FormBuilderValidationPromise;
 } & LitElement;
 
 export type FormBuilderValidationPromise = Promise<{
@@ -233,3 +233,26 @@ export type FormBuilderValue =
   | string
   | number
   | number[];
+
+export type ValidationResults = (
+  | {
+      result: boolean;
+      message: string | null;
+      name: string;
+      rule: "required" | "custom" | "email" | "between";
+    }
+  | ValidationResults
+)[];
+
+export type ValidationResult = {
+  result: boolean;
+  message: string | null;
+  name: string;
+  rule: "required" | "custom" | "email" | "between";
+};
+
+export type FormBuilderState = {
+  errors?: ValidationResult[];
+  isValid: boolean;
+  isChanged: boolean;
+};

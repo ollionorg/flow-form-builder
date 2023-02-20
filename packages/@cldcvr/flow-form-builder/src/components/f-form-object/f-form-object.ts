@@ -91,7 +91,7 @@ export class FFormObject extends FRoot {
     </f-div>`;
   }
 
-  async validate() {
+  async validate(silent = false) {
     const allValidations: FormBuilderValidationPromise[] = [];
     Object.entries(this.config.fields).forEach(
       async ([fieldname, fieldConfig]) => {
@@ -100,14 +100,16 @@ export class FFormObject extends FRoot {
           this.fieldRefs[fieldname].value
         ) {
           allValidations.push(
-            (this.fieldRefs[fieldname].value as FFormInputElements).validate()
+            (this.fieldRefs[fieldname].value as FFormInputElements).validate(
+              silent
+            )
           );
         } else {
           allValidations.push(
             validateField(
               fieldConfig,
               this.fieldRefs[fieldname].value as FFormInputElements,
-              false
+              silent
             )
           );
         }
