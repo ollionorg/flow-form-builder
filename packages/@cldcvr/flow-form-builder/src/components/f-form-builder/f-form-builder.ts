@@ -135,7 +135,6 @@ export class FFormBuilder extends FRoot {
 	}
 
 	updateValidaitonState(all: ValidationResults) {
-		console.log(this.state);
 		this.state.errors = extractValidationState(all);
 		this.dispatchStateChangeEvent();
 	}

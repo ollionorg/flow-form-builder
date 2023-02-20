@@ -1319,10 +1319,10 @@
     rxjs "^7.5.7"
     validate-color "^2.2.1"
 
-"@cldcvr/flow-core@1.3.1":
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/@cldcvr/flow-core/-/flow-core-1.3.1.tgz#14dfc1ac168556059417a4e3f502c0a88af27aca"
-  integrity sha512-qb7blNLhzFnPvri0OHrf+uZ8NhZGdg+8+V9SdgQTP4tZBbjBQoL/Y1zdtiQjTjq6ddUbhcnilRuEdu+FHOa2EA==
+"@cldcvr/flow-core@1.3.2":
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/@cldcvr/flow-core/-/flow-core-1.3.2.tgz#6e78169edc2c4ad03042b49ce2164114dba44662"
+  integrity sha512-3NfJj0n0gWPCdG1Mpbv1TLaF9RLIXj6uLuPMQzzDoE/i+0yP/cRdieaAJ4FEQNrHfqj8mk2jUa9HMvH9UYUt7Q==
   dependencies:
     "@floating-ui/dom" "^1.0.2"
     axios "^0.27.2"

@@ -38,6 +38,7 @@ export type FormBuilderObjectField = FormBuilderBaseField & {
 	isCollapsible?: boolean;
 	isCollapsed?: boolean;
 	fields: Record<string, FormBuilderField>;
+	fieldSeparator?: boolean;
 };
 // text input type field
 export type FormBuilderTextInputField = FormBuilderBaseField & {
