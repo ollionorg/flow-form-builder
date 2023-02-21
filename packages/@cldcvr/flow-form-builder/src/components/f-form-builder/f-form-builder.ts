@@ -6,7 +6,8 @@ import {
 	FormBuilderValues,
 	FormBuilderValidationPromise,
 	ValidationResults,
-	FormBuilderState
+	FormBuilderState,
+	FormBuilderLabel
 } from "./mixins/types";
 import eleStyle from "./f-form-builder.scss";
 
@@ -31,6 +32,11 @@ export class FFormBuilder extends FRoot {
 	@property({ type: String, reflect: true })
 	name!: string;
 
+	/**
+	 * @attribute formbuilder config
+	 */
+	@property({ type: Object, reflect: false })
+	label?: FormBuilderLabel;
 	/**
 	 * @attribute formbuilder config
 	 */
@@ -98,7 +104,7 @@ export class FFormBuilder extends FRoot {
 			<f-form
 				name="sampleForm"
 				@submit=${this.onSubmit}
-				@showWhen=${this.onShowWhen}
+				@show-when=${this.onShowWhen}
 				${ref(this.formRef)}
 				size=${this.size}
 				category=${this.category}
@@ -106,6 +112,33 @@ export class FFormBuilder extends FRoot {
 				?separator=${this.separator}
 				gap=${this.gap}
 			>
+				${this.label
+					? html`<f-div gap="x-small" direction="column" width="fill-container">
+							<f-div gap="small" direction="row">
+								<f-div height="hug-content" width="hug-content">
+									<f-text variant="heading" size="medium" weight="medium" state="default">
+										${this.label?.title}
+									</f-text>
+								</f-div>
+								${this.label?.iconTooltip
+									? html` <f-icon
+											source="i-question-filled"
+											size="small"
+											state="default"
+											.tooltip="${this.label?.iconTooltip}"
+											clickable
+									  ></f-icon>`
+									: ""}
+							</f-div>
+							${this.label?.description
+								? html` <f-div height="hug-content" width="hug-content">
+										<f-text variant="para" size="small" weight="regular">
+											${this.label.description}
+										</f-text>
+								  </f-div>`
+								: ""}
+					  </f-div>`
+					: ``}
 				${fieldRenderer[checkFieldType(this.field.type)](this.name, this.field, this.fieldRef)}
 				<slot @click=${this.checkSubmit}></slot>
 			</f-form>
@@ -233,7 +266,7 @@ export class FFormBuilder extends FRoot {
 		this.dispatchEvent(input);
 	}
 	dispatchStateChangeEvent() {
-		const stateChange = new CustomEvent("stateChange", {
+		const stateChange = new CustomEvent("state-change", {
 			detail: this.state,
 			bubbles: true,
 			composed: true
@@ -244,7 +277,7 @@ export class FFormBuilder extends FRoot {
 	 * dispatch showWhen event so that root will publish new form values
 	 */
 	dispatchShowWhenEvent() {
-		const showWhen = new CustomEvent("showWhen", {
+		const showWhen = new CustomEvent("show-when", {
 			detail: true,
 			bubbles: true,
 			composed: true

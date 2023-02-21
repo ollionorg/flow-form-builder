@@ -181,7 +181,7 @@ export class FFormObject extends FRoot {
 	 * dispatch showWhen event so that root will publish new form values
 	 */
 	dispatchShowWhenEvent() {
-		const showWhen = new CustomEvent("showWhen", {
+		const showWhen = new CustomEvent("show-when", {
 			detail: true,
 			bubbles: true,
 			composed: true

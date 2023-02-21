@@ -4,8 +4,15 @@ const field: FormBuilderField = {
 	type: "object",
 	direction: "vertical",
 	fieldSeparator: true,
+	label: {
+		title: "Object level label",
+		description: "following fields are used for demo purpose only"
+	},
 	fields: {
 		selectBox: {
+			label: {
+				title: "Select multiple option to test"
+			},
 			selection: "multiple",
 			options: ["option 1", "option 2", "option 3"],
 			type: "select",
@@ -22,6 +29,10 @@ const field: FormBuilderField = {
 		textField: {
 			type: "text",
 			helperText: "This field is a required field",
+			suffix: "recommended",
+			suffixWhen: value => {
+				return value === "vikas";
+			},
 			validationRules: [
 				{
 					name: "required"

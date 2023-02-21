@@ -67,11 +67,14 @@ import { createRef, ref } from "lit/directives/ref.js";
 				<f-form-builder
 					.field=${args.field}
 					.value=${args.value}
-					gap="large"
+					.label=${{
+						title: "Main form label"
+					}}
+					gap="medium"
 					@submit=${handleSubmit}
 					@input=${handleInput}
 					@keydown=${handleKeydown}
-					@stateChange=${handleStateChange}
+					@state-change=${handleStateChange}
 				>
 					<f-div>
 						<f-button label="submit" type="submit"></f-button>

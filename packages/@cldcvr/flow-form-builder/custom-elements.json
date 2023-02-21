@@ -430,6 +430,14 @@
             },
             {
               "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "FormBuilderLabel | undefined"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
               "name": "field",
               "type": {
                 "text": "FormBuilderField"
@@ -607,6 +615,13 @@
                 "text": "string"
               },
               "fieldName": "name"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "FormBuilderLabel | undefined"
+              },
+              "fieldName": "label"
             },
             {
               "name": "field",

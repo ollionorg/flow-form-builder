@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.1.5] - 2023-02-21
+
+### Improvements
+
+- `label` property added
+- `suffixWhen` implementation for text fields.
 ## [1.1.4] - 2023-02-21
 
 ### Bug Fix

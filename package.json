@@ -51,7 +51,7 @@
     "vite": "^2.9.9"
   },
   "dependencies": {
-    "@cldcvr/flow-core": "1.3.4",
+    "@cldcvr/flow-core": "1.3.6",
     "@cldcvr/flow-system-icon": "^1.0.5"
   }
 }
