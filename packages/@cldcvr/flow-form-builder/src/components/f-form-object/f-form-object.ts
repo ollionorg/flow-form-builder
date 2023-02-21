@@ -10,7 +10,7 @@ import {
 	FFormInputElements,
 	FormBuilderObjectField,
 	FormBuilderValidationPromise,
-	FormBuilderValue
+	FormBuilderValues
 } from "../f-form-builder/mixins/types";
 import { validateField } from "../f-form-builder/mixins/validator";
 import { Subject } from "rxjs";
@@ -48,7 +48,7 @@ export class FFormObject extends FRoot {
 
 	fieldRefs: Record<string, Ref<FFormInputElements>> = {};
 
-	showWhenSubject!: Subject<FormBuilderValue>;
+	showWhenSubject!: Subject<FormBuilderValues>;
 
 	render() {
 		return html`${this.buildFields()}`;
@@ -119,7 +119,7 @@ export class FFormObject extends FRoot {
 
 			Object.entries(this.fieldRefs).forEach(([name, ref]) => {
 				if (ref.value && this.value) {
-					ref.value.value = this.value[name] as FormBuilderValue;
+					ref.value.value = this.value[name] as FormBuilderValues;
 
 					if (this.value[name]) {
 						ref.value.requestUpdate();

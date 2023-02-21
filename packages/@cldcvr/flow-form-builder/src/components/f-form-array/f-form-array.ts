@@ -8,7 +8,7 @@ import {
 	FFormInputElements,
 	FormBuilderArrayField,
 	FormBuilderValidationPromise,
-	FormBuilderValue
+	FormBuilderValues
 } from "../f-form-builder/mixins/types";
 import fieldRenderer, { checkFieldType } from "../f-form-builder/fields";
 import { createRef, Ref } from "lit/directives/ref.js";
@@ -54,7 +54,7 @@ export class FFormArray extends FRoot {
 
 	fieldRefs: Ref<FFormInputElements>[] = [];
 
-	showWhenSubject!: Subject<FormBuilderValue>;
+	showWhenSubject!: Subject<FormBuilderValues>;
 
 	render() {
 		this.fieldRefs = [];
@@ -174,7 +174,7 @@ export class FFormArray extends FRoot {
 
 			this.fieldRefs.forEach((ref, idx) => {
 				if (ref.value && this.value) {
-					ref.value.value = this.value[idx] as FormBuilderValue;
+					ref.value.value = this.value[idx] as FormBuilderValues;
 					ref.value.requestUpdate();
 				}
 				if (ref.value) {

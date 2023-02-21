@@ -3,7 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import {
 	FormBuilderField,
 	FFormInputElements,
-	FormBuilderValue,
+	FormBuilderValues,
 	FormBuilderValidationPromise,
 	ValidationResults,
 	FormBuilderState
@@ -42,9 +42,12 @@ export class FFormBuilder extends FRoot {
 	 */
 	@property({
 		type: Object,
-		reflect: false
+		reflect: false,
+		hasChanged(newVal: FormBuilderValues, oldVal: FormBuilderValues) {
+			return JSON.stringify(newVal) !== JSON.stringify(oldVal);
+		}
 	})
-	value!: FormBuilderValue;
+	values!: FormBuilderValues;
 
 	/**
 	 * @attribute Controls size of all input elements within the form
@@ -86,7 +89,7 @@ export class FFormBuilder extends FRoot {
 		isChanged: false
 	};
 
-	showWhenSubject!: Subject<FormBuilderValue>;
+	showWhenSubject!: Subject<FormBuilderValues>;
 
 	render() {
 		this.fieldRef = createRef();
@@ -126,7 +129,7 @@ export class FFormBuilder extends FRoot {
 			this.updateValidaitonState(all);
 			if (this.state.errors?.length === 0) {
 				const event = new CustomEvent("submit", {
-					detail: this.value,
+					detail: this.values,
 					bubbles: true,
 					composed: true
 				});
@@ -149,11 +152,11 @@ export class FFormBuilder extends FRoot {
 		setTimeout(async () => {
 			await this.updateComplete;
 
-			this.showWhenSubject = new Subject<FormBuilderValue>();
+			this.showWhenSubject = new Subject<FormBuilderValues>();
 			const ref = this.fieldRef;
 
-			if (ref.value && this.value) {
-				ref.value.value = this.value;
+			if (ref.value && this.values) {
+				ref.value.value = this.values;
 
 				ref.value.requestUpdate();
 			}
@@ -161,10 +164,10 @@ export class FFormBuilder extends FRoot {
 				ref.value.showWhenSubject = this.showWhenSubject;
 				ref.value.oninput = async (event: Event) => {
 					event.stopPropagation();
-					if (!this.value) {
-						this.value = {};
+					if (!this.values) {
+						this.values = {};
 					}
-					this.value = ref.value?.value as FormBuilderValue;
+					this.values = ref.value?.value as FormBuilderValues;
 					this.state.isChanged = true;
 					validateField(this.field, ref.value as FFormInputElements, false);
 					await this.validateForm(true).then(all => {
@@ -201,7 +204,7 @@ export class FFormBuilder extends FRoot {
 	}
 
 	onShowWhen() {
-		this.showWhenSubject.next(this.value ?? {});
+		this.showWhenSubject.next(this.values ?? {});
 	}
 
 	async validateForm(silent = false) {
@@ -221,9 +224,9 @@ export class FFormBuilder extends FRoot {
 	 * dispatching form-builder input event
 	 */
 	dispatchInputEvent() {
-		this.showWhenSubject.next(this.value ?? {});
+		this.showWhenSubject.next(this.values ?? {});
 		const input = new CustomEvent("input", {
-			detail: this.value,
+			detail: this.values,
 			bubbles: true,
 			composed: true
 		});

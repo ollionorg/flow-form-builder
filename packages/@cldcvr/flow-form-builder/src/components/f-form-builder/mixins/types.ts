@@ -151,7 +151,7 @@ export type FormBuilderField =
 	| FormBuilderArrayField
 	| FormBuilderObjectField; // add other field types
 
-export type FormBuilderShowCondition = (value: FormBuilderValue) => boolean;
+export type FormBuilderShowCondition = (value: FormBuilderValues) => boolean;
 
 export type FormBuilderSuffixCondition = (value: string) => boolean;
 
@@ -218,10 +218,10 @@ export type FormBuilderFieldRenderFunction = (
 ) => TemplateResult;
 
 export type FFormInputElements = {
-	value: FormBuilderValue;
+	value: FormBuilderValues;
 	state?: "primary" | "default" | "success" | "warning" | "danger";
 	validate: (silent: boolean) => FormBuilderValidationPromise;
-	showWhenSubject: Subject<FormBuilderValue>;
+	showWhenSubject: Subject<FormBuilderValues>;
 } & LitElement;
 
 export type FormBuilderValidationPromise = Promise<{
@@ -230,7 +230,7 @@ export type FormBuilderValidationPromise = Promise<{
 	name: string;
 	rule: FormBuilderGenericValidationRule["name"];
 }>;
-export type FormBuilderValue =
+export type FormBuilderValues =
 	| Record<string, unknown>
 	| Record<string, unknown>[]
 	| string[]

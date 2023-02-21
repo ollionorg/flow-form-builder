@@ -308,7 +308,7 @@
               "kind": "field",
               "name": "showWhenSubject",
               "type": {
-                "text": "Subject<FormBuilderValue>"
+                "text": "Subject<FormBuilderValues>"
               }
             },
             {
@@ -438,11 +438,11 @@
             },
             {
               "kind": "field",
-              "name": "value",
+              "name": "values",
               "type": {
-                "text": "FormBuilderValue"
+                "text": "FormBuilderValues"
               },
-              "attribute": "value"
+              "attribute": "values"
             },
             {
               "kind": "field",
@@ -520,7 +520,7 @@
               "kind": "field",
               "name": "showWhenSubject",
               "type": {
-                "text": "Subject<FormBuilderValue>"
+                "text": "Subject<FormBuilderValues>"
               }
             },
             {
@@ -616,11 +616,11 @@
               "fieldName": "field"
             },
             {
-              "name": "value",
+              "name": "values",
               "type": {
-                "text": "FormBuilderValue"
+                "text": "FormBuilderValues"
               },
-              "fieldName": "value"
+              "fieldName": "values"
             },
             {
               "name": "size",
@@ -861,6 +861,131 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form-object/f-form-object.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FFormObject",
+          "members": [
+            {
+              "kind": "field",
+              "name": "config",
+              "type": {
+                "text": "FormBuilderObjectField"
+              },
+              "attribute": "config"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "ObjectValueType"
+              },
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fieldRefs",
+              "type": {
+                "text": "Record<string, Ref<FFormInputElements>>"
+              },
+              "default": "{}"
+            },
+            {
+              "kind": "field",
+              "name": "showWhenSubject",
+              "type": {
+                "text": "Subject<FormBuilderValues>"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "buildFields"
+            },
+            {
+              "kind": "method",
+              "name": "validate",
+              "parameters": [
+                {
+                  "name": "silent",
+                  "default": "false"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "dispatchInputEvent"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchShowWhenEvent",
+              "description": "dispatch showWhen event so that root will publish new form values"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "config",
+              "type": {
+                "text": "FormBuilderObjectField"
+              },
+              "fieldName": "config"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "ObjectValueType"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-form-object",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FFormObject",
+          "declaration": {
+            "name": "FFormObject",
+            "module": "src/components/f-form-object/f-form-object.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-form-object",
+          "declaration": {
+            "name": "FFormObject",
+            "module": "src/components/f-form-object/f-form-object.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-radio-group/f-radio-group.ts",
       "declarations": [
         {
@@ -1023,131 +1148,6 @@
           "declaration": {
             "name": "FRadioGroup",
             "module": "src/components/f-radio-group/f-radio-group.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-object/f-form-object.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FFormObject",
-          "members": [
-            {
-              "kind": "field",
-              "name": "config",
-              "type": {
-                "text": "FormBuilderObjectField"
-              },
-              "attribute": "config"
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "ObjectValueType"
-              },
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "fieldRefs",
-              "type": {
-                "text": "Record<string, Ref<FFormInputElements>>"
-              },
-              "default": "{}"
-            },
-            {
-              "kind": "field",
-              "name": "showWhenSubject",
-              "type": {
-                "text": "Subject<FormBuilderValue>"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "buildFields"
-            },
-            {
-              "kind": "method",
-              "name": "validate",
-              "parameters": [
-                {
-                  "name": "silent",
-                  "default": "false"
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "dispatchInputEvent"
-            },
-            {
-              "kind": "method",
-              "name": "dispatchShowWhenEvent",
-              "description": "dispatch showWhen event so that root will publish new form values"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "config",
-              "type": {
-                "text": "FormBuilderObjectField"
-              },
-              "fieldName": "config"
-            },
-            {
-              "name": "value",
-              "type": {
-                "text": "ObjectValueType"
-              },
-              "fieldName": "value"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-form-object",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FFormObject",
-          "declaration": {
-            "name": "FFormObject",
-            "module": "src/components/f-form-object/f-form-object.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-form-object",
-          "declaration": {
-            "name": "FFormObject",
-            "module": "src/components/f-form-object/f-form-object.ts"
           }
         }
       ]

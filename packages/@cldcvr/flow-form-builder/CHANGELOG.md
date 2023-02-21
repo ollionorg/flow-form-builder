@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.1.4] - 2023-02-21
+
+### Bug Fix
+
+- value property renamed to values for vue2 bug
 ## [1.1.3] - 2023-02-20
 
 ### Bug Fix
