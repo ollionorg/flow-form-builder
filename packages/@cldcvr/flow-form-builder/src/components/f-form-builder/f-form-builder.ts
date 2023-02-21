@@ -7,17 +7,22 @@ import {
 	FormBuilderValidationPromise,
 	ValidationResults,
 	FormBuilderState,
-	FormBuilderLabel
+	FormBuilderLabel,
+	FormBuilderCategory,
+	FormBuilderGap,
+	FormBuilderSize,
+	FormBuilderVariant
 } from "./mixins/types";
 import eleStyle from "./f-form-builder.scss";
 
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
-import fieldRenderer, { checkFieldType } from "./fields";
+import fieldRenderer from "./fields";
 import { extractValidationState, validateField } from "./mixins/validator";
 import { FForm } from "@cldcvr/flow-core";
 import { Subject } from "rxjs";
+import { propogateProperties } from "./mixins/helpers";
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
@@ -59,25 +64,25 @@ export class FFormBuilder extends FRoot {
 	 * @attribute Controls size of all input elements within the form
 	 */
 	@property({ reflect: true, type: String })
-	size?: "medium" | "small" = "medium";
+	size?: FormBuilderSize = "medium";
 
 	/**
 	 * @attribute Variants are various visual representations of all elements inside form.
 	 */
 	@property({ reflect: true, type: String })
-	variant?: "curved" | "round" | "block" = "curved";
+	variant?: FormBuilderVariant = "curved";
 
 	/**
 	 * @attribute Categories are various visual representations of all elements inside form.
 	 */
 	@property({ reflect: true, type: String })
-	category?: "fill" | "outline" | "transparent" = "fill";
+	category?: FormBuilderCategory = "fill";
 
 	/**
 	 * @attribute Gap is used to define the gap between the elements
 	 */
 	@property({ reflect: true, type: String })
-	gap?: "large" | "medium" | "small" | "x-small" = "medium";
+	gap?: FormBuilderGap = "medium";
 
 	/**
 	 * @attribute group separator
@@ -97,6 +102,9 @@ export class FFormBuilder extends FRoot {
 
 	showWhenSubject!: Subject<FormBuilderValues>;
 
+	/**
+	 * responsible for rendering form
+	 */
 	render() {
 		this.fieldRef = createRef();
 
@@ -106,9 +114,6 @@ export class FFormBuilder extends FRoot {
 				@submit=${this.onSubmit}
 				@show-when=${this.onShowWhen}
 				${ref(this.formRef)}
-				size=${this.size}
-				category=${this.category}
-				variant=${this.variant}
 				?separator=${this.separator}
 				gap=${this.gap}
 			>
@@ -139,25 +144,33 @@ export class FFormBuilder extends FRoot {
 								: ""}
 					  </f-div>`
 					: ``}
-				${fieldRenderer[checkFieldType(this.field.type)](this.name, this.field, this.fieldRef)}
+				${fieldRenderer[this.field.type](this.name, this.field, this.fieldRef)}
 				<slot @click=${this.checkSubmit}></slot>
 			</f-form>
 		`;
 	}
-
+	/**
+	 * Check if submit is triggerred by external element
+	 * @param event
+	 */
 	checkSubmit(event: MouseEvent) {
 		if ((event.target as HTMLElement).getAttribute("type") === "submit") {
 			this.submit();
 		}
 	}
-
+	/**
+	 * Form's submit event handler
+	 * @param event
+	 */
 	onSubmit(event: SubmitEvent) {
 		event.stopPropagation();
 		event.preventDefault();
 		this.submit();
 	}
-
-	submit(this: FFormBuilder) {
+	/**
+	 * Emit submit event with data if validaiton is successful
+	 */
+	submit() {
 		this.validateForm().then(all => {
 			this.updateValidaitonState(all);
 			if (this.state.errors?.length === 0) {
@@ -185,27 +198,50 @@ export class FFormBuilder extends FRoot {
 		setTimeout(async () => {
 			await this.updateComplete;
 
+			/**
+			 * this subject is created for `showWhen` implementation
+			 */
 			this.showWhenSubject = new Subject<FormBuilderValues>();
 			const ref = this.fieldRef;
 
 			if (ref.value && this.values) {
+				/**
+				 * assign values given by consumer
+				 */
 				ref.value.value = this.values;
-
 				ref.value.requestUpdate();
 			}
 			if (ref.value) {
+				/**
+				 * this subject is propogated for `showWhen` implementation
+				 */
 				ref.value.showWhenSubject = this.showWhenSubject;
 				ref.value.oninput = async (event: Event) => {
 					event.stopPropagation();
 					if (!this.values) {
 						this.values = {};
 					}
+					/**
+					 * update values
+					 */
 					this.values = ref.value?.value as FormBuilderValues;
+					/**
+					 * update isChanged prop in state to let user know that form is changed
+					 */
 					this.state.isChanged = true;
+					/**
+					 * validate current field
+					 */
 					validateField(this.field, ref.value as FFormInputElements, false);
+					/**
+					 * if current field is of type array or object then then also validate form anyway
+					 */
 					await this.validateForm(true).then(all => {
 						this.updateValidaitonState(all);
 					});
+					/**
+					 * dispatch input event for consumer
+					 */
 					this.dispatchInputEvent();
 				};
 
@@ -223,7 +259,9 @@ export class FFormBuilder extends FRoot {
 							}
 						}
 					});
-
+					/**
+					 * execute showWhen for values given by consumer
+					 */
 					this.dispatchShowWhenEvent();
 				}
 			}
@@ -233,13 +271,22 @@ export class FFormBuilder extends FRoot {
 			await this.validateForm(true).then(all => {
 				this.updateValidaitonState(all);
 			});
+
+			propogateProperties(this);
 		}, 100);
 	}
 
+	/**
+	 * showWhen handler
+	 */
 	onShowWhen() {
 		this.showWhenSubject.next(this.values ?? {});
 	}
 
+	/**
+	 * Validation of whole form
+	 * @param silent whether to display validaiton message or not
+	 */
 	async validateForm(silent = false) {
 		const allValidations: FormBuilderValidationPromise[] = [];
 		if ((this.field.type === "object" || this.field.type === "array") && this.fieldRef.value) {
@@ -265,6 +312,9 @@ export class FFormBuilder extends FRoot {
 		});
 		this.dispatchEvent(input);
 	}
+	/**
+	 * dispatching `state-change` event for consumer
+	 */
 	dispatchStateChangeEvent() {
 		const stateChange = new CustomEvent("state-change", {
 			detail: this.state,
@@ -284,7 +334,9 @@ export class FFormBuilder extends FRoot {
 		});
 		this.dispatchEvent(showWhen);
 	}
-
+	/**
+	 * Whenever form removed from DOM
+	 */
 	disconnectedCallback(): void {
 		try {
 			super.disconnectedCallback();

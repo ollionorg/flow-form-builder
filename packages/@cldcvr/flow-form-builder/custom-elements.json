@@ -90,6 +90,173 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form-array/f-form-array.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FFormArray",
+          "members": [
+            {
+              "kind": "field",
+              "name": "config",
+              "type": {
+                "text": "FormBuilderArrayField"
+              },
+              "attribute": "config"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "ArrayValueType"
+              },
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fieldRefs",
+              "type": {
+                "text": "Ref<FFormInputElements>[]"
+              },
+              "default": "[]"
+            },
+            {
+              "kind": "field",
+              "name": "showWhenSubject",
+              "type": {
+                "text": "Subject<FormBuilderValues>"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "buildFields",
+              "parameters": [
+                {
+                  "name": "valueCount",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "validate",
+              "parameters": [
+                {
+                  "name": "silent",
+                  "default": "false"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "addField"
+            },
+            {
+              "kind": "method",
+              "name": "removeField",
+              "parameters": [
+                {
+                  "name": "idx",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "dispatchShowWhenEvent",
+              "description": "dispatch showWhen event so that root will publish new form values"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchInputEvent"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "config",
+              "type": {
+                "text": "FormBuilderArrayField"
+              },
+              "fieldName": "config"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "ArrayValueType"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "gap"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-form-array",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FFormArray",
+          "declaration": {
+            "name": "FFormArray",
+            "module": "src/components/f-form-array/f-form-array.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-form-array",
+          "declaration": {
+            "name": "FFormArray",
+            "module": "src/components/f-form-array/f-form-array.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-checkbox-group/f-checkbox-group.ts",
       "declarations": [
         {
@@ -263,155 +430,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-form-array/f-form-array.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FFormArray",
-          "members": [
-            {
-              "kind": "field",
-              "name": "config",
-              "type": {
-                "text": "FormBuilderArrayField"
-              },
-              "attribute": "config"
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "ArrayValueType"
-              },
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "fieldRefs",
-              "type": {
-                "text": "Ref<FFormInputElements>[]"
-              },
-              "default": "[]"
-            },
-            {
-              "kind": "field",
-              "name": "showWhenSubject",
-              "type": {
-                "text": "Subject<FormBuilderValues>"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "buildFields",
-              "parameters": [
-                {
-                  "name": "valueCount",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "validate",
-              "parameters": [
-                {
-                  "name": "silent",
-                  "default": "false"
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "addField"
-            },
-            {
-              "kind": "method",
-              "name": "removeField",
-              "parameters": [
-                {
-                  "name": "idx",
-                  "type": {
-                    "text": "number"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "dispatchShowWhenEvent",
-              "description": "dispatch showWhen event so that root will publish new form values"
-            },
-            {
-              "kind": "method",
-              "name": "dispatchInputEvent"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "config",
-              "type": {
-                "text": "FormBuilderArrayField"
-              },
-              "fieldName": "config"
-            },
-            {
-              "name": "value",
-              "type": {
-                "text": "ArrayValueType"
-              },
-              "fieldName": "value"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-form-array",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FFormArray",
-          "declaration": {
-            "name": "FFormArray",
-            "module": "src/components/f-form-array/f-form-array.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-form-array",
-          "declaration": {
-            "name": "FFormArray",
-            "module": "src/components/f-form-array/f-form-array.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-form-builder/f-form-builder.ts",
       "declarations": [
         {
@@ -456,7 +474,7 @@
               "kind": "field",
               "name": "size",
               "type": {
-                "text": "\"medium\" | \"small\" | undefined"
+                "text": "FormBuilderSize | undefined"
               },
               "default": "\"medium\"",
               "attribute": "size",
@@ -466,7 +484,7 @@
               "kind": "field",
               "name": "variant",
               "type": {
-                "text": "\"curved\" | \"round\" | \"block\" | undefined"
+                "text": "FormBuilderVariant | undefined"
               },
               "default": "\"curved\"",
               "attribute": "variant",
@@ -476,7 +494,7 @@
               "kind": "field",
               "name": "category",
               "type": {
-                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
+                "text": "FormBuilderCategory | undefined"
               },
               "default": "\"fill\"",
               "attribute": "category",
@@ -486,7 +504,7 @@
               "kind": "field",
               "name": "gap",
               "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+                "text": "FormBuilderGap | undefined"
               },
               "default": "\"medium\"",
               "attribute": "gap",
@@ -541,7 +559,8 @@
                     "text": "MouseEvent"
                   }
                 }
-              ]
+              ],
+              "description": "Check if submit is triggerred by external element"
             },
             {
               "kind": "method",
@@ -553,19 +572,13 @@
                     "text": "SubmitEvent"
                   }
                 }
-              ]
+              ],
+              "description": "Form's submit event handler"
             },
             {
               "kind": "method",
               "name": "submit",
-              "parameters": [
-                {
-                  "name": "this",
-                  "type": {
-                    "text": "FFormBuilder"
-                  }
-                }
-              ]
+              "description": "Emit submit event with data if validaiton is successful"
             },
             {
               "kind": "method",
@@ -581,7 +594,8 @@
             },
             {
               "kind": "method",
-              "name": "onShowWhen"
+              "name": "onShowWhen",
+              "description": "showWhen handler"
             },
             {
               "kind": "method",
@@ -589,9 +603,11 @@
               "parameters": [
                 {
                   "name": "silent",
-                  "default": "false"
+                  "default": "false",
+                  "description": "whether to display validaiton message or not"
                 }
-              ]
+              ],
+              "description": "Validation of whole form"
             },
             {
               "kind": "method",
@@ -600,7 +616,8 @@
             },
             {
               "kind": "method",
-              "name": "dispatchStateChangeEvent"
+              "name": "dispatchStateChangeEvent",
+              "description": "dispatching `state-change` event for consumer"
             },
             {
               "kind": "method",
@@ -640,7 +657,7 @@
             {
               "name": "size",
               "type": {
-                "text": "\"medium\" | \"small\" | undefined"
+                "text": "FormBuilderSize | undefined"
               },
               "default": "\"medium\"",
               "fieldName": "size"
@@ -648,7 +665,7 @@
             {
               "name": "variant",
               "type": {
-                "text": "\"curved\" | \"round\" | \"block\" | undefined"
+                "text": "FormBuilderVariant | undefined"
               },
               "default": "\"curved\"",
               "fieldName": "variant"
@@ -656,7 +673,7 @@
             {
               "name": "category",
               "type": {
-                "text": "\"fill\" | \"outline\" | \"transparent\" | undefined"
+                "text": "FormBuilderCategory | undefined"
               },
               "default": "\"fill\"",
               "fieldName": "category"
@@ -664,7 +681,7 @@
             {
               "name": "gap",
               "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+                "text": "FormBuilderGap | undefined"
               },
               "default": "\"medium\"",
               "fieldName": "gap"
@@ -911,6 +928,16 @@
             },
             {
               "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
               "name": "fieldRefs",
               "type": {
                 "text": "Record<string, Ref<FFormInputElements>>"
@@ -970,6 +997,14 @@
               },
               "default": "\"default\"",
               "fieldName": "state"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "gap"
             }
           ],
           "superclass": {
@@ -1411,20 +1446,7 @@
           "type": {
             "text": "Record<string, FormBuilderFieldRenderFunction>"
           },
-          "default": "{\n\ttext,\n\tcheckbox,\n\ttextarea,\n\tradio,\n\tswitchButton,\n\tselect,\n\tbutton,\n\tarray,\n\tobject,\n\t[\"icon-button\"]: iconButton\n}"
-        },
-        {
-          "kind": "function",
-          "name": "checkFieldType",
-          "parameters": [
-            {
-              "name": "type",
-              "type": {
-                "text": "string"
-              }
-            }
-          ],
-          "description": "check field type and return genric"
+          "default": "{\n\ttext,\n\tcheckbox,\n\ttextarea,\n\tradio,\n\tswitchButton,\n\tselect,\n\tbutton,\n\tarray,\n\tobject,\n\t[\"icon-button\"]: iconButton,\n\ttel: text,\n\tnumber: text,\n\temail: text,\n\turl: text,\n\tpassword: text\n}"
         }
       ],
       "exports": [
@@ -1433,14 +1455,6 @@
           "name": "default",
           "declaration": {
             "name": "all",
-            "module": "src/components/f-form-builder/fields/index.ts"
-          }
-        },
-        {
-          "kind": "js",
-          "name": "checkFieldType",
-          "declaration": {
-            "name": "checkFieldType",
             "module": "src/components/f-form-builder/fields/index.ts"
           }
         }
@@ -1706,6 +1720,34 @@
           "declaration": {
             "name": "",
             "module": "src/components/f-form-builder/fields/textarea.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/mixins/helpers.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "propogateProperties",
+          "parameters": [
+            {
+              "name": "element",
+              "type": {
+                "text": "FFormArray | FFormObject | FFormBuilder"
+              }
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "propogateProperties",
+          "declaration": {
+            "name": "propogateProperties",
+            "module": "src/components/f-form-builder/mixins/helpers.ts"
           }
         }
       ]

@@ -4,7 +4,7 @@ import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import eleStyle from "./f-form-object.scss";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 
-import fieldRenderer, { checkFieldType } from "../f-form-builder/fields";
+import fieldRenderer from "../f-form-builder/fields";
 import { createRef, Ref } from "lit/directives/ref.js";
 import {
 	FFormInputElements,
@@ -14,6 +14,7 @@ import {
 } from "../f-form-builder/mixins/types";
 import { validateField } from "../f-form-builder/mixins/validator";
 import { Subject } from "rxjs";
+import { propogateProperties } from "../f-form-builder/mixins/helpers";
 
 export type ObjectValueType = Record<
 	string,
@@ -46,6 +47,12 @@ export class FFormObject extends FRoot {
 	@property({ reflect: true, type: String })
 	state?: "primary" | "default" | "success" | "warning" | "danger" = "default";
 
+	/**
+	 * @attribute Gap is used to define the gap between the elements
+	 */
+	@property({ reflect: true, type: String })
+	gap?: "large" | "medium" | "small" | "x-small" = "medium";
+
 	fieldRefs: Record<string, Ref<FFormInputElements>> = {};
 
 	showWhenSubject!: Subject<FormBuilderValues>;
@@ -62,7 +69,7 @@ export class FFormObject extends FRoot {
 			this.fieldRefs[fieldname] = fieldRef;
 			fieldTemplates.push(
 				html`
-					${fieldRenderer[checkFieldType(fieldConfig.type)](fieldname, fieldConfig, fieldRef)}
+					${fieldRenderer[fieldConfig.type](fieldname, fieldConfig, fieldRef)}
 					${this.config.fieldSeparator
 						? html`<f-divider id="${fieldname}-divider"></f-divider>`
 						: ""}
@@ -75,7 +82,7 @@ export class FFormObject extends FRoot {
 				.direction=${this.config.direction}
 				.variant=${this.config.variant}
 				.label=${this.config.label}
-				gap=${this.config.gap ?? "medium"}
+				gap=${this.config.gap ?? this.gap}
 				.collapse=${this.config.isCollapsible ? "accordion" : "none"}
 			>
 				${fieldTemplates}
@@ -165,6 +172,8 @@ export class FFormObject extends FRoot {
 					}
 				}
 			});
+
+			propogateProperties(this);
 		}, 100);
 	}
 

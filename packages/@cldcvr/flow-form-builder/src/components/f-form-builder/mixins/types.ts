@@ -260,3 +260,8 @@ export type FormBuilderState = {
 	isValid: boolean;
 	isChanged: boolean;
 };
+
+export type FormBuilderSize = "medium" | "small";
+export type FormBuilderVariant = "curved" | "round" | "block";
+export type FormBuilderCategory = "fill" | "outline" | "transparent";
+export type FormBuilderGap = "large" | "medium" | "small" | "x-small";

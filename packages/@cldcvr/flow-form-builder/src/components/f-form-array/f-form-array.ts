@@ -10,11 +10,12 @@ import {
 	FormBuilderValidationPromise,
 	FormBuilderValues
 } from "../f-form-builder/mixins/types";
-import fieldRenderer, { checkFieldType } from "../f-form-builder/fields";
+import fieldRenderer from "../f-form-builder/fields";
 import { createRef, Ref } from "lit/directives/ref.js";
 import { isEmptyArray } from "../f-form-builder/utils";
 import { validateField } from "../f-form-builder/mixins/validator";
 import { Subject } from "rxjs";
+import { propogateProperties } from "../f-form-builder/mixins/helpers";
 
 export type ArrayValueType = (
 	| string
@@ -52,6 +53,12 @@ export class FFormArray extends FRoot {
 	@property({ reflect: true, type: String })
 	state?: "primary" | "default" | "success" | "warning" | "danger" = "default";
 
+	/**
+	 * @attribute Gap is used to define the gap between the elements
+	 */
+	@property({ reflect: true, type: String })
+	gap?: "large" | "medium" | "small" | "x-small" = "medium";
+
 	fieldRefs: Ref<FFormInputElements>[] = [];
 
 	showWhenSubject!: Subject<FormBuilderValues>;
@@ -78,7 +85,7 @@ export class FFormArray extends FRoot {
 			this.fieldRefs.push(fieldRef);
 			fieldTemplates.push(
 				html` <f-div gap="small" overflow="scroll"
-					>${fieldRenderer[checkFieldType(this.config.field.type)](
+					>${fieldRenderer[this.config.field.type](
 						this.getAttribute("name") as string,
 						this.config.field,
 						fieldRef
@@ -138,7 +145,7 @@ export class FFormArray extends FRoot {
 				  </f-div>`
 				: ``}
 
-			<f-div gap="small" direction="column"> ${fieldTemplates} </f-div>
+			<f-div .gap=${this.gap} direction="column"> ${fieldTemplates} </f-div>
 
 			${this.config.helperText
 				? html`<f-text variant="para" size="small" weight="regular" .state=${this.config.state}
@@ -208,6 +215,7 @@ export class FFormArray extends FRoot {
 					}
 				}
 			});
+			propogateProperties(this);
 		}, 100);
 	}
 

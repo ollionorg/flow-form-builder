@@ -83,7 +83,7 @@
     },
     {
       "name": "f-form-array",
-      "description": "Events:\n\n  * `show-when` {`CustomEvent<boolean>`} - \n\n  * `input` {`CustomEvent<ArrayValueType>`} - \n\nAttributes:\n\n  * `config` {`FormBuilderArrayField`} - \n\n  * `value` {`ArrayValueType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `config` {`FormBuilderArrayField`} - \n\n  * `value` {`ArrayValueType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `fieldRefs` {`Ref<FFormInputElements>[]`} - \n\n  * `showWhenSubject` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `show-when` {`CustomEvent<boolean>`} - \n\n  * `input` {`CustomEvent<ArrayValueType>`} - \n\nAttributes:\n\n  * `config` {`FormBuilderArrayField`} - \n\n  * `value` {`ArrayValueType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `config` {`FormBuilderArrayField`} - \n\n  * `value` {`ArrayValueType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `fieldRefs` {`Ref<FFormInputElements>[]`} - \n\n  * `showWhenSubject` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "config",
@@ -115,6 +115,24 @@
           ]
         },
         {
+          "name": "gap",
+          "description": "`gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\nProperty: gap\n\nDefault: medium",
+          "values": [
+            {
+              "name": "large"
+            },
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            },
+            {
+              "name": "x-small"
+            }
+          ]
+        },
+        {
           "name": "tooltip",
           "description": "`tooltip` {`string | undefined`} - \n\nProperty: tooltip",
           "values": []
@@ -131,7 +149,7 @@
     },
     {
       "name": "f-form-builder",
-      "description": "Events:\n\n  * `submit` {`CustomEvent<string | number | string[] | number[] | Record<string, unknown> | Record<string, unknown>[]>`} - \n\n  * `input` {`CustomEvent<string | number | string[] | number[] | Record<string, unknown> | Record<string, unknown>[]>`} - \n\n  * `state-change` {`CustomEvent<FormBuilderState>`} - \n\n  * `show-when` {`CustomEvent<boolean>`} - \n\nAttributes:\n\n  * `name` {`string`} - \n\n  * `label` {`FormBuilderLabel | undefined`} - \n\n  * `field` {`FormBuilderField`} - \n\n  * `values` - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `variant` {`\"curved\" | \"round\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `separator` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `name` {`string`} - \n\n  * `label` {`FormBuilderLabel | undefined`} - \n\n  * `field` {`FormBuilderField`} - \n\n  * `values` - \n\n  * `size` {`\"medium\" | \"small\" | undefined`} - \n\n  * `variant` {`\"curved\" | \"round\" | \"block\" | undefined`} - \n\n  * `category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `separator` {`boolean | undefined`} - \n\n  * `fieldRef` - \n\n  * `formRef` - \n\n  * `state` {`FormBuilderState`} - \n\n  * `showWhenSubject` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `submit` {`CustomEvent<string | number | string[] | number[] | Record<string, unknown> | Record<string, unknown>[]>`} - \n\n  * `input` {`CustomEvent<string | number | string[] | number[] | Record<string, unknown> | Record<string, unknown>[]>`} - \n\n  * `state-change` {`CustomEvent<FormBuilderState>`} - \n\n  * `show-when` {`CustomEvent<boolean>`} - \n\nAttributes:\n\n  * `name` {`string`} - \n\n  * `label` {`FormBuilderLabel | undefined`} - \n\n  * `field` {`FormBuilderField`} - \n\n  * `values` - \n\n  * `size` {`FormBuilderSize | undefined`} - \n\n  * `variant` {`FormBuilderVariant | undefined`} - \n\n  * `category` {`FormBuilderCategory | undefined`} - \n\n  * `gap` {`FormBuilderGap | undefined`} - \n\n  * `separator` {`boolean | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `name` {`string`} - \n\n  * `label` {`FormBuilderLabel | undefined`} - \n\n  * `field` {`FormBuilderField`} - \n\n  * `values` - \n\n  * `size` {`FormBuilderSize | undefined`} - \n\n  * `variant` {`FormBuilderVariant | undefined`} - \n\n  * `category` {`FormBuilderCategory | undefined`} - \n\n  * `gap` {`FormBuilderGap | undefined`} - \n\n  * `separator` {`boolean | undefined`} - \n\n  * `fieldRef` - \n\n  * `formRef` - \n\n  * `state` {`FormBuilderState`} - \n\n  * `showWhenSubject` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "name",
@@ -154,7 +172,7 @@
         },
         {
           "name": "size",
-          "description": "`size` {`\"medium\" | \"small\" | undefined`} - \n\nProperty: size\n\nDefault: medium",
+          "description": "`size` {`FormBuilderSize | undefined`} - \n\nProperty: size\n\nDefault: medium",
           "values": [
             {
               "name": "medium"
@@ -166,7 +184,7 @@
         },
         {
           "name": "variant",
-          "description": "`variant` {`\"curved\" | \"round\" | \"block\" | undefined`} - \n\nProperty: variant\n\nDefault: curved",
+          "description": "`variant` {`FormBuilderVariant | undefined`} - \n\nProperty: variant\n\nDefault: curved",
           "values": [
             {
               "name": "curved"
@@ -181,7 +199,7 @@
         },
         {
           "name": "category",
-          "description": "`category` {`\"fill\" | \"outline\" | \"transparent\" | undefined`} - \n\nProperty: category\n\nDefault: fill",
+          "description": "`category` {`FormBuilderCategory | undefined`} - \n\nProperty: category\n\nDefault: fill",
           "values": [
             {
               "name": "fill"
@@ -196,7 +214,7 @@
         },
         {
           "name": "gap",
-          "description": "`gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\nProperty: gap\n\nDefault: medium",
+          "description": "`gap` {`FormBuilderGap | undefined`} - \n\nProperty: gap\n\nDefault: medium",
           "values": [
             {
               "name": "large"
@@ -242,7 +260,7 @@
     },
     {
       "name": "f-form-object",
-      "description": "Events:\n\n  * `input` {`CustomEvent<ObjectValueType>`} - \n\n  * `show-when` {`CustomEvent<boolean>`} - \n\nAttributes:\n\n  * `config` {`FormBuilderObjectField`} - \n\n  * `value` - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `config` {`FormBuilderObjectField`} - \n\n  * `value` - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `fieldRefs` - \n\n  * `showWhenSubject` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `input` {`CustomEvent<ObjectValueType>`} - \n\n  * `show-when` {`CustomEvent<boolean>`} - \n\nAttributes:\n\n  * `config` {`FormBuilderObjectField`} - \n\n  * `value` - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `config` {`FormBuilderObjectField`} - \n\n  * `value` - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `fieldRefs` - \n\n  * `showWhenSubject` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "config",
@@ -270,6 +288,24 @@
             },
             {
               "name": "danger"
+            }
+          ]
+        },
+        {
+          "name": "gap",
+          "description": "`gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\nProperty: gap\n\nDefault: medium",
+          "values": [
+            {
+              "name": "large"
+            },
+            {
+              "name": "medium"
+            },
+            {
+              "name": "small"
+            },
+            {
+              "name": "x-small"
             }
           ]
         },

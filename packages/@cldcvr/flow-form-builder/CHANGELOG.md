@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.1.6] - 2023-02-21
+
+### Improvements
+
+- `variant`, `category`, `size`, `gap` propogation to all inputs.
 ## [1.1.5] - 2023-02-21
 
 ### Improvements

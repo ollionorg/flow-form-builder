@@ -20,26 +20,12 @@ const all: Record<string, FormBuilderFieldRenderFunction> = {
 	button,
 	array,
 	object,
-	["icon-button"]: iconButton
+	["icon-button"]: iconButton,
+	tel: text,
+	number: text,
+	email: text,
+	url: text,
+	password: text
 };
 
 export default all;
-
-/**
- * check field type and return genric
- * @param type
- */
-export function checkFieldType(type: string) {
-	if (
-		type === "text" ||
-		type === "tel" ||
-		type === "number" ||
-		type === "email" ||
-		type === "url" ||
-		type === "password"
-	) {
-		return "text";
-	} else {
-		return type;
-	}
-}
