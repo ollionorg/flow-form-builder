@@ -12,17 +12,17 @@ import {
 	FormBuilderGap,
 	FormBuilderSize,
 	FormBuilderVariant
-} from "./mixins/types";
+} from "../../types";
 import eleStyle from "./f-form-builder.scss";
 
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import { Ref, createRef, ref } from "lit/directives/ref.js";
 import fieldRenderer from "./fields";
-import { extractValidationState, validateField } from "./mixins/validator";
+import { extractValidationState, validateField } from "../../modules/validation/validator";
 import { FForm } from "@cldcvr/flow-core";
 import { Subject } from "rxjs";
-import { propogateProperties } from "./mixins/helpers";
+import { propogateProperties } from "../../modules/helpers";
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {

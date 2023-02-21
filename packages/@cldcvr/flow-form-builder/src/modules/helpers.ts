@@ -1,6 +1,6 @@
-import { FFormArray } from "./../../f-form-array/f-form-array";
-import { FFormObject } from "./../../f-form-object/f-form-object";
-import { FFormBuilder } from "../f-form-builder";
+import { FFormArray } from "../components/f-form-array/f-form-array";
+import { FFormObject } from "../components/f-form-object/f-form-object";
+import { FFormBuilder } from "../components/f-form-builder/f-form-builder";
 
 export function propogateProperties(element: FFormArray | FFormObject | FFormBuilder) {
 	const inputElements = element.shadowRoot?.querySelectorAll<HTMLElement>(

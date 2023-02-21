@@ -9,13 +9,13 @@ import {
 	FormBuilderArrayField,
 	FormBuilderValidationPromise,
 	FormBuilderValues
-} from "../f-form-builder/mixins/types";
+} from "../../types";
 import fieldRenderer from "../f-form-builder/fields";
 import { createRef, Ref } from "lit/directives/ref.js";
-import { isEmptyArray } from "../f-form-builder/utils";
-import { validateField } from "../f-form-builder/mixins/validator";
+import { isEmptyArray } from "../../modules/utils";
+import { validateField } from "../../modules/validation/validator";
 import { Subject } from "rxjs";
-import { propogateProperties } from "../f-form-builder/mixins/helpers";
+import { propogateProperties } from "../../modules/helpers";
 
 export type ArrayValueType = (
 	| string

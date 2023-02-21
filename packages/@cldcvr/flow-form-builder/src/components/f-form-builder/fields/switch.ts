@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { FFormInputElements, FormBuilderField, FormBuilderSwitchField } from "../mixins/types";
+import { FFormInputElements, FormBuilderField, FormBuilderSwitchField } from "../../../types";
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (

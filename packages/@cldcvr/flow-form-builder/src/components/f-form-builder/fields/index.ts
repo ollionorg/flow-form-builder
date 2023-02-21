@@ -4,7 +4,7 @@ import radio from "./radio";
 import switchButton from "./switch";
 import select from "./select";
 import button from "./button";
-import { FormBuilderFieldRenderFunction } from "../mixins/types";
+import { FormBuilderFieldRenderFunction } from "../../../types";
 import textarea from "./textarea";
 import iconButton from "./icon-button";
 import array from "./array";

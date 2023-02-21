@@ -1,7 +1,7 @@
 // import { FRoot } from "@cldcvr/flow-core";
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { RadioOptionsType } from "../f-form-builder/mixins/types";
+import { RadioOptionsType } from "../../types";
 import eleStyle from "./f-radio-group.scss";
 import { FDiv, FRoot, FText } from "@cldcvr/flow-core";
 

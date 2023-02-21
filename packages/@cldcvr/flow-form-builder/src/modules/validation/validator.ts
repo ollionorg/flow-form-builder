@@ -6,10 +6,10 @@ import {
 	FormBuilderValidationRules,
 	ValidationResult,
 	ValidationResults
-} from "./types";
+} from "../../types";
 
-import rules from "./../validation-rules";
-import defaultMessages from "./../default-validation-messages";
+import rules from "./rules";
+import defaultMessages from "./default-validation-messages";
 import { FButton, FIconButton } from "@cldcvr/flow-core";
 
 export default function validate(

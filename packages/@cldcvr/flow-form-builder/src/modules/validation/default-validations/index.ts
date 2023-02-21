@@ -1,5 +1,5 @@
-import { FormBuilderValidationRules } from "../mixins/types";
-import { isValidEmail, isValidHttpUrl } from "../utils";
+import { FormBuilderValidationRules } from "../../../types";
+import { isValidEmail, isValidHttpUrl } from "../../../modules/utils";
 
 export default function defaultValidations(
 	fieldType: string,

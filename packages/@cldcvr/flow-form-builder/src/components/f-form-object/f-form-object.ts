@@ -11,10 +11,10 @@ import {
 	FormBuilderObjectField,
 	FormBuilderValidationPromise,
 	FormBuilderValues
-} from "../f-form-builder/mixins/types";
-import { validateField } from "../f-form-builder/mixins/validator";
+} from "../../types";
+import { validateField } from "../../modules/validation/validator";
 import { Subject } from "rxjs";
-import { propogateProperties } from "../f-form-builder/mixins/helpers";
+import { propogateProperties } from "../../modules/helpers";
 
 export type ObjectValueType = Record<
 	string,

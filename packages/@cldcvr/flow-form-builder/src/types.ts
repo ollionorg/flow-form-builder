@@ -2,7 +2,7 @@
 import { LitElement, TemplateResult } from "lit";
 import { Ref } from "lit-html/directives/ref.js";
 import { FButtonState, FIconButtonState, FSelectOptions } from "@cldcvr/flow-core";
-import { BetweenParams } from "../validation-rules/between";
+import { BetweenParams } from "./modules/validation/rules/between";
 import { Subject } from "rxjs";
 
 export type FormBuilderFieldEvents = {
