@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.1.7] - 2023-02-22
+
+### Improvements
+
+- default validations added for `url` and `email` fields.
 ## [1.1.6] - 2023-02-21
 
 ### Improvements

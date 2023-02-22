@@ -1,4 +1,4 @@
-import { FormBuilderField } from "@cldcvr/flow-form-builder/src/components/f-form-builder/mixins/types";
+import { FormBuilderField } from "@cldcvr/flow-form-builder/src/types";
 
 const field: FormBuilderField = {
 	type: "object",
@@ -30,7 +30,7 @@ const field: FormBuilderField = {
 			type: "text",
 			helperText: "This field is a required field",
 			suffix: "recommended",
-			suffixWhen: value => {
+			suffixWhen: (value: string) => {
 				return value === "vikas";
 			},
 			validationRules: [
@@ -48,7 +48,6 @@ const field: FormBuilderField = {
 				}
 			],
 			showWhen: values => {
-				console.log(values, (values as Record<string, string>)?.textField === "vikas");
 				return (values as Record<string, string>)?.textField === "vikas";
 			},
 			onClick: (event: PointerEvent) => {
@@ -80,7 +79,13 @@ const field: FormBuilderField = {
 				description: "default validaiton should apply"
 			}
 		},
-
+		urlField: {
+			type: "url",
+			label: {
+				title: "URL field",
+				description: "default validaiton should apply"
+			}
+		},
 		switchButton: {
 			type: "switchButton",
 			validationRules: [

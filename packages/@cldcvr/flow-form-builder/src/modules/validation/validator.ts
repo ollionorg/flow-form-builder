@@ -11,6 +11,7 @@ import {
 import rules from "./rules";
 import defaultMessages from "./default-validation-messages";
 import { FButton, FIconButton } from "@cldcvr/flow-core";
+import defaultValidations from "./default-validations";
 
 export default function validate(
 	value: string,
@@ -84,8 +85,12 @@ export async function validateField(
 ): FormBuilderValidationPromise {
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 
-	const rulesToValidate = field.validationRules?.filter(filter ? filter : () => true);
+	let rulesToValidate = field.validationRules?.filter(filter ? filter : () => true);
+	if (!rulesToValidate) {
+		rulesToValidate = [];
+	}
 
+	defaultValidations(field.type, rulesToValidate);
 	const { result, message, rule, name } = validate(
 		(element.value as string) ?? "",
 		rulesToValidate as FormBuilderValidationRules,
