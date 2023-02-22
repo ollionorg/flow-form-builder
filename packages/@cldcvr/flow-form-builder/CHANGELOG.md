@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.1.9] - 2023-02-22
+
+### Improvements
+
+- `min`, `max`,`min-value`,`max-value`, `regex` validation rules added.
+
 ## [1.1.8] - 2023-02-22
 
 ### Improvements

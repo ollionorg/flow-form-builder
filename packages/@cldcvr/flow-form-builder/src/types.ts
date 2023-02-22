@@ -4,6 +4,11 @@ import { Ref } from "lit-html/directives/ref.js";
 import { FButtonState, FIconButtonState, FSelectOptions } from "@cldcvr/flow-core";
 import { BetweenParams } from "./modules/validation/rules/between";
 import { Subject } from "rxjs";
+import { MaxParams } from "./modules/validation/rules/max";
+import { MinParams } from "./modules/validation/rules/min";
+import { MaxValueParams } from "./modules/validation/rules/max-value";
+import { MinValueParams } from "./modules/validation/rules/min-value";
+import { RegexParams } from "./modules/validation/rules/regex";
 
 export type FormBuilderFieldEvents = {
 	onClick?: (event: PointerEvent) => void;
@@ -186,7 +191,26 @@ export type FormBuilderValidationBetweenRule = FormBuilderValidationRule & {
 	name: "between";
 	params: BetweenParams;
 };
-
+export type FormBuilderValidationMaxRule = FormBuilderValidationRule & {
+	name: "max";
+	params: MaxParams;
+};
+export type FormBuilderValidationMinRule = FormBuilderValidationRule & {
+	name: "min";
+	params: MinParams;
+};
+export type FormBuilderValidationMaxValueRule = FormBuilderValidationRule & {
+	name: "max-value";
+	params: MaxValueParams;
+};
+export type FormBuilderValidationMinValueRule = FormBuilderValidationRule & {
+	name: "min-value";
+	params: MinValueParams;
+};
+export type FormBuilderValidationRegexRule = FormBuilderValidationRule & {
+	name: "regex";
+	params: RegexParams;
+};
 export type FormBuilderCustomValidationRule = FormBuilderValidationRule & {
 	name: "custom";
 	when?: FormBuilderValidationRuleTriggers[];
@@ -202,7 +226,12 @@ export type FormBuilderGenericValidationRule =
 	| FormBuilderValidationRequiredRule
 	| FormBuilderCustomValidationRule
 	| FormBuilderValidationEmailRule
-	| FormBuilderValidationBetweenRule;
+	| FormBuilderValidationBetweenRule
+	| FormBuilderValidationMaxRule
+	| FormBuilderValidationMinRule
+	| FormBuilderValidationMinValueRule
+	| FormBuilderValidationMaxValueRule
+	| FormBuilderValidationRegexRule;
 export type FormBuilderValidationRules = FormBuilderGenericValidationRule[];
 
 export type FomrBuilderSuffixStateObject = {

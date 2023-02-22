@@ -72,20 +72,7 @@ const field: FormBuilderField = {
 				console.log("onMouseOver callback triggered", event);
 			}
 		},
-		emailField: {
-			type: "email",
-			label: {
-				title: "Email field",
-				description: "default validaiton should apply"
-			}
-		},
-		urlField: {
-			type: "url",
-			label: {
-				title: "URL field",
-				description: "default validaiton should apply"
-			}
-		},
+
 		switchButton: {
 			type: "switchButton",
 			validationRules: [

@@ -653,6 +653,174 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-radio-group/f-radio-group.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FRadioGroup",
+          "members": [
+            {
+              "kind": "field",
+              "name": "options",
+              "type": {
+                "text": "RadioOptions"
+              },
+              "default": "[]",
+              "attribute": "options",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "RadioOption | undefined"
+              },
+              "attribute": "value",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "attribute": "direction",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "helperText",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "helperText",
+              "reflects": true
+            },
+            {
+              "kind": "method",
+              "name": "handleChange",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "RadioOption"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "isChecked",
+              "parameters": [
+                {
+                  "name": "option",
+                  "type": {
+                    "text": "RadioOption"
+                  }
+                }
+              ]
+            }
+          ],
+          "attributes": [
+            {
+              "name": "options",
+              "type": {
+                "text": "RadioOptions"
+              },
+              "default": "[]",
+              "fieldName": "options"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "RadioOption | undefined"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "direction",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "fieldName": "direction"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"small\"",
+              "fieldName": "gap"
+            },
+            {
+              "name": "helperText",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "helperText"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core"
+          },
+          "summary": "Text component includes Headings, titles, body texts and links.",
+          "tagName": "f-radio-group",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FRadioGroup",
+          "declaration": {
+            "name": "FRadioGroup",
+            "module": "src/components/f-radio-group/f-radio-group.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-radio-group",
+          "declaration": {
+            "name": "FRadioGroup",
+            "module": "src/components/f-radio-group/f-radio-group.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-builder/f-form-builder.ts",
       "declarations": [
         {
@@ -1084,174 +1252,6 @@
           "declaration": {
             "name": "FFormObject",
             "module": "src/components/f-form-object/f-form-object.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-radio-group/f-radio-group.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FRadioGroup",
-          "members": [
-            {
-              "kind": "field",
-              "name": "options",
-              "type": {
-                "text": "RadioOptions"
-              },
-              "default": "[]",
-              "attribute": "options",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "RadioOption | undefined"
-              },
-              "attribute": "value",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "direction",
-              "type": {
-                "text": "\"vertical\" | \"horizontal\" | undefined"
-              },
-              "default": "\"vertical\"",
-              "attribute": "direction",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"small\"",
-              "attribute": "gap",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "helperText",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "helperText",
-              "reflects": true
-            },
-            {
-              "kind": "method",
-              "name": "handleChange",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "RadioOption"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "isChecked",
-              "parameters": [
-                {
-                  "name": "option",
-                  "type": {
-                    "text": "RadioOption"
-                  }
-                }
-              ]
-            }
-          ],
-          "attributes": [
-            {
-              "name": "options",
-              "type": {
-                "text": "RadioOptions"
-              },
-              "default": "[]",
-              "fieldName": "options"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "value",
-              "type": {
-                "text": "RadioOption | undefined"
-              },
-              "fieldName": "value"
-            },
-            {
-              "name": "direction",
-              "type": {
-                "text": "\"vertical\" | \"horizontal\" | undefined"
-              },
-              "default": "\"vertical\"",
-              "fieldName": "direction"
-            },
-            {
-              "name": "gap",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"small\"",
-              "fieldName": "gap"
-            },
-            {
-              "name": "helperText",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "helperText"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core"
-          },
-          "summary": "Text component includes Headings, titles, body texts and links.",
-          "tagName": "f-radio-group",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FRadioGroup",
-          "declaration": {
-            "name": "FRadioGroup",
-            "module": "src/components/f-radio-group/f-radio-group.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-radio-group",
-          "declaration": {
-            "name": "FRadioGroup",
-            "module": "src/components/f-radio-group/f-radio-group.ts"
           }
         }
       ]
@@ -1832,7 +1832,7 @@
           "type": {
             "text": "Record<string, string>"
           },
-          "default": "{\n\trequired: \"{{name}} is required field\",\n\temail: \"{{name}} is not a valid email address\",\n\tbetween: \"{{name}} must be between {{min}} and {{max}}\"\n}"
+          "default": "{\n\trequired: \"{{name}} is required field\",\n\temail: \"{{name}} is not a valid email address\",\n\tbetween: \"{{name}} must be between {{min}} and {{max}}\",\n\tmin: \"{{name}} must be at least {{length}} characters long\",\n\tmax: \"{{name}} can be max {{length}} characters long\",\n\t[\"min-value\"]: \"{{name}} must be greater than {{min}}\",\n\t[\"max-value\"]: \"{{name}} must be less than {{max}}\",\n\tregex: \"{{name}} is not matching with {{regex}}\"\n}"
         }
       ],
       "exports": [
@@ -1951,7 +1951,7 @@
           "type": {
             "text": "Record<string, FormBuilderValidatorFunction<unknown, any>>"
           },
-          "default": "{\n\trequired,\n\temail,\n\tbetween\n}"
+          "default": "{\n\trequired,\n\temail,\n\tbetween,\n\tmax,\n\tmin,\n\t[\"min-value\"]: minValue,\n\t[\"max-value\"]: maxValue,\n\tregex\n}"
         }
       ],
       "exports": [
@@ -1961,6 +1961,171 @@
           "declaration": {
             "name": "all",
             "module": "src/modules/validation/rules/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/modules/validation/rules/max-value.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "maxValueValidator",
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          },
+          "parameters": [
+            {
+              "name": "value"
+            },
+            {
+              "name": "params"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "maxValueValidator",
+            "module": "src/modules/validation/rules/max-value.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/modules/validation/rules/max.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "maxLengthValidator",
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          },
+          "parameters": [
+            {
+              "name": "value"
+            },
+            {
+              "name": "params"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "maxLengthValidator",
+            "module": "src/modules/validation/rules/max.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/modules/validation/rules/min-value.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "minValueValidator",
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          },
+          "parameters": [
+            {
+              "name": "value"
+            },
+            {
+              "name": "params"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "minValueValidator",
+            "module": "src/modules/validation/rules/min-value.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/modules/validation/rules/min.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "minValidator",
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          },
+          "parameters": [
+            {
+              "name": "value"
+            },
+            {
+              "name": "params"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "minValidator",
+            "module": "src/modules/validation/rules/min.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/modules/validation/rules/regex.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "regexValidator",
+          "return": {
+            "type": {
+              "text": "boolean"
+            }
+          },
+          "parameters": [
+            {
+              "name": "value"
+            },
+            {
+              "name": "params"
+            }
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "regexValidator",
+            "module": "src/modules/validation/rules/regex.ts"
           }
         }
       ]
