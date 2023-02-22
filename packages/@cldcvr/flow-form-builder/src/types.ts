@@ -272,7 +272,7 @@ export type ValidationResults = (
 			result: boolean;
 			message: string | null;
 			name: string;
-			rule: "required" | "custom" | "email" | "between";
+			rule: FormBuilderGenericValidationRule["name"];
 	  }
 	| ValidationResults
 )[];
@@ -281,7 +281,7 @@ export type ValidationResult = {
 	result: boolean;
 	message: string | null;
 	name: string;
-	rule: "required" | "custom" | "email" | "between";
+	rule: FormBuilderGenericValidationRule["name"];
 };
 
 export type FormBuilderState = {
