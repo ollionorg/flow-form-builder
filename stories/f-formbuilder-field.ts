@@ -101,11 +101,11 @@ const field: FormBuilderField = {
 			},
 			// helperText: "This field is required",
 			options: [
-				{ id: "1", title: "Orange", iconTooltip: "hello" },
+				{ title: "Orange", iconTooltip: "hello" },
 				{
-					id: "2",
 					title: "Banana",
-					iconTooltip: "hello"
+					iconTooltip: "hello",
+					description: "Check if you like Banana"
 				}
 			],
 			validationRules: [
@@ -124,11 +124,11 @@ const field: FormBuilderField = {
 			},
 			// helperText: "This field is required",
 			options: [
-				{ id: "1", title: "Orange", iconTooltip: "hello" },
+				{ title: "Orange", iconTooltip: "hello", description: "Orange has Vitamin C" },
 				{
-					id: "2",
 					title: "Banana",
-					iconTooltip: "hello"
+					iconTooltip: "hello",
+					description: "Banana is cheap but rich in fiber"
 				}
 			],
 			validationRules: [

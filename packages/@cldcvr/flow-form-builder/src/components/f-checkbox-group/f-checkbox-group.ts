@@ -1,9 +1,10 @@
 // import { FRoot } from "@cldcvr/flow-core";
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { CheckboxOptionsType } from "../../types";
+import { CheckboxOption, CheckboxOptions } from "../../types";
 import eleStyle from "./f-checkbox-group.scss";
 import { FRoot, FDiv, FText } from "@cldcvr/flow-core";
+import { isEqual } from "lodash";
 export type FCheckboxGroupValue = string[];
 
 @customElement("f-checkbox-group")
@@ -17,7 +18,7 @@ export class FCheckboxGroup extends FRoot {
 	 * @attribute Controls size of all input elements within the form
 	 */
 	@property({ reflect: true, type: Array })
-	options: CheckboxOptionsType = [];
+	options: CheckboxOptions = [];
 
 	/**
 	 * @attribute Controls size of all input elements within the form
@@ -35,7 +36,7 @@ export class FCheckboxGroup extends FRoot {
 			return JSON.stringify(newVal) !== JSON.stringify(oldVal);
 		}
 	})
-	value?: FCheckboxGroupValue;
+	value?: CheckboxOptions;
 
 	/**
 	 * @attribute Decides the direction of the input elements within the group.
@@ -52,13 +53,13 @@ export class FCheckboxGroup extends FRoot {
 	@property({ type: String, reflect: true })
 	helperText?: string;
 
-	handleChange(e: CustomEvent, id: string) {
+	handleChange(e: CustomEvent, option: CheckboxOption) {
 		e.stopPropagation();
 		let tempValues = this.value && this.value?.length > 0 ? [...this.value] : [];
-		if (this.isChecked(id) === "unchecked") {
-			tempValues.push(id);
+		if (this.isChecked(option) === "unchecked") {
+			tempValues.push(option);
 		} else {
-			tempValues = tempValues.filter(item => item !== id);
+			tempValues = tempValues.filter(item => !isEqual(item, option));
 		}
 
 		const event = new CustomEvent("input", {
@@ -70,8 +71,8 @@ export class FCheckboxGroup extends FRoot {
 		this.dispatchEvent(event);
 	}
 
-	isChecked(id: String) {
-		return this.value?.some(item => item === id) ? "checked" : "unchecked";
+	isChecked(option: CheckboxOption) {
+		return this.value?.find(item => isEqual(item, option)) ? "checked" : "unchecked";
 	}
 
 	render() {
@@ -104,13 +105,11 @@ export class FCheckboxGroup extends FRoot {
 					${this.options?.map(
 						item => html`
 							<f-checkbox
-								.value=${this.isChecked(item.id)}
-								@input=${(event: CustomEvent) => this.handleChange(event, item.id)}
+								.value=${this.isChecked(item)}
+								@input=${(event: CustomEvent) => this.handleChange(event, item)}
 								.state=${this.state}
 							>
-								${item?.title
-									? html` <f-div slot="label" padding="none" gap="none">${item?.title}</f-div>`
-									: html`<f-div slot="label" padding="none" gap="none">${item.id}</f-div>`}
+								<f-div slot="label" padding="none" gap="none">${item.title}</f-div>
 								${item?.description
 									? html` <f-div slot="description" padding="none" gap="none"
 											>${item?.description}</f-div

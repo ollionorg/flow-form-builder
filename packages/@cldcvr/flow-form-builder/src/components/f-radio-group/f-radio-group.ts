@@ -1,9 +1,10 @@
 // import { FRoot } from "@cldcvr/flow-core";
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { RadioOptionsType } from "../../types";
+import { RadioOption, RadioOptions } from "../../types";
 import eleStyle from "./f-radio-group.scss";
 import { FDiv, FRoot, FText } from "@cldcvr/flow-core";
+import { isEqual } from "lodash";
 
 /**
  * @summary Text component includes Headings, titles, body texts and links.
@@ -19,7 +20,7 @@ export class FRadioGroup extends FRoot {
 	 * @attribute Controls size of all input elements within the form
 	 */
 	@property({ reflect: true, type: Array })
-	options: RadioOptionsType = [];
+	options: RadioOptions = [];
 
 	/**
 	 * @attribute Controls size of all input elements within the form
@@ -31,7 +32,7 @@ export class FRadioGroup extends FRoot {
 	 * @attribute Controls size of all input elements within the form
 	 */
 	@property({ reflect: true, type: String })
-	value?: string;
+	value?: RadioOption;
 
 	/**
 	 * @attribute Decides the direction of the input elements within the group.
@@ -48,18 +49,18 @@ export class FRadioGroup extends FRoot {
 	@property({ type: String, reflect: true })
 	helperText?: string;
 
-	handleChange(id: string) {
+	handleChange(option: RadioOption) {
 		const event = new CustomEvent("input", {
 			detail: {
-				value: id
+				value: option
 			}
 		});
-		this.value = id;
+		this.value = option;
 		this.dispatchEvent(event);
 	}
 
-	isChecked(id: string) {
-		return this.value === id ? "selected" : "unselected";
+	isChecked(option: RadioOption) {
+		return isEqual(option, this.value) ? "selected" : "unselected";
 	}
 
 	render() {
@@ -87,13 +88,11 @@ export class FRadioGroup extends FRoot {
 					${this.options?.map(
 						item => html`
 							<f-radio
-								.value=${this.isChecked(item.id)}
-								@input=${() => this.handleChange(item.id)}
+								.value=${this.isChecked(item)}
+								@input=${() => this.handleChange(item)}
 								.state=${this.state}
 							>
-								${item.title
-									? html` <f-div slot="label" padding="none" gap="none">${item.title}</f-div>`
-									: html`<f-div slot="label" padding="none" gap="none">${item.id}</f-div>`}
+								<f-div slot="label" padding="none" gap="none">${item.title}</f-div>
 								${item.description
 									? html` <f-div slot="description" padding="none" gap="none"
 											>${item.description}</f-div

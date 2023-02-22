@@ -324,7 +324,7 @@
               "kind": "field",
               "name": "options",
               "type": {
-                "text": "CheckboxOptionsType"
+                "text": "CheckboxOptions"
               },
               "default": "[]",
               "attribute": "options",
@@ -344,7 +344,7 @@
               "kind": "field",
               "name": "value",
               "type": {
-                "text": "FCheckboxGroupValue | undefined"
+                "text": "CheckboxOptions | undefined"
               },
               "attribute": "value",
               "reflects": true
@@ -389,9 +389,9 @@
                   }
                 },
                 {
-                  "name": "id",
+                  "name": "option",
                   "type": {
-                    "text": "string"
+                    "text": "CheckboxOption"
                   }
                 }
               ]
@@ -401,9 +401,9 @@
               "name": "isChecked",
               "parameters": [
                 {
-                  "name": "id",
+                  "name": "option",
                   "type": {
-                    "text": "String"
+                    "text": "CheckboxOption"
                   }
                 }
               ]
@@ -413,7 +413,7 @@
             {
               "name": "options",
               "type": {
-                "text": "CheckboxOptionsType"
+                "text": "CheckboxOptions"
               },
               "default": "[]",
               "fieldName": "options"
@@ -429,7 +429,7 @@
             {
               "name": "value",
               "type": {
-                "text": "FCheckboxGroupValue | undefined"
+                "text": "CheckboxOptions | undefined"
               },
               "fieldName": "value"
             },
@@ -1101,7 +1101,7 @@
               "kind": "field",
               "name": "options",
               "type": {
-                "text": "RadioOptionsType"
+                "text": "RadioOptions"
               },
               "default": "[]",
               "attribute": "options",
@@ -1121,7 +1121,7 @@
               "kind": "field",
               "name": "value",
               "type": {
-                "text": "string | undefined"
+                "text": "RadioOption | undefined"
               },
               "attribute": "value",
               "reflects": true
@@ -1160,9 +1160,9 @@
               "name": "handleChange",
               "parameters": [
                 {
-                  "name": "id",
+                  "name": "option",
                   "type": {
-                    "text": "string"
+                    "text": "RadioOption"
                   }
                 }
               ]
@@ -1172,9 +1172,9 @@
               "name": "isChecked",
               "parameters": [
                 {
-                  "name": "id",
+                  "name": "option",
                   "type": {
-                    "text": "string"
+                    "text": "RadioOption"
                   }
                 }
               ]
@@ -1184,7 +1184,7 @@
             {
               "name": "options",
               "type": {
-                "text": "RadioOptionsType"
+                "text": "RadioOptions"
               },
               "default": "[]",
               "fieldName": "options"
@@ -1200,7 +1200,7 @@
             {
               "name": "value",
               "type": {
-                "text": "string | undefined"
+                "text": "RadioOption | undefined"
               },
               "fieldName": "value"
             },

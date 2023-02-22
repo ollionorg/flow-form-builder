@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.1.8] - 2023-02-22
+
+### Improvements
+
+- `f-radio-group` and `f-checkbox-group` options and value types updated.
 ## [1.1.7] - 2023-02-22
 
 ### Improvements

@@ -60,7 +60,7 @@ export type FormBuilderTextInputField = FormBuilderBaseField & {
 // checkbox type field
 export type FormBuilderCheckboxField = FormBuilderBaseField & {
 	type: "checkbox";
-	options: CheckboxOptionsType;
+	options: CheckboxOptions;
 	direction?: "vertical" | "horizontal";
 	gap?: "large" | "medium" | "small" | "x-small";
 };
@@ -68,7 +68,7 @@ export type FormBuilderCheckboxField = FormBuilderBaseField & {
 // radio type field
 export type FormBuilderRadioField = FormBuilderBaseField & {
 	type: "radio";
-	options: CheckboxOptionsType;
+	options: RadioOptions;
 	direction?: "vertical" | "horizontal";
 	gap?: "large" | "medium" | "small" | "x-small";
 };
@@ -130,14 +130,14 @@ export type FormBuilderIconButtonField = Omit<FormBuilderBaseField, "label"> & {
 	onMouseLeave?: (event: MouseEvent) => void;
 };
 
-export type CheckboxOptions = {
-	id: string;
+export type CheckboxOption = {
 	title: string;
 	description?: string;
 	iconTooltip?: string;
 };
-export type CheckboxOptionsType = CheckboxOptions[];
-export type RadioOptionsType = CheckboxOptionsType;
+export type RadioOption = CheckboxOption;
+export type CheckboxOptions = CheckboxOption[];
+export type RadioOptions = RadioOption[];
 
 export type FormBuilderField =
 	| FormBuilderTextInputField

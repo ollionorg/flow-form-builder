@@ -3,11 +3,11 @@
   "tags": [
     {
       "name": "f-checkbox-group",
-      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string[]; }>`} - \n\nAttributes:\n\n  * `options` {`CheckboxOptionsType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `value` {`FCheckboxGroupValue | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `helperText` {`string | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `options` {`CheckboxOptionsType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `value` {`FCheckboxGroupValue | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `helperText` {`string | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: CheckboxOption[]; }>`} - \n\nAttributes:\n\n  * `options` {`CheckboxOptions`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `value` {`CheckboxOptions | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `helperText` {`string | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `options` {`CheckboxOptions`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `value` {`CheckboxOptions | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `helperText` {`string | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "options",
-          "description": "`options` {`CheckboxOptionsType`} - \n\nProperty: options\n\nDefault: "
+          "description": "`options` {`CheckboxOptions`} - \n\nProperty: options\n\nDefault: "
         },
         {
           "name": "state",
@@ -32,7 +32,7 @@
         },
         {
           "name": "value",
-          "description": "`value` {`FCheckboxGroupValue | undefined`} - \n\nProperty: value",
+          "description": "`value` {`CheckboxOptions | undefined`} - \n\nProperty: value",
           "values": []
         },
         {
@@ -77,7 +77,7 @@
         },
         {
           "name": "oninput",
-          "description": "`input` {`CustomEvent<{ value: string[]; }>`} - "
+          "description": "`input` {`CustomEvent<{ value: CheckboxOption[]; }>`} - "
         }
       ]
     },
@@ -326,11 +326,11 @@
     },
     {
       "name": "f-radio-group",
-      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: string; }>`} - \n\nAttributes:\n\n  * `options` {`CheckboxOptionsType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `helperText` {`string | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `options` {`CheckboxOptionsType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `value` {`string | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `helperText` {`string | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `input` {`CustomEvent<{ value: CheckboxOption; }>`} - \n\nAttributes:\n\n  * `options` {`RadioOptions`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `value` {`CheckboxOption | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `helperText` {`string | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `options` {`RadioOptions`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `value` {`CheckboxOption | undefined`} - \n\n  * `direction` {`\"vertical\" | \"horizontal\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `helperText` {`string | undefined`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "options",
-          "description": "`options` {`CheckboxOptionsType`} - \n\nProperty: options\n\nDefault: "
+          "description": "`options` {`RadioOptions`} - \n\nProperty: options\n\nDefault: "
         },
         {
           "name": "state",
@@ -355,7 +355,7 @@
         },
         {
           "name": "value",
-          "description": "`value` {`string | undefined`} - \n\nProperty: value",
+          "description": "`value` {`CheckboxOption | undefined`} - \n\nProperty: value",
           "values": []
         },
         {
@@ -400,7 +400,7 @@
         },
         {
           "name": "oninput",
-          "description": "`input` {`CustomEvent<{ value: string; }>`} - "
+          "description": "`input` {`CustomEvent<{ value: CheckboxOption; }>`} - "
         }
       ]
     }
