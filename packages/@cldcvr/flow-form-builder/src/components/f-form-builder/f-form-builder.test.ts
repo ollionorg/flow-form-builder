@@ -17,8 +17,7 @@ function getSampleFormBuilder() {
 				isCollapsed: true,
 				label: {
 					title: "Object field form",
-					description: "showing object field",
-					iconTooltip: "Simple object with 2 fields `firstname` & `lastname` "
+					description: "showing object field"
 				},
 				fields: {
 					firstname: {

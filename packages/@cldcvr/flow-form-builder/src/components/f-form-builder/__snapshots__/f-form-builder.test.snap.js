@@ -20,7 +20,7 @@ snapshots["f-form-builder should render object field with all default properties
     collapse="none"
     direction="horizontal"
     gap="medium"
-    label="{&quot;title&quot;:&quot;Object field form&quot;,&quot;description&quot;:&quot;showing object field&quot;,&quot;iconTooltip&quot;:&quot;Simple object with 2 fields `firstname` &amp; `lastname` &quot;}"
+    label="{&quot;title&quot;:&quot;Object field form&quot;,&quot;description&quot;:&quot;showing object field&quot;}"
   >
     <f-input
       category="fill"
@@ -102,7 +102,7 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
     collapse="none"
     direction="horizontal"
     gap="medium"
-    label="{&quot;title&quot;:&quot;Object field form&quot;,&quot;description&quot;:&quot;showing object field&quot;,&quot;iconTooltip&quot;:&quot;Simple object with 2 fields `firstname` &amp; `lastname` &quot;}"
+    label="{&quot;title&quot;:&quot;Object field form&quot;,&quot;description&quot;:&quot;showing object field&quot;}"
   >
     <f-input
       category="fill"
