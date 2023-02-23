@@ -136,7 +136,8 @@ export type FormBuilderIconButtonField = Omit<FormBuilderBaseField, "label"> & {
 };
 
 export type CheckboxOption = {
-	title: string;
+	id: string;
+	title?: string;
 	description?: string;
 	iconTooltip?: string;
 };

@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.2.0] - 2023-02-23
+
+### Improvements
+
+- `id` made mandatory in checbox and radio options.
 ## [1.1.9] - 2023-02-22
 
 ### Improvements

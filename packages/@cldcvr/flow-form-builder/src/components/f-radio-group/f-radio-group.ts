@@ -92,7 +92,7 @@ export class FRadioGroup extends FRoot {
 								@input=${() => this.handleChange(item)}
 								.state=${this.state}
 							>
-								<f-div slot="label" padding="none" gap="none">${item.title}</f-div>
+								<f-div slot="label" padding="none" gap="none">${item.title ?? item.id}</f-div>
 								${item.description
 									? html` <f-div slot="description" padding="none" gap="none"
 											>${item.description}</f-div

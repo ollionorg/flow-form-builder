@@ -88,9 +88,9 @@ const field: FormBuilderField = {
 			},
 			// helperText: "This field is required",
 			options: [
-				{ title: "Orange", iconTooltip: "hello" },
+				{ id: "or", title: "Orange", iconTooltip: "hello" },
 				{
-					title: "Banana",
+					id: "banannaId",
 					iconTooltip: "hello",
 					description: "Check if you like Banana"
 				}
@@ -111,9 +111,9 @@ const field: FormBuilderField = {
 			},
 			// helperText: "This field is required",
 			options: [
-				{ title: "Orange", iconTooltip: "hello", description: "Orange has Vitamin C" },
+				{ id: "or", title: "Orange", iconTooltip: "hello", description: "Orange has Vitamin C" },
 				{
-					title: "Banana",
+					id: "banannaId",
 					iconTooltip: "hello",
 					description: "Banana is cheap but rich in fiber"
 				}
