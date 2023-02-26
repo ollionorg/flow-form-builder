@@ -357,7 +357,7 @@ describe("f-form-builder", () => {
 
 			const fFormObject = fForm?.querySelector("f-form-object");
 
-			expect(fFormObject).shadowDom.to.equalSnapshot();
+			await expect(fFormObject).shadowDom.to.equalSnapshot();
 			expect(fFormObject).instanceOf(FFormObject);
 		}
 	});

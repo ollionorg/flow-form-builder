@@ -603,7 +603,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
       name="switchButton"
       size="medium"
       state="default"
-      value="off"
+      value="false"
       variant="curved"
     >
       <f-div

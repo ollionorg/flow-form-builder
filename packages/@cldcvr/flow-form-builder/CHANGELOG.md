@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.2.1] - 2023-02-26
+
+### Improvements
+
+- `f-form-object`, `f-form-array` css fixed.
 ## [1.2.0] - 2023-02-23
 
 ### Improvements

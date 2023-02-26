@@ -26,6 +26,20 @@ const field: FormBuilderField = {
 				}
 			]
 		},
+		singleSelect: {
+			label: {
+				title: "Select option from dropdown"
+			},
+			selection: "single",
+			options: ["First", "Second", "Third"],
+			type: "select",
+			placeholder: "This is a placeholder",
+			validationRules: [
+				{
+					name: "required"
+				}
+			]
+		},
 		textField: {
 			type: "text",
 			helperText: "This field is a required field",

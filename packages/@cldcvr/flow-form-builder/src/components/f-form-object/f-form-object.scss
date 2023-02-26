@@ -12,8 +12,15 @@
 		display: none !important;
 	}
 }
-f-div[direction="column"] {
-	f-form-object {
+f-div[direction="column"],
+f-form-group[direction="vertical"] {
+	> f-form-object {
+		width: 100%;
+	}
+	> f-form-array {
+		width: 100%;
+	}
+	> f-form-group {
 		width: 100%;
 	}
 }

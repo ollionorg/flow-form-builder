@@ -6,6 +6,7 @@
 	@include base();
 	display: flex;
 	flex: 1 0 auto;
+	width: unset;
 
 	[data-hidden="true"] {
 		display: none !important;
