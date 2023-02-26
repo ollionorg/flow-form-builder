@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.2.2] - 2023-02-26
+
+### Improvements
+
+- `debounce` added in input event.
+
 ## [1.2.1] - 2023-02-26
 
 ### Improvements
