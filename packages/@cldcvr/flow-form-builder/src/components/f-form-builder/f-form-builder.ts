@@ -101,6 +101,7 @@ export class FFormBuilder extends FRoot {
 	};
 
 	showWhenSubject!: Subject<FormBuilderValues>;
+	inputTimeout!: ReturnType<typeof setTimeout>;
 
 	/**
 	 * responsible for rendering form
@@ -218,31 +219,37 @@ export class FFormBuilder extends FRoot {
 				ref.value.showWhenSubject = this.showWhenSubject;
 				ref.value.oninput = async (event: Event) => {
 					event.stopPropagation();
-					if (!this.values) {
-						this.values = {};
+					if (this.inputTimeout) {
+						clearTimeout(this.inputTimeout);
 					}
-					/**
-					 * update values
-					 */
-					this.values = ref.value?.value as FormBuilderValues;
-					/**
-					 * update isChanged prop in state to let user know that form is changed
-					 */
-					this.state.isChanged = true;
-					/**
-					 * validate current field
-					 */
-					validateField(this.field, ref.value as FFormInputElements, false);
-					/**
-					 * if current field is of type array or object then then also validate form anyway
-					 */
-					await this.validateForm(true).then(all => {
-						this.updateValidaitonState(all);
-					});
-					/**
-					 * dispatch input event for consumer
-					 */
-					this.dispatchInputEvent();
+
+					this.inputTimeout = setTimeout(async () => {
+						if (!this.values) {
+							this.values = {};
+						}
+						/**
+						 * update values
+						 */
+						this.values = ref.value?.value as FormBuilderValues;
+						/**
+						 * update isChanged prop in state to let user know that form is changed
+						 */
+						this.state.isChanged = true;
+						/**
+						 * validate current field
+						 */
+						validateField(this.field, ref.value as FFormInputElements, false);
+						/**
+						 * if current field is of type array or object then then also validate form anyway
+						 */
+						await this.validateForm(true).then(all => {
+							this.updateValidaitonState(all);
+						});
+						/**
+						 * dispatch input event for consumer
+						 */
+						this.dispatchInputEvent();
+					}, 300);
 				};
 
 				if (this.field.showWhen) {

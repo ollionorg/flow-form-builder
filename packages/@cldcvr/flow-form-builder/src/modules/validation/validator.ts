@@ -79,7 +79,7 @@ function getValidationMessage(
 
 export async function validateField(
 	field: FormBuilderField,
-	element: FFormInputElements,
+	element: FFormInputElements | undefined,
 	silent = false,
 	filter?: (r: FormBuilderGenericValidationRule) => boolean
 ): FormBuilderValidationPromise {
@@ -91,31 +91,39 @@ export async function validateField(
 	}
 
 	defaultValidations(field.type, rulesToValidate);
-	const { result, message, rule, name } = validate(
-		(element.value as string) ?? "",
-		rulesToValidate as FormBuilderValidationRules,
-		element.getAttribute("name") ?? "This"
-	);
+	if (element) {
+		const { result, message, rule, name } = validate(
+			(element.value as string) ?? "",
+			rulesToValidate as FormBuilderValidationRules,
+			element.getAttribute("name") ?? "This"
+		);
 
-	if (!result && message && element.offsetHeight > 0) {
-		if (!silent) {
-			updateMessage(element, message);
-			element.state = "danger";
-		}
-	} else {
-		const slotName = element.lastElementChild?.getAttribute("slot");
-		if (field.helperText) {
-			updateMessage(element, field.helperText);
-		} else if (slotName === "help") {
-			const child = element.children[element.children.length - 1];
-			child.remove();
-		}
+		if (!result && message && element.offsetHeight > 0) {
+			if (!silent) {
+				updateMessage(element, message);
+				element.state = "danger";
+			}
+		} else {
+			const slotName = element.lastElementChild?.getAttribute("slot");
+			if (field.helperText) {
+				updateMessage(element, field.helperText);
+			} else if (slotName === "help") {
+				const child = element.children[element.children.length - 1];
+				child.remove();
+			}
 
-		if (!(element instanceof FButton) && !(element instanceof FIconButton)) {
-			element.state = "default";
+			if (!(element instanceof FButton) && !(element instanceof FIconButton)) {
+				element.state = "default";
+			}
 		}
+		return { result, message, rule, name };
 	}
-	return { result, message, rule, name };
+	return {
+		result: true,
+		message: "Element removed from dom",
+		rule: "custom",
+		name: "NA"
+	};
 }
 
 function updateMessage(element: HTMLElement, message: string) {
