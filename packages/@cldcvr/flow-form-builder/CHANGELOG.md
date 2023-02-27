@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.2.3] - 2023-02-27
+
+### Improvements
+
+- `value` assignemnt logic updated.
+
 ## [1.2.2] - 2023-02-26
 
 ### Improvements

@@ -244,7 +244,7 @@ export type FormBuilderFieldRenderFunction = (
 	name: string,
 	field: FormBuilderField,
 	fieldRef: Ref<FFormInputElements>,
-	params?: Record<string, unknown>
+	value: unknown
 ) => TemplateResult;
 
 export type FFormInputElements = {

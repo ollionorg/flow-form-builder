@@ -5,7 +5,8 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (
 	name: string,
 	_field: FormBuilderField,
-	fieldRef: Ref<FFormInputElements>
+	fieldRef: Ref<FFormInputElements>,
+	value: unknown
 ) {
 	const field = _field as FormBuilderRadioField;
 
@@ -14,6 +15,7 @@ export default function (
 			name=${name}
 			${ref(fieldRef)}
 			.options=${field.options}
+			.value=${value}
 			state=${ifDefined(field.state)}
 			direction=${ifDefined(field.direction)}
 			gap=${ifDefined(field.gap)}

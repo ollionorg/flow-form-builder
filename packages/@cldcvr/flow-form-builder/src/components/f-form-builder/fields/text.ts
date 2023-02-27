@@ -5,7 +5,8 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (
 	name: string,
 	_field: FormBuilderField,
-	fieldRef: Ref<FFormInputElements>
+	fieldRef: Ref<FFormInputElements>,
+	value: unknown
 ) {
 	const field = _field as FormBuilderTextInputField;
 	return html`
@@ -15,6 +16,7 @@ export default function (
 			${ref(fieldRef)}
 			.placeholder=${field.placeholder}
 			.type=${field.type}
+			.value=${value}
 			icon-left=${ifDefined(field.iconLeft)}
 			icon-right=${ifDefined(field.iconRight)}
 			prefix=${ifDefined(field.prefix)}

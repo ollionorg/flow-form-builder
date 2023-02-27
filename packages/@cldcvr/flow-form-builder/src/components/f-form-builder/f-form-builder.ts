@@ -145,7 +145,7 @@ export class FFormBuilder extends FRoot {
 								: ""}
 					  </f-div>`
 					: ``}
-				${fieldRenderer[this.field.type](this.name, this.field, this.fieldRef)}
+				${fieldRenderer[this.field.type](this.name, this.field, this.fieldRef, this.values)}
 				<slot @click=${this.checkSubmit}></slot>
 			</f-form>
 		`;
@@ -205,13 +205,6 @@ export class FFormBuilder extends FRoot {
 			this.showWhenSubject = new Subject<FormBuilderValues>();
 			const ref = this.fieldRef;
 
-			if (ref.value && this.values) {
-				/**
-				 * assign values given by consumer
-				 */
-				ref.value.value = this.values;
-				ref.value.requestUpdate();
-			}
 			if (ref.value) {
 				/**
 				 * this subject is propogated for `showWhen` implementation
@@ -219,37 +212,39 @@ export class FFormBuilder extends FRoot {
 				ref.value.showWhenSubject = this.showWhenSubject;
 				ref.value.oninput = async (event: Event) => {
 					event.stopPropagation();
-					if (this.inputTimeout) {
-						clearTimeout(this.inputTimeout);
-					}
 
-					this.inputTimeout = setTimeout(async () => {
-						if (!this.values) {
-							this.values = {};
-						}
-						/**
-						 * update values
-						 */
+					/**
+					 * update values
+					 */
+					if (this.values && this.field.type === "array") {
+						(this.values as []).splice(
+							0,
+							(this.values as []).length,
+							...((ref.value as FFormInputElements).value as [])
+						);
+					} else if (this.values && this.field.type === "object") {
+						Object.assign(this.values, (ref.value as FFormInputElements).value as Object);
+					} else {
 						this.values = ref.value?.value as FormBuilderValues;
-						/**
-						 * update isChanged prop in state to let user know that form is changed
-						 */
-						this.state.isChanged = true;
-						/**
-						 * validate current field
-						 */
-						validateField(this.field, ref.value as FFormInputElements, false);
-						/**
-						 * if current field is of type array or object then then also validate form anyway
-						 */
-						await this.validateForm(true).then(all => {
-							this.updateValidaitonState(all);
-						});
-						/**
-						 * dispatch input event for consumer
-						 */
-						this.dispatchInputEvent();
-					}, 300);
+					}
+					/**
+					 * update isChanged prop in state to let user know that form is changed
+					 */
+					this.state.isChanged = true;
+					/**
+					 * validate current field
+					 */
+					await validateField(this.field, ref.value as FFormInputElements, false);
+					/**
+					 * if current field is of type array or object then then also validate form anyway
+					 */
+					await this.validateForm(true).then(all => {
+						this.updateValidaitonState(all);
+					});
+					/**
+					 * dispatch input event for consumer
+					 */
+					this.dispatchInputEvent();
 				};
 
 				if (this.field.showWhen) {

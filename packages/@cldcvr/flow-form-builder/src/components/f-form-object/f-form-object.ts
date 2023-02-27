@@ -61,6 +61,10 @@ export class FFormObject extends FRoot {
 		return html`${this.buildFields()}`;
 	}
 
+	getFieldValue(fieldname: string) {
+		return this.value ? this.value[fieldname] : undefined;
+	}
+
 	buildFields() {
 		const fieldTemplates: TemplateResult[] = [];
 		Object.entries(this.config.fields).forEach(([fieldname, fieldConfig]) => {
@@ -69,7 +73,12 @@ export class FFormObject extends FRoot {
 			this.fieldRefs[fieldname] = fieldRef;
 			fieldTemplates.push(
 				html`
-					${fieldRenderer[fieldConfig.type](fieldname, fieldConfig, fieldRef)}
+					${fieldRenderer[fieldConfig.type](
+						fieldname,
+						fieldConfig,
+						fieldRef,
+						this.getFieldValue(fieldname)
+					)}
 					${this.config.fieldSeparator
 						? html`<f-divider id="${fieldname}-divider"></f-divider>`
 						: ""}
@@ -107,9 +116,15 @@ export class FFormObject extends FRoot {
 					(this.fieldRefs[fieldname].value as FFormInputElements).validate(silent)
 				);
 			} else {
-				allValidations.push(
-					validateField(fieldConfig, this.fieldRefs[fieldname].value as FFormInputElements, silent)
-				);
+				if (this.fieldRefs[fieldname]) {
+					allValidations.push(
+						validateField(
+							fieldConfig,
+							this.fieldRefs[fieldname].value as FFormInputElements,
+							silent
+						)
+					);
+				}
 			}
 		});
 		return Promise.all(allValidations);
@@ -125,24 +140,18 @@ export class FFormObject extends FRoot {
 			await this.updateComplete;
 
 			Object.entries(this.fieldRefs).forEach(([name, ref]) => {
-				if (ref.value && this.value) {
-					ref.value.value = this.value[name] as FormBuilderValues;
-
-					if (this.value[name]) {
-						ref.value.requestUpdate();
-					}
-				}
 				if (ref.value) {
 					ref.value.showWhenSubject = this.showWhenSubject;
-					ref.value.oninput = (event: Event) => {
+					ref.value.oninput = async (event: Event) => {
 						event.stopPropagation();
 						if (!this.value) {
 							this.value = {};
 						}
 						this.value[name] = ref.value?.value;
-						this.dispatchInputEvent();
 
-						validateField(this.config.fields[name], ref.value as FFormInputElements, false);
+						await validateField(this.config.fields[name], ref.value as FFormInputElements, false);
+
+						this.dispatchInputEvent();
 					};
 					const fieldConfig = this.config.fields[name];
 					if (fieldConfig.showWhen) {

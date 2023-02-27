@@ -5,13 +5,15 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (
 	name: string,
 	_field: FormBuilderField,
-	fieldRef: Ref<FFormInputElements>
+	fieldRef: Ref<FFormInputElements>,
+	value: unknown
 ) {
 	const field = _field as FormBuilderSwitchField;
 	return html`
 		<f-switch
 			name=${name}
 			${ref(fieldRef)}
+			.value="${value}"
 			state=${ifDefined(field.state)}
 			?disabled=${field.disabled ?? false}
 			@click=${ifDefined(field.onClick)}

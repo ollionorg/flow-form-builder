@@ -3,6 +3,7 @@ import { html } from "lit-html";
 import { FormBuilderField } from "@cldcvr/flow-form-builder/src/types";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
 import { useArgs } from "@storybook/client-api";
+import { FFormBuilder } from "@cldcvr/flow-form-builder/src";
 
 export default {
 	title: "Features/Deep Reactivity",
@@ -91,12 +92,15 @@ const Template: Story<unknown> = (args: any) => {
 		event.stopImmediatePropagation();
 	};
 	const fieldRef: Ref<HTMLElement> = createRef();
+	const formRef: Ref<FFormBuilder> = createRef();
 	const stateRef: Ref<HTMLElement> = createRef();
 	const handleInput = (event: CustomEvent) => {
-		updateArgs({ values: { ...event.detail, firstname: "vikas" } });
-		// if (fieldRef.value) {
-		// 	fieldRef.value.innerHTML = JSON.stringify(event.detail, undefined, 8);
-		// }
+		if (formRef.value) {
+			formRef.value.values = { ...event.detail };
+		}
+		if (fieldRef.value) {
+			fieldRef.value.innerHTML = JSON.stringify(event.detail, undefined, 8);
+		}
 	};
 	const handleStateChange = (event: CustomEvent) => {
 		if (stateRef.value) {
@@ -108,6 +112,7 @@ const Template: Story<unknown> = (args: any) => {
 			<f-form-builder
 				.field=${args.field}
 				.values=${args.values}
+				${ref(formRef)}
 				@keydown=${handleKeydown}
 				@input=${handleInput}
 				@state-change=${handleStateChange}
@@ -133,6 +138,7 @@ basic.args = {
 	field: sampleFormBuilder.field,
 	values: {
 		firstname: "Tony",
-		lastname: "Stark"
+		lastname: "Stark",
+		arrayOfObjects: [{ lastname: "Khan" }]
 	}
 };

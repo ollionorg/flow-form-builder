@@ -76,7 +76,9 @@ export class FFormArray extends FRoot {
 
 		return html`${this.buildFields(valueCount)}`;
 	}
-
+	getFieldValue(index: number) {
+		return this.value ? this.value[index] : undefined;
+	}
 	buildFields(valueCount: number) {
 		const fieldTemplates = [];
 		for (let i = 0; i < valueCount; i++) {
@@ -88,7 +90,8 @@ export class FFormArray extends FRoot {
 					>${fieldRenderer[this.config.field.type](
 						this.getAttribute("name") as string,
 						this.config.field,
-						fieldRef
+						fieldRef,
+						this.getFieldValue(i)
 					)}
 					${i === 0
 						? html` <f-icon-button
@@ -180,18 +183,14 @@ export class FFormArray extends FRoot {
 			await this.updateComplete;
 
 			this.fieldRefs.forEach((ref, idx) => {
-				if (ref.value && this.value) {
-					ref.value.value = this.value[idx] as FormBuilderValues;
-					ref.value.requestUpdate();
-				}
 				if (ref.value) {
 					ref.value.showWhenSubject = this.showWhenSubject;
-					ref.value.oninput = (event: Event) => {
+					ref.value.oninput = async (event: Event) => {
 						event.stopPropagation();
 
 						this.value[idx] = ref.value?.value;
 
-						validateField(this.config.field, ref.value as FFormInputElements, false);
+						await validateField(this.config.field, ref.value as FFormInputElements, false);
 
 						this.dispatchInputEvent();
 					};

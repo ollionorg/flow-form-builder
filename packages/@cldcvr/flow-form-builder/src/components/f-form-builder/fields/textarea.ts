@@ -5,13 +5,15 @@ import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (
 	name: string,
 	_field: FormBuilderField,
-	fieldRef: Ref<FFormInputElements>
+	fieldRef: Ref<FFormInputElements>,
+	value: unknown
 ) {
 	const field = _field as FormBuilderTextAreaField;
 	return html`
 		<f-text-area
 			name=${name}
 			${ref(fieldRef)}
+			.value=${value}
 			.placeholder=${field.placeholder}
 			max-length=${ifDefined(field?.maxLength)}
 			?disabled=${field?.disabled ?? false}
