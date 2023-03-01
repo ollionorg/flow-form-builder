@@ -1535,6 +1535,56 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form-builder/fields/file.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "",
+          "parameters": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "_field",
+              "type": {
+                "text": "FormBuilderField"
+              }
+            },
+            {
+              "name": "fieldRef",
+              "type": {
+                "text": "Ref<FFormInputElements>"
+              }
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "unknown"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": ""
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "",
+            "module": "src/components/f-form-builder/fields/file.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-builder/fields/icon-button.ts",
       "declarations": [
         {
@@ -1587,7 +1637,7 @@
           "type": {
             "text": "Record<string, FormBuilderFieldRenderFunction>"
           },
-          "default": "{\n\ttext,\n\tcheckbox,\n\ttextarea,\n\tradio,\n\tswitchButton,\n\tselect,\n\tbutton,\n\tarray,\n\tobject,\n\t[\"icon-button\"]: iconButton,\n\ttel: text,\n\tnumber: text,\n\temail: text,\n\turl: text,\n\tpassword: text\n}"
+          "default": "{\n\ttext,\n\tcheckbox,\n\ttextarea,\n\tradio,\n\tswitchButton,\n\tselect,\n\tbutton,\n\tarray,\n\tobject,\n\t[\"icon-button\"]: iconButton,\n\ttel: text,\n\tnumber: text,\n\temail: text,\n\turl: text,\n\tpassword: text,\n\tfile,\n\tsuggest\n}"
         }
       ],
       "exports": [
@@ -1747,6 +1797,56 @@
           "declaration": {
             "name": "",
             "module": "src/components/f-form-builder/fields/select.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-form-builder/fields/suggest.ts",
+      "declarations": [
+        {
+          "kind": "function",
+          "name": "",
+          "parameters": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              }
+            },
+            {
+              "name": "_field",
+              "type": {
+                "text": "FormBuilderField"
+              }
+            },
+            {
+              "name": "fieldRef",
+              "type": {
+                "text": "Ref<FFormInputElements>"
+              }
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "unknown"
+              }
+            }
+          ]
+        },
+        {
+          "kind": "function",
+          "name": ""
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "",
+            "module": "src/components/f-form-builder/fields/suggest.ts"
           }
         }
       ]

@@ -1,7 +1,14 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { LitElement, TemplateResult } from "lit";
 import { Ref } from "lit-html/directives/ref.js";
-import { FButtonState, FIconButtonState, FSelectOptions } from "@cldcvr/flow-core";
+import {
+	FButtonState,
+	FFileUploadFileType,
+	FFileUploadSizeProp,
+	FIconButtonState,
+	FSelectOptions,
+	FSuggestSuggestions
+} from "@cldcvr/flow-core";
 import { BetweenParams } from "./modules/validation/rules/between";
 import { Subject } from "rxjs";
 import { MaxParams } from "./modules/validation/rules/max";
@@ -62,6 +69,31 @@ export type FormBuilderTextInputField = FormBuilderBaseField & {
 	suffixWhen?: FormBuilderSuffixCondition;
 };
 
+export type FormBuilderSuggestField = FormBuilderBaseField & {
+	type: "suggest";
+	placeholder?: string;
+	autoComplete?: boolean; // to disabled browser's auto-complete behavior
+	iconLeft?: string;
+	iconRight?: string;
+	prefix?: string;
+	suffix?: string;
+	maxLength?: number;
+	loading?: boolean;
+	readonly?: boolean;
+	clear?: boolean;
+	suggestions?: FSuggestSuggestions;
+	suffixWhen?: FormBuilderSuffixCondition;
+};
+
+export type FormBuilderFileField = FormBuilderBaseField & {
+	type: "file";
+	multiple?: boolean;
+	placeholder?: string;
+	fileType?: FFileUploadFileType;
+	maxSize?: FFileUploadSizeProp;
+	disabled?: boolean;
+	loading?: boolean;
+};
 // checkbox type field
 export type FormBuilderCheckboxField = FormBuilderBaseField & {
 	type: "checkbox";
@@ -125,7 +157,7 @@ export type FormBuilderButtonField = Omit<FormBuilderBaseField, "label"> & {
 };
 
 // button type field
-export type FormBuilderIconButtonField = Omit<FormBuilderBaseField, "label"> & {
+export type FormBuilderIconButtonField = FormBuilderBaseField & {
 	type: "icon-button";
 	icon: string;
 	state?: FIconButtonState;
@@ -155,7 +187,9 @@ export type FormBuilderField =
 	| FormBuilderButtonField
 	| FormBuilderIconButtonField
 	| FormBuilderArrayField
-	| FormBuilderObjectField; // add other field types
+	| FormBuilderObjectField
+	| FormBuilderSuggestField
+	| FormBuilderFileField; // add other field types
 
 export type FormBuilderShowCondition = (value: FormBuilderValues) => boolean;
 
@@ -258,6 +292,7 @@ export type FormBuilderValidationPromise = Promise<{
 	result: boolean;
 	message: string | null;
 	name: string;
+	label?: FormBuilderLabel | string;
 	rule: FormBuilderGenericValidationRule["name"];
 }>;
 export type FormBuilderValues =

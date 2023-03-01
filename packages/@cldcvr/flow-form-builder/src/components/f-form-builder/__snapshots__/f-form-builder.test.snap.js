@@ -552,9 +552,6 @@ snapshots["f-form-builder should test snapshot of all fields"] =
       type="text"
       variant="curved"
     >
-      (event) => {
-              console.log("onMouseOver callback triggered", event);
-            }
       <f-div
         align="top-left"
         direction="row"

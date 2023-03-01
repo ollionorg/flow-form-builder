@@ -1,5 +1,5 @@
 import { html } from "lit";
-import { FFormInputElements, FormBuilderField, FormBuilderTextInputField } from "../../../types";
+import { FFormInputElements, FormBuilderField, FormBuilderSuggestField } from "../../../types";
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
 export default function (
@@ -8,11 +8,10 @@ export default function (
 	fieldRef: Ref<FFormInputElements>,
 	value: unknown
 ) {
-	const field = _field as FormBuilderTextInputField;
+	const field = _field as FormBuilderSuggestField;
 	return html`
-		<f-input
+		<f-suggest
 			name=${name}
-			.type=${field.type}
 			${ref(fieldRef)}
 			.placeholder=${field.placeholder}
 			.value=${value}
@@ -21,6 +20,7 @@ export default function (
 			prefix=${ifDefined(field.prefix)}
 			suffix=${ifDefined(field.suffix)}
 			state=${ifDefined(field.state)}
+			.suggestions=${field.suggestions}
 			.suffixWhen=${field.suffixWhen}
 			max-length=${ifDefined(field.maxLength)}
 			?loading=${field.loading ?? false}
@@ -55,6 +55,6 @@ export default function (
 						></f-icon>
 				  `
 				: ""}
-		</f-input>
+		</f-suggest>
 	`;
 }

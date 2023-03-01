@@ -9,6 +9,8 @@ import textarea from "./textarea";
 import iconButton from "./icon-button";
 import array from "./array";
 import object from "./object";
+import file from "./file";
+import suggest from "./suggest";
 
 const all: Record<string, FormBuilderFieldRenderFunction> = {
 	text,
@@ -25,7 +27,9 @@ const all: Record<string, FormBuilderFieldRenderFunction> = {
 	number: text,
 	email: text,
 	url: text,
-	password: text
+	password: text,
+	file,
+	suggest
 };
 
 export default all;

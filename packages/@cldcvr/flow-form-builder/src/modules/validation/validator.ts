@@ -116,13 +116,14 @@ export async function validateField(
 				element.state = "default";
 			}
 		}
-		return { result, message, rule, name };
+		return { result, message, rule, name, label: field.label };
 	}
 	return {
 		result: true,
 		message: "Element removed from dom",
 		rule: "custom",
-		name: "NA"
+		name: "NA",
+		label: field.label
 	};
 }
 

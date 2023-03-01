@@ -179,6 +179,27 @@ const field: FormBuilderField = {
 			type: "button",
 			label: "get",
 			iconLeft: "i-arrow-rotate"
+		},
+		uploadFiles: {
+			label: {
+				title: "Files to upload",
+				description: "Select any file from native os file browser"
+			},
+			type: "file",
+			multiple: true
+		},
+		suggestValues: {
+			type: "suggest",
+			label: {
+				title: "Click inside field to see suggestions",
+				description: "Select suggestion to fill value"
+			},
+			suggestions: [
+				"Suggestion 1",
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut mattis vitae turpis sit amet vehicula. Mauris leo nulla, venenatis vel ullamcorper vel, scelerisque at sem. Donec venenatis nisl in eros consequat, vitae condimentum odio gravida.",
+				"Suggestion 3",
+				"Mauris efficitur tincidunt viverra. Praesent est velit, tincidunt ut ullamcorper et, commodo sed nibh. Fusce iaculis libero non arcu imperdiet laoreet. Phasellus vitae tortor vestibulum, interdum sem sit amet, semper risus. Pellentesque risus mauris, venenatis ut nunc non, lobortis venenatis nibh."
+			]
 		}
 	}
 };
