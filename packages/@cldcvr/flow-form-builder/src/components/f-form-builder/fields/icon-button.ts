@@ -11,6 +11,7 @@ export default function (
 	return html`
 		<f-icon-button
 			name=${name}
+			data-qa-id=${field.qaId || field.id}
 			${ref(fieldRef)}
 			.state=${field.state ?? "primary"}
 			.icon=${field.icon}

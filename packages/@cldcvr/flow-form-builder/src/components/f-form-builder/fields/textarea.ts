@@ -16,6 +16,7 @@ export default function (
 			.value=${value}
 			.placeholder=${field.placeholder}
 			max-length=${ifDefined(field?.maxLength)}
+			data-qa-id=${field.qaId || field.id}
 			?disabled=${field?.disabled ?? false}
 			?clear=${field?.clear ?? true}
 			?read-only=${field?.readonly ?? false}
@@ -30,20 +31,37 @@ export default function (
 			@mouseover=${ifDefined(field.onMouseOver)}
 		>
 			${field?.label?.title
-				? html` <f-div slot="label" padding="none" gap="none">${field?.label?.title}</f-div>`
-				: html`<f-div slot="label" padding="none" gap="none">${name}</f-div>`}
+				? html` <f-div
+						slot="label"
+						data-qa-label-for=${field.qaId || field.id}
+						padding="none"
+						gap="none"
+						>${field?.label?.title}</f-div
+				  >`
+				: html`<f-div
+						slot="label"
+						data-qa-label-for=${field.qaId || field.id}
+						padding="none"
+						gap="none"
+						>${name}</f-div
+				  >`}
 			${field?.label?.description
 				? html` <f-div slot="description" padding="none" gap="none"
 						>${field?.label?.description}</f-div
 				  >`
 				: ""}
-			${field?.helperText ? html`<f-div slot="help">${field?.helperText}</f-div>` : html``}
+			${field?.helperText
+				? html`<f-div slot="help" data-qa-help-for=${field.qaId || field.id}
+						>${field?.helperText}</f-div
+				  >`
+				: html``}
 			${field?.label?.iconTooltip
 				? html`
 						<f-icon
 							slot="icon-tooltip"
 							source="i-question-filled"
 							size="small"
+							data-qa-info-icon-for=${field.qaId || field.id}
 							.tooltip="${field.label?.iconTooltip}"
 							clickable
 						></f-icon>

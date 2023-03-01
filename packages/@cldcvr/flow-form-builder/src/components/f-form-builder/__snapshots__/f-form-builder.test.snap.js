@@ -25,6 +25,7 @@ snapshots["f-form-builder should render object field with all default properties
     <f-input
       category="fill"
       clear=""
+      data-qa-id=""
       name="firstname"
       size="medium"
       state="default"
@@ -34,6 +35,7 @@ snapshots["f-form-builder should render object field with all default properties
     >
       <f-div
         align="top-left"
+        data-qa-label-for=""
         direction="row"
         gap="none"
         height="fill-container"
@@ -53,6 +55,7 @@ snapshots["f-form-builder should render object field with all default properties
     <f-input
       category="fill"
       clear=""
+      data-qa-id=""
       name="lastname"
       size="medium"
       state="default"
@@ -62,6 +65,7 @@ snapshots["f-form-builder should render object field with all default properties
     >
       <f-div
         align="top-left"
+        data-qa-label-for=""
         direction="row"
         gap="none"
         height="fill-container"
@@ -107,6 +111,7 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
     <f-input
       category="fill"
       clear=""
+      data-qa-id=""
       name="firstname"
       size="medium"
       state="default"
@@ -116,6 +121,7 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
     >
       <f-div
         align="top-left"
+        data-qa-label-for=""
         direction="row"
         gap="none"
         height="fill-container"
@@ -135,6 +141,7 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
     <f-input
       category="fill"
       clear=""
+      data-qa-id=""
       name="lastname"
       size="medium"
       state="default"
@@ -144,6 +151,7 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
     >
       <f-div
         align="top-left"
+        data-qa-label-for=""
         direction="row"
         gap="none"
         height="fill-container"
@@ -211,6 +219,7 @@ snapshots["f-form-builder should display array fields"] =
       <f-input
         category="fill"
         clear=""
+        data-qa-id=""
         name=""
         size="medium"
         state="default"
@@ -220,6 +229,7 @@ snapshots["f-form-builder should display array fields"] =
       >
         <f-div
           align="top-left"
+          data-qa-label-for=""
           direction="row"
           gap="none"
           height="fill-container"
@@ -259,6 +269,7 @@ snapshots["f-form-builder should display array fields"] =
       <f-input
         category="fill"
         clear=""
+        data-qa-id=""
         name=""
         size="medium"
         state="default"
@@ -268,6 +279,7 @@ snapshots["f-form-builder should display array fields"] =
       >
         <f-div
           align="top-left"
+          data-qa-label-for=""
           direction="row"
           gap="none"
           height="fill-container"
@@ -343,6 +355,7 @@ snapshots["f-form-builder should add/delete field in array"] =
       <f-input
         category="fill"
         clear=""
+        data-qa-id=""
         name=""
         size="medium"
         state="default"
@@ -352,6 +365,7 @@ snapshots["f-form-builder should add/delete field in array"] =
       >
         <f-div
           align="top-left"
+          data-qa-label-for=""
           direction="row"
           gap="none"
           height="fill-container"
@@ -391,6 +405,7 @@ snapshots["f-form-builder should add/delete field in array"] =
       <f-input
         category="fill"
         clear=""
+        data-qa-id=""
         name=""
         size="medium"
         state="default"
@@ -400,6 +415,7 @@ snapshots["f-form-builder should add/delete field in array"] =
       >
         <f-div
           align="top-left"
+          data-qa-label-for=""
           direction="row"
           gap="none"
           height="fill-container"
@@ -453,6 +469,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     <f-select
       category="fill"
       clear=""
+      data-qa-id=""
       height="180"
       icon-left="i-app"
       name="selectBox"
@@ -466,6 +483,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     >
       <f-div
         align="top-left"
+        data-qa-label-for=""
         direction="row"
         gap="none"
         height="fill-container"
@@ -492,6 +510,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     <f-input
       category="fill"
       clear=""
+      data-qa-id=""
       name="textField"
       size="medium"
       state="default"
@@ -502,6 +521,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     >
       <f-div
         align="top-left"
+        data-qa-label-for=""
         direction="row"
         gap="none"
         height="fill-container"
@@ -519,6 +539,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
       </f-div>
       <f-div
         align="top-left"
+        data-qa-help-for="undefined"
         direction="row"
         gap="none"
         height="fill-container"
@@ -546,6 +567,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
       category="fill"
       clear=""
       data-hidden="false"
+      data-qa-id=""
       name="eventTestField"
       size="medium"
       state="default"
@@ -554,6 +576,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     >
       <f-div
         align="top-left"
+        data-qa-label-for=""
         direction="row"
         gap="none"
         height="fill-container"
@@ -571,6 +594,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
       </f-div>
       <f-div
         align="top-left"
+        data-qa-help-for=""
         direction="row"
         gap="none"
         height="fill-container"
@@ -597,6 +621,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     </f-divider>
     <f-switch
       category="fill"
+      data-qa-id=""
       name="switchButton"
       size="medium"
       state="default"
@@ -605,6 +630,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     >
       <f-div
         align="top-left"
+        data-qa-label-for=""
         direction="row"
         gap="none"
         height="fill-container"
@@ -630,6 +656,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     </f-divider>
     <f-radio-group
       category="fill"
+      data-qa-id=""
       direction="vertical"
       gap="small"
       name="radio"
@@ -640,6 +667,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     >
       <f-div
         align="top-left"
+        data-qa-label-for=""
         direction="row"
         gap="none"
         height="fill-container"
@@ -665,6 +693,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     </f-divider>
     <f-checkbox-group
       category="fill"
+      data-qa-id=""
       direction="horizontal"
       gap="small"
       name="checkboxField"
@@ -675,6 +704,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     >
       <f-div
         align="top-left"
+        data-qa-label-for=""
         direction="row"
         gap="none"
         height="fill-container"
@@ -718,6 +748,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     <f-text-area
       category="fill"
       clear=""
+      data-qa-id=""
       max-length="100"
       name="textAreaField"
       placeholder="This is a placeholder"
@@ -727,6 +758,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     >
       <f-div
         align="top-left"
+        data-qa-label-for=""
         direction="row"
         gap="none"
         height="fill-container"
@@ -752,6 +784,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     </f-divider>
     <f-form-object
       category="fill"
+      data-qa-id=""
       gap="medium"
       name="nestedObject"
       size="medium"
@@ -768,6 +801,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     </f-divider>
     <f-form-array
       category="fill"
+      data-qa-id=""
       gap="medium"
       name="nestedArray"
       size="medium"
@@ -784,6 +818,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     </f-divider>
     <f-button
       category="fill"
+      data-qa-id=""
       icon-left="i-arrow-rotate"
       name="getButton"
       size="medium"

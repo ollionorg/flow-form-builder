@@ -30,7 +30,7 @@ export type FormBuilderBaseField = {
 	id?: string; // id to uniquely identify in DOM
 	state?: "default" | "success" | "danger" | "warning" | "primary";
 	className?: string; // any additional css class name
-	dataQA?: string; // data dq attribute for qa automation
+	qaId?: string; // data dq attribute for qa automation
 	label?: FormBuilderLabel; // label of field
 	description?: string; // description displayed at bottom of field
 	validationRules?: FormBuilderValidationRules; // validation rules to validate field

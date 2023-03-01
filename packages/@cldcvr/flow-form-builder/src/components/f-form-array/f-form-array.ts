@@ -124,7 +124,11 @@ export class FFormArray extends FRoot {
 						>
 							<!--label-->
 							<f-div padding="none" direction="row" width="hug-content" height="hug-content">
-								<f-text variant="heading" size="medium" weight="regular"
+								<f-text
+									data-qa-label-for=${this.config.qaId || this.config.id}
+									variant="heading"
+									size="medium"
+									weight="regular"
 									>${this.config.label?.title}</f-text
 								>
 							</f-div>
@@ -134,6 +138,7 @@ export class FFormArray extends FRoot {
 										source="i-question-filled"
 										size="small"
 										state="default"
+										data-qa-info-icon-for=${this.config.qaId || this.config.id}
 										.tooltip="${this.config.label?.iconTooltip}"
 										clickable
 								  ></f-icon>`
@@ -151,7 +156,12 @@ export class FFormArray extends FRoot {
 			<f-div .gap=${this.gap} direction="column"> ${fieldTemplates} </f-div>
 
 			${this.config.helperText
-				? html`<f-text variant="para" size="small" weight="regular" .state=${this.config.state}
+				? html`<f-text
+						variant="para"
+						data-qa-help-for=${this.config.qaId || this.config.id}
+						size="small"
+						weight="regular"
+						.state=${this.config.state}
 						>${this.config?.helperText}</f-text
 				  >`
 				: html`<slot name="help"></slot>`}

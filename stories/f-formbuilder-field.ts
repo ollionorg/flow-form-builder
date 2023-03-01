@@ -41,6 +41,11 @@ const field: FormBuilderField = {
 			]
 		},
 		textField: {
+			qaId: "sampleQAId",
+			label: {
+				title: "Test for QA field",
+				iconTooltip: "Tooltip QA help"
+			},
 			type: "text",
 			helperText: "This field is a required field",
 			suffix: "recommended",

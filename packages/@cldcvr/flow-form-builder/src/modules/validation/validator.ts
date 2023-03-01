@@ -100,16 +100,15 @@ export async function validateField(
 
 		if (!result && message && element.offsetHeight > 0) {
 			if (!silent) {
-				updateMessage(element, message);
+				updateMessage(element, message, field, "data-qa-error-for");
 				element.state = "danger";
 			}
 		} else {
-			const slotName = element.lastElementChild?.getAttribute("slot");
+			const helpSlot = element.querySelector("[slot='help']");
 			if (field.helperText) {
-				updateMessage(element, field.helperText);
-			} else if (slotName === "help") {
-				const child = element.children[element.children.length - 1];
-				child.remove();
+				updateMessage(element, field.helperText, field, "data-qa-help-for");
+			} else if (helpSlot) {
+				helpSlot.remove();
 			}
 
 			if (!(element instanceof FButton) && !(element instanceof FIconButton)) {
@@ -120,20 +119,31 @@ export async function validateField(
 	}
 	return {
 		result: true,
-		message: "Element removed from dom",
+		message: "NA",
 		rule: "custom",
 		name: "NA",
 		label: field.label
 	};
 }
 
-function updateMessage(element: HTMLElement, message: string) {
-	if (element.lastElementChild?.getAttribute("slot") === "help") {
-		const child = element.children[element.children.length - 1];
-		child.remove();
-		element.insertAdjacentHTML("beforeend", `<f-div slot="help">${message}</f-div>`);
+function updateMessage(
+	element: HTMLElement,
+	message: string,
+	field: FormBuilderField,
+	qaAttribute: string
+) {
+	const helpSlot = element.querySelector("[slot='help']");
+	if (helpSlot) {
+		helpSlot.remove();
+		element.insertAdjacentHTML(
+			"beforeend",
+			`<f-div slot="help" ${qaAttribute}=${field.qaId || field.id}>${message}</f-div>`
+		);
 	} else {
-		element.insertAdjacentHTML("beforeend", `<f-div slot="help">${message}</f-div>`);
+		element.insertAdjacentHTML(
+			"beforeend",
+			`<f-div slot="help" ${qaAttribute}=${field.qaId || field.id}>${message}</f-div>`
+		);
 	}
 }
 

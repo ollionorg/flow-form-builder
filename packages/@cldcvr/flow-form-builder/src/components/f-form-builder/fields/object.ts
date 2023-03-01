@@ -12,6 +12,7 @@ export default function (
 	return html`
 		<f-form-object
 			name=${name}
+			data-qa-id=${field.qaId || field.id}
 			${ref(fieldRef)}
 			.config=${field}
 			.value=${value}

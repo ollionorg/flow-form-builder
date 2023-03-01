@@ -12,6 +12,7 @@ export default function (
 	return html`
 		<f-file-upload
 			name=${name}
+			data-qa-id=${field.qaId || field.id}
 			${ref(fieldRef)}
 			.placeholder=${field.placeholder ?? "Drag and Drop Files or Click here to upload"}
 			.value=${value}
@@ -29,18 +30,35 @@ export default function (
 			@mouseover=${ifDefined(field.onMouseOver)}
 		>
 			${field.label?.title
-				? html` <f-div slot="label" padding="none" gap="none">${field.label.title}</f-div>`
-				: html`<f-div slot="label" padding="none" gap="none">${name}</f-div>`}
+				? html` <f-div
+						slot="label"
+						padding="none"
+						gap="none"
+						data-qa-label-for=${field.qaId || field.id}
+						>${field.label.title}</f-div
+				  >`
+				: html`<f-div
+						slot="label"
+						padding="none"
+						gap="none"
+						data-qa-label-for=${field.qaId || field.id}
+						>${name}</f-div
+				  >`}
 			${field.label?.description
 				? html` <f-div slot="description" padding="none" gap="none"
 						>${field.label.description}</f-div
 				  >`
 				: ""}
-			${field.helperText ? html`<f-div slot="help">${field.helperText}</f-div>` : ``}
+			${field.helperText
+				? html`<f-div slot="help" data-qa-help-for=${field.qaId || field.id}
+						>${field.helperText}</f-div
+				  >`
+				: ``}
 			${field.label?.iconTooltip
 				? html`
 						<f-icon
 							slot="icon-tooltip"
+							data-qa-info-icon-for=${field.qaId || field.id}
 							source="i-question-filled"
 							size="small"
 							.tooltip="${field.label?.iconTooltip}"
