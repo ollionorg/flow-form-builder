@@ -185,7 +185,7 @@ export class FFormArray extends FRoot {
 			this.fieldRefs.forEach((ref, idx) => {
 				if (ref.value) {
 					ref.value.showWhenSubject = this.showWhenSubject;
-					ref.value.oninput = async (event: Event) => {
+					const fieldValidation = async (event: Event) => {
 						event.stopPropagation();
 
 						this.value[idx] = ref.value?.value;
@@ -194,6 +194,9 @@ export class FFormArray extends FRoot {
 
 						this.dispatchInputEvent();
 					};
+
+					ref.value.oninput = fieldValidation;
+					ref.value.onblur = fieldValidation;
 
 					const fieldConfig = this.config.field;
 					if (fieldConfig.showWhen) {

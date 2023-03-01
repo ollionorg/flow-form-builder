@@ -210,7 +210,7 @@ export class FFormBuilder extends FRoot {
 				 * this subject is propogated for `showWhen` implementation
 				 */
 				ref.value.showWhenSubject = this.showWhenSubject;
-				ref.value.oninput = async (event: Event) => {
+				const fieldValidation = async (event: Event) => {
 					event.stopPropagation();
 
 					/**
@@ -246,7 +246,8 @@ export class FFormBuilder extends FRoot {
 					 */
 					this.dispatchInputEvent();
 				};
-
+				ref.value.oninput = fieldValidation;
+				ref.value.onblur = fieldValidation;
 				if (this.field.showWhen) {
 					/**
 					 * subsscribe to show when subject, whenever new values are there in formbuilder then show when will execute

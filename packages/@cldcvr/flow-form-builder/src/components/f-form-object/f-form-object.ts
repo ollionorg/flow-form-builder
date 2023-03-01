@@ -142,7 +142,7 @@ export class FFormObject extends FRoot {
 			Object.entries(this.fieldRefs).forEach(([name, ref]) => {
 				if (ref.value) {
 					ref.value.showWhenSubject = this.showWhenSubject;
-					ref.value.oninput = async (event: Event) => {
+					const fieldValidation = async (event: Event) => {
 						event.stopPropagation();
 						if (!this.value) {
 							this.value = {};
@@ -153,6 +153,8 @@ export class FFormObject extends FRoot {
 
 						this.dispatchInputEvent();
 					};
+					ref.value.oninput = fieldValidation;
+					ref.value.onblur = fieldValidation;
 					const fieldConfig = this.config.fields[name];
 					if (fieldConfig.showWhen) {
 						this.showWhenSubject.subscribe(values => {
