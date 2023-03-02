@@ -4,6 +4,13 @@
 
 # Change Log
 
+## [1.2.4] - 2023-03-02
+
+### Features
+- `suggest` and `file` field implemented.
+### Improvements
+
+- `data-qa-*` attributes added.
 ## [1.2.3] - 2023-02-27
 
 ### Improvements

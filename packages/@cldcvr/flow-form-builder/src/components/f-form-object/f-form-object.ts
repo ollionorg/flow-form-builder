@@ -92,13 +92,19 @@ export class FFormObject extends FRoot {
 				.variant=${this.config.variant}
 				.label=${this.config.label}
 				gap=${this.config.gap ?? this.gap}
+				data-qa-id=${this.config.qaId || this.config.id}
 				.collapse=${this.config.isCollapsible ? "accordion" : "none"}
 			>
 				${fieldTemplates}
 			</f-form-group>
 
 			${this.config.helperText
-				? html`<f-text variant="para" size="small" weight="regular" .state=${this.config.state}
+				? html`<f-text
+						variant="para"
+						size="small"
+						weight="regular"
+						data-qa-help-for=${this.config.qaId || this.config.id}
+						.state=${this.config.state}
 						>${this.config?.helperText}</f-text
 				  >`
 				: ""}

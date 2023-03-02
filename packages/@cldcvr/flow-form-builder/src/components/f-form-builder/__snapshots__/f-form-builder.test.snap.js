@@ -18,6 +18,7 @@ snapshots["f-form-builder should render object field with all default properties
 >
   <f-form-group
     collapse="none"
+    data-qa-id=""
     direction="horizontal"
     gap="medium"
     label="{&quot;title&quot;:&quot;Object field form&quot;,&quot;description&quot;:&quot;showing object field&quot;}"
@@ -104,6 +105,7 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
 >
   <f-form-group
     collapse="none"
+    data-qa-id=""
     direction="horizontal"
     gap="medium"
     label="{&quot;title&quot;:&quot;Object field form&quot;,&quot;description&quot;:&quot;showing object field&quot;}"
@@ -462,6 +464,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
 >
   <f-form-group
     collapse="none"
+    data-qa-id=""
     direction="vertical"
     gap="medium"
     label="{&quot;title&quot;:&quot;Object level label&quot;,&quot;description&quot;:&quot;following fields are used for demo purpose only&quot;}"
