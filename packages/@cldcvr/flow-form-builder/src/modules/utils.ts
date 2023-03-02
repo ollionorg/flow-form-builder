@@ -55,3 +55,7 @@ export function isEmpty(value: unknown): boolean {
 
 	return false;
 }
+
+export function isAllNullOrUndefined(value: Array<unknown>) {
+	return value.every(v => isNullOrUndefined(v));
+}

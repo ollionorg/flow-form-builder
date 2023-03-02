@@ -42,6 +42,8 @@ export type FormBuilderBaseField = {
 export type FormBuilderArrayField = FormBuilderBaseField & {
 	type: "array";
 	field: FormBuilderField;
+	label: FormBuilderLabel;
+	allowEmpty?: boolean;
 };
 export type FormBuilderObjectField = FormBuilderBaseField & {
 	type: "object";

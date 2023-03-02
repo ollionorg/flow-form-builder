@@ -205,7 +205,7 @@ snapshots["f-form-builder should display array fields"] =
     width="fill-container"
   >
     <f-div
-      align="top-left"
+      align="middle-left"
       direction="row"
       gap="small"
       height="fill-container"
@@ -255,7 +255,7 @@ snapshots["f-form-builder should display array fields"] =
       </f-icon-button>
     </f-div>
     <f-div
-      align="top-left"
+      align="middle-left"
       direction="row"
       gap="small"
       height="fill-container"
@@ -341,7 +341,7 @@ snapshots["f-form-builder should add/delete field in array"] =
     width="fill-container"
   >
     <f-div
-      align="top-left"
+      align="middle-left"
       direction="row"
       gap="small"
       height="fill-container"
@@ -391,7 +391,7 @@ snapshots["f-form-builder should add/delete field in array"] =
       </f-icon-button>
     </f-div>
     <f-div
-      align="top-left"
+      align="middle-left"
       direction="row"
       gap="small"
       height="fill-container"
@@ -829,13 +829,6 @@ snapshots["f-form-builder should test snapshot of all fields"] =
       variant="curved"
     >
     </f-button>
-    <f-divider
-      id="getButton-divider"
-      size="medium"
-      state="default"
-      variant="solid"
-    >
-    </f-divider>
   </f-form-group>
 </f-div>
 `;

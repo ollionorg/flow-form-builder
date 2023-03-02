@@ -67,7 +67,7 @@ export class FFormObject extends FRoot {
 
 	buildFields() {
 		const fieldTemplates: TemplateResult[] = [];
-		Object.entries(this.config.fields).forEach(([fieldname, fieldConfig]) => {
+		Object.entries(this.config.fields).forEach(([fieldname, fieldConfig], idx, fieldArray) => {
 			const fieldRef: Ref<FFormInputElements> = createRef();
 
 			this.fieldRefs[fieldname] = fieldRef;
@@ -79,7 +79,7 @@ export class FFormObject extends FRoot {
 						fieldRef,
 						this.getFieldValue(fieldname)
 					)}
-					${this.config.fieldSeparator
+					${this.config.fieldSeparator && idx < fieldArray.length - 1
 						? html`<f-divider id="${fieldname}-divider"></f-divider>`
 						: ""}
 				`

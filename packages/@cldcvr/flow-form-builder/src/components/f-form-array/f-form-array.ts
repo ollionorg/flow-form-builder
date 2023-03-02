@@ -63,18 +63,34 @@ export class FFormArray extends FRoot {
 
 	showWhenSubject!: Subject<FormBuilderValues>;
 
+	get isRequired() {
+		return !this.config.allowEmpty;
+	}
+
 	render() {
 		this.fieldRefs = [];
 
-		let valueCount = 1;
+		if (this.isRequired) {
+			let valueCount = 1;
 
-		if (this.value && !isEmptyArray(this.value)) {
-			valueCount = this.value.length;
+			if (this.value && !isEmptyArray(this.value)) {
+				valueCount = this.value.length;
+			} else {
+				this.value = [null];
+			}
+
+			return html`${this.buildFields(valueCount)}`;
 		} else {
-			this.value = [null];
-		}
+			let valueCount = 0;
 
-		return html`${this.buildFields(valueCount)}`;
+			if (this.value && !isEmptyArray(this.value)) {
+				valueCount = this.value.length;
+			} else {
+				this.value = [];
+			}
+
+			return html`${this.buildFields(valueCount)}`;
+		}
 	}
 	getFieldValue(index: number) {
 		return this.value ? this.value[index] : undefined;
@@ -86,14 +102,14 @@ export class FFormArray extends FRoot {
 
 			this.fieldRefs.push(fieldRef);
 			fieldTemplates.push(
-				html` <f-div gap="small" overflow="scroll"
+				html` <f-div gap="small" align="middle-left" overflow="scroll"
 					>${fieldRenderer[this.config.field.type](
-						this.getAttribute("name") as string,
+						``,
 						this.config.field,
 						fieldRef,
 						this.getFieldValue(i)
 					)}
-					${i === 0
+					${i === 0 && this.isRequired
 						? html` <f-icon-button
 								icon="i-plus"
 								size="x-small"
@@ -121,14 +137,20 @@ export class FFormArray extends FRoot {
 							direction="row"
 							width="hug-content"
 							height="hug-content"
+							align="middle-center"
 						>
 							<!--label-->
-							<f-div padding="none" direction="row" width="hug-content" height="hug-content">
+							<f-div
+								padding="0px 0px 0px x-small"
+								direction="row"
+								width="hug-content"
+								height="hug-content"
+							>
 								<f-text
 									data-qa-label-for=${this.config.qaId || this.config.id}
-									variant="heading"
-									size="medium"
-									weight="regular"
+									variant="para"
+									size="small"
+									weight="medium"
 									>${this.config.label?.title}</f-text
 								>
 							</f-div>
@@ -143,6 +165,14 @@ export class FFormArray extends FRoot {
 										clickable
 								  ></f-icon>`
 								: ""}
+							${!this.isRequired
+								? html`<f-icon-button
+										icon="i-plus"
+										size="x-small"
+										state="neutral"
+										@click=${this.addField}
+								  />`
+								: ``}
 						</f-div>
 						<!--field description-->
 						${this.config.label?.description

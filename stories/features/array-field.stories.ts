@@ -19,6 +19,10 @@ type SampleFormBuilder = {
 const sampleFormBuilder: SampleFormBuilder = {
 	field: {
 		type: "array",
+		allowEmpty: true,
+		label: {
+			title: "Text array"
+		},
 		field: {
 			type: "text"
 		}

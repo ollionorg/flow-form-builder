@@ -171,13 +171,12 @@ const field: FormBuilderField = {
 		},
 		nestedArray: {
 			type: "array",
+			allowEmpty: true,
+			label: {
+				title: "Optional Array"
+			},
 			field: {
-				type: "text",
-				validationRules: [
-					{
-						name: "required"
-					}
-				]
+				type: "text"
 			}
 		},
 		getButton: {

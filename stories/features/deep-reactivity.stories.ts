@@ -48,6 +48,9 @@ const sampleFormBuilder: SampleFormBuilder = {
 			},
 			arrayOfObjects: {
 				type: "array",
+				label: {
+					title: "Array of Objects"
+				},
 				field: {
 					type: "object",
 					fields: {
@@ -72,6 +75,9 @@ const sampleFormBuilder: SampleFormBuilder = {
 			},
 			array: {
 				type: "array",
+				label: {
+					title: "Array"
+				},
 				field: {
 					type: "text",
 					validationRules: [
