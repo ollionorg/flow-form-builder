@@ -1,0 +1,8 @@
+@mixin infoIcon() {
+	f-icon[source="i-question-filled"] {
+		opacity: 0.5;
+		&:hover {
+			opacity: 1;
+		}
+	}
+}

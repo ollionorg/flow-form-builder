@@ -1,4 +1,5 @@
 @import "@cldcvr/flow-core/src/mixins/scss/mixins";
+@import "./../../mixins";
 
 /**
 $gaps map hold gap attribute related values
@@ -37,6 +38,7 @@ $states: (
 			flex-direction: row;
 		}
 	}
+	@include infoIcon();
 }
 
 f-radio-group {

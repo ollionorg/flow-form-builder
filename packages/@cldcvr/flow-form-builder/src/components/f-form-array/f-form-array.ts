@@ -159,7 +159,7 @@ export class FFormArray extends FRoot {
 								? html` <f-icon
 										source="i-question-filled"
 										size="small"
-										state="default"
+										state="subtle"
 										data-qa-info-icon-for=${this.config.qaId || this.config.id}
 										.tooltip="${this.config.label?.iconTooltip}"
 										clickable

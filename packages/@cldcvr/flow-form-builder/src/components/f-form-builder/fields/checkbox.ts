@@ -60,6 +60,7 @@ export default function (
 							data-qa-info-icon-for=${field.qaId || field.id}
 							source="i-question-filled"
 							size="small"
+							state="subtle"
 							.tooltip="${field.label?.iconTooltip}"
 							clickable
 						></f-icon>

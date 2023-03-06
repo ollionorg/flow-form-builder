@@ -130,7 +130,7 @@ export class FFormBuilder extends FRoot {
 									? html` <f-icon
 											source="i-question-filled"
 											size="small"
-											state="default"
+											state="subtle"
 											.tooltip="${this.label?.iconTooltip}"
 											clickable
 									  ></f-icon>`

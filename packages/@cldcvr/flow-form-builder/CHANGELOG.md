@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.2.6] - 2023-03-06
+
+### Improvements
+- `InfoIcon` tooltip behavior updated.
+
 ## [1.2.5] - 2023-03-02
 
 ### Improvements

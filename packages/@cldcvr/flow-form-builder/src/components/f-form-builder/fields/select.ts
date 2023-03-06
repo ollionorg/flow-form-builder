@@ -67,6 +67,7 @@ export default function (
 						<f-icon
 							slot="icon-tooltip"
 							source="i-question-filled"
+							state="subtle"
 							data-qa-info-icon-for=${field.qaId || field.id}
 							.tooltip="${field.label?.iconTooltip}"
 							size="small"

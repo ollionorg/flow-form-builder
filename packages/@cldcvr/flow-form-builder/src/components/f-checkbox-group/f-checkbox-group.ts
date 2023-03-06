@@ -121,6 +121,7 @@ export class FCheckboxGroup extends FRoot {
 												slot="icon-tooltip"
 												source="i-question-filled"
 												size="small"
+												state="subtle"
 												.tooltip="${item.iconTooltip}"
 												clickable
 											></f-icon>

@@ -67,6 +67,7 @@ export default function (
 							slot="icon-tooltip"
 							source="i-question-filled"
 							size="small"
+							state="subtle"
 							data-qa-info-icon-for=${field.qaId || field.id}
 							.tooltip="${field.label?.iconTooltip}"
 							clickable

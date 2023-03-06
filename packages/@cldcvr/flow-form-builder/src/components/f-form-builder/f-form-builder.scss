@@ -1,5 +1,6 @@
 // common mixins imported from this file
 @import "@cldcvr/flow-core/src/mixins/scss/mixins";
+@import "./../../mixins";
 
 :host {
 	// Important :  always include base mixins
@@ -16,6 +17,8 @@
 		justify-content: flex-start;
 		flex: 1 0 auto;
 	}
+
+	@include infoIcon();
 }
 
 f-form-builder {
