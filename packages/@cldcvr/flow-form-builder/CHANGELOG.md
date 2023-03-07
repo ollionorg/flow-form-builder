@@ -3,6 +3,10 @@
 <p class="margin-btm-24">All notable changes to this project will be documented in this file. See <a>Conventional Commits</a> for commit guidelines. </p>
 
 # Change Log
+## [1.2.8-beta] - 2023-03-07
+
+### Improvements
+- `data-qa-*` testing.
 
 ## [1.2.7] - 2023-03-07
 

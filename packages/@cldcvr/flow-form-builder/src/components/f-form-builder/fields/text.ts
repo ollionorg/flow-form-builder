@@ -16,7 +16,7 @@ export default function (
 			${ref(fieldRef)}
 			.placeholder=${field.placeholder}
 			.value=${value}
-			data-qa-id=${field.qaId || field.id}
+			data-qa-element-id=${field.qaId || field.id}
 			icon-left=${ifDefined(field.iconLeft)}
 			icon-right=${ifDefined(field.iconRight)}
 			prefix=${ifDefined(field.prefix)}

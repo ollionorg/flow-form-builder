@@ -26,7 +26,7 @@ snapshots["f-form-builder should render object field with all default properties
     <f-input
       category="fill"
       clear=""
-      data-qa-id=""
+      data-qa-element-id=""
       name="firstname"
       size="medium"
       state="default"
@@ -56,7 +56,7 @@ snapshots["f-form-builder should render object field with all default properties
     <f-input
       category="fill"
       clear=""
-      data-qa-id=""
+      data-qa-element-id=""
       name="lastname"
       size="medium"
       state="default"
@@ -113,7 +113,7 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
     <f-input
       category="fill"
       clear=""
-      data-qa-id=""
+      data-qa-element-id=""
       name="firstname"
       size="medium"
       state="default"
@@ -143,7 +143,7 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
     <f-input
       category="fill"
       clear=""
-      data-qa-id=""
+      data-qa-element-id=""
       name="lastname"
       size="medium"
       state="default"
@@ -221,7 +221,7 @@ snapshots["f-form-builder should display array fields"] =
       <f-input
         category="fill"
         clear=""
-        data-qa-id=""
+        data-qa-element-id=""
         name=""
         size="medium"
         state="default"
@@ -271,7 +271,7 @@ snapshots["f-form-builder should display array fields"] =
       <f-input
         category="fill"
         clear=""
-        data-qa-id=""
+        data-qa-element-id=""
         name=""
         size="medium"
         state="default"
@@ -357,7 +357,7 @@ snapshots["f-form-builder should add/delete field in array"] =
       <f-input
         category="fill"
         clear=""
-        data-qa-id=""
+        data-qa-element-id=""
         name=""
         size="medium"
         state="default"
@@ -407,7 +407,7 @@ snapshots["f-form-builder should add/delete field in array"] =
       <f-input
         category="fill"
         clear=""
-        data-qa-id=""
+        data-qa-element-id=""
         name=""
         size="medium"
         state="default"
@@ -513,7 +513,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     <f-input
       category="fill"
       clear=""
-      data-qa-id=""
+      data-qa-element-id=""
       name="textField"
       size="medium"
       state="default"
@@ -570,7 +570,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
       category="fill"
       clear=""
       data-hidden="false"
-      data-qa-id=""
+      data-qa-element-id=""
       name="eventTestField"
       size="medium"
       state="default"
