@@ -111,7 +111,7 @@ export class FFormBuilder extends FRoot {
 
 		return html`
 			<f-form
-				name="sampleForm"
+				name=${this.name}
 				@submit=${this.onSubmit}
 				@show-when=${this.onShowWhen}
 				${ref(this.formRef)}

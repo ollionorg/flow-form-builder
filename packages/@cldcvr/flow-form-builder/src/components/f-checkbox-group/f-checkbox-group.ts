@@ -109,7 +109,9 @@ export class FCheckboxGroup extends FRoot {
 								@input=${(event: CustomEvent) => this.handleChange(event, item)}
 								.state=${this.state}
 							>
-								<f-div slot="label" padding="none" gap="none">${item.title ?? item.id}</f-div>
+								<f-div slot="label" padding="none" gap="none">
+									<f-text weight="regular" size="small">${item.title ?? item.id}</f-text></f-div
+								>
 								${item?.description
 									? html` <f-div slot="description" padding="none" gap="none"
 											>${item?.description}</f-div

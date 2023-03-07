@@ -25,12 +25,14 @@ const sampleFormBuilder: SampleFormBuilder = {
 		},
 		field: {
 			type: "object",
+			direction: "vertical",
 			fields: {
 				firstname: {
 					type: "text"
 				},
 				lastname: {
-					type: "text"
+					type: "text",
+					helperText: "Lastname help"
 				}
 			}
 		}

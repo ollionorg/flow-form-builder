@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.2.7] - 2023-03-07
+
+### Improvements
+- UX improvements.
+
 ## [1.2.6] - 2023-03-06
 
 ### Improvements
