@@ -328,6 +328,9 @@ describe("f-form-builder", () => {
 						},
 						nestedArray: {
 							type: "array",
+							label: {
+								title: "This is array"
+							},
 							field: {
 								type: "text",
 								validationRules: [
