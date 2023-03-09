@@ -205,7 +205,7 @@ snapshots["f-form-builder should display array fields"] =
     width="fill-container"
   >
     <f-div
-      align="middle-left"
+      align="top-left"
       direction="row"
       gap="small"
       height="fill-container"
@@ -229,34 +229,19 @@ snapshots["f-form-builder should display array fields"] =
         value="username1"
         variant="curved"
       >
-        <f-div
-          align="top-left"
-          data-qa-label-for=""
-          direction="row"
-          gap="none"
-          height="fill-container"
-          overflow="wrap"
-          padding="none"
-          selected="none"
-          slot="label"
-          state="transparent"
-          sticky="none"
-          style="padding: 0px;"
-          variant="block"
-          width="fill-container"
-        >
-        </f-div>
       </f-input>
       <f-icon-button
+        class="f-form-array-action"
         data-qa-plus=""
         icon="i-plus"
         size="x-small"
         state="neutral"
+        style="margin-top: 8px; visibility: visible;"
       >
       </f-icon-button>
     </f-div>
     <f-div
-      align="middle-left"
+      align="top-left"
       direction="row"
       gap="small"
       height="fill-container"
@@ -280,29 +265,14 @@ snapshots["f-form-builder should display array fields"] =
         value="username2"
         variant="curved"
       >
-        <f-div
-          align="top-left"
-          data-qa-label-for=""
-          direction="row"
-          gap="none"
-          height="fill-container"
-          overflow="wrap"
-          padding="none"
-          selected="none"
-          slot="label"
-          state="transparent"
-          sticky="none"
-          style="padding: 0px;"
-          variant="block"
-          width="fill-container"
-        >
-        </f-div>
       </f-input>
       <f-icon-button
+        class="f-form-array-action"
         data-qa-minus=""
         icon="i-minus"
         size="x-small"
-        state="danger"
+        state="neutral"
+        style="margin-top: 8px; visibility: visible;"
       >
       </f-icon-button>
     </f-div>
@@ -343,7 +313,7 @@ snapshots["f-form-builder should add/delete field in array"] =
     width="fill-container"
   >
     <f-div
-      align="middle-left"
+      align="top-left"
       direction="row"
       gap="small"
       height="fill-container"
@@ -367,34 +337,19 @@ snapshots["f-form-builder should add/delete field in array"] =
         value="username1"
         variant="curved"
       >
-        <f-div
-          align="top-left"
-          data-qa-label-for=""
-          direction="row"
-          gap="none"
-          height="fill-container"
-          overflow="wrap"
-          padding="none"
-          selected="none"
-          slot="label"
-          state="transparent"
-          sticky="none"
-          style="padding: 0px;"
-          variant="block"
-          width="fill-container"
-        >
-        </f-div>
       </f-input>
       <f-icon-button
+        class="f-form-array-action"
         data-qa-plus=""
         icon="i-plus"
         size="x-small"
         state="neutral"
+        style="margin-top: 8px; visibility: visible;"
       >
       </f-icon-button>
     </f-div>
     <f-div
-      align="middle-left"
+      align="top-left"
       direction="row"
       gap="small"
       height="fill-container"
@@ -418,29 +373,14 @@ snapshots["f-form-builder should add/delete field in array"] =
         value="username2"
         variant="curved"
       >
-        <f-div
-          align="top-left"
-          data-qa-label-for=""
-          direction="row"
-          gap="none"
-          height="fill-container"
-          overflow="wrap"
-          padding="none"
-          selected="none"
-          slot="label"
-          state="transparent"
-          sticky="none"
-          style="padding: 0px;"
-          variant="block"
-          width="fill-container"
-        >
-        </f-div>
       </f-input>
       <f-icon-button
+        class="f-form-array-action"
         data-qa-minus=""
         icon="i-minus"
         size="x-small"
-        state="danger"
+        state="neutral"
+        style="margin-top: 8px; visibility: visible;"
       >
       </f-icon-button>
     </f-div>
