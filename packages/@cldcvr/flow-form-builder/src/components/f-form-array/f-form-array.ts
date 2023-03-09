@@ -61,7 +61,7 @@ export class FFormArray extends FRoot {
 	@property({ reflect: true, type: String })
 	gap?: "large" | "medium" | "small" | "x-small" = "medium";
 
-	@queryAll(".f-form-array-action")
+	@queryAll("f-icon-button.f-form-array-action")
 	actions?: NodeListOf<FIconButton>;
 
 	fieldRefs: Ref<FFormInputElements>[] = [];
