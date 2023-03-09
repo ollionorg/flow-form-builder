@@ -26,6 +26,9 @@ const sampleFormBuilder: SampleFormBuilder = {
 		field: {
 			type: "object",
 			direction: "vertical",
+			label: {
+				title: "Object level title"
+			},
 			fields: {
 				firstname: {
 					type: "text",
@@ -37,6 +40,10 @@ const sampleFormBuilder: SampleFormBuilder = {
 				lastname: {
 					type: "text",
 					helperText: "Lastname help"
+				},
+				email: {
+					type: "text",
+					helperText: "Email help"
 				}
 			}
 		}

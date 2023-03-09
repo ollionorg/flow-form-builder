@@ -219,20 +219,22 @@ export class FFormArray extends FRoot {
 		return Promise.all(allValidations);
 	}
 	applyLabelOffSet(element: HTMLElement) {
-		const labelHeight: number =
-			(element.querySelector("[slot='label']") as HTMLElement)?.offsetHeight ?? 0;
-		const descriptionHeight: number =
-			(element.querySelector("[slot='description']") as HTMLElement)?.offsetHeight ?? 0;
-		let totalHeight = labelHeight + descriptionHeight;
-		if (totalHeight > 0) {
-			totalHeight += 4;
-		}
+		let totalHeight = 0;
 		if (this.config.field.type === "object") {
 			let innerLabelTotal = (element as FFormObject).getLabelOffSet();
 			if (innerLabelTotal > 0) {
 				innerLabelTotal += 4;
 			}
 			totalHeight += innerLabelTotal;
+		} else {
+			const labelHeight: number =
+				(element.querySelector("[slot='label']") as HTMLElement)?.offsetHeight ?? 0;
+			const descriptionHeight: number =
+				(element.querySelector("[slot='description']") as HTMLElement)?.offsetHeight ?? 0;
+			totalHeight = labelHeight + descriptionHeight;
+			if (totalHeight > 0) {
+				totalHeight += 4;
+			}
 		}
 
 		if (this.actions) {

@@ -1,5 +1,5 @@
 import { html, PropertyValueMap, TemplateResult, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, query } from "lit/decorators.js";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import eleStyle from "./f-form-object.scss";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
@@ -15,6 +15,7 @@ import {
 import { validateField } from "../../modules/validation/validator";
 import { Subject } from "rxjs";
 import { propogateProperties } from "../../modules/helpers";
+import { FFormGroup } from "@cldcvr/flow-core";
 
 export type ObjectValueType = Record<
 	string,
@@ -53,6 +54,9 @@ export class FFormObject extends FRoot {
 	@property({ reflect: true, type: String })
 	gap?: "large" | "medium" | "small" | "x-small" = "medium";
 
+	@query("f-form-group")
+	formGroupElement?: FFormGroup;
+
 	fieldRefs: Record<string, Ref<FFormInputElements>> = {};
 
 	showWhenSubject!: Subject<FormBuilderValues>;
@@ -75,8 +79,16 @@ export class FFormObject extends FRoot {
 			(element.querySelector("[slot='label']") as HTMLElement)?.offsetHeight ?? 0;
 		const descriptionHeight: number =
 			(element.querySelector("[slot='description']") as HTMLElement)?.offsetHeight ?? 0;
-		const totalHeight = labelHeight + descriptionHeight;
+		let totalHeight = labelHeight + descriptionHeight;
+		if (this.formGroupElement) {
+			const fDiv = this.formGroupElement.shadowRoot?.querySelector<HTMLElement>(
+				"f-div.f-form-group-label-wrapper"
+			);
 
+			if (fDiv) {
+				totalHeight += fDiv.offsetHeight + 12;
+			}
+		}
 		return totalHeight;
 	}
 

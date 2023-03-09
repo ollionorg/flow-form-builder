@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.2.11] - 2023-03-09
+
+### Improvements
+- Alignment of +, - actions in array field fixed.
 ## [1.2.10] - 2023-03-09
 
 ### Improvements
