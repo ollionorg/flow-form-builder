@@ -17,10 +17,10 @@ import eleStyle from "./f-form-builder.scss";
 
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
-import { Ref, createRef, ref } from "lit/directives/ref.js";
+import { Ref, createRef } from "lit/directives/ref.js";
 import fieldRenderer from "./fields";
 import { extractValidationState, validateField } from "../../modules/validation/validator";
-import { FForm } from "@cldcvr/flow-core";
+
 import { Subject } from "rxjs";
 import { propogateProperties } from "../../modules/helpers";
 
@@ -90,8 +90,7 @@ export class FFormBuilder extends FRoot {
 	@property({ reflect: true, type: Boolean })
 	separator?: boolean = false;
 
-	fieldRef!: Ref<FFormInputElements>;
-	formRef!: Ref<FForm>;
+	fieldRef: Ref<FFormInputElements> = createRef();
 
 	state: FormBuilderState = {
 		get isValid() {
@@ -107,14 +106,11 @@ export class FFormBuilder extends FRoot {
 	 * responsible for rendering form
 	 */
 	render() {
-		this.fieldRef = createRef();
-
 		return html`
 			<f-form
 				name=${this.name}
 				@submit=${this.onSubmit}
 				@show-when=${this.onShowWhen}
-				${ref(this.formRef)}
 				?separator=${this.separator}
 				gap=${this.gap}
 			>

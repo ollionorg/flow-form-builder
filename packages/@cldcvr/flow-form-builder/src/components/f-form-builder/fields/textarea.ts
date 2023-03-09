@@ -16,7 +16,7 @@ export default function (
 			.value=${value}
 			.placeholder=${field.placeholder}
 			max-length=${ifDefined(field?.maxLength)}
-			data-qa-id=${field.qaId || field.id}
+			data-qa-element-id=${field.qaId || field.id}
 			?disabled=${field?.disabled ?? false}
 			?clear=${field?.clear ?? true}
 			?read-only=${field?.readonly ?? false}

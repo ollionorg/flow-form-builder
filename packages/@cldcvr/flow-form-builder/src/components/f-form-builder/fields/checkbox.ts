@@ -12,7 +12,7 @@ export default function (
 	return html`
 		<f-checkbox-group
 			name=${name}
-			data-qa-id=${field.qaId || field.id}
+			data-qa-element-id=${field.qaId || field.id}
 			${ref(fieldRef)}
 			.options=${field.options}
 			.value=${value}

@@ -4,7 +4,7 @@ import { customElement, property } from "lit/decorators.js";
 import { RadioOption, RadioOptions } from "../../types";
 import eleStyle from "./f-radio-group.scss";
 import { FDiv, FRoot, FText } from "@cldcvr/flow-core";
-import { isEqual } from "lodash";
+import { isEqual } from "lodash-es";
 
 /**
  * @summary Text component includes Headings, titles, body texts and links.
@@ -88,21 +88,29 @@ export class FRadioGroup extends FRoot {
 					${this.options?.map(
 						item => html`
 							<f-radio
+								data-qa-element-id=${this.getAttribute("data-qa-element-id")}
 								.value=${this.isChecked(item)}
 								@input=${() => this.handleChange(item)}
 								.state=${this.state}
 							>
 								<f-div slot="label" padding="none" gap="none"
-									><f-text weight="regular" size="small">${item.title ?? item.id}</f-text></f-div
+									><f-text weight="regular" data-qa-label-for=${item.title ?? item.id} size="small"
+										>${item.title ?? item.id}</f-text
+									></f-div
 								>
 								${item.description
-									? html` <f-div slot="description" padding="none" gap="none"
+									? html` <f-div
+											slot="description"
+											data-qa-description-for=${item.title ?? item.id}
+											padding="none"
+											gap="none"
 											>${item.description}</f-div
 									  >`
 									: ""}
 								${item.iconTooltip
 									? html`
 											<f-icon
+												data-qa-info-icon-for=${item.title ?? item.id}
 												slot="icon-tooltip"
 												source="i-question-filled"
 												size="small"
@@ -117,7 +125,12 @@ export class FRadioGroup extends FRoot {
 					)}
 				</div>
 				${this?.helperText
-					? html`<f-text variant="para" size="small" weight="regular" .state=${this.state}
+					? html`<f-text
+							variant="para"
+							size="small"
+							weight="regular"
+							data-qa-help-for=${this.getAttribute("data-qa-element-id")}
+							.state=${this.state}
 							>${this?.helperText}</f-text
 					  >`
 					: html`<slot name="help"></slot>`}

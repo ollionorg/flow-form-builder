@@ -1,6 +1,6 @@
 {
   "name": "@cldcvr/flow-form-builder",
-  "version": "1.2.8-beta",
+  "version": "1.2.8",
   "description": "Lineage dependency for flow design system",
   "module": "dist/flow-form-builder.es.js",
   "main": "dist/flow-form-builder.cjs.js",
@@ -27,7 +27,7 @@
   ],
   "dependencies": {
     "lit": "^2.2.4",
-    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "rxjs": "^7.8.0"
   },
   "devDependencies": {

@@ -12,7 +12,7 @@ export default function (
 	return html`
 		<f-file-upload
 			name=${name}
-			data-qa-id=${field.qaId || field.id}
+			data-qa-element-id=${field.qaId || field.id}
 			${ref(fieldRef)}
 			.placeholder=${field.placeholder ?? "Drag and Drop Files or Click here to upload"}
 			.value=${value}

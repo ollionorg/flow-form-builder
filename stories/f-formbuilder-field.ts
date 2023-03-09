@@ -10,6 +10,7 @@ const field: FormBuilderField = {
 	},
 	fields: {
 		selectBox: {
+			qaId: "selectQa",
 			label: {
 				title: "Select multiple option to test"
 			},
@@ -27,6 +28,7 @@ const field: FormBuilderField = {
 			]
 		},
 		singleSelect: {
+			qaId: "singleSelectQa",
 			label: {
 				title: "Select option from dropdown"
 			},
@@ -59,7 +61,8 @@ const field: FormBuilderField = {
 			]
 		},
 		eventTestField: {
-			type: "text",
+			qaId: "eventTestQa",
+			type: "number",
 			helperText: "This field is a required field",
 			validationRules: [
 				{
@@ -93,6 +96,7 @@ const field: FormBuilderField = {
 		},
 
 		switchButton: {
+			qaId: "switchQA",
 			type: "switchButton",
 			validationRules: [
 				{
@@ -101,6 +105,7 @@ const field: FormBuilderField = {
 			]
 		},
 		radio: {
+			qaId: "radioQA",
 			type: "radio",
 			label: {
 				title: "Radios"
@@ -122,6 +127,7 @@ const field: FormBuilderField = {
 		},
 
 		checkboxField: {
+			qaId: "checkboxQA",
 			type: "checkbox",
 			direction: "horizontal",
 			label: {
@@ -144,6 +150,7 @@ const field: FormBuilderField = {
 			]
 		},
 		textAreaField: {
+			qaId: "textAreaQA",
 			type: "textarea",
 			placeholder: "This is a placeholder",
 			maxLength: 100,
@@ -160,10 +167,12 @@ const field: FormBuilderField = {
 			type: "object",
 			fields: {
 				username: {
+					qaId: "nestedUsernameQA",
 					type: "text",
 					validationRules: [{ name: "required" }]
 				},
 				email: {
+					qaId: "emailQA",
 					type: "text",
 					validationRules: [{ name: "required" }, { name: "email" }]
 				}
@@ -176,15 +185,18 @@ const field: FormBuilderField = {
 				title: "Optional Array"
 			},
 			field: {
+				qaId: "nestedArrayText",
 				type: "text"
 			}
 		},
 		getButton: {
+			qaId: "getButtonQA",
 			type: "button",
 			label: "get",
 			iconLeft: "i-arrow-rotate"
 		},
 		uploadFiles: {
+			qaId: "uploadFilesQA",
 			label: {
 				title: "Files to upload",
 				description: "Select any file from native os file browser"
@@ -193,6 +205,7 @@ const field: FormBuilderField = {
 			multiple: true
 		},
 		suggestValues: {
+			qaId: "suggestQA",
 			type: "suggest",
 			label: {
 				title: "Click inside field to see suggestions",

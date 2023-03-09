@@ -111,12 +111,14 @@ export class FFormArray extends FRoot {
 					)}
 					${i === 0 && this.isRequired
 						? html` <f-icon-button
+								data-qa-plus
 								icon="i-plus"
 								size="x-small"
 								state="neutral"
 								@click=${this.addField}
 						  />`
 						: html` <f-icon-button
+								data-qa-minus
 								icon="i-minus"
 								size="x-small"
 								state="danger"
@@ -167,6 +169,7 @@ export class FFormArray extends FRoot {
 								: ""}
 							${!this.isRequired
 								? html`<f-icon-button
+										data-qa-plus
 										icon="i-plus"
 										size="x-small"
 										state="neutral"

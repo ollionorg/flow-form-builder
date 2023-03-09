@@ -788,13 +788,6 @@
             },
             {
               "kind": "field",
-              "name": "formRef",
-              "type": {
-                "text": "Ref<FForm>"
-              }
-            },
-            {
-              "kind": "field",
               "name": "state",
               "type": {
                 "text": "FormBuilderState"

@@ -20,7 +20,7 @@ export default function (
 			prefix=${ifDefined(field.prefix)}
 			suffix=${ifDefined(field.suffix)}
 			state=${ifDefined(field.state)}
-			data-qa-id=${field.qaId || field.id}
+			data-qa-element-id=${field.qaId || field.id}
 			.suggestions=${field.suggestions}
 			.suffixWhen=${field.suffixWhen}
 			max-length=${ifDefined(field.maxLength)}

@@ -22,7 +22,7 @@ export default function (
 			?checkbox=${field.checkbox}
 			?clear=${field.clear}
 			.width=${field.width}
-			data-qa-id=${field.qaId || field.id}
+			data-qa-element-id=${field.qaId || field.id}
 			height=${ifDefined(field.height)}
 			?disabled=${field.disabled}
 			selection-limit=${ifDefined(field.selectionLimit)}

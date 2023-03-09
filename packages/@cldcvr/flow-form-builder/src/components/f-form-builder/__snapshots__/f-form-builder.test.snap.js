@@ -248,6 +248,7 @@ snapshots["f-form-builder should display array fields"] =
         </f-div>
       </f-input>
       <f-icon-button
+        data-qa-plus=""
         icon="i-plus"
         size="x-small"
         state="neutral"
@@ -298,6 +299,7 @@ snapshots["f-form-builder should display array fields"] =
         </f-div>
       </f-input>
       <f-icon-button
+        data-qa-minus=""
         icon="i-minus"
         size="x-small"
         state="danger"
@@ -384,6 +386,7 @@ snapshots["f-form-builder should add/delete field in array"] =
         </f-div>
       </f-input>
       <f-icon-button
+        data-qa-plus=""
         icon="i-plus"
         size="x-small"
         state="neutral"
@@ -434,6 +437,7 @@ snapshots["f-form-builder should add/delete field in array"] =
         </f-div>
       </f-input>
       <f-icon-button
+        data-qa-minus=""
         icon="i-minus"
         size="x-small"
         state="danger"
@@ -472,7 +476,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     <f-select
       category="fill"
       clear=""
-      data-qa-id=""
+      data-qa-element-id=""
       height="180"
       icon-left="i-app"
       name="selectBox"
@@ -624,7 +628,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     </f-divider>
     <f-switch
       category="fill"
-      data-qa-id=""
+      data-qa-element-id=""
       name="switchButton"
       size="medium"
       state="default"
@@ -659,7 +663,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     </f-divider>
     <f-radio-group
       category="fill"
-      data-qa-id=""
+      data-qa-element-id=""
       direction="vertical"
       gap="small"
       name="radio"
@@ -696,7 +700,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     </f-divider>
     <f-checkbox-group
       category="fill"
-      data-qa-id=""
+      data-qa-element-id=""
       direction="horizontal"
       gap="small"
       name="checkboxField"
@@ -751,7 +755,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     <f-text-area
       category="fill"
       clear=""
-      data-qa-id=""
+      data-qa-element-id=""
       max-length="100"
       name="textAreaField"
       placeholder="This is a placeholder"
@@ -821,7 +825,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     </f-divider>
     <f-button
       category="fill"
-      data-qa-id=""
+      data-qa-element-id=""
       icon-left="i-arrow-rotate"
       name="getButton"
       size="medium"

@@ -4,7 +4,7 @@ import { customElement, property } from "lit/decorators.js";
 import { CheckboxOption, CheckboxOptions } from "../../types";
 import eleStyle from "./f-checkbox-group.scss";
 import { FRoot, FDiv, FText } from "@cldcvr/flow-core";
-import { isEqual } from "lodash";
+import { isEqual } from "lodash-es";
 export type FCheckboxGroupValue = string[];
 
 @customElement("f-checkbox-group")
@@ -105,21 +105,29 @@ export class FCheckboxGroup extends FRoot {
 					${this.options?.map(
 						item => html`
 							<f-checkbox
+								data-qa-element-id=${this.getAttribute("data-qa-element-id")}
 								.value=${this.isChecked(item)}
 								@input=${(event: CustomEvent) => this.handleChange(event, item)}
 								.state=${this.state}
 							>
 								<f-div slot="label" padding="none" gap="none">
-									<f-text weight="regular" size="small">${item.title ?? item.id}</f-text></f-div
+									<f-text weight="regular" data-qa-label-for=${item.title ?? item.id} size="small"
+										>${item.title ?? item.id}</f-text
+									></f-div
 								>
 								${item?.description
-									? html` <f-div slot="description" padding="none" gap="none"
+									? html` <f-div
+											slot="description"
+											data-qa-description-for=${item.title ?? item.id}
+											padding="none"
+											gap="none"
 											>${item?.description}</f-div
 									  >`
 									: ""}
 								${item?.iconTooltip
 									? html`
 											<f-icon
+												data-qa-info-icon-for=${item.title ?? item.id}
 												slot="icon-tooltip"
 												source="i-question-filled"
 												size="small"
@@ -134,7 +142,12 @@ export class FCheckboxGroup extends FRoot {
 					)}
 				</div>
 				${this?.helperText
-					? html`<f-text variant="para" size="small" weight="regular" .state=${this.state}
+					? html`<f-text
+							variant="para"
+							data-qa-help-for=${this.getAttribute("data-qa-element-id")}
+							size="small"
+							weight="regular"
+							.state=${this.state}
 							>${this?.helperText}</f-text
 					  >`
 					: html`<slot name="help"></slot>`}

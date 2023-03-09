@@ -14,7 +14,7 @@ export default function (
 			name=${name}
 			${ref(fieldRef)}
 			.value="${value}"
-			data-qa-id=${field.qaId || field.id}
+			data-qa-element-id=${field.qaId || field.id}
 			state=${ifDefined(field.state)}
 			?disabled=${field.disabled ?? false}
 			@click=${ifDefined(field.onClick)}
