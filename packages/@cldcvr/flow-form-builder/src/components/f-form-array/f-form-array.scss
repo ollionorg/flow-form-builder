@@ -13,4 +13,7 @@
 		display: none !important;
 	}
 	@include infoIcon();
+	.f-form-array-action {
+		visibility: hidden;
+	}
 }

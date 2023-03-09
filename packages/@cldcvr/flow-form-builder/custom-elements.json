@@ -551,6 +551,13 @@
             },
             {
               "kind": "field",
+              "name": "actions",
+              "type": {
+                "text": "NodeListOf<FIconButton> | undefined"
+              }
+            },
+            {
+              "kind": "field",
               "name": "fieldRefs",
               "type": {
                 "text": "Ref<FFormInputElements>[]"
@@ -599,6 +606,18 @@
                 {
                   "name": "silent",
                   "default": "false"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "applyLabelOffSet",
+              "parameters": [
+                {
+                  "name": "element",
+                  "type": {
+                    "text": "HTMLElement"
+                  }
                 }
               ]
             },
@@ -1052,6 +1071,10 @@
                   }
                 }
               ]
+            },
+            {
+              "kind": "method",
+              "name": "getLabelOffSet"
             },
             {
               "kind": "method",

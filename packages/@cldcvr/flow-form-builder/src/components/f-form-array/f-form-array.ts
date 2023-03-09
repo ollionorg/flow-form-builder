@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { html, PropertyValueMap, unsafeCSS } from "lit";
-import { customElement, property } from "lit/decorators.js";
+import { customElement, property, queryAll } from "lit/decorators.js";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import eleStyle from "./f-form-array.scss";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
@@ -16,6 +16,8 @@ import { isEmptyArray } from "../../modules/utils";
 import { validateField } from "../../modules/validation/validator";
 import { Subject } from "rxjs";
 import { propogateProperties } from "../../modules/helpers";
+import { FFormObject } from "../f-form-object/f-form-object";
+import { FIconButton } from "@cldcvr/flow-core";
 
 export type ArrayValueType = (
 	| string
@@ -58,6 +60,9 @@ export class FFormArray extends FRoot {
 	 */
 	@property({ reflect: true, type: String })
 	gap?: "large" | "medium" | "small" | "x-small" = "medium";
+
+	@queryAll(".f-form-array-action")
+	actions?: NodeListOf<FIconButton>;
 
 	fieldRefs: Ref<FFormInputElements>[] = [];
 
@@ -102,7 +107,7 @@ export class FFormArray extends FRoot {
 
 			this.fieldRefs.push(fieldRef);
 			fieldTemplates.push(
-				html` <f-div gap="small" align="middle-left" overflow="scroll"
+				html` <f-div gap="small" align="top-left" overflow="scroll"
 					>${fieldRenderer[this.config.field.type](
 						``,
 						this.config.field,
@@ -112,6 +117,7 @@ export class FFormArray extends FRoot {
 					${i === 0 && this.isRequired
 						? html` <f-icon-button
 								data-qa-plus
+								class="f-form-array-action"
 								icon="i-plus"
 								size="x-small"
 								state="neutral"
@@ -119,9 +125,10 @@ export class FFormArray extends FRoot {
 						  />`
 						: html` <f-icon-button
 								data-qa-minus
+								class="f-form-array-action"
 								icon="i-minus"
 								size="x-small"
-								state="danger"
+								state="neutral"
 								@click=${() => {
 									this.removeField(i);
 								}}
@@ -142,12 +149,7 @@ export class FFormArray extends FRoot {
 							align="middle-center"
 						>
 							<!--label-->
-							<f-div
-								padding="0px 0px 0px x-small"
-								direction="row"
-								width="hug-content"
-								height="hug-content"
-							>
+							<f-div direction="row" width="hug-content" height="hug-content">
 								<f-text
 									data-qa-label-for=${this.config.qaId || this.config.id}
 									variant="para"
@@ -185,9 +187,9 @@ export class FFormArray extends FRoot {
 							: ""}
 				  </f-div>`
 				: ``}
-
-			<f-div .gap=${this.gap} direction="column"> ${fieldTemplates} </f-div>
-
+			${fieldTemplates.length > 0
+				? html`<f-div .gap=${this.gap} direction="column"> ${fieldTemplates} </f-div>`
+				: ``}
 			${this.config.helperText
 				? html`<f-text
 						variant="para"
@@ -216,6 +218,30 @@ export class FFormArray extends FRoot {
 
 		return Promise.all(allValidations);
 	}
+	applyLabelOffSet(element: HTMLElement) {
+		const labelHeight: number =
+			(element.querySelector("[slot='label']") as HTMLElement)?.offsetHeight ?? 0;
+		const descriptionHeight: number =
+			(element.querySelector("[slot='description']") as HTMLElement)?.offsetHeight ?? 0;
+		let totalHeight = labelHeight + descriptionHeight;
+		if (totalHeight > 0) {
+			totalHeight += 4;
+		}
+		if (this.config.field.type === "object") {
+			let innerLabelTotal = (element as FFormObject).getLabelOffSet();
+			if (innerLabelTotal > 0) {
+				innerLabelTotal += 4;
+			}
+			totalHeight += innerLabelTotal;
+		}
+
+		if (this.actions) {
+			this.actions.forEach(el => {
+				el.style.marginTop = `${totalHeight + 8}px`;
+				el.style.visibility = "visible";
+			});
+		}
+	}
 	/**
 	 * updated hook of lit element
 	 * @param _changedProperties
@@ -227,6 +253,9 @@ export class FFormArray extends FRoot {
 
 			this.fieldRefs.forEach((ref, idx) => {
 				if (ref.value) {
+					if (idx === 0) {
+						this.applyLabelOffSet(ref.value);
+					}
 					ref.value.showWhenSubject = this.showWhenSubject;
 					const fieldValidation = async (event: Event) => {
 						event.stopPropagation();

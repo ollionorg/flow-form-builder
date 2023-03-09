@@ -3,6 +3,11 @@
 <p class="margin-btm-24">All notable changes to this project will be documented in this file. See <a>Conventional Commits</a> for commit guidelines. </p>
 
 # Change Log
+
+## [1.2.9] - 2023-03-09
+
+### Improvements
+- Alignment of +, - actions in array field fixed.
 ## [1.2.8-beta] - 2023-03-07
 
 ### Improvements

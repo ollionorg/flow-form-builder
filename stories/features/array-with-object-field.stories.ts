@@ -28,7 +28,11 @@ const sampleFormBuilder: SampleFormBuilder = {
 			direction: "vertical",
 			fields: {
 				firstname: {
-					type: "text"
+					type: "text",
+					label: {
+						title: "Test",
+						description: "My description"
+					}
 				},
 				lastname: {
 					type: "text",

@@ -65,6 +65,21 @@ export class FFormObject extends FRoot {
 		return this.value ? this.value[fieldname] : undefined;
 	}
 
+	getLabelOffSet() {
+		const allFields = Object.entries(this.fieldRefs);
+		let element = allFields[allFields.length - 1][1].value as FFormInputElements;
+		if (this.config.direction == "vertical") {
+			element = allFields[0][1].value as FFormInputElements;
+		}
+		const labelHeight: number =
+			(element.querySelector("[slot='label']") as HTMLElement)?.offsetHeight ?? 0;
+		const descriptionHeight: number =
+			(element.querySelector("[slot='description']") as HTMLElement)?.offsetHeight ?? 0;
+		const totalHeight = labelHeight + descriptionHeight;
+
+		return totalHeight;
+	}
+
 	buildFields() {
 		const fieldTemplates: TemplateResult[] = [];
 		Object.entries(this.config.fields).forEach(([fieldname, fieldConfig], idx, fieldArray) => {

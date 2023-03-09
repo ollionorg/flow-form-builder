@@ -1,6 +1,6 @@
 {
   "name": "@cldcvr/flow-form-builder",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "Lineage dependency for flow design system",
   "module": "dist/flow-form-builder.es.js",
   "main": "dist/flow-form-builder.cjs.js",

@@ -1314,10 +1314,23 @@
   resolved "https://registry.yarnpkg.com/@cldcvr/custom-elements-manifest-to-types/-/custom-elements-manifest-to-types-1.0.6.tgz#53791ac6bde35ec8d01a6ea5884088ed41c2960c"
   integrity sha512-a02DcgYED6qpr6nQchXJSX1zUp05dq/QtKmB6gbNexuvyYIViqNNndlXXURTYG1R0XER/xgYVi2CV+NLQPuOpA==
 
-"@cldcvr/flow-core@*", "@cldcvr/flow-core@1.5.0":
+"@cldcvr/flow-core@*":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@cldcvr/flow-core/-/flow-core-1.5.0.tgz#2a7fc2bb90de909903747ab4fbb50cc85502184b"
   integrity sha512-4VN4+rAqWi7Pod8fY7U20MF4buS0Tafe7qOVIii9GKyxdx+TCYTyp5SBUltESp9/KhMhv2HTAlulOq/sHsVNwA==
+  dependencies:
+    "@emoji-mart/data" "^1.1.2"
+    "@floating-ui/dom" "^1.0.2"
+    axios "^0.27.2"
+    emoji-mart "^5.5.2"
+    lit "^2.2.4"
+    rxjs "^7.5.7"
+    validate-color "^2.2.1"
+
+"@cldcvr/flow-core@1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@cldcvr/flow-core/-/flow-core-1.5.2.tgz#de6e4c402ad16b0b8b2a5217abab0fe2ab03d251"
+  integrity sha512-EiA5NioIQHGerXpFjbN+Zu8KbQamLl3ODVOR5vlrEkYHmTfKyN1hLuBLY9ppp0qoI7yH9DEZhUP7aBsA5tcroQ==
   dependencies:
     "@emoji-mart/data" "^1.1.2"
     "@floating-ui/dom" "^1.0.2"

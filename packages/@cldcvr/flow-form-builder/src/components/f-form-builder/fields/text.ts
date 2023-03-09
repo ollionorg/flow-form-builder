@@ -44,13 +44,15 @@ export default function (
 						data-qa-label-for=${field.qaId || field.id}
 						>${field.label.title}</f-div
 				  >`
-				: html`<f-div
+				: name
+				? html`<f-div
 						slot="label"
 						padding="none"
 						gap="none"
 						data-qa-label-for=${field.qaId || field.id}
 						>${name}</f-div
-				  >`}
+				  >`
+				: ""}
 			${field.label?.description
 				? html` <f-div slot="description" padding="none" gap="none"
 						>${field.label.description}</f-div

@@ -30,7 +30,8 @@ const field: FormBuilderField = {
 		singleSelect: {
 			qaId: "singleSelectQa",
 			label: {
-				title: "Select option from dropdown"
+				title: "Select option from dropdown",
+				description: "Here is another description"
 			},
 			selection: "single",
 			options: ["First", "Second", "Third"],
@@ -46,6 +47,7 @@ const field: FormBuilderField = {
 			qaId: "sampleQAId",
 			label: {
 				title: "Test for QA field",
+				description: "Hello description",
 				iconTooltip: "Tooltip QA help"
 			},
 			type: "text",
@@ -151,6 +153,10 @@ const field: FormBuilderField = {
 		},
 		textAreaField: {
 			qaId: "textAreaQA",
+			label: {
+				title: "I am textarea",
+				description: "This is my decription"
+			},
 			type: "textarea",
 			placeholder: "This is a placeholder",
 			maxLength: 100,

@@ -40,6 +40,7 @@ const sampleFormBuilder: SampleFormBuilder = {
 			},
 			lastname: {
 				type: "text",
+
 				validationRules: [
 					{
 						name: "required"
@@ -56,6 +57,10 @@ const sampleFormBuilder: SampleFormBuilder = {
 					fields: {
 						firstname: {
 							type: "text",
+							label: {
+								title: "MCD no 1",
+								description: "This is no1 choice"
+							},
 							validationRules: [
 								{
 									name: "required"
@@ -63,7 +68,13 @@ const sampleFormBuilder: SampleFormBuilder = {
 							]
 						},
 						lastname: {
-							type: "text",
+							type: "select",
+							label: {
+								title: "Select Title",
+								description: "Hello description"
+							},
+							selection: "single",
+							options: ["op1", "op2"],
 							validationRules: [
 								{
 									name: "required"
