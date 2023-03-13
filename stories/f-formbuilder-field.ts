@@ -3,7 +3,7 @@ import { FormBuilderField } from "@cldcvr/flow-form-builder/src/types";
 const field: FormBuilderField = {
 	type: "object",
 	direction: "vertical",
-	fieldSeparator: true,
+	fieldSeparator: false,
 	label: {
 		title: "Object level label",
 		description: "following fields are used for demo purpose only"
@@ -26,6 +26,10 @@ const field: FormBuilderField = {
 					name: "required"
 				}
 			]
+		},
+		mySeparator: {
+			type: "separator",
+			title: "OR"
 		},
 		singleSelect: {
 			qaId: "singleSelectQa",

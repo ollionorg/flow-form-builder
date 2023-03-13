@@ -4,7 +4,7 @@ import { FFormBuilder } from "../components/f-form-builder/f-form-builder";
 
 export function propogateProperties(element: FFormArray | FFormObject | FFormBuilder) {
 	const inputElements = element.shadowRoot?.querySelectorAll<HTMLElement>(
-		"f-input,f-form-object,f-form-array,f-button,f-checkbox-group,f-radio-group,f-select,f-switch,f-text-area"
+		"f-input,f-form-object,f-form-array,f-button,f-checkbox-group,f-radio-group,f-select,f-switch,f-text-area,f-file-upload,f-suggest,f-field-separator"
 	);
 	inputElements?.forEach(inputElement => {
 		inputElement.setAttribute("size", element.getAttribute("size") as string);

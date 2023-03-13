@@ -28,4 +28,14 @@ f-form-group[direction="vertical"] {
 	> f-suggest {
 		width: 100%;
 	}
+	> f-field-separator {
+		width: 100%;
+	}
+}
+
+f-div[direction="row"],
+f-form-group[direction="horizontal"] {
+	> f-field-separator {
+		height: 100%;
+	}
 }

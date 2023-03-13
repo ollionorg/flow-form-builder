@@ -1,4 +1,5 @@
 import {
+	CanValidateFields,
 	FFormInputElements,
 	FormBuilderField,
 	FormBuilderGenericValidationRule,
@@ -78,7 +79,7 @@ function getValidationMessage(
 }
 
 export async function validateField(
-	field: FormBuilderField,
+	field: CanValidateFields,
 	element: FFormInputElements | undefined,
 	silent = false,
 	filter?: (r: FormBuilderGenericValidationRule) => boolean
@@ -91,7 +92,7 @@ export async function validateField(
 	}
 
 	defaultValidations(field.type, rulesToValidate);
-	if (element) {
+	if (element && rulesToValidate.length > 0) {
 		const { result, message, rule, name } = validate(
 			(element.value as string) ?? "",
 			rulesToValidate as FormBuilderValidationRules,

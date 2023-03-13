@@ -7,6 +7,7 @@ import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import fieldRenderer from "../f-form-builder/fields";
 import { createRef, Ref } from "lit/directives/ref.js";
 import {
+	CanValidateFields,
 	FFormInputElements,
 	FormBuilderObjectField,
 	FormBuilderValidationPromise,
@@ -16,6 +17,7 @@ import { validateField } from "../../modules/validation/validator";
 import { Subject } from "rxjs";
 import { propogateProperties } from "../../modules/helpers";
 import { FFormGroup } from "@cldcvr/flow-core";
+import { FFieldSeparator } from "../f-field-separator/f-field-separator";
 
 export type ObjectValueType = Record<
 	string,
@@ -26,7 +28,7 @@ export class FFormObject extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(flowCoreCSS), unsafeCSS(eleStyle)];
+	static styles = [unsafeCSS(flowCoreCSS), unsafeCSS(eleStyle), ...FFieldSeparator.styles];
 
 	/**
 	 * @attribute comments baout title
@@ -96,7 +98,9 @@ export class FFormObject extends FRoot {
 		const fieldTemplates: TemplateResult[] = [];
 		Object.entries(this.config.fields).forEach(([fieldname, fieldConfig], idx, fieldArray) => {
 			const fieldRef: Ref<FFormInputElements> = createRef();
-
+			if (fieldConfig.type === "separator") {
+				fieldConfig.direction = this.config.direction ?? "vertical";
+			}
 			this.fieldRefs[fieldname] = fieldRef;
 			fieldTemplates.push(
 				html`
@@ -152,7 +156,7 @@ export class FFormObject extends FRoot {
 				if (this.fieldRefs[fieldname]) {
 					allValidations.push(
 						validateField(
-							fieldConfig,
+							fieldConfig as CanValidateFields,
 							this.fieldRefs[fieldname].value as FFormInputElements,
 							silent
 						)
@@ -182,7 +186,11 @@ export class FFormObject extends FRoot {
 						}
 						this.value[name] = ref.value?.value;
 
-						await validateField(this.config.fields[name], ref.value as FFormInputElements, false);
+						await validateField(
+							this.config.fields[name] as CanValidateFields,
+							ref.value as FFormInputElements,
+							false
+						);
 
 						this.dispatchInputEvent();
 					};

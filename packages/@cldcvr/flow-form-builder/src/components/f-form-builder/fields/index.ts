@@ -11,6 +11,7 @@ import array from "./array";
 import object from "./object";
 import file from "./file";
 import suggest from "./suggest";
+import separator from "./separator";
 
 const all: Record<string, FormBuilderFieldRenderFunction> = {
 	text,
@@ -29,7 +30,8 @@ const all: Record<string, FormBuilderFieldRenderFunction> = {
 	url: text,
 	password: text,
 	file,
-	suggest
+	suggest,
+	separator
 };
 
 export default all;

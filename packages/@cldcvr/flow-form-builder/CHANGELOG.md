@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.3.0] - 2023-03-13
+
+### Features
+- `separator` field added.
+
 ## [1.2.11] - 2023-03-09
 
 ### Improvements

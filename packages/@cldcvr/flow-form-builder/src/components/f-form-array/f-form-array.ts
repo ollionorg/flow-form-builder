@@ -5,6 +5,7 @@ import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import eleStyle from "./f-form-array.scss";
 import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
 import {
+	CanValidateFields,
 	FFormInputElements,
 	FormBuilderArrayField,
 	FormBuilderValidationPromise,
@@ -211,7 +212,11 @@ export class FFormArray extends FRoot {
 				allValidations.push((fieldRef.value as FFormInputElements).validate(silent));
 			} else {
 				allValidations.push(
-					validateField(this.config.field, fieldRef.value as FFormInputElements, silent)
+					validateField(
+						this.config.field as CanValidateFields,
+						fieldRef.value as FFormInputElements,
+						silent
+					)
 				);
 			}
 		});
@@ -264,7 +269,11 @@ export class FFormArray extends FRoot {
 
 						this.value[idx] = ref.value?.value;
 
-						await validateField(this.config.field, ref.value as FFormInputElements, false);
+						await validateField(
+							this.config.field as CanValidateFields,
+							ref.value as FFormInputElements,
+							false
+						);
 
 						this.dispatchInputEvent();
 					};

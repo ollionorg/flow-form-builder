@@ -3,6 +3,7 @@ import { LitElement, TemplateResult } from "lit";
 import { Ref } from "lit-html/directives/ref.js";
 import {
 	FButtonState,
+	FDividerState,
 	FFileUploadFileType,
 	FFileUploadSizeProp,
 	FIconButtonState,
@@ -45,6 +46,18 @@ export type FormBuilderArrayField = FormBuilderBaseField & {
 	label: FormBuilderLabel;
 	allowEmpty?: boolean;
 };
+export type FormBuilderSeparatorField = FormBuilderFieldEvents & {
+	id?: string; // id to uniquely identify in DOM
+	state?: FDividerState;
+	className?: string; // any additional css class name
+	type: "separator";
+	title?: string;
+	showWhen?: FormBuilderShowCondition;
+	qaId?: string;
+	direction?: "vertical" | "horizontal";
+};
+
+export type CanValidateFields = Exclude<FormBuilderField, FormBuilderSeparatorField>;
 export type FormBuilderObjectField = FormBuilderBaseField & {
 	type: "object";
 	direction?: "vertical" | "horizontal";
@@ -191,7 +204,8 @@ export type FormBuilderField =
 	| FormBuilderArrayField
 	| FormBuilderObjectField
 	| FormBuilderSuggestField
-	| FormBuilderFileField; // add other field types
+	| FormBuilderFileField
+	| FormBuilderSeparatorField; // add other field types
 
 export type FormBuilderShowCondition = (value: FormBuilderValues) => boolean;
 

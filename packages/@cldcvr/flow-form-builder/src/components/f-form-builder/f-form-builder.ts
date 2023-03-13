@@ -11,7 +11,8 @@ import {
 	FormBuilderCategory,
 	FormBuilderGap,
 	FormBuilderSize,
-	FormBuilderVariant
+	FormBuilderVariant,
+	CanValidateFields
 } from "../../types";
 import eleStyle from "./f-form-builder.scss";
 
@@ -230,7 +231,11 @@ export class FFormBuilder extends FRoot {
 					/**
 					 * validate current field
 					 */
-					await validateField(this.field, ref.value as FFormInputElements, false);
+					await validateField(
+						this.field as CanValidateFields,
+						ref.value as FFormInputElements,
+						false
+					);
 					/**
 					 * if current field is of type array or object then then also validate form anyway
 					 */
@@ -292,7 +297,11 @@ export class FFormBuilder extends FRoot {
 			allValidations.push(this.fieldRef.value.validate(silent));
 		} else {
 			allValidations.push(
-				validateField(this.field, this.fieldRef.value as FFormInputElements, silent)
+				validateField(
+					this.field as CanValidateFields,
+					this.fieldRef.value as FFormInputElements,
+					silent
+				)
 			);
 		}
 
