@@ -4,6 +4,9 @@ import { Ref } from "lit-html/directives/ref.js";
 import {
 	FButtonState,
 	FDividerState,
+	FEmojiPickerCustomEmojiData,
+	FEmojiPickerExcludesCategories,
+	FEmojiPickerIncludesCategories,
 	FFileUploadFileType,
 	FFileUploadSizeProp,
 	FIconButtonState,
@@ -84,6 +87,18 @@ export type FormBuilderTextInputField = FormBuilderBaseField & {
 	suffixWhen?: FormBuilderSuffixCondition;
 };
 
+export type FormBuilderEmojiField = FormBuilderBaseField & {
+	type: "emoji";
+	placeholder?: string;
+	recent?: string[];
+	include?: FEmojiPickerIncludesCategories;
+	exclude?: FEmojiPickerExcludesCategories;
+	excludeEmojis?: string[];
+	custom?: FEmojiPickerCustomEmojiData;
+	closeOnSelect?: boolean;
+	clear?: boolean;
+	disabled?: boolean;
+};
 export type FormBuilderSuggestField = FormBuilderBaseField & {
 	type: "suggest";
 	placeholder?: string;
@@ -205,7 +220,8 @@ export type FormBuilderField =
 	| FormBuilderObjectField
 	| FormBuilderSuggestField
 	| FormBuilderFileField
-	| FormBuilderSeparatorField; // add other field types
+	| FormBuilderSeparatorField
+	| FormBuilderEmojiField; // add other field types
 
 export type FormBuilderShowCondition = (value: FormBuilderValues) => boolean;
 

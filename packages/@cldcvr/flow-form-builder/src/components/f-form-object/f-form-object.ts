@@ -191,8 +191,9 @@ export class FFormObject extends FRoot {
 							ref.value as FFormInputElements,
 							false
 						);
-
-						this.dispatchInputEvent();
+						if (event.type !== "blur") {
+							this.dispatchInputEvent();
+						}
 					};
 					ref.value.oninput = fieldValidation;
 					ref.value.onblur = fieldValidation;

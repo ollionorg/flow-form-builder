@@ -245,7 +245,9 @@ export class FFormBuilder extends FRoot {
 					/**
 					 * dispatch input event for consumer
 					 */
-					this.dispatchInputEvent();
+					if (event.type !== "blur") {
+						this.dispatchInputEvent();
+					}
 				};
 				ref.value.oninput = fieldValidation;
 				ref.value.onblur = fieldValidation;

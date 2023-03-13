@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.4.0] - 2023-03-13
+
+### Features
+- `emoji` field added.
 ## [1.3.0] - 2023-03-13
 
 ### Features

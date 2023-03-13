@@ -9,6 +9,20 @@ const field: FormBuilderField = {
 		description: "following fields are used for demo purpose only"
 	},
 	fields: {
+		orgDetails: {
+			type: "object",
+			fields: {
+				name: {
+					label: { title: "Org name" },
+					type: "text"
+				},
+				logo: {
+					label: { title: "Logo" },
+					type: "emoji",
+					clear: true
+				}
+			}
+		},
 		selectBox: {
 			qaId: "selectQa",
 			label: {
