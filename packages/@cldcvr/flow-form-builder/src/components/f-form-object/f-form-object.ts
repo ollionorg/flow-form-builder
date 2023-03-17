@@ -171,63 +171,64 @@ export class FFormObject extends FRoot {
 	 * updated hook of lit element
 	 * @param _changedProperties
 	 */
-	protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+	protected async updated(
+		_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
 		super.updated(_changedProperties);
-		setTimeout(async () => {
-			await this.updateComplete;
 
-			Object.entries(this.fieldRefs).forEach(([name, ref]) => {
-				if (ref.value) {
-					ref.value.showWhenSubject = this.showWhenSubject;
-					const fieldValidation = async (event: Event) => {
-						event.stopPropagation();
-						if (!this.value) {
-							this.value = {};
-						}
-						this.value[name] = ref.value?.value;
+		await this.updateComplete;
 
-						await validateField(
-							this.config.fields[name] as CanValidateFields,
-							ref.value as FFormInputElements,
-							false
-						);
-						if (event.type !== "blur") {
-							this.dispatchInputEvent();
-						}
-					};
-					ref.value.oninput = fieldValidation;
-					ref.value.onblur = fieldValidation;
-					const fieldConfig = this.config.fields[name];
-					if (fieldConfig.showWhen) {
-						this.showWhenSubject.subscribe(values => {
-							if (fieldConfig.showWhen && ref.value) {
-								const showField = fieldConfig.showWhen(values);
-								if (!showField) {
-									ref.value.dataset.hidden = "true";
-									const divider = this.shadowRoot?.querySelector<HTMLElement>(
-										`#${ref.value.getAttribute("name")}-divider`
-									);
-									if (divider) {
-										divider.dataset.hidden = "true";
-									}
-								} else {
-									ref.value.dataset.hidden = "false";
-									const divider = this.shadowRoot?.querySelector<HTMLElement>(
-										`#${ref.value.getAttribute("name")}-divider`
-									);
-									if (divider) {
-										divider.dataset.hidden = "false";
-									}
+		Object.entries(this.fieldRefs).forEach(([name, ref]) => {
+			if (ref.value) {
+				ref.value.showWhenSubject = this.showWhenSubject;
+				const fieldValidation = async (event: Event) => {
+					event.stopPropagation();
+					if (!this.value) {
+						this.value = {};
+					}
+					this.value[name] = ref.value?.value;
+
+					await validateField(
+						this.config.fields[name] as CanValidateFields,
+						ref.value as FFormInputElements,
+						false
+					);
+					if (event.type !== "blur") {
+						this.dispatchInputEvent();
+					}
+				};
+				ref.value.oninput = fieldValidation;
+				ref.value.onblur = fieldValidation;
+				const fieldConfig = this.config.fields[name];
+				if (fieldConfig.showWhen) {
+					this.showWhenSubject.subscribe(values => {
+						if (fieldConfig.showWhen && ref.value) {
+							const showField = fieldConfig.showWhen(values);
+							if (!showField) {
+								ref.value.dataset.hidden = "true";
+								const divider = this.shadowRoot?.querySelector<HTMLElement>(
+									`#${ref.value.getAttribute("name")}-divider`
+								);
+								if (divider) {
+									divider.dataset.hidden = "true";
+								}
+							} else {
+								ref.value.dataset.hidden = "false";
+								const divider = this.shadowRoot?.querySelector<HTMLElement>(
+									`#${ref.value.getAttribute("name")}-divider`
+								);
+								if (divider) {
+									divider.dataset.hidden = "false";
 								}
 							}
-						});
-						this.dispatchShowWhenEvent();
-					}
+						}
+					});
+					this.dispatchShowWhenEvent();
 				}
-			});
+			}
+		});
 
-			propogateProperties(this);
-		}, 100);
+		propogateProperties(this);
 	}
 
 	dispatchInputEvent() {

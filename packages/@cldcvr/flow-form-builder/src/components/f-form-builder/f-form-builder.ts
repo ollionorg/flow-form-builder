@@ -191,95 +191,96 @@ export class FFormBuilder extends FRoot {
 	 * updated hook of lit element
 	 * @param _changedProperties
 	 */
-	protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+	protected async updated(
+		_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
 		super.updated(_changedProperties);
-		setTimeout(async () => {
-			await this.updateComplete;
 
+		await this.updateComplete;
+
+		/**
+		 * this subject is created for `showWhen` implementation
+		 */
+		this.showWhenSubject = new Subject<FormBuilderValues>();
+		const ref = this.fieldRef;
+
+		if (ref.value) {
 			/**
-			 * this subject is created for `showWhen` implementation
+			 * this subject is propogated for `showWhen` implementation
 			 */
-			this.showWhenSubject = new Subject<FormBuilderValues>();
-			const ref = this.fieldRef;
+			ref.value.showWhenSubject = this.showWhenSubject;
+			const fieldValidation = async (event: Event) => {
+				event.stopPropagation();
 
-			if (ref.value) {
 				/**
-				 * this subject is propogated for `showWhen` implementation
+				 * update values
 				 */
-				ref.value.showWhenSubject = this.showWhenSubject;
-				const fieldValidation = async (event: Event) => {
-					event.stopPropagation();
-
-					/**
-					 * update values
-					 */
-					if (this.values && this.field.type === "array") {
-						(this.values as []).splice(
-							0,
-							(this.values as []).length,
-							...((ref.value as FFormInputElements).value as [])
-						);
-					} else if (this.values && this.field.type === "object") {
-						Object.assign(this.values, (ref.value as FFormInputElements).value as Object);
-					} else {
-						this.values = ref.value?.value as FormBuilderValues;
-					}
-					/**
-					 * update isChanged prop in state to let user know that form is changed
-					 */
-					this.state.isChanged = true;
-					/**
-					 * validate current field
-					 */
-					await validateField(
-						this.field as CanValidateFields,
-						ref.value as FFormInputElements,
-						false
+				if (this.values && this.field.type === "array") {
+					(this.values as []).splice(
+						0,
+						(this.values as []).length,
+						...((ref.value as FFormInputElements).value as [])
 					);
-					/**
-					 * if current field is of type array or object then then also validate form anyway
-					 */
-					await this.validateForm(true).then(all => {
-						this.updateValidaitonState(all);
-					});
-					/**
-					 * dispatch input event for consumer
-					 */
-					if (event.type !== "blur") {
-						this.dispatchInputEvent();
-					}
-				};
-				ref.value.oninput = fieldValidation;
-				ref.value.onblur = fieldValidation;
-				if (this.field.showWhen) {
-					/**
-					 * subsscribe to show when subject, whenever new values are there in formbuilder then show when will execute
-					 */
-					this.showWhenSubject.subscribe(values => {
-						if (this.field.showWhen && ref.value) {
-							const showField = this.field.showWhen(values);
-							if (!showField) {
-								ref.value.dataset.hidden = "true";
-							} else {
-								ref.value.dataset.hidden = "false";
-							}
-						}
-					});
-					/**
-					 * execute showWhen for values given by consumer
-					 */
-					this.dispatchShowWhenEvent();
+				} else if (this.values && this.field.type === "object") {
+					Object.assign(this.values, (ref.value as FFormInputElements).value as Object);
+				} else {
+					this.values = ref.value?.value as FormBuilderValues;
 				}
+				/**
+				 * update isChanged prop in state to let user know that form is changed
+				 */
+				this.state.isChanged = true;
+				/**
+				 * validate current field
+				 */
+				await validateField(
+					this.field as CanValidateFields,
+					ref.value as FFormInputElements,
+					false
+				);
+				/**
+				 * if current field is of type array or object then then also validate form anyway
+				 */
+				await this.validateForm(true).then(all => {
+					this.updateValidaitonState(all);
+				});
+				/**
+				 * dispatch input event for consumer
+				 */
+				if (event.type !== "blur") {
+					this.dispatchInputEvent();
+				}
+			};
+			ref.value.oninput = fieldValidation;
+			ref.value.onblur = fieldValidation;
+			if (this.field.showWhen) {
+				/**
+				 * subsscribe to show when subject, whenever new values are there in formbuilder then show when will execute
+				 */
+				this.showWhenSubject.subscribe(values => {
+					if (this.field.showWhen && ref.value) {
+						const showField = this.field.showWhen(values);
+						if (!showField) {
+							ref.value.dataset.hidden = "true";
+						} else {
+							ref.value.dataset.hidden = "false";
+						}
+					}
+				});
+				/**
+				 * execute showWhen for values given by consumer
+				 */
+				this.dispatchShowWhenEvent();
 			}
-			/**
-			 * silent validation and store in state
-			 */
-			await this.validateForm(true).then(all => {
-				this.updateValidaitonState(all);
-			});
+		}
+		/**
+		 * silent validation and store in state
+		 */
+		await this.validateForm(true).then(all => {
+			this.updateValidaitonState(all);
+		});
 
-			propogateProperties(this);
-		}, 100);
+		propogateProperties(this);
 	}
 
 	/**

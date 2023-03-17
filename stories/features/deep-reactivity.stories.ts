@@ -101,7 +101,7 @@ const sampleFormBuilder: SampleFormBuilder = {
 		}
 	}
 };
-
+let count = 0;
 const Template: Story<unknown> = (args: any) => {
 	const [_, updateArgs] = useArgs();
 	const handleKeydown = (event: Event) => {
@@ -113,7 +113,9 @@ const Template: Story<unknown> = (args: any) => {
 	const stateRef: Ref<HTMLElement> = createRef();
 	const handleInput = (event: CustomEvent) => {
 		if (formRef.value) {
-			formRef.value.values = { ...event.detail };
+			const someCoolValues = { ...event.detail };
+			someCoolValues.lastname = `Cloud${(count += 1)}`;
+			formRef.value.values = someCoolValues;
 		}
 		if (fieldRef.value) {
 			fieldRef.value.innerHTML = JSON.stringify(event.detail, undefined, 8);

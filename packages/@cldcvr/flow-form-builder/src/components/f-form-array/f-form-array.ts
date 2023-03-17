@@ -253,56 +253,57 @@ export class FFormArray extends FRoot {
 	 * updated hook of lit element
 	 * @param _changedProperties
 	 */
-	protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+	protected async updated(
+		_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>
+	): Promise<void> {
 		super.updated(_changedProperties);
-		setTimeout(async () => {
-			await this.updateComplete;
 
-			this.fieldRefs.forEach((ref, idx) => {
-				if (ref.value) {
-					if (idx === 0) {
-						this.applyLabelOffSet(ref.value);
-					}
-					ref.value.showWhenSubject = this.showWhenSubject;
-					const fieldValidation = async (event: Event) => {
-						event.stopPropagation();
+		await this.updateComplete;
 
-						this.value[idx] = ref.value?.value;
-
-						await validateField(
-							this.config.field as CanValidateFields,
-							ref.value as FFormInputElements,
-							false
-						);
-						if (event.type !== "blur") {
-							this.dispatchInputEvent();
-						}
-					};
-
-					ref.value.oninput = fieldValidation;
-					ref.value.onblur = fieldValidation;
-
-					const fieldConfig = this.config.field;
-					if (fieldConfig.showWhen) {
-						/**
-						 * subsscribe to show when subject, whenever new values are there in formbuilder then show when will execute
-						 */
-						this.showWhenSubject.subscribe(values => {
-							if (fieldConfig.showWhen && ref.value) {
-								const showField = fieldConfig.showWhen(values);
-								if (!showField) {
-									ref.value.dataset.hidden = "true";
-								} else {
-									ref.value.dataset.hidden = "false";
-								}
-							}
-						});
-						this.dispatchShowWhenEvent();
-					}
+		this.fieldRefs.forEach((ref, idx) => {
+			if (ref.value) {
+				if (idx === 0) {
+					this.applyLabelOffSet(ref.value);
 				}
-			});
-			propogateProperties(this);
-		}, 100);
+				ref.value.showWhenSubject = this.showWhenSubject;
+				const fieldValidation = async (event: Event) => {
+					event.stopPropagation();
+
+					this.value[idx] = ref.value?.value;
+
+					await validateField(
+						this.config.field as CanValidateFields,
+						ref.value as FFormInputElements,
+						false
+					);
+					if (event.type !== "blur") {
+						this.dispatchInputEvent();
+					}
+				};
+
+				ref.value.oninput = fieldValidation;
+				ref.value.onblur = fieldValidation;
+
+				const fieldConfig = this.config.field;
+				if (fieldConfig.showWhen) {
+					/**
+					 * subsscribe to show when subject, whenever new values are there in formbuilder then show when will execute
+					 */
+					this.showWhenSubject.subscribe(values => {
+						if (fieldConfig.showWhen && ref.value) {
+							const showField = fieldConfig.showWhen(values);
+							if (!showField) {
+								ref.value.dataset.hidden = "true";
+							} else {
+								ref.value.dataset.hidden = "false";
+							}
+						}
+					});
+					this.dispatchShowWhenEvent();
+				}
+			}
+		});
+		propogateProperties(this);
 	}
 
 	addField() {

@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.4.2] - 2023-03-17
+
+### Bug fixes
+- form render bug fixed.
 ## [1.4.1] - 2023-03-17
 
 ### Bug fixes
