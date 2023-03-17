@@ -14,7 +14,13 @@ const field: FormBuilderField = {
 			fields: {
 				name: {
 					label: { title: "Org name" },
-					type: "text"
+					type: "text",
+					validationRules: [
+						{
+							name: "required",
+							message: "{{name}} field is compulsary"
+						}
+					]
 				},
 				logo: {
 					label: { title: "Logo" },

@@ -3,6 +3,7 @@ import {
 	FFormInputElements,
 	FormBuilderField,
 	FormBuilderGenericValidationRule,
+	FormBuilderLabel,
 	FormBuilderValidationPromise,
 	FormBuilderValidationRules,
 	ValidationResult,
@@ -96,7 +97,7 @@ export async function validateField(
 		const { result, message, rule, name } = validate(
 			(element.value as string) ?? "",
 			rulesToValidate as FormBuilderValidationRules,
-			element.getAttribute("name") ?? "This"
+			(field.label as FormBuilderLabel)?.title ?? element.getAttribute("name") ?? "This"
 		);
 
 		if (!result && message && element.offsetHeight > 0) {

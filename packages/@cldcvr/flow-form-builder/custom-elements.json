@@ -2278,6 +2278,30 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/modules/validation/default-validation-messages/index.ts",
+      "declarations": [
+        {
+          "kind": "variable",
+          "name": "messages",
+          "type": {
+            "text": "Record<string, string>"
+          },
+          "default": "{\n\trequired: \"{{name}} is required field\",\n\temail: \"{{name}} is not a valid email address\",\n\tbetween: \"{{name}} must be between {{min}} and {{max}}\",\n\tmin: \"{{name}} must be at least {{length}} characters long\",\n\tmax: \"{{name}} can be max {{length}} characters long\",\n\t[\"min-value\"]: \"{{name}} must be greater than {{min}}\",\n\t[\"max-value\"]: \"{{name}} must be less than {{max}}\",\n\tregex: \"{{name}} is not matching with {{regex}}\"\n}"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "default",
+          "declaration": {
+            "name": "messages",
+            "module": "src/modules/validation/default-validation-messages/index.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/modules/validation/default-validations/index.ts",
       "declarations": [
         {
@@ -2306,30 +2330,6 @@
           "declaration": {
             "name": "defaultValidations",
             "module": "src/modules/validation/default-validations/index.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/modules/validation/default-validation-messages/index.ts",
-      "declarations": [
-        {
-          "kind": "variable",
-          "name": "messages",
-          "type": {
-            "text": "Record<string, string>"
-          },
-          "default": "{\n\trequired: \"{{name}} is required field\",\n\temail: \"{{name}} is not a valid email address\",\n\tbetween: \"{{name}} must be between {{min}} and {{max}}\",\n\tmin: \"{{name}} must be at least {{length}} characters long\",\n\tmax: \"{{name}} can be max {{length}} characters long\",\n\t[\"min-value\"]: \"{{name}} must be greater than {{min}}\",\n\t[\"max-value\"]: \"{{name}} must be less than {{max}}\",\n\tregex: \"{{name}} is not matching with {{regex}}\"\n}"
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "default",
-          "declaration": {
-            "name": "messages",
-            "module": "src/modules/validation/default-validation-messages/index.ts"
           }
         }
       ]

@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.4.1] - 2023-03-17
+
+### Bug fixes
+- `label.title` not used in error messages.
+
 ## [1.4.0] - 2023-03-13
 
 ### Features
