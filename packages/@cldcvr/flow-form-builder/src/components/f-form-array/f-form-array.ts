@@ -118,6 +118,7 @@ export class FFormArray extends FRoot {
 					${i === 0 && this.isRequired
 						? html` <f-icon-button
 								data-qa-plus
+								data-qa-plus-for=${this.getAttribute("name")}
 								class="f-form-array-action"
 								icon="i-plus"
 								size="x-small"
@@ -126,6 +127,7 @@ export class FFormArray extends FRoot {
 						  />`
 						: html` <f-icon-button
 								data-qa-minus
+								data-qa-minus-for=${this.getAttribute("name")}
 								class="f-form-array-action"
 								icon="i-minus"
 								size="x-small"
@@ -173,6 +175,7 @@ export class FFormArray extends FRoot {
 							${!this.isRequired
 								? html`<f-icon-button
 										data-qa-plus
+										data-qa-plus-for=${this.getAttribute("name")}
 										icon="i-plus"
 										size="x-small"
 										state="neutral"

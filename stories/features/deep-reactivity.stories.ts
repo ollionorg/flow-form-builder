@@ -68,6 +68,7 @@ const sampleFormBuilder: SampleFormBuilder = {
 							]
 						},
 						lastname: {
+							qaId: "lastQa",
 							type: "select",
 							label: {
 								title: "Select Title",

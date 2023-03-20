@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.4.3] - 2023-03-20
+
+### Improvements
+- `data-qa-` updated on + - button in `f-form-array`.
+
 ## [1.4.2] - 2023-03-17
 
 ### Bug fixes

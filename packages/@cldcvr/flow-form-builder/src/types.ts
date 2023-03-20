@@ -36,7 +36,6 @@ export type FormBuilderBaseField = {
 	className?: string; // any additional css class name
 	qaId?: string; // data dq attribute for qa automation
 	label?: FormBuilderLabel; // label of field
-	description?: string; // description displayed at bottom of field
 	validationRules?: FormBuilderValidationRules; // validation rules to validate field
 	disabled?: boolean;
 	helperText?: string;
