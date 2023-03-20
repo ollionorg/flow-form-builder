@@ -233,6 +233,7 @@ snapshots["f-form-builder should display array fields"] =
       <f-icon-button
         class="f-form-array-action"
         data-qa-plus=""
+        data-qa-plus-for=""
         icon="i-plus"
         size="x-small"
         state="neutral"
@@ -269,6 +270,7 @@ snapshots["f-form-builder should display array fields"] =
       <f-icon-button
         class="f-form-array-action"
         data-qa-minus=""
+        data-qa-minus-for=""
         icon="i-minus"
         size="x-small"
         state="neutral"
@@ -341,6 +343,7 @@ snapshots["f-form-builder should add/delete field in array"] =
       <f-icon-button
         class="f-form-array-action"
         data-qa-plus=""
+        data-qa-plus-for=""
         icon="i-plus"
         size="x-small"
         state="neutral"
@@ -377,6 +380,7 @@ snapshots["f-form-builder should add/delete field in array"] =
       <f-icon-button
         class="f-form-array-action"
         data-qa-minus=""
+        data-qa-minus-for=""
         icon="i-minus"
         size="x-small"
         state="neutral"
