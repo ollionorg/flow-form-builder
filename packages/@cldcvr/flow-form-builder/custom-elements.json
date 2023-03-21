@@ -553,7 +553,7 @@
               "kind": "field",
               "name": "state",
               "type": {
-                "text": "FDividerState | undefined"
+                "text": "FFieldSeparatorState | undefined"
               },
               "default": "\"default\"",
               "attribute": "state",
@@ -597,7 +597,7 @@
             {
               "name": "state",
               "type": {
-                "text": "FDividerState | undefined"
+                "text": "FFieldSeparatorState | undefined"
               },
               "default": "\"default\"",
               "fieldName": "state"

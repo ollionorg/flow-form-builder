@@ -2,6 +2,7 @@ import { html, nothing, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { FRoot, FDivider, FDividerState, FText, FDiv } from "@cldcvr/flow-core";
 import eleStyle from "./f-field-separator.scss";
+export type FFieldSeparatorState = FDividerState;
 
 @customElement("f-field-separator")
 export class FFieldSeparator extends FRoot {
@@ -32,7 +33,7 @@ export class FFieldSeparator extends FRoot {
 	 * @attribute The state of Divider helps in indicating the degree of emphasis. By default it is default state.
 	 */
 	@property({ reflect: true, type: String })
-	state?: FDividerState = "default";
+	state?: FFieldSeparatorState = "default";
 
 	/**
 	 * @attribute The state of Divider helps in indicating the degree of emphasis. By default it is default state.

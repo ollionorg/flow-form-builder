@@ -4,6 +4,11 @@
 
 # Change Log
 
+
+## [1.4.4] - 2023-03-21
+
+### Improvements
+- Typescript types error fixed for`FDividerState`.
 ## [1.4.3] - 2023-03-20
 
 ### Improvements
