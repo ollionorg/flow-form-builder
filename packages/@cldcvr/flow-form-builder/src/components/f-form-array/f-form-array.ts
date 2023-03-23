@@ -208,6 +208,7 @@ export class FFormArray extends FRoot {
 	}
 
 	async validate(silent = false) {
+		await this.updateComplete;
 		const fieldConfig = this.config.field;
 		const allValidations: FormBuilderValidationPromise[] = [];
 		this.fieldRefs.forEach(async fieldRef => {

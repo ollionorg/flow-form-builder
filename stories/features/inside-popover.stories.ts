@@ -2,6 +2,7 @@ import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 import { FormBuilderField } from "@cldcvr/flow-form-builder/src/types";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
+import { FButton } from "@cldcvr/flow-core";
 
 export default {
 	title: "Features/In PopOver",
@@ -19,7 +20,7 @@ type SampleFormBuilder = {
 const sampleFormBuilder: SampleFormBuilder = {
 	field: {
 		type: "object",
-		direction: "horizontal",
+		direction: "vertical",
 		isCollapsible: false,
 		isCollapsed: true,
 		label: {
@@ -28,16 +29,28 @@ const sampleFormBuilder: SampleFormBuilder = {
 			iconTooltip: "Simple object with 2 fields `name` & `emoji` "
 		},
 		fields: {
-			name: {
+			topField: {
 				type: "text",
-				validationRules: [
-					{
-						name: "required"
-					}
-				]
+				label: {
+					title: "Top field"
+				}
 			},
-			emoji: {
-				type: "emoji"
+			nameAndEmoji: {
+				type: "object",
+				direction: "horizontal",
+				fields: {
+					name: {
+						type: "text",
+						validationRules: [
+							{
+								name: "required"
+							}
+						]
+					},
+					emoji: {
+						type: "emoji"
+					}
+				}
 			}
 		}
 	}
@@ -49,27 +62,46 @@ const Template: Story<unknown> = (args: any) => {
 		event.stopImmediatePropagation();
 	};
 	const fieldRef: Ref<HTMLElement> = createRef();
+	const buttonRef: Ref<FButton> = createRef();
+	const stateRef = createRef();
 	const handleInput = (event: CustomEvent) => {
 		if (fieldRef.value) {
 			fieldRef.value.innerHTML = JSON.stringify(event.detail, undefined, 8);
 		}
 	};
+	const handleStateChange = (event: CustomEvent) => {
+		if (stateRef.value) {
+			stateRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
+		}
+		if (buttonRef.value) {
+			buttonRef.value.disabled = !event.detail.isValid;
+		}
+	};
 	return html`
 		<f-popover open size="large">
-			<f-div padding="large" height="200px" state="default" gap="large">
+			<f-div padding="large" height="300px" state="default" gap="large">
 				<f-form-builder
 					.field=${args.field}
 					.values=${args.values}
 					@keydown=${handleKeydown}
 					@input=${handleInput}
+					@state-change=${handleStateChange}
 				>
 					<f-div>
-						<f-button label="submit" type="submit"></f-button>
+						<f-button ${ref(buttonRef)} label="submit" type="submit"></f-button>
 					</f-div>
 				</f-form-builder>
 				<f-divider></f-divider>
-				<f-div>
-					<pre ${ref(fieldRef)}>${JSON.stringify(args.values, undefined, 8)}</pre>
+				<f-div direction="column" height="hug-content">
+					<f-div direction="column">
+						<f-text>Values : </f-text>
+						<pre ${ref(fieldRef)}>${JSON.stringify(args.values, undefined, 8)}</pre>
+					</f-div>
+					<f-divider></f-divider>
+					<f-div direction="column">
+						<f-text>State : </f-text>
+						<pre ${ref(stateRef)}>${JSON.stringify(args.values, undefined, 8)}</pre>
+					</f-div>
 				</f-div>
 			</f-div>
 		</f-popover>
@@ -79,8 +111,5 @@ const Template: Story<unknown> = (args: any) => {
 export const basic = Template.bind({});
 
 basic.args = {
-	field: sampleFormBuilder.field,
-	values: {
-		name: "Tony"
-	}
+	field: sampleFormBuilder.field
 };

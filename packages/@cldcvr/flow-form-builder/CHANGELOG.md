@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.5.1] - 2023-03-23
+
+### Bug fixes
+- `state-change` does not emit deep inner element's validation messages.
 
 ## [1.5.0] - 2023-03-23
 
