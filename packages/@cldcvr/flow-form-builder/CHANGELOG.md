@@ -5,6 +5,14 @@
 # Change Log
 
 
+## [1.5.0] - 2023-03-23
+
+### Features
+- `hidden` field type support added.
+
+### Improvements
+- `showWhen` updated to more generic typescript type.
+- `button`,`icon-button` updated to support `variant`,`category`,`size`.
 ## [1.4.4] - 2023-03-21
 
 ### Improvements

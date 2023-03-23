@@ -11,6 +11,8 @@ export default function (
 	const field = _field as FormBuilderTextAreaField;
 	return html`
 		<f-text-area
+			id=${ifDefined(field.id)}
+			class=${ifDefined(field.className)}
 			name=${name}
 			${ref(fieldRef)}
 			.value=${value}

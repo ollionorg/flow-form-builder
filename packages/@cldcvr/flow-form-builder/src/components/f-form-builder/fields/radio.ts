@@ -12,6 +12,8 @@ export default function (
 
 	return html`
 		<f-radio-group
+			id=${ifDefined(field.id)}
+			class=${ifDefined(field.className)}
 			name=${name}
 			data-qa-element-id=${field.qaId || field.id}
 			${ref(fieldRef)}

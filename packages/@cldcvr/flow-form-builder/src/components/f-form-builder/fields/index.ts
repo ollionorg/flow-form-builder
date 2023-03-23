@@ -13,6 +13,7 @@ import file from "./file";
 import suggest from "./suggest";
 import separator from "./separator";
 import emoji from "./emoji";
+import hidden from "./hidden";
 
 const all: Record<string, FormBuilderFieldRenderFunction> = {
 	text,
@@ -33,7 +34,8 @@ const all: Record<string, FormBuilderFieldRenderFunction> = {
 	file,
 	suggest,
 	separator,
-	emoji
+	emoji,
+	hidden
 };
 
 export default all;

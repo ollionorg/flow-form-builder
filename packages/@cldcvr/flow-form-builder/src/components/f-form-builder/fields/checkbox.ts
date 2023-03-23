@@ -11,6 +11,8 @@ export default function (
 	const field = _field as FormBuilderCheckboxField;
 	return html`
 		<f-checkbox-group
+			id=${ifDefined(field.id)}
+			class=${ifDefined(field.className)}
 			name=${name}
 			data-qa-element-id=${field.qaId || field.id}
 			${ref(fieldRef)}

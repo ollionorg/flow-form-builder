@@ -9,7 +9,10 @@ import {
 	FEmojiPickerIncludesCategories,
 	FFileUploadFileType,
 	FFileUploadSizeProp,
+	FIconButtonSize,
 	FIconButtonState,
+	FIconButtonType,
+	FIconButtonVariant,
 	FSelectOptions,
 	FSuggestSuggestions
 } from "@cldcvr/flow-core";
@@ -58,8 +61,18 @@ export type FormBuilderSeparatorField = FormBuilderFieldEvents & {
 	qaId?: string;
 	direction?: "vertical" | "horizontal";
 };
+export type FormBuilderHiddenField = {
+	id?: string; // id to uniquely identify in DOM
+	className?: string; // any additional css class name
+	type: "hidden";
+	qaId?: string;
+	showWhen?: undefined;
+};
 
-export type CanValidateFields = Exclude<FormBuilderField, FormBuilderSeparatorField>;
+export type CanValidateFields = Exclude<
+	FormBuilderField,
+	FormBuilderSeparatorField | FormBuilderHiddenField
+>;
 export type FormBuilderObjectField = FormBuilderBaseField & {
 	type: "object";
 	direction?: "vertical" | "horizontal";
@@ -176,6 +189,9 @@ export type FormBuilderTextAreaField = FormBuilderBaseField & {
 export type FormBuilderButtonField = Omit<FormBuilderBaseField, "label"> & {
 	type: "button";
 	label: string;
+	category?: "fill" | "outline" | "transparent";
+	variant?: "round" | "curved" | "block";
+	size?: "large" | "medium" | "small" | "x-small";
 	state?: FButtonState;
 	iconLeft?: string;
 	iconRight?: string;
@@ -193,6 +209,9 @@ export type FormBuilderIconButtonField = FormBuilderBaseField & {
 	counter?: string;
 	loading?: boolean;
 	disabled?: boolean;
+	variant?: FIconButtonVariant;
+	category?: FIconButtonType;
+	size?: FIconButtonSize;
 	onMouseLeave?: (event: MouseEvent) => void;
 };
 
@@ -220,9 +239,10 @@ export type FormBuilderField =
 	| FormBuilderSuggestField
 	| FormBuilderFileField
 	| FormBuilderSeparatorField
-	| FormBuilderEmojiField; // add other field types
+	| FormBuilderEmojiField
+	| FormBuilderHiddenField; // add other field types
 
-export type FormBuilderShowCondition = (value: FormBuilderValues) => boolean;
+export type FormBuilderShowCondition<T = FormBuilderValues> = (value: T) => boolean;
 
 export type FormBuilderSuffixCondition = (value: string) => boolean;
 

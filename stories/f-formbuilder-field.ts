@@ -9,6 +9,10 @@ const field: FormBuilderField = {
 		description: "following fields are used for demo purpose only"
 	},
 	fields: {
+		hiddenField: {
+			type: "hidden",
+			qaId: "hiddenQA"
+		},
 		orgDetails: {
 			type: "object",
 			fields: {
@@ -224,6 +228,36 @@ const field: FormBuilderField = {
 			type: "button",
 			label: "get",
 			iconLeft: "i-arrow-rotate"
+		},
+		transparentButton: {
+			type: "button",
+			label: "add description",
+			iconLeft: "i-plus",
+			category: "transparent",
+			size: "small"
+		},
+		iconButtons: {
+			type: "object",
+			direction: "horizontal",
+			fields: {
+				fillIconButton: {
+					type: "icon-button",
+					icon: "i-plus",
+					size: "small"
+				},
+				outlinedIconButton: {
+					type: "icon-button",
+					icon: "i-plus",
+					category: "outline",
+					size: "small"
+				},
+				packedIconButton: {
+					type: "icon-button",
+					icon: "i-plus",
+					category: "transparent",
+					size: "small"
+				}
+			}
 		},
 		uploadFiles: {
 			qaId: "uploadFilesQA",

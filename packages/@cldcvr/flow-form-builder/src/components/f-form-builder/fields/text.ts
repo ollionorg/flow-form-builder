@@ -11,6 +11,8 @@ export default function (
 	const field = _field as FormBuilderTextInputField;
 	return html`
 		<f-input
+			id=${ifDefined(field.id)}
+			class=${ifDefined(field.className)}
 			name=${name}
 			.type=${field.type}
 			${ref(fieldRef)}

@@ -10,12 +10,16 @@ export default function (
 	const field = _field as FormBuilderIconButtonField;
 	return html`
 		<f-icon-button
+			id=${ifDefined(field.id)}
+			class=${ifDefined(field.className)}
 			name=${name}
 			data-qa-element-id=${field.qaId || field.id}
 			${ref(fieldRef)}
 			.state=${field.state ?? "primary"}
 			.icon=${field.icon}
-			type="packed"
+			.variant=${ifDefined(field.variant)}
+			.category=${ifDefined(field.category)}
+			.size=${ifDefined(field.size)}
 			.counter=${ifDefined(field.counter)}
 			?disabled=${field.disabled ?? false}
 			?loading=${field.loading ?? false}

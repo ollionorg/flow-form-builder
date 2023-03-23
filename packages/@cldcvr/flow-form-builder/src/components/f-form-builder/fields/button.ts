@@ -10,6 +10,8 @@ export default function (
 	const field = _field as FormBuilderButtonField;
 	return html`
 		<f-button
+			id=${ifDefined(field.id)}
+			class=${ifDefined(field.className)}
 			name=${name}
 			data-qa-element-id=${field.qaId || field.id}
 			${ref(fieldRef)}
@@ -18,6 +20,9 @@ export default function (
 			.iconLeft=${ifDefined(field.iconLeft)}
 			.iconRight=${ifDefined(field.iconRight)}
 			.counter=${ifDefined(field.counter)}
+			.variant=${ifDefined(field.variant)}
+			.category=${ifDefined(field.category)}
+			.size=${ifDefined(field.size)}
 			?disabled=${field.disabled ?? false}
 			?loading=${field.loading ?? false}
 			@click=${ifDefined(field.onClick)}

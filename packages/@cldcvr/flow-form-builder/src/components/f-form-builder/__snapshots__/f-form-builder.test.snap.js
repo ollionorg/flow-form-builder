@@ -774,7 +774,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
       name="getButton"
       size="medium"
       state="primary"
-      variant="curved"
+      variant="round"
     >
     </f-button>
   </f-form-group>

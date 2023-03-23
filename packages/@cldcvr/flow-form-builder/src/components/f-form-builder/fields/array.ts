@@ -11,6 +11,8 @@ export default function (
 	const field = _field as FormBuilderArrayField;
 	return html`
 		<f-form-array
+			id=${ifDefined(field.id)}
+			class=${ifDefined(field.className)}
 			name=${name}
 			data-qa-id=${field.qaId || field.id}
 			${ref(fieldRef)}

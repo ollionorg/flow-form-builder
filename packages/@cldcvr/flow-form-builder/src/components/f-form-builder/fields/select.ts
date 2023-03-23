@@ -11,6 +11,8 @@ export default function (
 	const field = _field as FormBuilderSelectField;
 	return html`
 		<f-select
+			id=${ifDefined(field.id)}
+			class=${ifDefined(field.className)}
 			name=${name}
 			${ref(fieldRef)}
 			.placeholder=${field.placeholder}

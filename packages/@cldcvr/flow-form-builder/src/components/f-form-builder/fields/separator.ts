@@ -10,6 +10,8 @@ export default function (
 	const field = _field as FormBuilderSeparatorField;
 	return html`
 		<f-field-separator
+			id=${ifDefined(field.id)}
+			class=${ifDefined(field.className)}
 			name=${name}
 			data-qa-id=${field.qaId || field.id}
 			${ref(fieldRef)}
