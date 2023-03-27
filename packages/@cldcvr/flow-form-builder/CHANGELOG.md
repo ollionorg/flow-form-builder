@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.5.2] - 2023-03-23
+
+### Bug fixes
+- `emoji` category selection closes popover.
+
 ## [1.5.1] - 2023-03-23
 
 ### Bug fixes

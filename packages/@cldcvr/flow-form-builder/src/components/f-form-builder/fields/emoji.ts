@@ -33,6 +33,9 @@ export default function (
 					field.onClick(e);
 				}
 			}}
+			@mouseup=${(e: PointerEvent) => {
+				e.stopPropagation();
+			}}
 			@focus=${ifDefined(field.onFocus)}
 			@input=${ifDefined(field.onInput)}
 			@keypress=${ifDefined(field.onKeyPress)}
