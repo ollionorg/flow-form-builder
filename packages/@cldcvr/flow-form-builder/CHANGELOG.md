@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.5.4] - 2023-03-31
+
+### Bug fixes
+- `undefined` check added on field.
+
 ## [1.5.3] - 2023-03-31
 
 ### Improvements

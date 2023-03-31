@@ -1,4 +1,4 @@
-import { html, PropertyValueMap, unsafeCSS } from "lit";
+import { html, nothing, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import {
 	FormBuilderField,
@@ -47,7 +47,7 @@ export class FFormBuilder extends FRoot {
 	 * @attribute formbuilder config
 	 */
 	@property({ type: Object, reflect: false })
-	field!: FormBuilderField;
+	field?: FormBuilderField;
 
 	/**
 	 * @attribute key value pair of values
@@ -59,7 +59,7 @@ export class FFormBuilder extends FRoot {
 			return JSON.stringify(newVal) !== JSON.stringify(oldVal);
 		}
 	})
-	values!: FormBuilderValues;
+	values?: FormBuilderValues;
 
 	/**
 	 * @attribute Controls size of all input elements within the form
@@ -142,7 +142,9 @@ export class FFormBuilder extends FRoot {
 								: ""}
 					  </f-div>`
 					: ``}
-				${fieldRenderer[this.field.type](this.name, this.field, this.fieldRef, this.values)}
+				${this.field
+					? fieldRenderer[this.field.type](this.name, this.field, this.fieldRef, this.values)
+					: nothing}
 				<slot @click=${this.checkSubmit}></slot>
 			</f-form>
 		`;
@@ -215,13 +217,13 @@ export class FFormBuilder extends FRoot {
 				/**
 				 * update values
 				 */
-				if (this.values && this.field.type === "array") {
+				if (this.values && this.field && this.field.type === "array") {
 					(this.values as []).splice(
 						0,
 						(this.values as []).length,
 						...((ref.value as FFormInputElements).value as [])
 					);
-				} else if (this.values && this.field.type === "object") {
+				} else if (this.values && this.field && this.field.type === "object") {
 					Object.assign(this.values, (ref.value as FFormInputElements).value as Object);
 				} else {
 					this.values = ref.value?.value as FormBuilderValues;
@@ -253,12 +255,12 @@ export class FFormBuilder extends FRoot {
 			};
 			ref.value.oninput = fieldValidation;
 			ref.value.onblur = fieldValidation;
-			if (this.field.showWhen) {
+			if (this.field && this.field.showWhen) {
 				/**
 				 * subsscribe to show when subject, whenever new values are there in formbuilder then show when will execute
 				 */
 				this.showWhenSubject.subscribe(values => {
-					if (this.field.showWhen && ref.value) {
+					if (this.field && this.field.showWhen && ref.value) {
 						const showField = this.field.showWhen(values);
 						if (!showField) {
 							ref.value.dataset.hidden = "true";
@@ -296,7 +298,11 @@ export class FFormBuilder extends FRoot {
 	 */
 	async validateForm(silent = false) {
 		const allValidations: FormBuilderValidationPromise[] = [];
-		if ((this.field.type === "object" || this.field.type === "array") && this.fieldRef.value) {
+		if (
+			this.field &&
+			(this.field.type === "object" || this.field.type === "array") &&
+			this.fieldRef.value
+		) {
 			allValidations.push(this.fieldRef.value.validate(silent));
 		} else {
 			allValidations.push(

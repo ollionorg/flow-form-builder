@@ -870,7 +870,7 @@
               "kind": "field",
               "name": "field",
               "type": {
-                "text": "FormBuilderField"
+                "text": "FormBuilderField | undefined"
               },
               "attribute": "field"
             },
@@ -878,7 +878,7 @@
               "kind": "field",
               "name": "values",
               "type": {
-                "text": "FormBuilderValues"
+                "text": "FormBuilderValues | undefined"
               },
               "attribute": "values"
             },
@@ -1055,14 +1055,14 @@
             {
               "name": "field",
               "type": {
-                "text": "FormBuilderField"
+                "text": "FormBuilderField | undefined"
               },
               "fieldName": "field"
             },
             {
               "name": "values",
               "type": {
-                "text": "FormBuilderValues"
+                "text": "FormBuilderValues | undefined"
               },
               "fieldName": "values"
             },
