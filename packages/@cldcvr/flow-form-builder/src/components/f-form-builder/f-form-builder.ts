@@ -304,7 +304,7 @@ export class FFormBuilder extends FRoot {
 			this.fieldRef.value
 		) {
 			allValidations.push(this.fieldRef.value.validate(silent));
-		} else {
+		} else if (this.field) {
 			allValidations.push(
 				validateField(
 					this.field as CanValidateFields,

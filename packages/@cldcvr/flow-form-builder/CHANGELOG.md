@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.5.5] - 2023-03-31
+
+### Bug fixes
+- umd : `undefined` check added on validation state.
+
 ## [1.5.4] - 2023-03-31
 
 ### Bug fixes
