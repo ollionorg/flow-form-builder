@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.5.3] - 2023-03-31
+
+### Improvements
+- `umd` bundle added in package.
 ## [1.5.2] - 2023-03-23
 
 ### Bug fixes

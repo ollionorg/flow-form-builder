@@ -1,6 +1,6 @@
 {
   "name": "@cldcvr/flow-form-builder",
-  "version": "1.5.2",
+  "version": "1.5.3",
   "description": "Lineage dependency for flow design system",
   "module": "dist/flow-form-builder.es.js",
   "main": "dist/flow-form-builder.cjs.js",
@@ -10,7 +10,7 @@
     "prepublishOnly": "./compile.sh",
     "compile": "./compile.sh",
     "meta-build": "./meta-build.sh",
-    "build": "vite build --emptyOutDir && tsc -emitDeclarationOnly",
+    "build": "vite build --emptyOutDir && vite build --emptyOutDir --config vite.umd.config.ts && tsc -emitDeclarationOnly",
     "build:watch": "concurrently --kill-others \"vite build --emptyOutDir --watch\" \"tsc --watch\"",
     "lint:eslint": "eslint 'src/**/*.ts'",
     "analyze": "cem analyze --litelement --globs \"src/**/*.ts\" && wca analyze src --format vscode --outFile html.html-data.json",
