@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.5.7] - 2023-04-04
+
+### Bug fixes
+- `subTitle` not working in select fixed.
+
 ## [1.5.6] - 2023-04-04
 
 ### Improvements

@@ -78,6 +78,13 @@ export default function (
 						></f-icon>
 				  `
 				: ""}
+			${field.label?.subTitle
+				? html`
+						<f-text size="small" slot="subtitle" align="right" state="secondary"
+							>${field.label?.subTitle}</f-text
+						>
+				  `
+				: ""}
 		</f-select>
 	`;
 }

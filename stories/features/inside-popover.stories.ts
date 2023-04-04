@@ -59,6 +59,10 @@ const sampleFormBuilder: SampleFormBuilder = {
 				}
 			},
 			dropdown: {
+				label: {
+					title: "Dorpdown",
+					subTitle: "MyDropDown"
+				},
 				type: "select",
 				options: [
 					{ title: "Hash", data: { description: "[a-f0-9]" } },
