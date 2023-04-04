@@ -22,7 +22,7 @@
 f-form-builder {
 	@include base();
 	@include input-color("danger");
-	width: unset;
+	width: fit-content;
 	flex: 1 0 auto;
 	flex-direction: column;
 	align-items: stretch;

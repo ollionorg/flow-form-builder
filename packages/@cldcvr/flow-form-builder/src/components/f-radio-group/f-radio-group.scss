@@ -42,6 +42,8 @@ $states: (
 }
 
 f-radio-group {
+	display: flex;
+	flex: 1 0 fit-content;
 	@each $state, $color in $states {
 		&[state="#{$state}"] {
 			@include input-color($state);

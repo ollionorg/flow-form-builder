@@ -160,7 +160,7 @@ export type FormBuilderSwitchField = FormBuilderBaseField & {
 //select type field
 export type FormBuilderSelectField = FormBuilderBaseField & {
 	type: "select";
-	selection: "single" | "multiple";
+	selection?: "single" | "multiple";
 	placeholder?: string;
 	options: FSelectOptions;
 	optionTemplate?: string;
@@ -220,6 +220,7 @@ export type CheckboxOption = {
 	title?: string;
 	description?: string;
 	iconTooltip?: string;
+	subTitle?: string;
 };
 export type RadioOption = CheckboxOption;
 export type CheckboxOptions = CheckboxOption[];
@@ -250,6 +251,7 @@ export type FormBuilderLabel = {
 	title: string; // title of field/group/form
 	description?: string; // more info about title (displayed at bottom of label)
 	iconTooltip?: string; //icon to display besides title
+	subTitle?: string;
 };
 
 export type FormBuilderValidationRuleTriggers =

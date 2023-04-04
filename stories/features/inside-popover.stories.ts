@@ -32,7 +32,8 @@ const sampleFormBuilder: SampleFormBuilder = {
 			topField: {
 				type: "text",
 				label: {
-					title: "Top field"
+					title: "Top field",
+					subTitle: "Optional"
 				}
 			},
 			nameAndEmoji: {
@@ -41,6 +42,11 @@ const sampleFormBuilder: SampleFormBuilder = {
 				fields: {
 					name: {
 						type: "text",
+						label: {
+							title: "Testing external tooltip",
+							iconTooltip: "#testTooltip"
+						},
+						helperText: `<f-text size="small" state="warning">This class is pretty straight-forward. It has two mandatory methods, bind and react which are called upon app initialization and after the scope updates respectively. Since this is a one-way binding on the text property, all we do here is set the innerText of the element.</f-text>`,
 						validationRules: [
 							{
 								name: "required"
@@ -51,6 +57,16 @@ const sampleFormBuilder: SampleFormBuilder = {
 						type: "emoji"
 					}
 				}
+			},
+			dropdown: {
+				type: "select",
+				options: [
+					{ title: "Hash", data: { description: "[a-f0-9]" } },
+					{ title: "Two Digits", data: { description: "\\d+\\.\\d+" } }
+				],
+				optionTemplate: `<f-div direction="column" gap="x-small">
+				<f-text>\${option.title}</f-text>
+				<f-text state="secondary">\${option.data.description}</f-text></f-div>`
 			}
 		}
 	}
@@ -79,18 +95,26 @@ const Template: Story<unknown> = (args: any) => {
 	};
 	return html`
 		<f-popover open size="large">
-			<f-div padding="large" height="300px" state="default" gap="large">
-				<f-form-builder
-					.field=${args.field}
-					.values=${args.values}
-					@keydown=${handleKeydown}
-					@input=${handleInput}
-					@state-change=${handleStateChange}
-				>
-					<f-div>
-						<f-button ${ref(buttonRef)} label="submit" type="submit"></f-button>
-					</f-div>
-				</f-form-builder>
+			<f-tooltip id="testTooltip">
+				<f-div gap="medium">
+					<f-icon source="i-bulb"></f-icon
+					><f-text state="warning">This comes from external tooltip</f-text>
+				</f-div>
+			</f-tooltip>
+			<f-div padding="large" width="100%" height="500px" state="default" gap="large">
+				<f-div>
+					<f-form-builder
+						.field=${args.field}
+						.values=${args.values}
+						@keydown=${handleKeydown}
+						@input=${handleInput}
+						@state-change=${handleStateChange}
+					>
+						<f-div>
+							<f-button ${ref(buttonRef)} label="submit" type="submit"></f-button>
+						</f-div>
+					</f-form-builder>
+				</f-div>
 				<f-divider></f-divider>
 				<f-div direction="column" height="hug-content">
 					<f-div direction="column">

@@ -4,6 +4,14 @@
 
 # Change Log
 
+## [1.5.6] - 2023-04-04
+
+### Improvements
+- `subTitle` filed added to support right side text of input.
+- `helperText` now supports `html` markup.
+### Bug fixes
+- `helperText` not wrapping issue fixed.
+
 ## [1.5.5] - 2023-03-31
 
 ### Bug fixes

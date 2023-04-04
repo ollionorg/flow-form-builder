@@ -2,6 +2,7 @@ import { html } from "lit";
 import { FFormInputElements, FormBuilderField, FormBuilderSwitchField } from "../../../types";
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 export default function (
 	name: string,
 	_field: FormBuilderField,
@@ -44,7 +45,7 @@ export default function (
 				  >`}
 			${field.helperText
 				? html`<f-div slot="help" data-qa-help-for=${field.qaId || field.id}
-						>${field.helperText}</f-div
+						>${unsafeHTML(field.helperText)}</f-div
 				  >`
 				: html``}
 			${field.label?.iconTooltip
@@ -58,6 +59,13 @@ export default function (
 							.tooltip="${field.label?.iconTooltip}"
 							clickable
 						></f-icon>
+				  `
+				: ""}
+			${field.label?.subTitle
+				? html`
+						<f-text size="small" slot="subtitle" align="right" state="secondary"
+							>${field.label?.subTitle}</f-text
+						>
 				  `
 				: ""}
 		</f-switch>

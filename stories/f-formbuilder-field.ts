@@ -138,11 +138,12 @@ const field: FormBuilderField = {
 			qaId: "radioQA",
 			type: "radio",
 			label: {
-				title: "Radios"
+				title: "Radios",
+				subTitle: "Optional"
 			},
 			// helperText: "This field is required",
 			options: [
-				{ id: "or", title: "Orange", iconTooltip: "hello" },
+				{ id: "or", title: "Orange", iconTooltip: "hello", subTitle: "Fruit" },
 				{
 					id: "banannaId",
 					iconTooltip: "hello",
@@ -162,7 +163,7 @@ const field: FormBuilderField = {
 			direction: "horizontal",
 			label: {
 				title: "Check/Uncheck options",
-				description: "this my checkbox"
+				subTitle: "this my checkbox"
 			},
 			// helperText: "This field is required",
 			options: [
@@ -170,7 +171,7 @@ const field: FormBuilderField = {
 				{
 					id: "banannaId",
 					iconTooltip: "hello",
-					description: "Banana is cheap but rich in fiber"
+					subTitle: "Fruit"
 				}
 			],
 			validationRules: [
@@ -263,7 +264,7 @@ const field: FormBuilderField = {
 			qaId: "uploadFilesQA",
 			label: {
 				title: "Files to upload",
-				description: "Select any file from native os file browser"
+				subTitle: "Select any file from native os file browser"
 			},
 			type: "file",
 			multiple: true

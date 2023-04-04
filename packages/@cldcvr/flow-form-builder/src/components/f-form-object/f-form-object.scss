@@ -31,6 +31,12 @@ f-form-group[direction="vertical"] {
 	> f-field-separator {
 		width: 100%;
 	}
+	> f-radio-group {
+		width: 100%;
+	}
+	> f-checkbox-group {
+		width: 100%;
+	}
 }
 
 f-div[direction="row"],

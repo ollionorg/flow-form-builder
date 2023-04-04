@@ -6,6 +6,7 @@ import eleStyle from "./f-checkbox-group.scss";
 import { FRoot, FDiv, FText } from "@cldcvr/flow-core";
 import { isEqual } from "lodash-es";
 export type FCheckboxGroupValue = string[];
+export const checkboxGroupStyles = eleStyle;
 
 @customElement("f-checkbox-group")
 export class FCheckboxGroup extends FRoot {
@@ -17,7 +18,7 @@ export class FCheckboxGroup extends FRoot {
 	/**
 	 * @attribute Controls size of all input elements within the form
 	 */
-	@property({ reflect: true, type: Array })
+	@property({ reflect: false, type: Array })
 	options: CheckboxOptions = [];
 
 	/**
@@ -80,19 +81,22 @@ export class FCheckboxGroup extends FRoot {
 		 * Final html to render
 		 */
 		return html`
-			<f-div .gap=${this.gap} direction="column">
+			<f-div .gap=${this.gap} direction="column" width="100%">
 				<f-div padding="none" gap="x-small" direction="column" width="fill-container">
-					<f-div
-						padding="none"
-						gap="small"
-						direction="row"
-						width="hug-content"
-						height="hug-content"
-					>
-						<f-div padding="none" direction="row" width="hug-content" height="hug-content">
+					<f-div padding="none" gap="auto" direction="row" height="hug-content">
+						<f-div
+							padding="none"
+							gap="small"
+							direction="row"
+							width="hug-content"
+							height="hug-content"
+						>
 							<slot name="label"></slot>
+							<slot name="icon-toolttip"></slot>
 						</f-div>
-						<slot name="icon-toolttip"></slot>
+						<f-div width="hug-content">
+							<slot name="subtitle"></slot>
+						</f-div>
 					</f-div>
 					<slot name="description"></slot>
 				</f-div>
@@ -135,6 +139,13 @@ export class FCheckboxGroup extends FRoot {
 												.tooltip="${item.iconTooltip}"
 												clickable
 											></f-icon>
+									  `
+									: ""}
+								${item?.subTitle
+									? html`
+											<f-text size="small" slot="subtitle" align="right" state="secondary"
+												>${item?.subTitle}</f-text
+											>
 									  `
 									: ""}
 							</f-checkbox>

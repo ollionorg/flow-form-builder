@@ -2,6 +2,7 @@ import { html } from "lit";
 import { FFormInputElements, FormBuilderField, FormBuilderSelectField } from "../../../types";
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 export default function (
 	name: string,
 	_field: FormBuilderField,
@@ -16,7 +17,7 @@ export default function (
 			name=${name}
 			${ref(fieldRef)}
 			.placeholder=${field.placeholder}
-			.type=${field.selection}
+			.type=${field.selection ?? "single"}
 			.state=${field.state ?? "default"}
 			?searchable=${field.searchable}
 			.options=${field.options}
@@ -29,7 +30,7 @@ export default function (
 			?disabled=${field.disabled}
 			selection-limit=${ifDefined(field.selectionLimit)}
 			?create-option=${field.createOption}
-			.option-template=${field.optionTemplate}
+			.optionTemplate=${field.optionTemplate}
 			icon-left=${ifDefined(field.iconLeft)}
 			@click=${ifDefined(field.onClick)}
 			@focus=${ifDefined(field.onFocus)}
@@ -61,7 +62,7 @@ export default function (
 				: ""}
 			${field?.helperText
 				? html`<f-div slot="help" data-qa-help-for=${field.qaId || field.id}
-						>${field?.helperText}</f-div
+						>${unsafeHTML(field.helperText)}</f-div
 				  >`
 				: html``}
 			${field?.label?.iconTooltip

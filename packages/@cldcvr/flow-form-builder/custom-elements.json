@@ -344,6 +344,11 @@
       "path": "src/components/f-checkbox-group/f-checkbox-group.ts",
       "declarations": [
         {
+          "kind": "variable",
+          "name": "checkboxGroupStyles",
+          "default": "eleStyle"
+        },
+        {
           "kind": "class",
           "description": "",
           "name": "FCheckboxGroup",
@@ -355,8 +360,7 @@
                 "text": "CheckboxOptions"
               },
               "default": "[]",
-              "attribute": "options",
-              "reflects": true
+              "attribute": "options"
             },
             {
               "kind": "field",
@@ -494,6 +498,14 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "checkboxGroupStyles",
+          "declaration": {
+            "name": "checkboxGroupStyles",
+            "module": "src/components/f-checkbox-group/f-checkbox-group.ts"
+          }
+        },
         {
           "kind": "js",
           "name": "FCheckboxGroup",
@@ -1305,6 +1317,11 @@
       "path": "src/components/f-radio-group/f-radio-group.ts",
       "declarations": [
         {
+          "kind": "variable",
+          "name": "radioGroupStyles",
+          "default": "eleStyle"
+        },
+        {
           "kind": "class",
           "description": "",
           "name": "FRadioGroup",
@@ -1316,8 +1333,7 @@
                 "text": "RadioOptions"
               },
               "default": "[]",
-              "attribute": "options",
-              "reflects": true
+              "attribute": "options"
             },
             {
               "kind": "field",
@@ -1450,6 +1466,14 @@
         }
       ],
       "exports": [
+        {
+          "kind": "js",
+          "name": "radioGroupStyles",
+          "declaration": {
+            "name": "radioGroupStyles",
+            "module": "src/components/f-radio-group/f-radio-group.ts"
+          }
+        },
         {
           "kind": "js",
           "name": "FRadioGroup",

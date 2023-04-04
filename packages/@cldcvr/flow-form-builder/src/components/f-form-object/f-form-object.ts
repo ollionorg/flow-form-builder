@@ -18,6 +18,8 @@ import { Subject } from "rxjs";
 import { propogateProperties } from "../../modules/helpers";
 import { FFormGroup } from "@cldcvr/flow-core";
 import { FFieldSeparator } from "../f-field-separator/f-field-separator";
+import { radioGroupStyles } from "../f-radio-group/f-radio-group";
+import { checkboxGroupStyles } from "../f-checkbox-group/f-checkbox-group";
 
 export type ObjectValueType = Record<
 	string,
@@ -28,7 +30,13 @@ export class FFormObject extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(flowCoreCSS), unsafeCSS(eleStyle), ...FFieldSeparator.styles];
+	static styles = [
+		unsafeCSS(flowCoreCSS),
+		unsafeCSS(eleStyle),
+		...FFieldSeparator.styles,
+		unsafeCSS(radioGroupStyles),
+		unsafeCSS(checkboxGroupStyles)
+	];
 
 	/**
 	 * @attribute comments baout title

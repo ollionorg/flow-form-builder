@@ -6,6 +6,7 @@ import eleStyle from "./f-radio-group.scss";
 import { FDiv, FRoot, FText } from "@cldcvr/flow-core";
 import { isEqual } from "lodash-es";
 
+export const radioGroupStyles = eleStyle;
 /**
  * @summary Text component includes Headings, titles, body texts and links.
  */
@@ -19,7 +20,7 @@ export class FRadioGroup extends FRoot {
 	/**
 	 * @attribute Controls size of all input elements within the form
 	 */
-	@property({ reflect: true, type: Array })
+	@property({ reflect: false, type: Array })
 	options: RadioOptions = [];
 
 	/**
@@ -68,19 +69,22 @@ export class FRadioGroup extends FRoot {
 		 * Final html to render
 		 */
 		return html`
-			<f-div .gap=${this.gap} direction="column">
+			<f-div .gap=${this.gap} direction="column" width="100%">
 				<f-div padding="none" gap="x-small" direction="column" width="fill-container">
-					<f-div
-						padding="none"
-						gap="small"
-						direction="row"
-						width="hug-content"
-						height="hug-content"
-					>
-						<f-div padding="none" direction="row" width="hug-content" height="hug-content">
+					<f-div padding="none" gap="auto" direction="row" height="hug-content">
+						<f-div
+							padding="none"
+							gap="small"
+							direction="row"
+							width="hug-content"
+							height="hug-content"
+						>
 							<slot name="label"></slot>
+							<slot name="icon-toolttip"></slot>
 						</f-div>
-						<slot name="icon-toolttip"></slot>
+						<f-div width="hug-content">
+							<slot name="subtitle"></slot>
+						</f-div>
 					</f-div>
 					<slot name="description"></slot>
 				</f-div>
@@ -118,6 +122,13 @@ export class FRadioGroup extends FRoot {
 												.tooltip="${item.iconTooltip}"
 												clickable
 											></f-icon>
+									  `
+									: ""}
+								${item?.subTitle
+									? html`
+											<f-text size="small" slot="subtitle" align="right" state="secondary"
+												>${item?.subTitle}</f-text
+											>
 									  `
 									: ""}
 							</f-radio>
