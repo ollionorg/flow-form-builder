@@ -251,7 +251,7 @@ export type FormBuilderLabel = {
 	title: string; // title of field/group/form
 	description?: string; // more info about title (displayed at bottom of label)
 	iconTooltip?: string; //icon to display besides title
-	subTitle?: string;
+	subTitle?: string | { text: string; onClick: (event: PointerEvent) => void };
 };
 
 export type FormBuilderValidationRuleTriggers =

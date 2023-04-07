@@ -2,7 +2,7 @@ import { html } from "lit";
 import { FFormInputElements, FormBuilderField, FormBuilderTextInputField } from "../../../types";
 import { Ref, ref } from "lit/directives/ref.js";
 import { ifDefined } from "lit-html/directives/if-defined.js";
-import { unsafeHTML } from "lit/directives/unsafe-html.js";
+import { getSlots } from "../../../modules/helpers";
 export default function (
 	name: string,
 	_field: FormBuilderField,
@@ -39,53 +39,7 @@ export default function (
 			@keyup=${ifDefined(field.onKeyUp)}
 			@mouseover=${ifDefined(field.onMouseOver)}
 		>
-			${field.label?.title
-				? html` <f-div
-						slot="label"
-						padding="none"
-						gap="none"
-						data-qa-label-for=${field.qaId || field.id}
-						>${field.label.title}</f-div
-				  >`
-				: name
-				? html`<f-div
-						slot="label"
-						padding="none"
-						gap="none"
-						data-qa-label-for=${field.qaId || field.id}
-						>${name}</f-div
-				  >`
-				: ""}
-			${field.label?.description
-				? html` <f-div slot="description" padding="none" gap="none"
-						>${field.label.description}</f-div
-				  >`
-				: ""}
-			${field.helperText
-				? html`<f-div slot="help" data-qa-help-for=${field.qaId || field.id}
-						>${unsafeHTML(field.helperText)}</f-div
-				  >`
-				: ``}
-			${field.label?.iconTooltip
-				? html`
-						<f-icon
-							slot="icon-tooltip"
-							source="i-question-filled"
-							size="small"
-							state="subtle"
-							data-qa-info-icon-for=${field.qaId || field.id}
-							.tooltip="${field.label?.iconTooltip}"
-							clickable
-						></f-icon>
-				  `
-				: ""}
-			${field.label?.subTitle
-				? html`
-						<f-text size="small" slot="subtitle" align="right" state="secondary"
-							>${field.label?.subTitle}</f-text
-						>
-				  `
-				: ""}
+			${getSlots(name, field)}
 		</f-input>
 	`;
 }

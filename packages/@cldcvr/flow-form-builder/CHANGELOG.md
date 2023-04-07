@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.5.10] - 2023-04-07
+
+### Improvements
+- `subTitle` clickable feature.
 ## [1.5.9] - 2023-04-07
 
 ### Bug fixes

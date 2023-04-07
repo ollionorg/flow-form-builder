@@ -17,7 +17,15 @@ const field: FormBuilderField = {
 			type: "object",
 			fields: {
 				name: {
-					label: { title: "Org name" },
+					label: {
+						title: "Org name",
+						subTitle: {
+							text: "I'm Feeling Lucky",
+							onClick: () => {
+								alert("Ding dong!");
+							}
+						}
+					},
 					type: "text",
 					validationRules: [
 						{
@@ -207,7 +215,16 @@ const field: FormBuilderField = {
 				username: {
 					qaId: "nestedUsernameQA",
 					type: "text",
-					validationRules: [{ name: "required" }]
+					validationRules: [{ name: "required" }],
+					label: {
+						title: "Username",
+						subTitle: {
+							text: "Forgot username?",
+							onClick: event => {
+								console.log("subtitle is clicked", event);
+							}
+						}
+					}
 				},
 				email: {
 					qaId: "emailQA",
