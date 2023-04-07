@@ -44,7 +44,7 @@ const field: FormBuilderField = {
 			placeholder: "This is a placeholder",
 			iconLeft: "i-app",
 			disabled: false,
-			clear: true,
+			clear: false,
 			validationRules: [
 				{
 					name: "required"
@@ -224,18 +224,40 @@ const field: FormBuilderField = {
 				type: "text"
 			}
 		},
-		getButton: {
-			qaId: "getButtonQA",
-			type: "button",
-			label: "get",
-			iconLeft: "i-arrow-rotate"
-		},
-		transparentButton: {
-			type: "button",
-			label: "add description",
-			iconLeft: "i-plus",
-			category: "transparent",
-			size: "small"
+		buttons: {
+			type: "object",
+			direction: "horizontal",
+			fields: {
+				getButton: {
+					qaId: "getButtonQA",
+					type: "button",
+					label: "get",
+					iconLeft: "i-arrow-rotate"
+				},
+				transparentButton: {
+					type: "button",
+					label: "add description",
+					iconLeft: "i-plus",
+					category: "transparent",
+					size: "small"
+				},
+				testButton: {
+					type: "object",
+					direction: "horizontal",
+					fields: {
+						innerButton: {
+							qaId: "testButtonQA",
+							type: "button",
+							label: "Custom State",
+							variant: "curved",
+							category: "outline",
+							size: "small",
+							iconLeft: "i-crown",
+							state: "custom, orange"
+						}
+					}
+				}
+			}
 		},
 		iconButtons: {
 			type: "object",

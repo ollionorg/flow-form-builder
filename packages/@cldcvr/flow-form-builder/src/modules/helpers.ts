@@ -1,12 +1,14 @@
 import { FFormArray } from "../components/f-form-array/f-form-array";
 import { FFormObject } from "../components/f-form-object/f-form-object";
 import { FFormBuilder } from "../components/f-form-builder/f-form-builder";
+import { LitElement } from "lit";
 
 export function propogateProperties(element: FFormArray | FFormObject | FFormBuilder) {
-	const inputElements = element.shadowRoot?.querySelectorAll<HTMLElement>(
+	const inputElements = element.shadowRoot?.querySelectorAll<LitElement>(
 		"f-input,f-form-object,f-form-array,f-button,f-checkbox-group,f-radio-group,f-select,f-switch,f-text-area,f-file-upload,f-suggest,f-field-separator"
 	);
-	inputElements?.forEach(inputElement => {
+	inputElements?.forEach(async inputElement => {
+		await inputElement.updateComplete;
 		if (
 			inputElement.getAttribute("size") === null ||
 			inputElement.getAttribute("size") === "medium" ||

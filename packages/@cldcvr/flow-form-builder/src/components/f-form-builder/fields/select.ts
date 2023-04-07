@@ -23,7 +23,7 @@ export default function (
 			.options=${field.options}
 			.value=${value}
 			?checkbox=${field.checkbox}
-			?clear=${field.clear}
+			.clear=${ifDefined(field.clear)}
 			.width=${field.width}
 			data-qa-element-id=${field.qaId || field.id}
 			height=${ifDefined(field.height)}

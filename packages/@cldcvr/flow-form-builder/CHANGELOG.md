@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.5.8] - 2023-04-07
+
+### Bug fixes
+- `clear` property not working in select field.
+- Vue : overridden variant, category, size not working.
+- Typescript : `button`, `icon-button` custom state not working.
 ## [1.5.7] - 2023-04-04
 
 ### Bug fixes

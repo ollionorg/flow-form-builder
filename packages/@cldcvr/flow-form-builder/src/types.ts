@@ -186,7 +186,7 @@ export type FormBuilderTextAreaField = FormBuilderBaseField & {
 };
 
 // button type field
-export type FormBuilderButtonField = Omit<FormBuilderBaseField, "label"> & {
+export type FormBuilderButtonField = Omit<FormBuilderBaseField, "label" | "state"> & {
 	type: "button";
 	label: string;
 	category?: "fill" | "outline" | "transparent";
@@ -202,7 +202,7 @@ export type FormBuilderButtonField = Omit<FormBuilderBaseField, "label"> & {
 };
 
 // button type field
-export type FormBuilderIconButtonField = FormBuilderBaseField & {
+export type FormBuilderIconButtonField = Omit<FormBuilderBaseField, "state"> & {
 	type: "icon-button";
 	icon: string;
 	state?: FIconButtonState;
