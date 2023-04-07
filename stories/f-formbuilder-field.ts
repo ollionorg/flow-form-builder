@@ -84,6 +84,9 @@ const field: FormBuilderField = {
 			suffixWhen: (value: string) => {
 				return value === "vikas";
 			},
+			showWhen: values => {
+				return (values as Record<string, any>)?.orgDetails?.name === "vikas";
+			},
 			validationRules: [
 				{
 					name: "required"

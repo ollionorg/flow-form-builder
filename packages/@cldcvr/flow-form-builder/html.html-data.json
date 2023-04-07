@@ -153,7 +153,7 @@
     },
     {
       "name": "f-form-array",
-      "description": "Events:\n\n  * `show-when` {`CustomEvent<boolean>`} - \n\n  * `input` {`CustomEvent<ArrayValueType>`} - \n\nAttributes:\n\n  * `config` {`FormBuilderArrayField`} - \n\n  * `value` {`ArrayValueType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `config` {`FormBuilderArrayField`} - \n\n  * `value` {`ArrayValueType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `actions` {`NodeListOf<FIconButton> | undefined`} - \n\n  * `fieldRefs` {`Ref<FFormInputElements>[]`} - \n\n  * `showWhenSubject` - \n\n  * `isRequired` {`boolean`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `show-when` {`CustomEvent<boolean>`} - \n\n  * `input` {`CustomEvent<ArrayValueType>`} - \n\n  * `show-when-exe` {`CustomEvent<boolean>`} - \n\nAttributes:\n\n  * `config` {`FormBuilderArrayField`} - \n\n  * `value` {`ArrayValueType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `config` {`FormBuilderArrayField`} - \n\n  * `value` {`ArrayValueType`} - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `actions` {`NodeListOf<FIconButton> | undefined`} - \n\n  * `fieldRefs` {`Ref<FFormInputElements>[]`} - \n\n  * `showWhenSubject` - \n\n  * `isRequired` {`boolean`} - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "config",
@@ -214,6 +214,10 @@
         {
           "name": "oninput",
           "description": "`input` {`CustomEvent<ArrayValueType>`} - "
+        },
+        {
+          "name": "onshow-when-exe",
+          "description": "`show-when-exe` {`CustomEvent<boolean>`} - "
         }
       ]
     },
@@ -330,7 +334,7 @@
     },
     {
       "name": "f-form-object",
-      "description": "Events:\n\n  * `input` {`CustomEvent<ObjectValueType>`} - \n\n  * `show-when` {`CustomEvent<boolean>`} - \n\nAttributes:\n\n  * `config` {`FormBuilderObjectField`} - \n\n  * `value` - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `config` {`FormBuilderObjectField`} - \n\n  * `value` - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `formGroupElement` - \n\n  * `fieldRefs` - \n\n  * `showWhenSubject` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
+      "description": "Events:\n\n  * `input` {`CustomEvent<ObjectValueType>`} - \n\n  * `show-when` {`CustomEvent<boolean>`} - \n\n  * `show-when-exe` {`CustomEvent<boolean>`} - \n\nAttributes:\n\n  * `config` {`FormBuilderObjectField`} - \n\n  * `value` - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `tooltip` {`string | undefined`} - \n\nProperties:\n\n  * `config` {`FormBuilderObjectField`} - \n\n  * `value` - \n\n  * `state` {`\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined`} - \n\n  * `gap` {`\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined`} - \n\n  * `formGroupElement` - \n\n  * `fieldRefs` - \n\n  * `showWhenSubject` - \n\n  * `styles` {`CSSResult[]`} - css loaded from scss file\n\n  * `tooltipElement` {`HTMLElement`} - \n\n  * `tooltip` {`string | undefined`} - ",
       "attributes": [
         {
           "name": "config",
@@ -391,6 +395,10 @@
         {
           "name": "onshow-when",
           "description": "`show-when` {`CustomEvent<boolean>`} - "
+        },
+        {
+          "name": "onshow-when-exe",
+          "description": "`show-when-exe` {`CustomEvent<boolean>`} - "
         }
       ]
     },

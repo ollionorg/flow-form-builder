@@ -112,6 +112,7 @@ export class FFormBuilder extends FRoot {
 				name=${this.name}
 				@submit=${this.onSubmit}
 				@show-when=${this.onShowWhen}
+				@show-when-exe=${this.onShowWhenExecution}
 				?separator=${this.separator}
 				gap=${this.gap}
 			>
@@ -267,6 +268,7 @@ export class FFormBuilder extends FRoot {
 						} else {
 							ref.value.dataset.hidden = "false";
 						}
+						this.onShowWhenExecution();
 					}
 				});
 				/**
@@ -292,6 +294,11 @@ export class FFormBuilder extends FRoot {
 		this.showWhenSubject.next(this.values ?? {});
 	}
 
+	onShowWhenExecution() {
+		this.validateForm(true).then(all => {
+			this.updateValidaitonState(all);
+		});
+	}
 	/**
 	 * Validation of whole form
 	 * @param silent whether to display validaiton message or not

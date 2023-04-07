@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.5.9] - 2023-04-07
+
+### Bug fixes
+- hidden field validation.
 ## [1.5.8] - 2023-04-07
 
 ### Bug fixes

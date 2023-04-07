@@ -69,8 +69,12 @@ const sampleFormBuilder: SampleFormBuilder = {
 					{ title: "Two Digits", data: { description: "\\d+\\.\\d+" } }
 				],
 				optionTemplate: `<f-div direction="column" gap="x-small">
-				<f-text>\${option.title}</f-text>
-				<f-text state="secondary">\${option.data.description}</f-text></f-div>`
+					<f-div gap="small">
+						\${option.title==="Hash"?\`<f-icon source="i-crown"></f-icon>\`:''}
+						<f-text>\${option.title}</f-text>
+					</f-div>
+					<f-text state="secondary">\${option.data.description}</f-text></f-div
+				>`
 			}
 		}
 	}

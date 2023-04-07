@@ -301,6 +301,7 @@ export class FFormArray extends FRoot {
 							} else {
 								ref.value.dataset.hidden = "false";
 							}
+							this.dispatchShowWhenExeEvent();
 						}
 					});
 					this.dispatchShowWhenEvent();
@@ -339,5 +340,17 @@ export class FFormArray extends FRoot {
 			composed: true
 		});
 		this.dispatchEvent(input);
+	}
+
+	/**
+	 * dispatch showWhen event so that root will publish new form values
+	 */
+	dispatchShowWhenExeEvent() {
+		const showWhen = new CustomEvent("show-when-exe", {
+			detail: true,
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(showWhen);
 	}
 }

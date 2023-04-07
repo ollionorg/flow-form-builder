@@ -230,6 +230,7 @@ export class FFormObject extends FRoot {
 									divider.dataset.hidden = "false";
 								}
 							}
+							this.dispatchShowWhenExeEvent();
 						}
 					});
 					this.dispatchShowWhenEvent();
@@ -254,6 +255,18 @@ export class FFormObject extends FRoot {
 	 */
 	dispatchShowWhenEvent() {
 		const showWhen = new CustomEvent("show-when", {
+			detail: true,
+			bubbles: true,
+			composed: true
+		});
+		this.dispatchEvent(showWhen);
+	}
+
+	/**
+	 * dispatch showWhen event so that root will publish new form values
+	 */
+	dispatchShowWhenExeEvent() {
+		const showWhen = new CustomEvent("show-when-exe", {
 			detail: true,
 			bubbles: true,
 			composed: true

@@ -93,7 +93,7 @@ export async function validateField(
 	}
 
 	defaultValidations(field.type, rulesToValidate);
-	if (element && rulesToValidate.length > 0) {
+	if (element && rulesToValidate.length > 0 && element.getAttribute("data-hidden") !== "true") {
 		const { result, message, rule, name } = validate(
 			(element.value as string) ?? "",
 			rulesToValidate as FormBuilderValidationRules,
