@@ -115,6 +115,7 @@ export class FFormBuilder extends FRoot {
 				@show-when-exe=${this.onShowWhenExecution}
 				?separator=${this.separator}
 				gap=${this.gap}
+				@keyup=${this.handleKeyUp}
 			>
 				${this.label
 					? html`<f-div gap="x-small" direction="column" width="fill-container">
@@ -156,6 +157,13 @@ export class FFormBuilder extends FRoot {
 	 */
 	checkSubmit(event: MouseEvent) {
 		if ((event.target as HTMLElement).getAttribute("type") === "submit") {
+			this.submit();
+		}
+	}
+
+	handleKeyUp(event: KeyboardEvent) {
+		console.log(event);
+		if (event.code === "Enter" || event.key === "Enter") {
 			this.submit();
 		}
 	}

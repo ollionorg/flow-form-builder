@@ -1,7 +1,8 @@
 import { FFormArray } from "../components/f-form-array/f-form-array";
 import { FFormObject } from "../components/f-form-object/f-form-object";
 import { FFormBuilder } from "../components/f-form-builder/f-form-builder";
-import { html, LitElement, nothing } from "lit";
+import { LitElement, nothing, html } from "lit";
+
 import {
 	FormBuilderButtonField,
 	FormBuilderField,
@@ -65,15 +66,7 @@ export function getSubTitle(
 		`;
 	} else if (subTitle && typeof subTitle === "object") {
 		return html`
-			<f-div slot="subtitle" clickable>
-				<f-text
-					align="right"
-					data-qa-subtitle-for=${field.qaId || field.id}
-					state="primary"
-					@click=${subTitle.onClick}
-					>${subTitle.text}</f-text
-				>
-			</f-div>
+			<f-div data-qa-subtitle-for=${field.qaId || field.id} slot="subtitle">${subTitle}</f-div>
 		`;
 	}
 
@@ -105,8 +98,8 @@ export function getSlots(
 		: ""}
 	${field.helperText
 		? html`<f-div slot="help" data-qa-help-for=${field.qaId || field.id}
-				>${unsafeHTML(field.helperText)}</f-div
-		  >`
+				>${typeof field.helperText === "object" ? field.helperText : unsafeHTML(field.helperText)}
+		  </f-div>`
 		: ``}
 	${field.label?.iconTooltip
 		? html`

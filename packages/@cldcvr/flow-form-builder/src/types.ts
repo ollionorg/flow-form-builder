@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { LitElement, TemplateResult } from "lit";
+import { HTMLTemplateResult, LitElement, TemplateResult } from "lit";
 import { Ref } from "lit-html/directives/ref.js";
 import {
 	FButtonState,
@@ -41,7 +41,7 @@ export type FormBuilderBaseField = {
 	label?: FormBuilderLabel; // label of field
 	validationRules?: FormBuilderValidationRules; // validation rules to validate field
 	disabled?: boolean;
-	helperText?: string;
+	helperText?: string | HTMLTemplateResult;
 	showWhen?: FormBuilderShowCondition;
 } & FormBuilderFieldEvents;
 
@@ -96,6 +96,8 @@ export type FormBuilderTextInputField = FormBuilderBaseField & {
 	loading?: boolean;
 	readonly?: boolean;
 	clear?: boolean;
+	autofocus?: boolean;
+	autocomplete?: boolean;
 	suffixWhen?: FormBuilderSuffixCondition;
 };
 
@@ -217,7 +219,7 @@ export type FormBuilderIconButtonField = Omit<FormBuilderBaseField, "state"> & {
 
 export type CheckboxOption = {
 	id: string;
-	title?: string;
+	title?: string | HTMLTemplateResult;
 	description?: string;
 	iconTooltip?: string;
 	subTitle?: string;
@@ -248,10 +250,10 @@ export type FormBuilderShowCondition<T = FormBuilderValues> = (value: T) => bool
 export type FormBuilderSuffixCondition = (value: string) => boolean;
 
 export type FormBuilderLabel = {
-	title: string; // title of field/group/form
+	title: string | HTMLTemplateResult; // title of field/group/form
 	description?: string; // more info about title (displayed at bottom of label)
 	iconTooltip?: string; //icon to display besides title
-	subTitle?: string | { text: string; onClick: (event: PointerEvent) => void };
+	subTitle?: string | HTMLTemplateResult;
 };
 
 export type FormBuilderValidationRuleTriggers =

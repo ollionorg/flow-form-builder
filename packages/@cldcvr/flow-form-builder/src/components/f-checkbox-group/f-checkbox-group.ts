@@ -5,6 +5,7 @@ import { CheckboxOption, CheckboxOptions } from "../../types";
 import eleStyle from "./f-checkbox-group.scss";
 import { FRoot, FDiv, FText } from "@cldcvr/flow-core";
 import { isEqual } from "lodash-es";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 export type FCheckboxGroupValue = string[];
 export const checkboxGroupStyles = eleStyle;
 
@@ -115,10 +116,15 @@ export class FCheckboxGroup extends FRoot {
 								.state=${this.state}
 							>
 								<f-div slot="label" padding="none" gap="none">
-									<f-text weight="regular" data-qa-label-for=${item.title ?? item.id} size="small"
-										>${item.title ?? item.id}</f-text
-									></f-div
-								>
+									${typeof item.title === "object"
+										? item.title
+										: html`<f-text
+												weight="regular"
+												data-qa-label-for=${item.title ?? item.id}
+												size="small"
+												>${unsafeHTML(item.title ?? item.id)}</f-text
+										  >`}
+								</f-div>
 								${item?.description
 									? html` <f-div
 											slot="description"

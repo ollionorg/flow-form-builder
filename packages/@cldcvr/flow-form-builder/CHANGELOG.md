@@ -4,6 +4,13 @@
 
 # Change Log
 
+## [1.5.11] - 2023-04-10
+
+### Improvements
+- We can now pass html\`\` markup with event binding in `label.title`, `label.subTitle` and `helperText`.
+- `autofocus`, `autocomplete` support added to text fields.
+- `submit` on enter feature.
+- `html` function rexported for consumer.
 ## [1.5.10] - 2023-04-07
 
 ### Improvements

@@ -5,6 +5,7 @@ import { RadioOption, RadioOptions } from "../../types";
 import eleStyle from "./f-radio-group.scss";
 import { FDiv, FRoot, FText } from "@cldcvr/flow-core";
 import { isEqual } from "lodash-es";
+import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
 export const radioGroupStyles = eleStyle;
 /**
@@ -97,11 +98,16 @@ export class FRadioGroup extends FRoot {
 								@input=${() => this.handleChange(item)}
 								.state=${this.state}
 							>
-								<f-div slot="label" padding="none" gap="none"
-									><f-text weight="regular" data-qa-label-for=${item.title ?? item.id} size="small"
-										>${item.title ?? item.id}</f-text
-									></f-div
-								>
+								<f-div slot="label" padding="none" gap="none">
+									${typeof item.title === "object"
+										? item.title
+										: html`<f-text
+												weight="regular"
+												data-qa-label-for=${item.title ?? item.id}
+												size="small"
+												>${unsafeHTML(item.title ?? item.id)}</f-text
+										  >`}
+								</f-div>
 								${item.description
 									? html` <f-div
 											slot="description"

@@ -1,4 +1,7 @@
 import { FormBuilderField } from "@cldcvr/flow-form-builder/src/types";
+import { html } from "lit";
+const test = () => alert("test called");
+const lucky = () => alert("Lucky function called");
 
 const field: FormBuilderField = {
 	type: "object",
@@ -19,12 +22,9 @@ const field: FormBuilderField = {
 				name: {
 					label: {
 						title: "Org name",
-						subTitle: {
-							text: "I'm Feeling Lucky",
-							onClick: () => {
-								alert("Ding dong!");
-							}
-						}
+						subTitle: html`<f-text size="small">
+							<a href="#" @click=${lucky}>I'm Feeling Lucky</a>
+						</f-text>`
 					},
 					type: "text",
 					validationRules: [
@@ -32,7 +32,9 @@ const field: FormBuilderField = {
 							name: "required",
 							message: "{{name}} field is compulsary"
 						}
-					]
+					],
+					helperText: "Test",
+					autofocus: true
 				},
 				logo: {
 					label: { title: "Logo" },
@@ -57,7 +59,10 @@ const field: FormBuilderField = {
 				{
 					name: "required"
 				}
-			]
+			],
+			helperText: html`<f-text size="small" state="secondary"
+				>Testing&nbsp;<a href="#" @click=${test}> link</a>&nbsp;inside text.</f-text
+			>`
 		},
 		mySeparator: {
 			type: "separator",
@@ -149,14 +154,26 @@ const field: FormBuilderField = {
 			qaId: "radioQA",
 			type: "radio",
 			label: {
-				title: "Radios",
+				title: html`<f-text state="warning" weight="bold">Radios</f-text>`,
 				subTitle: "Optional"
 			},
-			// helperText: "This field is required",
+			// helperText: "This field is required",#008272
 			options: [
-				{ id: "or", title: "Orange", iconTooltip: "hello", subTitle: "Fruit" },
+				{
+					id: "or",
+					title: html` <f-div gap="small">
+						<f-text size="medium">Terraform Variable</f-text>
+						<f-tag size="small" label="TF" state="custom, #924AEE"> </f-tag
+					></f-div>`,
+					iconTooltip: "hello",
+					subTitle: "Fruit"
+				},
 				{
 					id: "banannaId",
+					title: html`<f-div gap="small"
+						><f-text size="medium">Environment Variable</f-text>
+						<f-tag size="small" label="Env" state="custom, #008272"></f-tag
+					></f-div>`,
 					iconTooltip: "hello",
 					description: "Check if you like Banana"
 				}
@@ -218,12 +235,7 @@ const field: FormBuilderField = {
 					validationRules: [{ name: "required" }],
 					label: {
 						title: "Username",
-						subTitle: {
-							text: "Forgot username?",
-							onClick: event => {
-								console.log("subtitle is clicked", event);
-							}
-						}
+						subTitle: html`<f-checkbox><f-text slot="label">Mask this</f-text></f-checkbox>`
 					}
 				},
 				email: {

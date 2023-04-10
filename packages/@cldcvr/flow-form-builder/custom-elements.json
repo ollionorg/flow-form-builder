@@ -62,6 +62,14 @@
             "name": "*",
             "package": "\"./components/f-field-separator/f-field-separator\""
           }
+        },
+        {
+          "kind": "js",
+          "name": "html",
+          "declaration": {
+            "name": "html",
+            "module": "\"lit\""
+          }
         }
       ]
     },
@@ -1036,6 +1044,18 @@
                 }
               ],
               "description": "Check if submit is triggerred by external element"
+            },
+            {
+              "kind": "method",
+              "name": "handleKeyUp",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
             },
             {
               "kind": "method",

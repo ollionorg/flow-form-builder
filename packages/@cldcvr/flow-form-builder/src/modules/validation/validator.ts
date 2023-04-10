@@ -14,6 +14,7 @@ import rules from "./rules";
 import defaultMessages from "./default-validation-messages";
 import { FButton, FIconButton } from "@cldcvr/flow-core";
 import defaultValidations from "./default-validations";
+import { render } from "lit-html";
 
 export default function validate(
 	value: string,
@@ -94,10 +95,14 @@ export async function validateField(
 
 	defaultValidations(field.type, rulesToValidate);
 	if (element && rulesToValidate.length > 0 && element.getAttribute("data-hidden") !== "true") {
+		let fieldName = element.getAttribute("name") ?? "This";
+		if (typeof (field.label as FormBuilderLabel)?.title === "string") {
+			fieldName = (field.label as FormBuilderLabel)?.title as string;
+		}
 		const { result, message, rule, name } = validate(
 			(element.value as string) ?? "",
 			rulesToValidate as FormBuilderValidationRules,
-			(field.label as FormBuilderLabel)?.title ?? element.getAttribute("name") ?? "This"
+			fieldName
 		);
 
 		if (!result && message && element.offsetHeight > 0) {
@@ -108,7 +113,14 @@ export async function validateField(
 		} else {
 			const helpSlot = element.querySelector("[slot='help']");
 			if (field.helperText) {
-				updateMessage(element, field.helperText, field, "data-qa-help-for");
+				if (typeof field.helperText === "string") {
+					updateMessage(element, field.helperText, field, "data-qa-help-for");
+				} else if (typeof field.helperText === "object") {
+					updateMessage(element, "", field, "data-qa-help-for");
+					const helpSlotToUpdate = element.querySelector<HTMLElement>("[slot='help']");
+
+					if (helpSlotToUpdate) render(field.helperText, helpSlotToUpdate);
+				}
 			} else if (helpSlot) {
 				helpSlot.remove();
 			}
@@ -134,7 +146,7 @@ function updateMessage(
 	field: FormBuilderField,
 	qaAttribute: string
 ) {
-	const helpSlot = element.querySelector("[slot='help']");
+	const helpSlot = element.querySelector<HTMLSlotElement>("[slot='help']");
 	if (helpSlot) {
 		helpSlot.remove();
 		element.insertAdjacentHTML(
