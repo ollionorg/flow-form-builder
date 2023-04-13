@@ -39,7 +39,7 @@ Head over to [Flow form builder Storybook](https://flow.cldcvr.com/form-builder/
 
 # Getting started
 
-Flow form builder is built on [Flow](https://flow.cldcvr.com/), an open source design framework. To run lineage, please make sure that you have [Flow core](https://github.com/cldcvr/flow-core) as part of your project.
+Flow form builder is built on [Flow](https://flow.cldcvr.com/), an open source design framework. To run form builder, please make sure that you have [Flow core](https://github.com/cldcvr/flow-core) as part of your project.
 
 <!-- During installation if you run into any issues, head over to our [known issues + solutions document](https://github.com/cldcvr/flow-form-builder/blob/main/KNOWN_SOLUTIONS.md) to see if a solution already exists. -->
 
@@ -51,7 +51,7 @@ Flow form builder is built on [Flow](https://flow.cldcvr.com/), an open source d
 
 ## Installation
 
-### 1️⃣ Install flow form builder dependency
+#### 1️⃣ Install flow form builder dependency
 ```
 yarn add @cldcvr/flow-form-builder
 ```
@@ -59,7 +59,7 @@ yarn add @cldcvr/flow-form-builder
 
 <br>
 
-### 2️⃣ Import styles/CSS 
+#### 2️⃣ Import styles/CSS 
 For **Vue JS:** 
 Paste the below snippet after the closing `<template>` tag in your `App.vue` file
 ```html
@@ -87,7 +87,7 @@ import "@cldcvr/flow-form-builder/dist/style.css";
 
 <br>
 
-### 3️⃣ Import flow-form-builder into your project
+#### 3️⃣ Import flow-form-builder into your project
 
 Paste the below snippet in your project and add your application startup/runtime code to it. 
 
@@ -123,14 +123,14 @@ Paste the below snippet in your project, for `src/index.tsx` or `index.jsx`
 
 <br>
 
-### 4️⃣ For a typescript enabled project (optional)
+#### 4️⃣ For a typescript enabled project (optional)
 
 **Note:** After adding, re-start your application. Make sure you are using version >4.5
 
 **For Vue 3:**
 Copy paste below import types in your `main.ts` file.
 ```Javascript
-import "@cldcvr/flow-lineage/dist/types/vue3";
+import "@cldcvr/flow-form-builder/dist/types/vue3";
 ```
 <details>
 <summary>For Vue 2</summary>
@@ -138,7 +138,7 @@ import "@cldcvr/flow-lineage/dist/types/vue3";
 Copy paste below import types in your `main.ts` file.
 
 ```Javascript
-import "@cldcvr/flow-lineage/dist/types/vue2";
+import "@cldcvr/flow-form-builder/dist/types/vue2";
 ```
 </details>
 
@@ -147,7 +147,7 @@ import "@cldcvr/flow-lineage/dist/types/vue2";
 
 **React**: Include react type in `tsconfig.json` file like below.
 ```json
-"include": ["src", "./node_modules/@cldcvr/flow-lineage/dist/types/react.ts"]
+"include": ["src", "./node_modules/@cldcvr/flow-form-builder/dist/types/react.ts"]
 ```
 </details>
 <br>
@@ -158,47 +158,204 @@ We have created a sample form along with it's schema to get you going, simply co
 ## Template
 ```html
 <template>
-  @vikas is this required?
+  <f-div padding="large" height="100%" overflow="scroll">
+    <f-form-builder
+      ref="form"
+      :field.prop="field"
+      :values.prop="values"
+      @submit="handleSubmit"
+      @state-change="handleStateChange"
+      @input="handleInput"
+    >
+      <f-div width="200px">
+        <f-button
+          :disabled="state?.isValid ? false : true"
+          label="Submit"
+          type="submit"
+        ></f-button>
+      </f-div>
+    </f-form-builder>
+  </f-div>
 </template>
 ```
 
 ## Schema
 ```Javascript
-	{
-		type:"object",
-		direction:"vertical",
-		fields:{
-			firstname:{
-				type:"text"
-			},
-			lastname:{
-				type:"text"
-			},
-			hobbies:{
-				type:"array",
-				field:{
-					type:"text"
-				}
-			},
-			addresses:{
-				type:"array",
-				field:{
-					type:"object",
-					fields:{
-						houseno:{
-							type:"text"
-						},
-						street:{
-							type:"text"
-						},
-						city:{
-							type:"text"
-						}
-					}
-				}
-			},
-		}
-	}
+<script lang="ts">
+import {
+  FormBuilderField,
+  FormBuilderState,
+  FormBuilderValues,
+} from "@cldcvr/flow-form-builder";
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  name: "FlowFormBuilder",
+  data(): {
+    field: FormBuilderField;
+    state: FormBuilderState | null;
+    values: FormBuilderValues | undefined;
+  } {
+    return {
+      field: {
+        type: "object",
+        direction: "vertical",
+        fieldSeparator: true,
+        fields: {
+          selectBox: {
+            label: {
+              title: "Multi-select Box",
+            },
+            selection: "multiple",
+            options: ["option 1", "option 2", "option 3"],
+            type: "select",
+            placeholder: "This is a placeholder",
+            iconLeft: "i-app",
+            disabled: false,
+            clear: true,
+            validationRules: [
+              {
+                name: "required",
+              },
+            ],
+          },
+          textField: {
+            label: {
+              title: "Text Field",
+            },
+            type: "text",
+            helperText: "This field is a required field",
+            validationRules: [
+              {
+                name: "required",
+              },
+            ],
+          },
+          switchButton: {
+            type: "switchButton",
+            validationRules: [
+              {
+                name: "required",
+              },
+            ],
+          },
+          radio: {
+            type: "radio",
+            label: {
+              title: "Radios",
+            },
+            // helperText: "This field is required",
+            options: [
+              { id: "1", title: "Orange", iconTooltip: "hello" },
+              {
+                id: "2",
+                title: "Banana",
+                iconTooltip: "hello",
+              },
+            ],
+            validationRules: [
+              {
+                name: "required",
+              },
+            ],
+          },
+
+          checkboxField: {
+            type: "checkbox",
+            direction: "horizontal",
+            label: {
+              title: "Check/Uncheck options",
+              description: "this my checkbox",
+            },
+            // helperText: "This field is required",
+            options: [
+              { id: "1", title: "Orange", iconTooltip: "hello" },
+              {
+                id: "2",
+                title: "Banana",
+                iconTooltip: "hello",
+              },
+            ],
+            validationRules: [
+              {
+                name: "required",
+              },
+            ],
+          },
+          textAreaField: {
+            type: "textarea",
+            label: {
+              title: "Textarea Field",
+            },
+            placeholder: "This is a placeholder",
+            maxLength: 100,
+            disabled: false,
+            readonly: false,
+            clear: true,
+            validationRules: [
+              {
+                name: "required",
+              },
+            ],
+          },
+          nestedObject: {
+            type: "object",
+            label: {
+              title: "Nested Object",
+            },
+            fields: {
+              username: {
+                label: {
+                  title: "Username",
+                },
+                type: "text",
+                validationRules: [{ name: "required" }],
+              },
+              emoji: {
+                label: {
+                  title: "Emoji",
+                },
+                type: "emoji",
+                validationRules: [{ name: "required" }],
+              },
+            },
+          },
+          nestedArray: {
+            type: "array",
+            label: {
+              title: "Nested array",
+              description: "Click on + button to add more",
+            },
+            field: {
+              type: "text",
+              validationRules: [
+                {
+                  name: "required",
+                },
+              ],
+            },
+          },
+        },
+      },
+      values: { textField: "vikas" },
+      state: null,
+    };
+  },
+  methods: {
+    handleSubmit(event: CustomEvent) {
+      console.log("Submit", event);
+    },
+    handleStateChange(event: CustomEvent) {
+      this.state = event.detail as FormBuilderState;
+      console.log(this.state);
+    },
+    handleInput(event: CustomEvent) {
+      // console.log(event.detail);
+      this.values = event.detail as FormBuilderValues;
+    },
+  },
+});
+</script>
 ```
 </p>
 
