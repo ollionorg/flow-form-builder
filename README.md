@@ -51,7 +51,7 @@ Flow form builder is built on [Flow](https://flow.cldcvr.com/), an open source d
 
 ## Installation
 
-#### 1️⃣ Install flow form builder dependency
+### 1️⃣ Install flow form builder dependency
 ```
 yarn add @cldcvr/flow-form-builder
 ```
@@ -59,7 +59,7 @@ yarn add @cldcvr/flow-form-builder
 
 <br>
 
-#### 2️⃣ Import styles/CSS 
+### 2️⃣ Import styles/CSS 
 For **Vue JS:** 
 Paste the below snippet after the closing `<template>` tag in your `App.vue` file
 ```html
@@ -87,7 +87,7 @@ import "@cldcvr/flow-form-builder/dist/style.css";
 
 <br>
 
-#### 3️⃣ Import flow-form-builder into your project
+### 3️⃣ Import flow-form-builder into your project
 
 Paste the below snippet in your project and add your application startup/runtime code to it. 
 
@@ -123,7 +123,7 @@ Paste the below snippet in your project, for `src/index.tsx` or `index.jsx`
 
 <br>
 
-#### 4️⃣ For a typescript enabled project (optional)
+### 4️⃣ For a typescript enabled project (optional)
 
 **Note:** After adding, re-start your application. Make sure you are using version >4.5
 
@@ -371,79 +371,3 @@ Once it's running, you will see a rendered form like the image below.
 # Properties
 
 Head over to [Flow form builder Storybook](https://flow.cldcvr.com/form-builder/index.html?path=/story/components-f-form-builder--playground) for all properties and playground.
-
-
-<br><br>
-
-# OLD -------
-
-### Features ( compared to our flow v1 formbuilder + all other open source formbuilder.)
-- Full typescript support. (Typescript reduces all compile time errors)
-- It accepts `field` and `values` in separate props for better DX.
-- `field` and `values` supports nested data that means any type of values we can build through formbuilder.
-  - For example i want to generate `values` like below
-    ```Javascript
-		{
-			firstname:"Tony",
-			lastname:"Stark",
-			hobbies:["cricket","football"],
-			addresses:[
-				{
-					houseno:"101",
-					street:"MGRoad",
-					city:"Pune"
-				},
-				{
-					houseno:"401",
-					street:"Prabhat Road",
-					city:"Thane"
-				}
-			]
-		}
-	```
-
-	Then my field will look like this
-	```Javascript
-	{
-		type:"object",
-		direction:"vertical",
-		fields:{
-			firstname:{
-				type:"text"
-			},
-			lastname:{
-				type:"text"
-			},
-			hobbies:{
-				type:"array",
-				field:{
-					type:"text"
-				}
-			},
-			addresses:{
-				type:"array",
-				field:{
-					type:"object",
-					fields:{
-						houseno:{
-							type:"text"
-						},
-						street:{
-							type:"text"
-						},
-						city:{
-							type:"text"
-						}
-					}
-				}
-			},
-		}
-	}
-	```
-- Baked with built in validaiton module, which supports `custom` validaiton for advanced usecases.
-- With the help of `array` field, we can build dynamic add/remove feature.
-- It saves 50 - 60% of devs time for building any form related use cases.
-
-### Features inherited from `flow-core`
-- Framework agnostic.
-- Themeable (out-of-the-boxdark and light supported) 
