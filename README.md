@@ -362,8 +362,7 @@ export default defineComponent({
 
 Once it's running, you will see a rendered form like the image below.
 
-![image (10)](https://user-images.githubusercontent.com/2121451/211773535-3fbc3b2b-b962-4cb3-9713-d50906b88243.png)
-
+![Screenshot 2023-04-13 at 3 59 54 PM](https://user-images.githubusercontent.com/2121451/231734039-b63dde6a-e427-4300-8ebb-6ac7e6a43f10.png)
 
 </details>
 
