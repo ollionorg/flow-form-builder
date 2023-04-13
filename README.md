@@ -3,30 +3,30 @@ The Flow form builder is built on the Flow design framework ([website](https://f
 
 ## Benefits / Features
 
-#### ⚡ Speed + Flexibility
+#### Speed + Flexibility ⚡
 Quickly create and customize your form through the form builder schema. Built with developers in mind, the schema is simple and easy to use.
 
-#### 👩‍💻 TypeScript Support
+#### TypeScript Support 👩‍💻
 Out of the box TS support.
 
-#### 🚓 Built-in + Custom Validation
+#### Built-in + Custom Validation 🚓
 Validation is natively built and integrated throught the form-builder schema. You can easily reference built-in validations or quickly write your own custom or advanced validation.
 
-#### 🚀 Dynamic Data
+#### Dynamic Data 🚀
 Built with dyanmic complex usecases in mind, you can easily manupilate the form structure + data through built in events.
 
-#### 💤 Silent Validation
+#### Silent Validation 💤
 This form-builder automatically emits a state-change event whenever the internal state is modified, this gives you access to  the validation state of the form builder silently (i.e. Without displaying validation messages). 
 
 This helps in custom or advanced scenarios like calling external APIs, modifying the form layout etc, based on user interactions
 
-#### 🎨 Custom designs
+#### Custom designs 🎨
 You can pass custom markup to render custom designs for titles, actions, help text, content, etc
 
-#### 🍭 Flow components and themes
+#### Flow components and themes 🍭
 Built on [flow-core](https://github.com/cldcvr/flow-core) gives you accesss to all themes and components like emoji-picker, datetime-picker , suggestions ,file-upload,multi-select etc.
 
-#### 🛠️ Structural API co-relation
+#### Structural API co-relation 🛠️
 Structural correlation involves defining the data structure that will be transmitted between the frontend and backend, including the format and type of data. To achieve this, we leverage objects and arrays to support any type api payload format. This reduces the complex task of transpiling form builder output to the backend API payload format.
 
 
