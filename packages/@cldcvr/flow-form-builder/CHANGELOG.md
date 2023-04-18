@@ -4,6 +4,13 @@
 
 # Change Log
 
+## [1.5.12] - 2023-04-18
+
+### Improvements
+- types updated
+- console.log cleanup
+- schema doc md file added 
+
 ## [1.5.11] - 2023-04-10
 
 ### Improvements

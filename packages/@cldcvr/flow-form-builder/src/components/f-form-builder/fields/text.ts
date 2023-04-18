@@ -39,7 +39,7 @@ export default function (
 			@keyup=${ifDefined(field.onKeyUp)}
 			@mouseover=${ifDefined(field.onMouseOver)}
 			autofocus=${ifDefined(field.autofocus)}
-			autocomplete=${field.autocomplete ? "on" : "off"}
+			autocomplete=${ifDefined(field.autocomplete)}
 		>
 			${getSlots(name, field)}
 		</f-input>

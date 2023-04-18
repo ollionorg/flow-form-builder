@@ -87,7 +87,6 @@ export type FormBuilderObjectField = FormBuilderBaseField & {
 export type FormBuilderTextInputField = FormBuilderBaseField & {
 	type: "text" | "email" | "password" | "url" | "tel" | "number";
 	placeholder?: string;
-	autoComplete?: boolean; // to disabled browser's auto-complete behavior
 	iconLeft?: string;
 	iconRight?: string;
 	prefix?: string;
@@ -97,7 +96,7 @@ export type FormBuilderTextInputField = FormBuilderBaseField & {
 	readonly?: boolean;
 	clear?: boolean;
 	autofocus?: boolean;
-	autocomplete?: boolean;
+	autocomplete?: string;
 	suffixWhen?: FormBuilderSuffixCondition;
 };
 
@@ -116,7 +115,6 @@ export type FormBuilderEmojiField = FormBuilderBaseField & {
 export type FormBuilderSuggestField = FormBuilderBaseField & {
 	type: "suggest";
 	placeholder?: string;
-	autoComplete?: boolean; // to disabled browser's auto-complete behavior
 	iconLeft?: string;
 	iconRight?: string;
 	prefix?: string;

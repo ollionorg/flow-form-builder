@@ -24,7 +24,6 @@ snapshots["f-form-builder should render object field with all default properties
     label="{&quot;title&quot;:&quot;Object field form&quot;,&quot;description&quot;:&quot;showing object field&quot;}"
   >
     <f-input
-      autocomplete="off"
       category="fill"
       clear=""
       data-qa-element-id=""
@@ -55,7 +54,6 @@ snapshots["f-form-builder should render object field with all default properties
       </f-div>
     </f-input>
     <f-input
-      autocomplete="off"
       category="fill"
       clear=""
       data-qa-element-id=""
@@ -113,7 +111,6 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
     label="{&quot;title&quot;:&quot;Object field form&quot;,&quot;description&quot;:&quot;showing object field&quot;}"
   >
     <f-input
-      autocomplete="off"
       category="fill"
       clear=""
       data-qa-element-id=""
@@ -144,7 +141,6 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
       </f-div>
     </f-input>
     <f-input
-      autocomplete="off"
       category="fill"
       clear=""
       data-qa-element-id=""
@@ -223,7 +219,6 @@ snapshots["f-form-builder should display array fields"] =
       width="fill-container"
     >
       <f-input
-        autocomplete="off"
         category="fill"
         clear=""
         data-qa-element-id=""
@@ -261,7 +256,6 @@ snapshots["f-form-builder should display array fields"] =
       width="fill-container"
     >
       <f-input
-        autocomplete="off"
         category="fill"
         clear=""
         data-qa-element-id=""
@@ -335,7 +329,6 @@ snapshots["f-form-builder should add/delete field in array"] =
       width="fill-container"
     >
       <f-input
-        autocomplete="off"
         category="fill"
         clear=""
         data-qa-element-id=""
@@ -373,7 +366,6 @@ snapshots["f-form-builder should add/delete field in array"] =
       width="fill-container"
     >
       <f-input
-        autocomplete="off"
         category="fill"
         clear=""
         data-qa-element-id=""
@@ -467,7 +459,6 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     >
     </f-divider>
     <f-input
-      autocomplete="off"
       category="fill"
       clear=""
       data-qa-element-id=""
@@ -524,7 +515,6 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     >
     </f-divider>
     <f-input
-      autocomplete="off"
       category="fill"
       clear=""
       data-hidden="false"

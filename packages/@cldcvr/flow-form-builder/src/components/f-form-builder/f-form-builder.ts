@@ -162,7 +162,6 @@ export class FFormBuilder extends FRoot {
 	}
 
 	handleKeyUp(event: KeyboardEvent) {
-		console.log(event);
 		if (event.code === "Enter" || event.key === "Enter") {
 			this.submit();
 		}
