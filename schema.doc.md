@@ -131,7 +131,7 @@
 		<td>undefined</td>
 	</tr>
 	<tr>
-		<td>validationRules</td>
+		<td><a href="#validationrule">validationRules</a></td>
 		<td>object[]</td>
 		<td></td>
 		<td></td>
@@ -1254,6 +1254,106 @@
 			<td>"large" | "medium" | "small" | "x-small"</td>
 			<td>size of button</td>
 			<td>"medium"</td>
+		</tr>
+	</tbody>
+</table>
+
+<br/>
+
+<hr/>
+
+### validationrule
+
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Type</th>
+			<th>Options</th>
+			<th>Description</th>
+			<th>Default</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>name</td>
+			<td>string</td>
+			<td>"required" | "email" | "between" | "max" | "min" | "max-value" | "min-value" | "regex" | "custom"</td>
+			<td>name of validation to apply on field</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>when</td>
+			<td>string[]</td>
+			<td>"blur" | "keyup" | "click" | "keypress" | "focus" | "input" | "change"</td>
+			<td>event names to apply validation on. (If nothing is specifies by default validaiton applies on input event)</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>message</td>
+			<td>string</td>
+			<td></td>
+			<td>validaiotn message to override default validation message</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>params</td>
+			<td>object</td>
+			<td></td>
+			<td><a href="#params">extra params</a> required for validation rule</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>validate</td>
+			<td>function</td>
+			<td>(value: TValue, params?: TParams) => boolean</td>
+			<td>Specify only when "custom" validaiton rule used</td>
+			<td></td>
+		</tr>
+	</tbody>
+</table>
+
+<br/>
+
+<hr/>
+
+### params
+
+<table>
+	<thead>
+		<tr>
+			<th>Validation rule name</th>
+			<th>params</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>between</td>
+			<td>{min:number;max:number;}</td>
+		</tr>
+		<tr>
+			<td>max</td>
+			<td>{length:number;}</td>
+		</tr>
+		<tr>
+			<td>min</td>
+			<td>{length:number;}</td>
+		</tr>
+		<tr>
+			<td>max-value</td>
+			<td>{max:number;}</td>
+		</tr>
+		<tr>
+			<td>min-value</td>
+			<td>{min:number;}</td>
+		</tr>
+		<tr>
+			<td>regex</td>
+			<td>{regex:string;}</td>
+		</tr>
+		<tr>
+			<td>regex</td>
+			<td>{regex:string;}</td>
 		</tr>
 	</tbody>
 </table>
