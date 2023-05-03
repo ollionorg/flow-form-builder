@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.5.13] - 2023-05-03
+
+### Bug fixes
+- `required` validation rule message fixed.
 ## [1.5.12] - 2023-04-18
 
 ### Improvements

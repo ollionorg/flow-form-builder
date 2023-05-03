@@ -1327,15 +1327,16 @@
     rxjs "^7.5.7"
     validate-color "^2.2.1"
 
-"@cldcvr/flow-core@1.8.4":
-  version "1.8.4"
-  resolved "https://registry.yarnpkg.com/@cldcvr/flow-core/-/flow-core-1.8.4.tgz#c60f9865d904a1d455974643bb6c542d38ab5fe1"
-  integrity sha512-OzhTP18SYaAyXNA7eoLDpgLUiH8Rlu6BD9FbBjYFWaxgoBSCuufo5xeR0jsLnSjw43xASoZ3fmkRlkZmwBKO8w==
+"@cldcvr/flow-core@1.13.3":
+  version "1.13.3"
+  resolved "https://registry.yarnpkg.com/@cldcvr/flow-core/-/flow-core-1.13.3.tgz#9e1bc902673f9eb2d95ea0ea6abf87fa54dfafb0"
+  integrity sha512-FgpfTA1VZcNuoav+Fk79IteCB2WKEAFwVQe5zx7YclfDmopYitcpdzGPRWREZJH3is58p+pjKcn/TXJi3zPt4A==
   dependencies:
     "@emoji-mart/data" "^1.1.2"
     "@floating-ui/dom" "^1.0.2"
     axios "^0.27.2"
     emoji-mart "^5.5.2"
+    flatpickr "^4.6.13"
     lit "^2.2.4"
     rxjs "^7.5.7"
     validate-color "^2.2.1"
@@ -6503,6 +6504,11 @@ flat-cache@^3.0.4:
   dependencies:
     flatted "^3.1.0"
     rimraf "^3.0.2"
+
+flatpickr@^4.6.13:
+  version "4.6.13"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.13.tgz#8a029548187fd6e0d670908471e43abe9ad18d94"
+  integrity sha512-97PMG/aywoYpB4IvbvUJi0RQi8vearvU0oov1WW3k0WZPBMrTQVqekSX5CjSG/M4Q3i6A/0FKXC7RyAoAUUSPw==
 
 flatted@^3.1.0:
   version "3.2.7"

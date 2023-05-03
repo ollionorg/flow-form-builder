@@ -108,7 +108,7 @@ describe("f-form-builder", () => {
 			const ev = await oneEvent(el, "state-change");
 
 			expect(ev.detail.isValid).equals(false);
-			expect(ev.detail.errors[0].message).equals("firstname is required field");
+			expect(ev.detail.errors[0].message).equals("firstname is a required field");
 		}
 	});
 	it("should display array fields", async () => {
