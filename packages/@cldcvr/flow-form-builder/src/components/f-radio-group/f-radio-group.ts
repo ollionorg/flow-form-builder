@@ -81,7 +81,7 @@ export class FRadioGroup extends FRoot {
 							height="hug-content"
 						>
 							<slot name="label"></slot>
-							<slot name="icon-toolttip"></slot>
+							<slot name="icon-tooltip"></slot>
 						</f-div>
 						<f-div width="hug-content">
 							<slot name="subtitle"></slot>

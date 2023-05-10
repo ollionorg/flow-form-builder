@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.5.14] - 2023-05-10
+
+### Bug fixes
+- `radio` field tooltip not displaying fixed.
+
 ## [1.5.13] - 2023-05-03
 
 ### Bug fixes

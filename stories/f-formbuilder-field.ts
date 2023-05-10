@@ -155,7 +155,8 @@ const field: FormBuilderField = {
 			type: "radio",
 			label: {
 				title: html`<f-text state="warning" weight="bold">Radios</f-text>`,
-				subTitle: "Optional"
+				subTitle: "Optional",
+				iconTooltip: "Test Radio tooltip"
 			},
 			// helperText: "This field is required",#008272
 			options: [
