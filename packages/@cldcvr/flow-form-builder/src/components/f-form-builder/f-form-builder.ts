@@ -179,17 +179,21 @@ export class FFormBuilder extends FRoot {
 	 * Emit submit event with data if validaiton is successful
 	 */
 	submit() {
-		this.validateForm().then(all => {
-			this.updateValidaitonState(all);
-			if (this.state.errors?.length === 0) {
-				const event = new CustomEvent("submit", {
-					detail: this.values,
-					bubbles: true,
-					composed: true
-				});
-				this.dispatchEvent(event);
-			}
-		});
+		this.validateForm()
+			.then(all => {
+				this.updateValidaitonState(all);
+				if (this.state.errors?.length === 0) {
+					const event = new CustomEvent("submit", {
+						detail: this.values,
+						bubbles: true,
+						composed: true
+					});
+					this.dispatchEvent(event);
+				}
+			})
+			.catch(error => {
+				console.error("Error validating form", error);
+			});
 	}
 
 	updateValidaitonState(all: ValidationResults) {
@@ -302,9 +306,13 @@ export class FFormBuilder extends FRoot {
 	}
 
 	onShowWhenExecution() {
-		this.validateForm(true).then(all => {
-			this.updateValidaitonState(all);
-		});
+		this.validateForm(true)
+			.then(all => {
+				this.updateValidaitonState(all);
+			})
+			.catch(error => {
+				console.error("Error validating form", error);
+			});
 	}
 	/**
 	 * Validation of whole form

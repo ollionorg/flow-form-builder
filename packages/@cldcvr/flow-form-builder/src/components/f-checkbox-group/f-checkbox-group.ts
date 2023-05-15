@@ -1,4 +1,3 @@
-// import { FRoot } from "@cldcvr/flow-core";
 import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { CheckboxOption, CheckboxOptions } from "../../types";

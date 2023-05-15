@@ -14,7 +14,8 @@ import {
 	FIconButtonType,
 	FIconButtonVariant,
 	FSelectOptions,
-	FSuggestSuggestions
+	FSuggestSuggestions,
+	FSelectOptionTemplate
 } from "@cldcvr/flow-core";
 import { BetweenParams } from "./modules/validation/rules/between";
 import { Subject } from "rxjs";
@@ -163,7 +164,7 @@ export type FormBuilderSelectField = FormBuilderBaseField & {
 	selection?: "single" | "multiple";
 	placeholder?: string;
 	options: FSelectOptions;
-	optionTemplate?: string;
+	optionTemplate?: FSelectOptionTemplate;
 	iconLeft?: string;
 	height?: number;
 	width?: string;

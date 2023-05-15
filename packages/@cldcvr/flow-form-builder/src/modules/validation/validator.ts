@@ -125,7 +125,9 @@ export async function validateField(
 				helpSlot.remove();
 			}
 
-			if (!(element instanceof FButton) && !(element instanceof FIconButton)) {
+			if (field.state) {
+				element.state = field.state as "primary" | "default" | "success" | "warning" | "danger";
+			} else if (!(element instanceof FButton) && !(element instanceof FIconButton)) {
 				element.state = "default";
 			}
 		}

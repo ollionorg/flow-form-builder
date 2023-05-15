@@ -1,3 +1,4 @@
+import { FSelectSingleOption } from "@cldcvr/flow-core";
 import { FormBuilderField } from "@cldcvr/flow-form-builder/src/types";
 import { html } from "lit";
 const test = () => alert("test called");
@@ -34,7 +35,8 @@ const field: FormBuilderField = {
 						}
 					],
 					helperText: "Test",
-					autofocus: true
+					autofocus: true,
+					state: "success"
 				},
 				logo: {
 					label: { title: "Logo" },
@@ -82,7 +84,10 @@ const field: FormBuilderField = {
 				{
 					name: "required"
 				}
-			]
+			],
+			optionTemplate: function (option: FSelectSingleOption) {
+				return html`<f-text state="warning">${option}</f-text>`;
+			}
 		},
 		textField: {
 			qaId: "sampleQAId",

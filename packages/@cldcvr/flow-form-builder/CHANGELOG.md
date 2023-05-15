@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.5.15] - 2023-05-10
+
+### Bug fixes
+- `f-select` : `optionTemplate` type fixed.
 ## [1.5.14] - 2023-05-10
 
 ### Bug fixes
