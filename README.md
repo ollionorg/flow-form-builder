@@ -3,6 +3,15 @@
 
 The Flow form builder is built on the Flow design framework ([website](https://flow.cldcvr.com/) / [github](https://github.com/cldcvr/flow-core))
 
+
+**Table of contents**
+* [Benefits / Features](#Benefits-/-Features)
+* [Demo](https://flow.cldcvr.com/form-builder/index.html?path=/story/components-f-form-builder--playground)
+* [Getting started](#Getting-started)
+* [Installation](#Installation)
+* [Sample code](#Sample-code)
+* [Properties](https://flow.cldcvr.com/form-builder/index.html?path=/story/components-f-form-builder--playground)
+
 ## Benefits / Features
 
 #### ⚡ Speed + Flexibility
@@ -154,8 +163,8 @@ import "@cldcvr/flow-form-builder/dist/types/vue2";
 </details>
 <br>
 
-# Sample code (Vue JS)
-We have created a sample form along with it's schema to get you going, simply copy paste the below language code block in your VueJS project.
+# Sample code
+We have created a sample form along with it's schema to get you going, simply copy paste the below language code block in your **VueJS** project.
 
 ## Template
 ```html
