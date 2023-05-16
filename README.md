@@ -10,7 +10,6 @@ The Flow form builder is built on the Flow design framework ([website](https://f
 * [Getting started](#Getting-started)
 * [Installation](#Installation)
 * [Sample code](#Sample-code)
-* [Properties](https://flow.cldcvr.com/form-builder/index.html?path=/story/components-f-form-builder--playground)
 * [Schema doc](https://github.com/cldcvr/flow-form-builder/blob/percy/FLOW-769/schema.doc.md)
 
 ## Benefits / Features
