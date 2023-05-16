@@ -218,6 +218,7 @@ export type FormBuilderIconButtonField = Omit<FormBuilderBaseField, "state"> & {
 
 export type CheckboxOption = {
 	id: string;
+	qaId?: string;
 	title?: string | HTMLTemplateResult;
 	description?: string;
 	iconTooltip?: string;

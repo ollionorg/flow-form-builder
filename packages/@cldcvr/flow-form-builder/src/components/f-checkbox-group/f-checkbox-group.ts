@@ -109,7 +109,7 @@ export class FCheckboxGroup extends FRoot {
 					${this.options?.map(
 						item => html`
 							<f-checkbox
-								data-qa-element-id=${this.getAttribute("data-qa-element-id")}
+								data-qa-element-id=${item.qaId ?? item.id}
 								.value=${this.isChecked(item)}
 								@input=${(event: CustomEvent) => this.handleChange(event, item)}
 								.state=${this.state}

@@ -93,7 +93,7 @@ export class FRadioGroup extends FRoot {
 					${this.options?.map(
 						item => html`
 							<f-radio
-								data-qa-element-id=${this.getAttribute("data-qa-element-id")}
+								data-qa-element-id=${item.qaId ?? item.id}
 								.value=${this.isChecked(item)}
 								@input=${() => this.handleChange(item)}
 								.state=${this.state}

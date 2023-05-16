@@ -1,4 +1,4 @@
-import { FSelectSingleOption } from "@cldcvr/flow-core";
+import { FSelectOptionObject, FSelectSingleOption } from "@cldcvr/flow-core";
 import { FormBuilderField } from "@cldcvr/flow-form-builder/src/types";
 import { html } from "lit";
 const test = () => alert("test called");
@@ -77,7 +77,7 @@ const field: FormBuilderField = {
 				description: "Here is another description"
 			},
 			selection: "single",
-			options: ["First", "Second", "Third"],
+			options: [{ title: "First" }, { title: "Second" }, { title: "Third", disabled: true }],
 			type: "select",
 			placeholder: "This is a placeholder",
 			validationRules: [
@@ -86,7 +86,8 @@ const field: FormBuilderField = {
 				}
 			],
 			optionTemplate: function (option: FSelectSingleOption) {
-				return html`<f-text state="warning">${option}</f-text>`;
+				option = option as FSelectOptionObject;
+				return html`<f-text state="warning">${option.title}</f-text>`;
 			}
 		},
 		textField: {

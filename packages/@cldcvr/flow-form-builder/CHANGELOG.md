@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.5.16] - 2023-05-16
+
+### Improvements
+- `qaId` added in checkbox and radio options
 ## [1.5.15] - 2023-05-10
 
 ### Bug fixes
