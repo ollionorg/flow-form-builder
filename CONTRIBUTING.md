@@ -4,7 +4,7 @@ Thank you for your interest in contributing! 🎉👍
 
 Flow is a framework that is made up of multiple dependencies / templates. Visit the [about.md](https://github.com/cldcvr/flow-core/blob/main/ABOUT.md) on the [flow-core repo](https://github.com/cldcvr/flow-core/) to learn more.  
 
-When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the [owners](https://github.com/cldcvr/flow-core/blob/main/CODEOWNERS) of this repository before making a change. You can expect a response from a maintainer within a week. If you haven’t heard anything by then, feel free to ping on the slack channel or write to flow@cldcvr.com.
+When contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the [owners](https://github.com/cldcvr/flow-core/blob/main/CODEOWNERS) of this repository before making a change. You can expect a response from a maintainer within a week. If you haven’t heard anything by then, write to flow@cldcvr.com.
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
@@ -17,7 +17,8 @@ The contributed files should be licensed with a recognized OpenSource license.
 You can collaborate by 
 * Reporting issues
 * Fixing issues and bug
-* [Roadmap features](#) coming soon.
+* Design and define new components
+* Flow Documentation (including this doc)
 
 ### Reporting issues
 Bugs are tracked as GitHub issues. After you've determined which repository your bug is related to, create an issue on that repository and provide the following information by filling in the template.
@@ -37,22 +38,13 @@ All issues as tracked here. Once you have resolved an issue,
 * In the PR description link to the respective figma page/file
 * Include screenshots, animated GIFs or videos of the feature, you can also send it to flow@cldcvr.com with a reference to the PR.  
 
-### Updating icons packs
+### Design and define new components
+* Guidelines coming soon
+* Roadmap coming soon
 
-#### Flow maintaince
-All icon packages that start with **"flow-"** are maintained by the flow-core design team. These icons are mainatined in Flows Figma icon file and is direclty synced to the package repo. If you would like to contribute to any flow mainatined icon pack. Write into flow@cldcvr.com 
-
-#### Community mainatined
-* Guidelines/How to coming soon
-
-### Creating new icon packs
-#### Community
-* Guidelines/How to coming soon
-
-#### Private
-* Guidelines/How to coming soon
-
-If you would like to contribute to this document and guidlines, write into flow@cldcvr.com or join this slack channel.
+### Flow Documentation
+* Guidlines coming soon
+* If you would like to contribute to this document and guidlines, write into flow@cldcvr.com
 
 
 ## Pull Request Process
