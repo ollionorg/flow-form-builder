@@ -4,10 +4,16 @@
 
 # Change Log
 
+## [1.5.18] - 2023-05-23
+
+### Bug fix
+- Passed missing `fileType` prop to `f-file-input` component
+
 ## [1.5.17] - 2023-05-18
 
 ### Improvements
 - Slack notifications integrated
+
 ## [1.5.16] - 2023-05-16
 
 ### Improvements

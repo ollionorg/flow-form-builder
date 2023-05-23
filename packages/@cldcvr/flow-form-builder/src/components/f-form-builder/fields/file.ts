@@ -19,6 +19,7 @@ export default function (
 			${ref(fieldRef)}
 			.placeholder=${field.placeholder ?? "Drag and Drop Files or Click here to upload"}
 			.value=${value}
+			file-type=${ifDefined(field.fileType)}
 			state=${ifDefined(field.state)}
 			max-size=${ifDefined(field.maxSize)}
 			.type=${field.multiple ? "multiple" : "single"}
