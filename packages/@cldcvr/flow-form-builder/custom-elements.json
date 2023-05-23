@@ -580,132 +580,6 @@
     },
     {
       "kind": "javascript-module",
-      "path": "src/components/f-field-separator/f-field-separator.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FFieldSeparator",
-          "members": [
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "string | undefined"
-              },
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "type",
-              "type": {
-                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
-              },
-              "default": "\"solid\"",
-              "attribute": "type",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FFieldSeparatorState | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "direction",
-              "type": {
-                "text": "\"vertical\" | \"horizontal\" | undefined"
-              },
-              "default": "\"vertical\"",
-              "attribute": "direction",
-              "reflects": true
-            }
-          ],
-          "attributes": [
-            {
-              "name": "label",
-              "type": {
-                "text": "string | undefined"
-              },
-              "fieldName": "label"
-            },
-            {
-              "name": "type",
-              "type": {
-                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
-              },
-              "default": "\"solid\"",
-              "fieldName": "type"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "\"large\" | \"medium\" | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "FFieldSeparatorState | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "direction",
-              "type": {
-                "text": "\"vertical\" | \"horizontal\" | undefined"
-              },
-              "default": "\"vertical\"",
-              "fieldName": "direction"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core"
-          },
-          "tagName": "f-field-separator",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FFieldSeparator",
-          "declaration": {
-            "name": "FFieldSeparator",
-            "module": "src/components/f-field-separator/f-field-separator.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-field-separator",
-          "declaration": {
-            "name": "FFieldSeparator",
-            "module": "src/components/f-field-separator/f-field-separator.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
       "path": "src/components/f-form-array/f-form-array.ts",
       "declarations": [
         {
@@ -907,6 +781,132 @@
           "declaration": {
             "name": "FFormArray",
             "module": "src/components/f-form-array/f-form-array.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "src/components/f-field-separator/f-field-separator.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FFieldSeparator",
+          "members": [
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "type",
+              "type": {
+                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
+              },
+              "default": "\"solid\"",
+              "attribute": "type",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FFieldSeparatorState | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "direction",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "attribute": "direction",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "label",
+              "type": {
+                "text": "string | undefined"
+              },
+              "fieldName": "label"
+            },
+            {
+              "name": "type",
+              "type": {
+                "text": "\"solid\" | \"dashed\" | \"dotted\" | undefined"
+              },
+              "default": "\"solid\"",
+              "fieldName": "type"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "\"large\" | \"medium\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "FFieldSeparatorState | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "direction",
+              "type": {
+                "text": "\"vertical\" | \"horizontal\" | undefined"
+              },
+              "default": "\"vertical\"",
+              "fieldName": "direction"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core"
+          },
+          "tagName": "f-field-separator",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FFieldSeparator",
+          "declaration": {
+            "name": "FFieldSeparator",
+            "module": "src/components/f-field-separator/f-field-separator.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-field-separator",
+          "declaration": {
+            "name": "FFieldSeparator",
+            "module": "src/components/f-field-separator/f-field-separator.ts"
           }
         }
       ]
