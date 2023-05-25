@@ -23,7 +23,6 @@ export default function (
 			state=${ifDefined(field.state)}
 			direction=${ifDefined(field.direction)}
 			gap=${ifDefined(field.gap)}
-			helperText=${ifDefined(field.helperText)}
 			@click=${ifDefined(field.onClick)}
 			@focus=${ifDefined(field.onFocus)}
 			@input=${ifDefined(field.onInput)}

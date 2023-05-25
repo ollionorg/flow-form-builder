@@ -164,7 +164,7 @@ const field: FormBuilderField = {
 				subTitle: "Optional",
 				iconTooltip: "Test Radio tooltip"
 			},
-			// helperText: "This field is required",#008272
+			helperText: html`<f-text size="small" state="subtle">Checking helper text</f-text>`,
 			options: [
 				{
 					id: "or",
@@ -200,7 +200,7 @@ const field: FormBuilderField = {
 				title: "Check/Uncheck options",
 				subTitle: "this my checkbox"
 			},
-			// helperText: "This field is required",
+			helperText: html`<f-text size="small" state="subtle">Checking helper text</f-text>`,
 			options: [
 				{ id: "or", title: "Orange", iconTooltip: "hello", description: "Orange has Vitamin C" },
 				{

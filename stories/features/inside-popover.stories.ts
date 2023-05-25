@@ -2,7 +2,7 @@ import { Story, Meta } from "@storybook/web-components";
 import { html } from "lit-html";
 import { FormBuilderField } from "@cldcvr/flow-form-builder/src/types";
 import { createRef, Ref, ref } from "lit/directives/ref.js";
-import { FButton } from "@cldcvr/flow-core";
+import { FButton, FSelectOptionObject } from "@cldcvr/flow-core";
 
 export default {
 	title: "Features/In PopOver",
@@ -68,13 +68,44 @@ const sampleFormBuilder: SampleFormBuilder = {
 					{ title: "Hash", data: { description: "[a-f0-9]" } },
 					{ title: "Two Digits", data: { description: "\\d+\\.\\d+" } }
 				],
-				optionTemplate: `<f-div direction="column" gap="x-small">
-					<f-div gap="small">
-						\${option.title==="Hash"?\`<f-icon source="i-crown"></f-icon>\`:''}
-						<f-text>\${option.title}</f-text>
-					</f-div>
-					<f-text state="secondary">\${option.data.description}</f-text></f-div
-				>`
+				optionTemplate: function (option) {
+					option = option as FSelectOptionObject;
+					return html`<f-div direction="column" gap="x-small">
+						<f-div gap="small">
+							${option.title === "Hash" ? html`<f-icon source="i-crown"></f-icon>` : ""}
+							<f-text>${option.title}</f-text>
+						</f-div>
+						<f-text state="secondary">${option.data?.description}</f-text></f-div
+					>`;
+				},
+				validationRules: [
+					{
+						name: "required"
+					}
+				]
+			},
+			checkbox: {
+				type: "checkbox",
+				label: { title: " " },
+				options: [
+					{
+						id: "aws-arn-checkbox-terms",
+						title: html`<f-text size="medium" data-qa-id="aws-arn-checkbox-terms"
+							>I have designated my AWS account with Code Pipes Account ID and Organization
+							ID.</f-text
+						>`
+					}
+				],
+
+				validationRules: [
+					{
+						name: "required",
+						message:
+							"Please make sure you have designated your AWS account with Code Pipes Account ID and Organization ID."
+					}
+				],
+
+				id: "checkbox"
 			}
 		}
 	}
@@ -97,9 +128,9 @@ const Template: Story<unknown> = (args: any) => {
 		if (stateRef.value) {
 			stateRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
 		}
-		if (buttonRef.value) {
-			buttonRef.value.disabled = !event.detail.isValid;
-		}
+		// if (buttonRef.value) {
+		// 	buttonRef.value.disabled = !event.detail.isValid;
+		// }
 	};
 	return html`
 		<f-popover open size="large">

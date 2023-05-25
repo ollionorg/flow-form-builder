@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.5.19] - 2023-05-25
+
+### Bug fix
+- `checkbox` and `radio` helper text not displayed if used with markup.
+
 ## [1.5.18] - 2023-05-23
 
 ### Bug fix
