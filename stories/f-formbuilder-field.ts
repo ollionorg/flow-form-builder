@@ -76,8 +76,15 @@ const field: FormBuilderField = {
 				title: "Select option from dropdown",
 				description: "Here is another description"
 			},
-			selection: "single",
-			options: [{ title: "First" }, { title: "Second" }, { title: "Third", disabled: true }],
+			selection: "multiple",
+			options: [
+				{
+					title:
+						"It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a m"
+				},
+				{ title: "Second" },
+				{ title: "Third", disabled: true }
+			],
 			type: "select",
 			placeholder: "This is a placeholder",
 			validationRules: [
@@ -87,7 +94,8 @@ const field: FormBuilderField = {
 			],
 			optionTemplate: function (option: FSelectSingleOption) {
 				option = option as FSelectOptionObject;
-				return html`<f-text state="warning">${option.title}</f-text>`;
+				return html`<f-div align="middle-left" padding="small" gap="small"> <f-pictogram source="i-plus" size="small"></f-pictogram><f-text ellipsis
+				>${option.title}</f-tag></f-div>`;
 			}
 		},
 		textField: {

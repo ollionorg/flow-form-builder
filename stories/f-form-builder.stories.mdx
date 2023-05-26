@@ -54,7 +54,6 @@ import Properties from "./properties.md";
 			field,
 			values: {
 				hiddenField: "IAmHidden",
-				singleSelect: "First",
 				selectBox: ["option 1"],
 				nestedArray: []
 			},
@@ -90,27 +89,29 @@ import Properties from "./properties.md";
 				event.stopImmediatePropagation();
 			};
 			return html` <f-div padding="medium" gap="medium" height="100%" overflow="scroll">
-				<f-form-builder
-					.field=${args.field}
-					.values=${args.values}
-					.variant=${args.variant}
-					.category=${args.category}
-					.size=${args.size}
-					.gap=${args.gap}
-					.label=${{
-						title: "Form label",
-						description: "Description about form",
-						iconTooltip: "Form more info"
-					}}
-					@submit=${handleSubmit}
-					@input=${handleInput}
-					@keydown=${handleKeydown}
-					@state-change=${handleStateChange}
-				>
-					<f-div>
-						<f-button label="submit" type="submit"></f-button>
-					</f-div>
-				</f-form-builder>
+				<f-div>
+					<f-form-builder
+						.field=${args.field}
+						.values=${args.values}
+						.variant=${args.variant}
+						.category=${args.category}
+						.size=${args.size}
+						.gap=${args.gap}
+						.label=${{
+							title: "Form label",
+							description: "Description about form",
+							iconTooltip: "Form more info"
+						}}
+						@submit=${handleSubmit}
+						@input=${handleInput}
+						@keydown=${handleKeydown}
+						@state-change=${handleStateChange}
+					>
+						<f-div>
+							<f-button label="submit" type="submit"></f-button>
+						</f-div>
+					</f-form-builder>
+				</f-div>
 				<f-divider></f-divider>
 				<f-div width="400px" height="hug-content" direction="column" gap="small" overflow="scroll">
 					<f-text>Values</f-text>

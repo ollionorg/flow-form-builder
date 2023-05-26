@@ -1327,10 +1327,10 @@
     rxjs "^7.5.7"
     validate-color "^2.2.1"
 
-"@cldcvr/flow-core@1.14.6":
-  version "1.14.6"
-  resolved "https://registry.yarnpkg.com/@cldcvr/flow-core/-/flow-core-1.14.6.tgz#d29f242cbbaf43e92546967095ffe79513f48c91"
-  integrity sha512-yqKhbXM946ato0LQijlwqOqmv/ZK2wQL2qAte3Qb9lavz3Mea2M0z0k3GLv1UBWA744JiJKaqGVuuCRa+ctdRw==
+"@cldcvr/flow-core@1.14.7":
+  version "1.14.7"
+  resolved "https://registry.yarnpkg.com/@cldcvr/flow-core/-/flow-core-1.14.7.tgz#56d12469ef828edd9b9d08347b41d430e893231d"
+  integrity sha512-C81mOpa2Mp7dxPjk0rXdffMZc+cQZ38iyxhbs/KoDFr2QeF+9cmK4zS6W8WrzZ1nqAkd5UCZGWVVTq6vY9h0Nw==
   dependencies:
     "@emoji-mart/data" "^1.1.2"
     "@floating-ui/dom" "^1.0.2"
