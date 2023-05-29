@@ -24,6 +24,7 @@ import { extractValidationState, validateField } from "../../modules/validation/
 
 import { Subject } from "rxjs";
 import { propogateProperties } from "../../modules/helpers";
+import { cloneDeep, isEqual } from "lodash-es";
 
 @customElement("f-form-builder")
 export class FFormBuilder extends FRoot {
@@ -56,7 +57,7 @@ export class FFormBuilder extends FRoot {
 		type: Object,
 		reflect: false,
 		hasChanged(newVal: FormBuilderValues, oldVal: FormBuilderValues) {
-			return JSON.stringify(newVal) !== JSON.stringify(oldVal);
+			return !isEqual(newVal, oldVal);
 		}
 	})
 	values?: FormBuilderValues;
@@ -99,6 +100,8 @@ export class FFormBuilder extends FRoot {
 		},
 		isChanged: false
 	};
+
+	lastState?: FormBuilderState;
 
 	showWhenSubject!: Subject<FormBuilderValues>;
 	inputTimeout!: ReturnType<typeof setTimeout>;
@@ -345,7 +348,7 @@ export class FFormBuilder extends FRoot {
 	dispatchInputEvent() {
 		this.showWhenSubject.next(this.values ?? {});
 		const input = new CustomEvent("input", {
-			detail: this.values,
+			detail: cloneDeep(this.values),
 			bubbles: true,
 			composed: true
 		});
@@ -355,12 +358,15 @@ export class FFormBuilder extends FRoot {
 	 * dispatching `state-change` event for consumer
 	 */
 	dispatchStateChangeEvent() {
-		const stateChange = new CustomEvent("state-change", {
-			detail: this.state,
-			bubbles: true,
-			composed: true
-		});
-		this.dispatchEvent(stateChange);
+		if ((this.lastState && !isEqual(this.lastState, this.state)) || this.lastState === undefined) {
+			this.lastState = cloneDeep(this.state);
+			const stateChange = new CustomEvent("state-change", {
+				detail: this.lastState,
+				bubbles: true,
+				composed: true
+			});
+			this.dispatchEvent(stateChange);
+		}
 	}
 	/**
 	 * dispatch showWhen event so that root will publish new form values

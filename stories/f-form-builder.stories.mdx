@@ -68,6 +68,7 @@ import Properties from "./properties.md";
 			const [state, setState] = useState({});
 			const fieldRef = createRef();
 			const stateRef = createRef();
+			const formRef = createRef();
 			const handleSubmit = event => {
 				console.log("Submit event", event.detail);
 				window.alert("event submit successfully");
@@ -75,6 +76,9 @@ import Properties from "./properties.md";
 			const handleInput = event => {
 				if (fieldRef.value) {
 					fieldRef.value.textContent = JSON.stringify(event.detail, undefined, 2);
+				}
+				if (formRef.value) {
+					formRef.value.values = event.detail;
 				}
 				console.log("input event", event.detail);
 			};
@@ -91,6 +95,7 @@ import Properties from "./properties.md";
 			return html` <f-div padding="medium" gap="medium" height="100%" overflow="scroll">
 				<f-div>
 					<f-form-builder
+						${ref(formRef)}
 						.field=${args.field}
 						.values=${args.values}
 						.variant=${args.variant}

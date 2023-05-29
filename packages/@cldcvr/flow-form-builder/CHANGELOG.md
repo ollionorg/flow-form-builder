@@ -4,6 +4,12 @@
 
 # Change Log
 
+## [1.5.20-beta1] - 2023-05-29
+
+### Warning: Use only to test vue3 object reactivity and event emission. 
+### Improvements
+- input and state-change event now emitting new object/ deep copy of the object.
+- state-change event emission optimised
 ## [1.5.19] - 2023-05-25
 
 ### Bug fix

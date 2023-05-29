@@ -706,6 +706,323 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form-builder/f-form-builder.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FFormBuilder",
+          "members": [
+            {
+              "kind": "field",
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "attribute": "name",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "label",
+              "type": {
+                "text": "FormBuilderLabel | undefined"
+              },
+              "attribute": "label"
+            },
+            {
+              "kind": "field",
+              "name": "field",
+              "type": {
+                "text": "FormBuilderField | undefined"
+              },
+              "attribute": "field"
+            },
+            {
+              "kind": "field",
+              "name": "values",
+              "type": {
+                "text": "FormBuilderValues | undefined"
+              },
+              "attribute": "values"
+            },
+            {
+              "kind": "field",
+              "name": "size",
+              "type": {
+                "text": "FormBuilderSize | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "size",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "variant",
+              "type": {
+                "text": "FormBuilderVariant | undefined"
+              },
+              "default": "\"curved\"",
+              "attribute": "variant",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "category",
+              "type": {
+                "text": "FormBuilderCategory | undefined"
+              },
+              "default": "\"fill\"",
+              "attribute": "category",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "FormBuilderGap | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "separator",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "attribute": "separator",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "fieldRef",
+              "type": {
+                "text": "Ref<FFormInputElements>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "FormBuilderState"
+              },
+              "default": "{\n\t\tget isValid() {\n\t\t\treturn this.errors?.length === 0;\n\t\t},\n\t\tisChanged: false\n\t}"
+            },
+            {
+              "kind": "field",
+              "name": "lastState",
+              "type": {
+                "text": "FormBuilderState | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "showWhenSubject",
+              "type": {
+                "text": "Subject<FormBuilderValues>"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "inputTimeout",
+              "type": {
+                "text": "ReturnType<typeof setTimeout>"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "checkSubmit",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "description": "Check if submit is triggerred by external element"
+            },
+            {
+              "kind": "method",
+              "name": "handleKeyUp",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "KeyboardEvent"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onSubmit",
+              "parameters": [
+                {
+                  "name": "event",
+                  "type": {
+                    "text": "SubmitEvent"
+                  }
+                }
+              ],
+              "description": "Form's submit event handler"
+            },
+            {
+              "kind": "method",
+              "name": "submit",
+              "description": "Emit submit event with data if validaiton is successful"
+            },
+            {
+              "kind": "method",
+              "name": "updateValidaitonState",
+              "parameters": [
+                {
+                  "name": "all",
+                  "type": {
+                    "text": "ValidationResults"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "onShowWhen",
+              "description": "showWhen handler"
+            },
+            {
+              "kind": "method",
+              "name": "onShowWhenExecution"
+            },
+            {
+              "kind": "method",
+              "name": "validateForm",
+              "parameters": [
+                {
+                  "name": "silent",
+                  "default": "false",
+                  "description": "whether to display validaiton message or not"
+                }
+              ],
+              "description": "Validation of whole form"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchInputEvent",
+              "description": "dispatching form-builder input event"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchStateChangeEvent",
+              "description": "dispatching `state-change` event for consumer"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchShowWhenEvent",
+              "description": "dispatch showWhen event so that root will publish new form values"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "name",
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "name"
+            },
+            {
+              "name": "label",
+              "type": {
+                "text": "FormBuilderLabel | undefined"
+              },
+              "fieldName": "label"
+            },
+            {
+              "name": "field",
+              "type": {
+                "text": "FormBuilderField | undefined"
+              },
+              "fieldName": "field"
+            },
+            {
+              "name": "values",
+              "type": {
+                "text": "FormBuilderValues | undefined"
+              },
+              "fieldName": "values"
+            },
+            {
+              "name": "size",
+              "type": {
+                "text": "FormBuilderSize | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "size"
+            },
+            {
+              "name": "variant",
+              "type": {
+                "text": "FormBuilderVariant | undefined"
+              },
+              "default": "\"curved\"",
+              "fieldName": "variant"
+            },
+            {
+              "name": "category",
+              "type": {
+                "text": "FormBuilderCategory | undefined"
+              },
+              "default": "\"fill\"",
+              "fieldName": "category"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "FormBuilderGap | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "gap"
+            },
+            {
+              "name": "separator",
+              "type": {
+                "text": "boolean | undefined"
+              },
+              "default": "false",
+              "fieldName": "separator"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-form-builder",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FFormBuilder",
+          "declaration": {
+            "name": "FFormBuilder",
+            "module": "src/components/f-form-builder/f-form-builder.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-form-builder",
+          "declaration": {
+            "name": "FFormBuilder",
+            "module": "src/components/f-form-builder/f-form-builder.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-form-array/f-form-array.ts",
       "declarations": [
         {
@@ -907,316 +1224,6 @@
           "declaration": {
             "name": "FFormArray",
             "module": "src/components/f-form-array/f-form-array.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-builder/f-form-builder.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FFormBuilder",
-          "members": [
-            {
-              "kind": "field",
-              "name": "name",
-              "type": {
-                "text": "string"
-              },
-              "attribute": "name",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "label",
-              "type": {
-                "text": "FormBuilderLabel | undefined"
-              },
-              "attribute": "label"
-            },
-            {
-              "kind": "field",
-              "name": "field",
-              "type": {
-                "text": "FormBuilderField | undefined"
-              },
-              "attribute": "field"
-            },
-            {
-              "kind": "field",
-              "name": "values",
-              "type": {
-                "text": "FormBuilderValues | undefined"
-              },
-              "attribute": "values"
-            },
-            {
-              "kind": "field",
-              "name": "size",
-              "type": {
-                "text": "FormBuilderSize | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "size",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "variant",
-              "type": {
-                "text": "FormBuilderVariant | undefined"
-              },
-              "default": "\"curved\"",
-              "attribute": "variant",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "category",
-              "type": {
-                "text": "FormBuilderCategory | undefined"
-              },
-              "default": "\"fill\"",
-              "attribute": "category",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "FormBuilderGap | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "gap",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "separator",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "attribute": "separator",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "fieldRef",
-              "type": {
-                "text": "Ref<FFormInputElements>"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "FormBuilderState"
-              },
-              "default": "{\n\t\tget isValid() {\n\t\t\treturn this.errors?.length === 0;\n\t\t},\n\t\tisChanged: false\n\t}"
-            },
-            {
-              "kind": "field",
-              "name": "showWhenSubject",
-              "type": {
-                "text": "Subject<FormBuilderValues>"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "inputTimeout",
-              "type": {
-                "text": "ReturnType<typeof setTimeout>"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "checkSubmit",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "MouseEvent"
-                  }
-                }
-              ],
-              "description": "Check if submit is triggerred by external element"
-            },
-            {
-              "kind": "method",
-              "name": "handleKeyUp",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "KeyboardEvent"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onSubmit",
-              "parameters": [
-                {
-                  "name": "event",
-                  "type": {
-                    "text": "SubmitEvent"
-                  }
-                }
-              ],
-              "description": "Form's submit event handler"
-            },
-            {
-              "kind": "method",
-              "name": "submit",
-              "description": "Emit submit event with data if validaiton is successful"
-            },
-            {
-              "kind": "method",
-              "name": "updateValidaitonState",
-              "parameters": [
-                {
-                  "name": "all",
-                  "type": {
-                    "text": "ValidationResults"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "onShowWhen",
-              "description": "showWhen handler"
-            },
-            {
-              "kind": "method",
-              "name": "onShowWhenExecution"
-            },
-            {
-              "kind": "method",
-              "name": "validateForm",
-              "parameters": [
-                {
-                  "name": "silent",
-                  "default": "false",
-                  "description": "whether to display validaiton message or not"
-                }
-              ],
-              "description": "Validation of whole form"
-            },
-            {
-              "kind": "method",
-              "name": "dispatchInputEvent",
-              "description": "dispatching form-builder input event"
-            },
-            {
-              "kind": "method",
-              "name": "dispatchStateChangeEvent",
-              "description": "dispatching `state-change` event for consumer"
-            },
-            {
-              "kind": "method",
-              "name": "dispatchShowWhenEvent",
-              "description": "dispatch showWhen event so that root will publish new form values"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "name",
-              "type": {
-                "text": "string"
-              },
-              "fieldName": "name"
-            },
-            {
-              "name": "label",
-              "type": {
-                "text": "FormBuilderLabel | undefined"
-              },
-              "fieldName": "label"
-            },
-            {
-              "name": "field",
-              "type": {
-                "text": "FormBuilderField | undefined"
-              },
-              "fieldName": "field"
-            },
-            {
-              "name": "values",
-              "type": {
-                "text": "FormBuilderValues | undefined"
-              },
-              "fieldName": "values"
-            },
-            {
-              "name": "size",
-              "type": {
-                "text": "FormBuilderSize | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "size"
-            },
-            {
-              "name": "variant",
-              "type": {
-                "text": "FormBuilderVariant | undefined"
-              },
-              "default": "\"curved\"",
-              "fieldName": "variant"
-            },
-            {
-              "name": "category",
-              "type": {
-                "text": "FormBuilderCategory | undefined"
-              },
-              "default": "\"fill\"",
-              "fieldName": "category"
-            },
-            {
-              "name": "gap",
-              "type": {
-                "text": "FormBuilderGap | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "gap"
-            },
-            {
-              "name": "separator",
-              "type": {
-                "text": "boolean | undefined"
-              },
-              "default": "false",
-              "fieldName": "separator"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-form-builder",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FFormBuilder",
-          "declaration": {
-            "name": "FFormBuilder",
-            "module": "src/components/f-form-builder/f-form-builder.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-form-builder",
-          "declaration": {
-            "name": "FFormBuilder",
-            "module": "src/components/f-form-builder/f-form-builder.ts"
           }
         }
       ]
