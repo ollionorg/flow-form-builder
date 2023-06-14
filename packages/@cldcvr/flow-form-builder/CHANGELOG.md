@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.5.20] - 2023-06-14
+### Improvements
+- `textarea` field now supports `maskValue` peoperty.
+- Text based `tooltip` max-width improved.
+
 ## [1.5.20-beta1] - 2023-05-29
 
 ### Warning: Use only to test vue3 object reactivity and event emission. 

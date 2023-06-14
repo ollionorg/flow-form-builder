@@ -227,7 +227,9 @@ const field: FormBuilderField = {
 			qaId: "textAreaQA",
 			label: {
 				title: "I am textarea",
-				description: "This is my decription"
+				description: "This is my decription",
+				iconTooltip:
+					"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book."
 			},
 			type: "textarea",
 			placeholder: "This is a placeholder",

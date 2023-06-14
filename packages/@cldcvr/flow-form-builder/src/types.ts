@@ -184,6 +184,7 @@ export type FormBuilderTextAreaField = FormBuilderBaseField & {
 	clear?: boolean;
 	rows?: string;
 	resizable?: boolean;
+	maskValue?: boolean;
 };
 
 // button type field

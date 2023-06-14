@@ -24,6 +24,7 @@ export default function (
 			?clear=${field?.clear ?? true}
 			?read-only=${field?.readonly ?? false}
 			?resizable=${field?.resizable ?? false}
+			?mask-value=${field?.maskValue ?? false}
 			rows=${ifDefined(field?.rows)}
 			@click=${ifDefined(field.onClick)}
 			@focus=${ifDefined(field.onFocus)}

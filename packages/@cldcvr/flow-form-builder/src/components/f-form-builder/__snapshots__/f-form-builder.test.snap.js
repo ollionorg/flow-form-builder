@@ -12,7 +12,7 @@ snapshots["f-form-builder should render object field with all default properties
   selected="none"
   state="transparent"
   sticky="none"
-  style="padding: 0px; width: 100%;"
+  style="padding: 0px; width: 100%; border-radius: 0px;"
   variant="block"
   width="100%"
 >
@@ -46,7 +46,7 @@ snapshots["f-form-builder should render object field with all default properties
         slot="label"
         state="transparent"
         sticky="none"
-        style="padding: 0px;"
+        style="padding: 0px; border-radius: 0px;"
         variant="block"
         width="fill-container"
       >
@@ -76,7 +76,7 @@ snapshots["f-form-builder should render object field with all default properties
         slot="label"
         state="transparent"
         sticky="none"
-        style="padding: 0px;"
+        style="padding: 0px; border-radius: 0px;"
         variant="block"
         width="fill-container"
       >
@@ -99,7 +99,7 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
   selected="none"
   state="transparent"
   sticky="none"
-  style="padding: 0px; width: 100%;"
+  style="padding: 0px; width: 100%; border-radius: 0px;"
   variant="block"
   width="100%"
 >
@@ -133,7 +133,7 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
         slot="label"
         state="transparent"
         sticky="none"
-        style="padding: 0px;"
+        style="padding: 0px; border-radius: 0px;"
         variant="block"
         width="fill-container"
       >
@@ -163,7 +163,7 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
         slot="label"
         state="transparent"
         sticky="none"
-        style="padding: 0px;"
+        style="padding: 0px; border-radius: 0px;"
         variant="block"
         width="fill-container"
       >
@@ -186,7 +186,7 @@ snapshots["f-form-builder should display array fields"] =
   selected="none"
   state="transparent"
   sticky="none"
-  style="padding: 0px; width: 100%;"
+  style="padding: 0px; width: 100%; border-radius: 0px;"
   variant="block"
   width="100%"
 >
@@ -200,7 +200,7 @@ snapshots["f-form-builder should display array fields"] =
     selected="none"
     state="transparent"
     sticky="none"
-    style="padding: 0px;"
+    style="padding: 0px; border-radius: 0px;"
     variant="block"
     width="fill-container"
   >
@@ -214,7 +214,7 @@ snapshots["f-form-builder should display array fields"] =
       selected="none"
       state="transparent"
       sticky="none"
-      style="padding: 0px;"
+      style="padding: 0px; border-radius: 0px;"
       variant="block"
       width="fill-container"
     >
@@ -251,7 +251,7 @@ snapshots["f-form-builder should display array fields"] =
       selected="none"
       state="transparent"
       sticky="none"
-      style="padding: 0px;"
+      style="padding: 0px; border-radius: 0px;"
       variant="block"
       width="fill-container"
     >
@@ -296,7 +296,7 @@ snapshots["f-form-builder should add/delete field in array"] =
   selected="none"
   state="transparent"
   sticky="none"
-  style="padding: 0px; width: 100%;"
+  style="padding: 0px; width: 100%; border-radius: 0px;"
   variant="block"
   width="100%"
 >
@@ -310,7 +310,7 @@ snapshots["f-form-builder should add/delete field in array"] =
     selected="none"
     state="transparent"
     sticky="none"
-    style="padding: 0px;"
+    style="padding: 0px; border-radius: 0px;"
     variant="block"
     width="fill-container"
   >
@@ -324,7 +324,7 @@ snapshots["f-form-builder should add/delete field in array"] =
       selected="none"
       state="transparent"
       sticky="none"
-      style="padding: 0px;"
+      style="padding: 0px; border-radius: 0px;"
       variant="block"
       width="fill-container"
     >
@@ -361,7 +361,7 @@ snapshots["f-form-builder should add/delete field in array"] =
       selected="none"
       state="transparent"
       sticky="none"
-      style="padding: 0px;"
+      style="padding: 0px; border-radius: 0px;"
       variant="block"
       width="fill-container"
     >
@@ -406,7 +406,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
   selected="none"
   state="transparent"
   sticky="none"
-  style="padding: 0px; width: 100%;"
+  style="padding: 0px; width: 100%; border-radius: 0px;"
   variant="block"
   width="100%"
 >
@@ -444,7 +444,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
         slot="label"
         state="transparent"
         sticky="none"
-        style="padding: 0px;"
+        style="padding: 0px; border-radius: 0px;"
         variant="block"
         width="fill-container"
       >
@@ -482,7 +482,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
         slot="label"
         state="transparent"
         sticky="none"
-        style="padding: 0px;"
+        style="padding: 0px; border-radius: 0px;"
         variant="block"
         width="fill-container"
       >
@@ -500,7 +500,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
         slot="help"
         state="transparent"
         sticky="none"
-        style="padding: 0px;"
+        style="padding: 0px; border-radius: 0px;"
         variant="block"
         width="fill-container"
       >
@@ -537,7 +537,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
         slot="label"
         state="transparent"
         sticky="none"
-        style="padding: 0px;"
+        style="padding: 0px; border-radius: 0px;"
         variant="block"
         width="fill-container"
       >
@@ -555,7 +555,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
         slot="help"
         state="transparent"
         sticky="none"
-        style="padding: 0px;"
+        style="padding: 0px; border-radius: 0px;"
         variant="block"
         width="fill-container"
       >
@@ -591,7 +591,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
         slot="label"
         state="transparent"
         sticky="none"
-        style="padding: 0px;"
+        style="padding: 0px; border-radius: 0px;"
         variant="block"
         width="fill-container"
       >
@@ -627,7 +627,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
         slot="label"
         state="transparent"
         sticky="none"
-        style="padding: 0px;"
+        style="padding: 0px; border-radius: 0px;"
         variant="block"
         width="fill-container"
       >
@@ -663,7 +663,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
         slot="label"
         state="transparent"
         sticky="none"
-        style="padding: 0px;"
+        style="padding: 0px; border-radius: 0px;"
         variant="block"
         width="fill-container"
       >
@@ -680,7 +680,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
         slot="description"
         state="transparent"
         sticky="none"
-        style="padding: 0px;"
+        style="padding: 0px; border-radius: 0px;"
         variant="block"
         width="fill-container"
       >
@@ -717,7 +717,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
         slot="label"
         state="transparent"
         sticky="none"
-        style="padding: 0px;"
+        style="padding: 0px; border-radius: 0px;"
         variant="block"
         width="fill-container"
       >
