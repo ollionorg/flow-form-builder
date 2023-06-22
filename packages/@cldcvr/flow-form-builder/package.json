@@ -1,6 +1,6 @@
 {
   "name": "@cldcvr/flow-form-builder",
-  "version": "1.5.21-beta1",
+  "version": "1.5.21",
   "description": "Form builder for the flow design system",
   "module": "dist/flow-form-builder.es.js",
   "main": "dist/flow-form-builder.cjs.js",

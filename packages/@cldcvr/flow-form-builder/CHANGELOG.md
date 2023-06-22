@@ -4,9 +4,7 @@
 
 # Change Log
 
-## [1.5.21-beta1] - 2023-06-22
-
-### Note: Using to test duplicate css rules issue in consumer app.
+## [1.5.21] - 2023-06-22
 ### Bug fix
 - Duplicate css import when used with mutliple flow dependecies
 ## [1.5.20] - 2023-06-14
