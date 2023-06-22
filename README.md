@@ -32,12 +32,12 @@ Built on [flow-core](https://github.com/cldcvr/flow-core) gives you accesss to a
 Structural correlation involves defining the data structure that will be transmitted between the frontend and backend, including the format and type of data. To achieve this, we leverage objects and arrays to support any type api payload format. This reduces the complex task of transpiling form builder output to the backend API payload format.
 
 
-<br>
+<br/>
 
 # Demo
 Head over to [Flow form builder Storybook](https://flow.cldcvr.com/form-builder/index.html?path=/story/components-f-form-builder--playground) for a demo. 
 
-<br>
+<br/>
 
 # Getting started
 
@@ -49,7 +49,7 @@ Flow form builder is built on [Flow](https://flow.cldcvr.com/), an open source d
 
 **Note:** If you do not have an existing front-end project, you can quickly create one from a [flow starter kit](https://github.com/cldcvr/flow-core#starter-kits). 
 
-<br>
+<br/>
 
 ## Installation
 
@@ -59,7 +59,7 @@ yarn add @cldcvr/flow-form-builder
 ```
 **Note:** after installation, re-start your application.
 
-<br>
+<br/>
 
 ### 2️⃣ Import styles/CSS 
 For **Vue JS:** 
@@ -87,7 +87,7 @@ import "@cldcvr/flow-form-builder/dist/style.css";
 ```
 </details>
 
-<br>
+<br/>
 
 ### 3️⃣ Import flow-form-builder into your project
 
@@ -123,7 +123,7 @@ Paste the below snippet in your project, for `src/index.tsx` or `index.jsx`
 
 </details>
 
-<br>
+<br/>
 
 ### 4️⃣ For a typescript enabled project (optional)
 
@@ -152,7 +152,7 @@ import "@cldcvr/flow-form-builder/dist/types/vue2";
 "include": ["src", "./node_modules/@cldcvr/flow-form-builder/dist/types/react.ts"]
 ```
 </details>
-<br>
+<br/>
 
 # Sample code (Vue JS)
 We have created a sample form along with it's schema to get you going, simply copy paste the below language code block in your VueJS project.
