@@ -3,7 +3,7 @@ import { html, PropertyValueMap, unsafeCSS } from "lit";
 import { customElement, property, queryAll } from "lit/decorators.js";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import eleStyle from "./f-form-array.scss";
-import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
+import flowCoreCSS from "@cldcvr/flow-core/dist/style.css?inline";
 import {
 	CanValidateFields,
 	FFormInputElements,

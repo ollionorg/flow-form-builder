@@ -2,7 +2,7 @@ import { html, PropertyValueMap, TemplateResult, unsafeCSS } from "lit";
 import { customElement, property, query } from "lit/decorators.js";
 import { FRoot } from "@cldcvr/flow-core/src/mixins/components/f-root/f-root";
 import eleStyle from "./f-form-object.scss";
-import flowCoreCSS from "@cldcvr/flow-core/dist/style.css";
+import flowCoreCSS from "@cldcvr/flow-core/dist/style.css?inline";
 
 import fieldRenderer from "../f-form-builder/fields";
 import { createRef, Ref } from "lit/directives/ref.js";
