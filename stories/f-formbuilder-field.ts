@@ -243,6 +243,12 @@ const field: FormBuilderField = {
 				}
 			]
 		},
+		dateTimeField: {
+			type: "datetime",
+			label: {
+				title: "This is date time field"
+			}
+		},
 		nestedObject: {
 			type: "object",
 			fields: {

@@ -14,6 +14,7 @@ import suggest from "./suggest";
 import separator from "./separator";
 import emoji from "./emoji";
 import hidden from "./hidden";
+import datetime from "./datetime";
 
 const all: Record<string, FormBuilderFieldRenderFunction> = {
 	text,
@@ -35,7 +36,8 @@ const all: Record<string, FormBuilderFieldRenderFunction> = {
 	suggest,
 	separator,
 	emoji,
-	hidden
+	hidden,
+	datetime
 };
 
 export default all;

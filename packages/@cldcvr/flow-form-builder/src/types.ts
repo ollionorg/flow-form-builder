@@ -15,7 +15,10 @@ import {
 	FIconButtonVariant,
 	FSelectOptions,
 	FSuggestSuggestions,
-	FSelectOptionTemplate
+	FSelectOptionTemplate,
+	FDateTimePickerState,
+	FDateOption,
+	DateDisableType
 } from "@cldcvr/flow-core";
 import { BetweenParams } from "./modules/validation/rules/between";
 import { Subject } from "rxjs";
@@ -112,6 +115,22 @@ export type FormBuilderEmojiField = FormBuilderBaseField & {
 	closeOnSelect?: boolean;
 	clear?: boolean;
 	disabled?: boolean;
+};
+
+export type FormBuilderDatetimeField = FormBuilderBaseField & {
+	type: "datetime";
+	mode?: "date-time" | "date-only" | "time-only";
+	placeholder?: string;
+	state?: FDateTimePickerState;
+	minDate?: FDateOption;
+	maxDate?: FDateOption;
+	disableDate?: DateDisableType;
+	clear?: boolean;
+	isRange?: boolean;
+	inline?: boolean;
+	weekNumber?: boolean;
+	disabled?: boolean;
+	loading?: boolean;
 };
 export type FormBuilderSuggestField = FormBuilderBaseField & {
 	type: "suggest";
@@ -244,7 +263,8 @@ export type FormBuilderField =
 	| FormBuilderFileField
 	| FormBuilderSeparatorField
 	| FormBuilderEmojiField
-	| FormBuilderHiddenField; // add other field types
+	| FormBuilderHiddenField
+	| FormBuilderDatetimeField; // add other field types
 
 export type FormBuilderShowCondition<T = FormBuilderValues> = (value: T) => boolean;
 

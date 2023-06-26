@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.6.0] - 2023-06-26
+### Features
+- `datetime` field support added.
+
 ## [1.5.21] - 2023-06-22
 ### Bug fix
 - Duplicate css import when used with mutliple flow dependecies
