@@ -1238,6 +1238,177 @@
     },
     {
       "kind": "javascript-module",
+      "path": "src/components/f-form-object/f-form-object.ts",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "",
+          "name": "FFormObject",
+          "members": [
+            {
+              "kind": "field",
+              "name": "config",
+              "type": {
+                "text": "FormBuilderObjectField"
+              },
+              "attribute": "config"
+            },
+            {
+              "kind": "field",
+              "name": "value",
+              "type": {
+                "text": "ObjectValueType"
+              },
+              "attribute": "value"
+            },
+            {
+              "kind": "field",
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "attribute": "state",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "attribute": "gap",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "formGroupElement",
+              "type": {
+                "text": "FFormGroup | undefined"
+              }
+            },
+            {
+              "kind": "field",
+              "name": "fieldRefs",
+              "type": {
+                "text": "Record<string, Ref<FFormInputElements>>"
+              },
+              "default": "{}"
+            },
+            {
+              "kind": "field",
+              "name": "showWhenSubject",
+              "type": {
+                "text": "Subject<FormBuilderValues>"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "getFieldValue",
+              "parameters": [
+                {
+                  "name": "fieldname",
+                  "type": {
+                    "text": "string"
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "getLabelOffSet"
+            },
+            {
+              "kind": "method",
+              "name": "buildFields"
+            },
+            {
+              "kind": "method",
+              "name": "validate",
+              "parameters": [
+                {
+                  "name": "silent",
+                  "default": "false"
+                }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "dispatchInputEvent"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchShowWhenEvent",
+              "description": "dispatch showWhen event so that root will publish new form values"
+            },
+            {
+              "kind": "method",
+              "name": "dispatchShowWhenExeEvent",
+              "description": "dispatch showWhen event so that root will publish new form values"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "config",
+              "type": {
+                "text": "FormBuilderObjectField"
+              },
+              "fieldName": "config"
+            },
+            {
+              "name": "value",
+              "type": {
+                "text": "ObjectValueType"
+              },
+              "fieldName": "value"
+            },
+            {
+              "name": "state",
+              "type": {
+                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
+              },
+              "default": "\"default\"",
+              "fieldName": "state"
+            },
+            {
+              "name": "gap",
+              "type": {
+                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
+              },
+              "default": "\"medium\"",
+              "fieldName": "gap"
+            }
+          ],
+          "superclass": {
+            "name": "FRoot",
+            "package": "@cldcvr/flow-core/src/mixins/components/f-root/f-root"
+          },
+          "tagName": "f-form-object",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FFormObject",
+          "declaration": {
+            "name": "FFormObject",
+            "module": "src/components/f-form-object/f-form-object.ts"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "f-form-object",
+          "declaration": {
+            "name": "FFormObject",
+            "module": "src/components/f-form-object/f-form-object.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
       "path": "src/components/f-radio-group/f-radio-group.ts",
       "declarations": [
         {
@@ -1412,177 +1583,6 @@
           "declaration": {
             "name": "FRadioGroup",
             "module": "src/components/f-radio-group/f-radio-group.ts"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/components/f-form-object/f-form-object.ts",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "",
-          "name": "FFormObject",
-          "members": [
-            {
-              "kind": "field",
-              "name": "config",
-              "type": {
-                "text": "FormBuilderObjectField"
-              },
-              "attribute": "config"
-            },
-            {
-              "kind": "field",
-              "name": "value",
-              "type": {
-                "text": "ObjectValueType"
-              },
-              "attribute": "value"
-            },
-            {
-              "kind": "field",
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "attribute": "state",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "gap",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "attribute": "gap",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "formGroupElement",
-              "type": {
-                "text": "FFormGroup | undefined"
-              }
-            },
-            {
-              "kind": "field",
-              "name": "fieldRefs",
-              "type": {
-                "text": "Record<string, Ref<FFormInputElements>>"
-              },
-              "default": "{}"
-            },
-            {
-              "kind": "field",
-              "name": "showWhenSubject",
-              "type": {
-                "text": "Subject<FormBuilderValues>"
-              }
-            },
-            {
-              "kind": "method",
-              "name": "getFieldValue",
-              "parameters": [
-                {
-                  "name": "fieldname",
-                  "type": {
-                    "text": "string"
-                  }
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "getLabelOffSet"
-            },
-            {
-              "kind": "method",
-              "name": "buildFields"
-            },
-            {
-              "kind": "method",
-              "name": "validate",
-              "parameters": [
-                {
-                  "name": "silent",
-                  "default": "false"
-                }
-              ]
-            },
-            {
-              "kind": "method",
-              "name": "dispatchInputEvent"
-            },
-            {
-              "kind": "method",
-              "name": "dispatchShowWhenEvent",
-              "description": "dispatch showWhen event so that root will publish new form values"
-            },
-            {
-              "kind": "method",
-              "name": "dispatchShowWhenExeEvent",
-              "description": "dispatch showWhen event so that root will publish new form values"
-            }
-          ],
-          "attributes": [
-            {
-              "name": "config",
-              "type": {
-                "text": "FormBuilderObjectField"
-              },
-              "fieldName": "config"
-            },
-            {
-              "name": "value",
-              "type": {
-                "text": "ObjectValueType"
-              },
-              "fieldName": "value"
-            },
-            {
-              "name": "state",
-              "type": {
-                "text": "\"primary\" | \"default\" | \"success\" | \"warning\" | \"danger\" | undefined"
-              },
-              "default": "\"default\"",
-              "fieldName": "state"
-            },
-            {
-              "name": "gap",
-              "type": {
-                "text": "\"large\" | \"medium\" | \"small\" | \"x-small\" | undefined"
-              },
-              "default": "\"medium\"",
-              "fieldName": "gap"
-            }
-          ],
-          "superclass": {
-            "name": "FRoot",
-            "package": "@cldcvr/flow-core/src/mixins/components/f-root/f-root"
-          },
-          "tagName": "f-form-object",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FFormObject",
-          "declaration": {
-            "name": "FFormObject",
-            "module": "src/components/f-form-object/f-form-object.ts"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "f-form-object",
-          "declaration": {
-            "name": "FFormObject",
-            "module": "src/components/f-form-object/f-form-object.ts"
           }
         }
       ]

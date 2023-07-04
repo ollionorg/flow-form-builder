@@ -1314,6 +1314,13 @@
   resolved "https://registry.yarnpkg.com/@cldcvr/custom-elements-manifest-to-types/-/custom-elements-manifest-to-types-1.0.6.tgz#53791ac6bde35ec8d01a6ea5884088ed41c2960c"
   integrity sha512-a02DcgYED6qpr6nQchXJSX1zUp05dq/QtKmB6gbNexuvyYIViqNNndlXXURTYG1R0XER/xgYVi2CV+NLQPuOpA==
 
+"@cldcvr/flow-core-config@1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@cldcvr/flow-core-config/-/flow-core-config-1.0.0.tgz#954689eef14fa8f4e53e25a0226740ae7cd458be"
+  integrity sha512-kZzem2b1FQEf3Bnf2Uwm5OzY0RqHn5R4oDs7dPsUWpBFK8QTuFPbymQIqtoFhq3DjbMMNbMF1FK0BjHjlW5ukA==
+  dependencies:
+    rxjs "^7.5.7"
+
 "@cldcvr/flow-core@*":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@cldcvr/flow-core/-/flow-core-1.5.0.tgz#2a7fc2bb90de909903747ab4fbb50cc85502184b"
@@ -1327,11 +1334,12 @@
     rxjs "^7.5.7"
     validate-color "^2.2.1"
 
-"@cldcvr/flow-core@1.17.0":
-  version "1.17.0"
-  resolved "https://registry.yarnpkg.com/@cldcvr/flow-core/-/flow-core-1.17.0.tgz#c984e9db8dde949c34561c79e89c326d29a4750e"
-  integrity sha512-ChgviIVAKFxTHd/hx+kgokweEE7qG5ParCGxv2AJnOb9FpHNhxqhz0iY1NEek2EdxlGJgcEAx0Gtnc3EanTxBQ==
+"@cldcvr/flow-core@1.17.3":
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/@cldcvr/flow-core/-/flow-core-1.17.3.tgz#c372ed386c8ef33161d6dbb83f4bbba68365a569"
+  integrity sha512-CJGmXSUo5/tQ79XRPjPDwWcS7DxMsS0LDH9ubMZrWlSTPNKNG/Ysfwb0Ql4i4KHphKjHy8O/BMalkpvLl0N6kQ==
   dependencies:
+    "@cldcvr/flow-core-config" "1.0.0"
     "@emoji-mart/data" "^1.1.2"
     "@floating-ui/dom" "^1.0.2"
     axios "^0.27.2"
