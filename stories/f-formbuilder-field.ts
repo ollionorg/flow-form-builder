@@ -171,6 +171,7 @@ const field: FormBuilderField = {
 		radio: {
 			qaId: "radioQA",
 			type: "radio",
+			disabled: false,
 			label: {
 				title: html`<f-text state="warning" weight="bold">Radios</f-text>`,
 				subTitle: "Optional",
@@ -195,6 +196,16 @@ const field: FormBuilderField = {
 					></f-div>`,
 					iconTooltip: "hello",
 					description: "Check if you like Banana"
+				},
+				{
+					id: "disabledRadio",
+					title: html`<f-div gap="small"
+						><f-text size="medium">Disabled Variable</f-text>
+						<f-tag size="small" label="Env" state="custom, orange"></f-tag
+					></f-div>`,
+					iconTooltip: "This is disabled",
+					description: "You can't select this",
+					disabled: true
 				}
 			],
 			validationRules: [
@@ -208,6 +219,7 @@ const field: FormBuilderField = {
 			qaId: "checkboxQA",
 			type: "checkbox",
 			direction: "horizontal",
+			disabled: false,
 			label: {
 				title: "Check/Uncheck options",
 				subTitle: "this my checkbox"
@@ -219,6 +231,12 @@ const field: FormBuilderField = {
 					id: "banannaId",
 					iconTooltip: "hello",
 					subTitle: "Fruit"
+				},
+				{
+					id: "disabled",
+					iconTooltip: "This is disabled",
+					subTitle: "Disabled",
+					disabled: true
 				}
 			],
 			validationRules: [

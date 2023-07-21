@@ -22,6 +22,7 @@ export default function (
 			state=${ifDefined(field.state)}
 			direction=${ifDefined(field.direction)}
 			gap=${ifDefined(field.gap)}
+			.disabled=${ifDefined(field.disabled)}
 			@click=${ifDefined(field.onClick)}
 			@focus=${ifDefined(field.onFocus)}
 			@input=${ifDefined(field.onInput)}

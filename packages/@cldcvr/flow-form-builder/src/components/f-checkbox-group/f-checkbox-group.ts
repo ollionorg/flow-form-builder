@@ -2,7 +2,7 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { CheckboxOption, CheckboxOptions } from "../../types";
 import eleStyle from "./f-checkbox-group.scss";
-import { FRoot, FDiv, FText } from "@cldcvr/flow-core";
+import { FRoot, FDiv, FText, FCheckbox } from "@cldcvr/flow-core";
 import { isEqual } from "lodash-es";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 export type FCheckboxGroupValue = string[];
@@ -13,7 +13,7 @@ export class FCheckboxGroup extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [...FText.styles, unsafeCSS(eleStyle), ...FDiv.styles];
+	static styles = [...FText.styles, unsafeCSS(eleStyle), ...FDiv.styles, ...FCheckbox.styles];
 
 	/**
 	 * @attribute Controls size of all input elements within the form
@@ -54,6 +54,12 @@ export class FCheckboxGroup extends FRoot {
 	@property({ type: String, reflect: true })
 	helperText?: string;
 
+	/**
+	 * @attribute The disabled attribute can be set to keep a user from clicking on the checkbox group.
+	 */
+	@property({ reflect: true, type: Boolean })
+	disabled?: boolean = false;
+
 	handleChange(e: CustomEvent, option: CheckboxOption) {
 		e.stopPropagation();
 		let tempValues = this.value && this.value?.length > 0 ? [...this.value] : [];
@@ -81,7 +87,13 @@ export class FCheckboxGroup extends FRoot {
 		 * Final html to render
 		 */
 		return html`
-			<f-div .gap=${this.gap} direction="column" width="100%">
+			<f-div
+				class="f-checkbox-group-wrapper"
+				?disabled=${this.disabled}
+				.gap=${this.gap}
+				direction="column"
+				width="100%"
+			>
 				<f-div padding="none" gap="x-small" direction="column" width="fill-container">
 					<f-div padding="none" gap="auto" direction="row" height="hug-content">
 						<f-div
@@ -113,6 +125,7 @@ export class FCheckboxGroup extends FRoot {
 								.value=${this.isChecked(item)}
 								@input=${(event: CustomEvent) => this.handleChange(event, item)}
 								.state=${this.state}
+								?disabled=${item.disabled}
 							>
 								<f-div slot="label" padding="none" gap="none">
 									${typeof item.title === "object"

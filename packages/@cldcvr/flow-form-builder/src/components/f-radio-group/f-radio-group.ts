@@ -3,7 +3,7 @@ import { html, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import { RadioOption, RadioOptions } from "../../types";
 import eleStyle from "./f-radio-group.scss";
-import { FDiv, FRoot, FText } from "@cldcvr/flow-core";
+import { FDiv, FRadio, FRoot, FText } from "@cldcvr/flow-core";
 import { isEqual } from "lodash-es";
 import { unsafeHTML } from "lit/directives/unsafe-html.js";
 
@@ -16,7 +16,7 @@ export class FRadioGroup extends FRoot {
 	/**
 	 * css loaded from scss file
 	 */
-	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles];
+	static styles = [unsafeCSS(eleStyle), ...FDiv.styles, ...FText.styles, ...FRadio.styles];
 
 	/**
 	 * @attribute Controls size of all input elements within the form
@@ -51,6 +51,12 @@ export class FRadioGroup extends FRoot {
 	@property({ type: String, reflect: true })
 	helperText?: string;
 
+	/**
+	 * @attribute The disabled attribute can be set to keep a user from clicking on the radio group.
+	 */
+	@property({ reflect: true, type: Boolean })
+	disabled?: boolean = false;
+
 	handleChange(option: RadioOption) {
 		const event = new CustomEvent("input", {
 			detail: {
@@ -70,7 +76,13 @@ export class FRadioGroup extends FRoot {
 		 * Final html to render
 		 */
 		return html`
-			<f-div .gap=${this.gap} direction="column" width="100%">
+			<f-div
+				class="f-radio-group-wrapper"
+				?disabled=${this.disabled}
+				.gap=${this.gap}
+				direction="column"
+				width="100%"
+			>
 				<f-div padding="none" gap="x-small" direction="column" width="fill-container">
 					<f-div padding="none" gap="auto" direction="row" height="hug-content">
 						<f-div
@@ -97,6 +109,7 @@ export class FRadioGroup extends FRoot {
 								.value=${this.isChecked(item)}
 								@input=${() => this.handleChange(item)}
 								.state=${this.state}
+								?disabled=${item.disabled}
 							>
 								<f-div slot="label" padding="none" gap="none">
 									${typeof item.title === "object"

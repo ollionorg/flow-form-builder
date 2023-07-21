@@ -243,6 +243,7 @@ export type CheckboxOption = {
 	description?: string;
 	iconTooltip?: string;
 	subTitle?: string;
+	disabled?: boolean;
 };
 export type RadioOption = CheckboxOption;
 export type CheckboxOptions = CheckboxOption[];

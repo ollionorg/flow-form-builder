@@ -4,6 +4,13 @@
 
 # Change Log
 
+
+## [1.6.1] - 2023-07-21
+
+### Improvements
+- Individual options from checkboxes and radio buttons can be disabled.
+### Bug Fixes
+- `checkbox` and `radio` group disabled css fixed.
 ## [1.6.0] - 2023-06-26
 ### Features
 - `datetime` field support added.

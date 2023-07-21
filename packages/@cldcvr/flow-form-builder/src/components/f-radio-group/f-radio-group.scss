@@ -39,6 +39,12 @@ $states: (
 		}
 	}
 	@include infoIcon();
+
+	f-div.f-radio-group-wrapper[disabled] {
+		@include disabled();
+		pointer-events: none;
+		opacity: 1;
+	}
 }
 
 f-radio-group {
@@ -48,5 +54,8 @@ f-radio-group {
 		&[state="#{$state}"] {
 			@include input-color($state);
 		}
+	}
+	&[disabled] {
+		@include disabled();
 	}
 }
