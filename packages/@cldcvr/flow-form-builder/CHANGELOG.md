@@ -5,6 +5,10 @@
 # Change Log
 
 
+## [1.7.0] - 2023-08-08
+
+### Features
+- `async` validate function support in custom validator.
 ## [1.6.1] - 2023-07-21
 
 ### Improvements

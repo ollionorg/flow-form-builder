@@ -326,13 +326,18 @@ export type FormBuilderValidationRegexRule = FormBuilderValidationRule & {
 export type FormBuilderCustomValidationRule = FormBuilderValidationRule & {
 	name: "custom";
 	when?: FormBuilderValidationRuleTriggers[];
-	validate: FormBuilderValidatorFunction;
+	validate: FormBuilderValidatorFunction | FormBuilderAsyncValidatorFunction;
 };
 
 export type FormBuilderValidatorFunction<
 	TValue = string | unknown[],
 	TParams = Record<string, unknown>
 > = (value: TValue, params?: TParams) => boolean;
+
+export type FormBuilderAsyncValidatorFunction<
+	TValue = string | unknown[],
+	TParams = Record<string, unknown>
+> = (value: TValue, params?: TParams) => Promise<boolean>;
 
 export type FormBuilderGenericValidationRule =
 	| FormBuilderValidationRequiredRule

@@ -198,6 +198,7 @@ describe("f-form-builder", () => {
 							]
 						},
 						textField: {
+							qaId: "testFieldQA",
 							type: "text",
 							helperText: "This field is a required field",
 							suffix: "recommended",
@@ -211,6 +212,7 @@ describe("f-form-builder", () => {
 							]
 						},
 						eventTestField: {
+							qaId: "eventTestField",
 							type: "text",
 							helperText: "This field is a required field",
 							validationRules: [

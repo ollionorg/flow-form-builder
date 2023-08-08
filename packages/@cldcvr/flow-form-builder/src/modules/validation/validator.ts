@@ -16,10 +16,11 @@ import { FButton, FIconButton } from "@cldcvr/flow-core";
 import defaultValidations from "./default-validations";
 import { render } from "lit-html";
 
-export default function validate(
+export default async function validate(
 	value: string,
 	elementRules: FormBuilderValidationRules,
-	name: string
+	name: string,
+	element: FFormInputElements | undefined
 ) {
 	let result = true;
 	let message = null;
@@ -34,7 +35,11 @@ export default function validate(
 					break;
 				}
 			} else {
-				result = r.validate(value, r.params);
+				if (isAsync(r.validate)) {
+					result = await r.validate(value, { ...r.params, element });
+				} else {
+					result = r.validate(value, { ...r.params, element }) as boolean;
+				}
 				if (!result) {
 					rule = r.name;
 					message = getValidationMessage(r, { name, value });
@@ -99,10 +104,11 @@ export async function validateField(
 		if (typeof (field.label as FormBuilderLabel)?.title === "string") {
 			fieldName = (field.label as FormBuilderLabel)?.title as string;
 		}
-		const { result, message, rule, name } = validate(
+		const { result, message, rule, name } = await validate(
 			(element.value as string) ?? "",
 			rulesToValidate as FormBuilderValidationRules,
-			fieldName
+			fieldName,
+			element
 		);
 
 		if (!result && message && element.offsetHeight > 0) {
@@ -153,12 +159,12 @@ function updateMessage(
 		helpSlot.remove();
 		element.insertAdjacentHTML(
 			"beforeend",
-			`<f-div slot="help" ${qaAttribute}=${field.qaId || field.id}>${message}</f-div>`
+			`<f-div slot="help" ${qaAttribute}=${field.qaId || field.id || ""}>${message}</f-div>`
 		);
 	} else {
 		element.insertAdjacentHTML(
 			"beforeend",
-			`<f-div slot="help" ${qaAttribute}=${field.qaId || field.id}>${message}</f-div>`
+			`<f-div slot="help" ${qaAttribute}=${field.qaId || field.id || ""}>${message}</f-div>`
 		);
 	}
 }
@@ -174,4 +180,11 @@ export function extractValidationState(allResults: ValidationResults) {
 	});
 
 	return errors;
+}
+
+function isAsync(func: Function) {
+	if (func.constructor && func.constructor.name === "AsyncFunction") {
+		return true;
+	}
+	return false;
 }

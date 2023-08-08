@@ -1,4 +1,4 @@
-import { FSelectOptionObject, FSelectSingleOption } from "@cldcvr/flow-core";
+import { FInput, FSelectOptionObject, FSelectSingleOption } from "@cldcvr/flow-core";
 import { FormBuilderField } from "@cldcvr/flow-form-builder/src/types";
 import { html } from "lit";
 const test = () => alert("test called");
@@ -21,6 +21,7 @@ const field: FormBuilderField = {
 			type: "object",
 			fields: {
 				name: {
+					qaId: "org",
 					label: {
 						title: "Org name",
 						subTitle: html`<f-text size="small">
@@ -32,6 +33,16 @@ const field: FormBuilderField = {
 						{
 							name: "required",
 							message: "{{name}} field is compulsary"
+						},
+						{
+							name: "custom",
+							validate: async function (_val, params) {
+								(params?.element as FInput).loading = true;
+								await new Promise(resolve => setTimeout(resolve, 500));
+								(params?.element as FInput).loading = false;
+								return false;
+							},
+							message: "{{value}} already present"
 						}
 					],
 					helperText: "Test",
