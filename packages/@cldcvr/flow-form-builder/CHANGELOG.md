@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.7.3] - 2023-08-09
+### Bug fix
+- `async` silent validator blocking render while first update.
+
 ## [1.7.2] - 2023-08-09
 ### Bug fix
 - `async` validator wrong result issue.

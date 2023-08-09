@@ -294,7 +294,7 @@ export class FFormBuilder extends FRoot {
 		/**
 		 * silent validation and store in state
 		 */
-		await this.validateForm(true).then(all => {
+		this.validateForm(true).then(all => {
 			this.updateValidaitonState(all);
 		});
 

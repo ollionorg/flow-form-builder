@@ -38,7 +38,7 @@ const field: FormBuilderField = {
 							name: "custom",
 							validate: async function (_val, params) {
 								(params?.element as FInput).loading = true;
-								await new Promise(resolve => setTimeout(resolve, 500));
+								await new Promise(resolve => setTimeout(resolve, 5000));
 								(params?.element as FInput).loading = false;
 								return false;
 							},
@@ -47,7 +47,8 @@ const field: FormBuilderField = {
 					],
 					helperText: "Test",
 					autofocus: true,
-					state: "success"
+					state: "success",
+					suffix: "suggested"
 				},
 				logo: {
 					label: { title: "Logo" },
