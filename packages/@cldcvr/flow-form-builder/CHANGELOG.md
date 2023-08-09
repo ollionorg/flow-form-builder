@@ -5,6 +5,14 @@
 # Change Log
 
 
+## [1.7.1] - 2023-08-08
+
+### Improvements
+- loading added to element if it has async custom validator. (Note :  loading only works for supported fields)
+- `loading` property added for `select` field.
+### Bug fix
+- `async` validator called multiple times
+
 ## [1.7.0] - 2023-08-08
 
 ### Features

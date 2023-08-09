@@ -12,7 +12,15 @@ import {
 
 import rules from "./rules";
 import defaultMessages from "./default-validation-messages";
-import { FButton, FIconButton } from "@cldcvr/flow-core";
+import {
+	FButton,
+	FDateTimePicker,
+	FFileUpload,
+	FIconButton,
+	FInput,
+	FSelect,
+	FSuggest
+} from "@cldcvr/flow-core";
 import defaultValidations from "./default-validations";
 import { render } from "lit-html";
 
@@ -35,10 +43,40 @@ export default async function validate(
 					break;
 				}
 			} else {
-				if (isAsync(r.validate)) {
+				// this if statement is added to avoid multiple validation calls
+				if (element && element.dataset.lastValue === value) {
+					result = Boolean(element.dataset.isLastValueValid);
+				} else if (isAsync(r.validate)) {
+					if (
+						element instanceof FInput ||
+						element instanceof FSelect ||
+						element instanceof FDateTimePicker ||
+						element instanceof FFileUpload ||
+						element instanceof FSuggest
+					) {
+						element.loading = true;
+					}
 					result = await r.validate(value, { ...r.params, element });
+					if (
+						element instanceof FInput ||
+						element instanceof FSelect ||
+						element instanceof FDateTimePicker ||
+						element instanceof FFileUpload ||
+						element instanceof FSuggest
+					) {
+						element.loading = false;
+					}
+					if (element) {
+						element.dataset.lastValue = value;
+						element.dataset.isLastValueValid = String(result);
+					}
 				} else {
 					result = r.validate(value, { ...r.params, element }) as boolean;
+
+					if (element) {
+						element.dataset.lastValue = value;
+						element.dataset.isLastValueValid = String(result);
+					}
 				}
 				if (!result) {
 					rule = r.name;

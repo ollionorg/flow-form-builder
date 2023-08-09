@@ -30,6 +30,7 @@ export default function (
 			?disabled=${field.disabled}
 			selection-limit=${ifDefined(field.selectionLimit)}
 			?create-option=${field.createOption}
+			?loading=${field.loading ?? false}
 			.optionTemplate=${field.optionTemplate}
 			icon-left=${ifDefined(field.iconLeft)}
 			@click=${ifDefined(field.onClick)}

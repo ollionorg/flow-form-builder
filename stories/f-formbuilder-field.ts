@@ -102,6 +102,7 @@ const field: FormBuilderField = {
 			],
 			type: "select",
 			placeholder: "This is a placeholder",
+			loading: false,
 			validationRules: [
 				{
 					name: "required"

@@ -192,6 +192,7 @@ export type FormBuilderSelectField = FormBuilderBaseField & {
 	checkbox?: boolean;
 	selectionLimit?: number;
 	createOption?: boolean;
+	loading?: boolean;
 };
 
 // text-area type field
