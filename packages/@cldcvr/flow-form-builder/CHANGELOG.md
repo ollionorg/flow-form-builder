@@ -4,6 +4,9 @@
 
 # Change Log
 
+## [1.7.2] - 2023-08-09
+### Bug fix
+- `async` validator wrong result issue.
 
 ## [1.7.1] - 2023-08-08
 

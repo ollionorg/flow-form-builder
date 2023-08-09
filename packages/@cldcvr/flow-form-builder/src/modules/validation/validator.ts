@@ -45,7 +45,7 @@ export default async function validate(
 			} else {
 				// this if statement is added to avoid multiple validation calls
 				if (element && element.dataset.lastValue === value) {
-					result = Boolean(element.dataset.isLastValueValid);
+					result = element.dataset.isLastValueValid === "true";
 				} else if (isAsync(r.validate)) {
 					if (
 						element instanceof FInput ||
