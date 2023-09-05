@@ -127,7 +127,7 @@ export class FFormObject extends FRoot {
 
 		return html` <f-div gap="small" direction="column" width="100%">
 			<f-form-group
-				.direction=${this.config.direction}
+				.direction=${this.config.direction ?? "horizontal"}
 				.variant=${this.config.variant}
 				.label=${this.config.label}
 				gap=${this.config.gap ?? this.gap}

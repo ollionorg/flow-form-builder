@@ -50,4 +50,10 @@ f-form-group[direction="horizontal"] {
 	> f-field-separator {
 		height: 100%;
 	}
+	> f-select,
+	> f-suggest,
+	> f-date-time-picker {
+		width: 100%;
+		flex: initial;
+	}
 }

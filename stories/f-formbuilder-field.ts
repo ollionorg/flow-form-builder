@@ -32,7 +32,8 @@ const field: FormBuilderField = {
 					validationRules: [
 						{
 							name: "required",
-							message: "{{name}} field is compulsary"
+							message:
+								"{{name}} field is compulsary gshdg sdghsd ghsd ghsf sggsgfjhgs sgfgsjfh dgfhgdfh dfhgdfh dhfghdgf ghdgfhdf ghgdfhdgf ghdgfhdgfh gdhfghdfgh"
 						},
 						{
 							name: "custom",
@@ -292,8 +293,7 @@ const field: FormBuilderField = {
 					type: "text",
 					validationRules: [{ name: "required" }],
 					label: {
-						title: "Username",
-						subTitle: html`<f-checkbox><f-text slot="label">Mask this</f-text></f-checkbox>`
+						title: "Username"
 					}
 				},
 				email: {
@@ -311,7 +311,14 @@ const field: FormBuilderField = {
 			},
 			field: {
 				qaId: "nestedArrayText",
-				type: "text"
+				type: "text",
+				validationRules: [
+					{
+						name: "required",
+						message:
+							"this isn hasjhgd  dghgsd sd ghds sdghgghgsd ghsgdhsd tsgdytsds sdtytsd sdtytsd sdtytd sdgsdgysd"
+					}
+				]
 			}
 		},
 		buttons: {

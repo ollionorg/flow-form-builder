@@ -418,6 +418,7 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     label="{&quot;title&quot;:&quot;Object level label&quot;,&quot;description&quot;:&quot;following fields are used for demo purpose only&quot;}"
   >
     <f-select
+      auto-add-option=""
       category="fill"
       clear=""
       data-qa-element-id=""

@@ -4,6 +4,9 @@
 
 # Change Log
 
+## [1.7.4] - 2023-09-05
+### Bug fix
+- `f-select` width issue fixed in object with direction horizontal.
 ## [1.7.3] - 2023-08-09
 ### Bug fix
 - `async` silent validator blocking render while first update.
