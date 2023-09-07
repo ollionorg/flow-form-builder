@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.7.6] - 2023-09-07
+### Improvements
+- Async validator last value caching logic updated.
+- `Multiple Async Custom Validator` story added
+
 ## [1.7.5] - 2023-09-07
 ### Bug fix
 - Multiple `custom` validation rules are not triggering.

@@ -26,6 +26,8 @@ snapshots["f-form-builder should render object field with all default properties
     <f-input
       category="fill"
       clear=""
+      data-is-last-value-valid="true"
+      data-last-value="Tony"
       data-qa-element-id=""
       name="firstname"
       size="medium"
@@ -113,6 +115,8 @@ snapshots["f-form-builder should emit state-change with validation messages"] =
     <f-input
       category="fill"
       clear=""
+      data-is-last-value-valid="true"
+      data-last-value="Tony"
       data-qa-element-id=""
       name="firstname"
       size="medium"
@@ -421,6 +425,8 @@ snapshots["f-form-builder should test snapshot of all fields"] =
       auto-add-option=""
       category="fill"
       clear=""
+      data-is-last-value-valid="false"
+      data-last-value=""
       data-qa-element-id=""
       height="180"
       icon-left="i-app"
@@ -462,6 +468,8 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     <f-input
       category="fill"
       clear=""
+      data-is-last-value-valid="true"
+      data-last-value="vikas"
       data-qa-element-id="testFieldQA"
       name="textField"
       size="medium"
@@ -519,6 +527,8 @@ snapshots["f-form-builder should test snapshot of all fields"] =
       category="fill"
       clear=""
       data-hidden="false"
+      data-is-last-value-valid="false"
+      data-last-value=""
       data-qa-element-id="eventTestField"
       name="eventTestField"
       size="medium"
@@ -573,6 +583,8 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     </f-divider>
     <f-switch
       category="fill"
+      data-is-last-value-valid="false"
+      data-last-value="false"
       data-qa-element-id=""
       name="switchButton"
       size="medium"
@@ -608,6 +620,8 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     </f-divider>
     <f-radio-group
       category="fill"
+      data-is-last-value-valid="false"
+      data-last-value=""
       data-qa-element-id=""
       direction="vertical"
       gap="small"
@@ -644,6 +658,8 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     </f-divider>
     <f-checkbox-group
       category="fill"
+      data-is-last-value-valid="false"
+      data-last-value=""
       data-qa-element-id=""
       direction="horizontal"
       gap="small"
@@ -698,6 +714,8 @@ snapshots["f-form-builder should test snapshot of all fields"] =
     <f-text-area
       category="fill"
       clear=""
+      data-is-last-value-valid="false"
+      data-last-value=""
       data-qa-element-id=""
       max-length="100"
       name="textAreaField"

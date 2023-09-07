@@ -34,7 +34,7 @@ export default async function validate(
 	let message = null;
 	let rule!: FormBuilderGenericValidationRule["name"];
 	if (elementRules) {
-		for (const [index, r] of elementRules.entries()) {
+		for (const r of elementRules) {
 			if (r.name !== "custom") {
 				result = rules[r.name](value, r.params);
 				if (!result) {
@@ -46,6 +46,9 @@ export default async function validate(
 				// this if statement is added to avoid multiple validation calls
 				if (element && element.dataset.lastValue === value) {
 					result = element.dataset.isLastValueValid === "true";
+					if (element.dataset.lastErrorMessage) {
+						message = element.dataset.lastErrorMessage;
+					}
 				} else if (isAsync(r.validate)) {
 					if (
 						element instanceof FInput ||
@@ -66,28 +69,25 @@ export default async function validate(
 					) {
 						element.loading = false;
 					}
-					if (element) {
-						element.dataset.lastValue = value;
-						if (index === elementRules.length - 1) {
-							element.dataset.isLastValueValid = String(result);
-						}
-					}
 				} else {
 					result = r.validate(value, { ...r.params, element }) as boolean;
-
-					if (element) {
-						element.dataset.lastValue = value;
-						if (index === elementRules.length - 1) {
-							element.dataset.isLastValueValid = String(result);
-						}
-					}
 				}
 				if (!result) {
 					rule = r.name;
-					message = getValidationMessage(r, { name, value });
+					if (!message) {
+						message = getValidationMessage(r, { name, value });
+						if (element) {
+							element.dataset.lastErrorMessage = message;
+						}
+					}
 					break;
 				}
 			}
+		}
+
+		if (element) {
+			element.dataset.lastValue = value;
+			element.dataset.isLastValueValid = String(result);
 		}
 	}
 
