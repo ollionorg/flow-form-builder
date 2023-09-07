@@ -34,7 +34,7 @@ export default async function validate(
 	let message = null;
 	let rule!: FormBuilderGenericValidationRule["name"];
 	if (elementRules) {
-		for (const r of elementRules) {
+		for (const [index, r] of elementRules.entries()) {
 			if (r.name !== "custom") {
 				result = rules[r.name](value, r.params);
 				if (!result) {
@@ -68,14 +68,18 @@ export default async function validate(
 					}
 					if (element) {
 						element.dataset.lastValue = value;
-						element.dataset.isLastValueValid = String(result);
+						if (index === elementRules.length - 1) {
+							element.dataset.isLastValueValid = String(result);
+						}
 					}
 				} else {
 					result = r.validate(value, { ...r.params, element }) as boolean;
 
 					if (element) {
 						element.dataset.lastValue = value;
-						element.dataset.isLastValueValid = String(result);
+						if (index === elementRules.length - 1) {
+							element.dataset.isLastValueValid = String(result);
+						}
 					}
 				}
 				if (!result) {

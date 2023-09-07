@@ -4,6 +4,9 @@
 
 # Change Log
 
+## [1.7.5] - 2023-09-07
+### Bug fix
+- Multiple `custom` validation rules are not triggering.
 ## [1.7.4] - 2023-09-05
 ### Bug fix
 - `f-select` width issue fixed in object with direction horizontal.
