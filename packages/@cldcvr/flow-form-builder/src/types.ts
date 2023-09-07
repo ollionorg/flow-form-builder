@@ -89,7 +89,7 @@ export type FormBuilderObjectField = FormBuilderBaseField & {
 };
 // text input type field
 export type FormBuilderTextInputField = FormBuilderBaseField & {
-	type: "text" | "email" | "password" | "url" | "tel" | "number";
+	type: "text" | "email" | "password" | "url" | "tel" | "number" | "textarea";
 	placeholder?: string;
 	iconLeft?: string;
 	iconRight?: string;
