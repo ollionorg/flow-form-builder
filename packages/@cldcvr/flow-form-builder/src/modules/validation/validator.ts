@@ -44,13 +44,12 @@ export default async function validate(
 					break;
 				}
 			} else {
-				// this if statement is added to avoid multiple validation calls
 				if (isAsync(r.validate)) {
 					const asyncR = r as {
 						_lastValue?: string;
 						_lastResult?: boolean;
 					} & FormBuilderCustomValidationRule;
-
+					// this if statement is added to avoid multiple validation calls
 					if (asyncR._lastValue === value && asyncR._lastResult !== undefined) {
 						result = asyncR._lastResult;
 					} else {
@@ -63,6 +62,7 @@ export default async function validate(
 						) {
 							element.loading = true;
 						}
+						// holding last value
 						asyncR._lastValue = value;
 						result = await asyncR.validate(value, { ...asyncR.params, element });
 						asyncR._lastResult = result;
