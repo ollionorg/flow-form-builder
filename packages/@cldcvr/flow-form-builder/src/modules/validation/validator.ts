@@ -88,6 +88,10 @@ export default async function validate(
 		if (element) {
 			element.dataset.lastValue = value;
 			element.dataset.isLastValueValid = String(result);
+			// resetting chached message if validation success
+			if (result) {
+				delete element.dataset.lastErrorMessage;
+			}
 		}
 	}
 

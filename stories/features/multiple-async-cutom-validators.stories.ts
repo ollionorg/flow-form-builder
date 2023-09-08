@@ -98,5 +98,8 @@ const Template: Story<unknown> = (args: any) => {
 export const basic = Template.bind({});
 
 basic.args = {
-	field: sampleFormBuilder.field
+	field: sampleFormBuilder.field,
+	values: {
+		username: "kkb"
+	}
 };

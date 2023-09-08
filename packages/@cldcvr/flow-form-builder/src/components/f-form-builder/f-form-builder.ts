@@ -247,6 +247,14 @@ export class FFormBuilder extends FRoot {
 				 * update isChanged prop in state to let user know that form is changed
 				 */
 				this.state.isChanged = true;
+
+				/**
+				 * dispatch input event for consumer
+				 * FLOW-903 moving up to avoid race condition
+				 */
+				if (event.type !== "blur") {
+					this.dispatchInputEvent();
+				}
 				/**
 				 * validate current field
 				 */
@@ -261,12 +269,6 @@ export class FFormBuilder extends FRoot {
 				await this.validateForm(true).then(all => {
 					this.updateValidaitonState(all);
 				});
-				/**
-				 * dispatch input event for consumer
-				 */
-				if (event.type !== "blur") {
-					this.dispatchInputEvent();
-				}
 			};
 			ref.value.oninput = fieldValidation;
 			ref.value.onblur = fieldValidation;
