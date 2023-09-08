@@ -196,15 +196,17 @@ export class FFormObject extends FRoot {
 						this.value = {};
 					}
 					this.value[name] = ref.value?.value;
-
+					/**
+					 * FLOW-903 moving up to avoid race condition
+					 */
+					if (event.type !== "blur") {
+						this.dispatchInputEvent();
+					}
 					await validateField(
 						this.config.fields[name] as CanValidateFields,
 						ref.value as FFormInputElements,
 						false
 					);
-					if (event.type !== "blur") {
-						this.dispatchInputEvent();
-					}
 				};
 				ref.value.oninput = fieldValidation;
 				ref.value.onblur = fieldValidation;

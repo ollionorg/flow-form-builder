@@ -1,6 +1,7 @@
 import {
 	CanValidateFields,
 	FFormInputElements,
+	FormBuilderCustomValidationRule,
 	FormBuilderField,
 	FormBuilderGenericValidationRule,
 	FormBuilderLabel,
@@ -44,53 +45,45 @@ export default async function validate(
 				}
 			} else {
 				// this if statement is added to avoid multiple validation calls
-				if (element && element.dataset.lastValue === value) {
-					result = element.dataset.isLastValueValid === "true";
-					if (element.dataset.lastErrorMessage) {
-						message = element.dataset.lastErrorMessage;
-					}
-				} else if (isAsync(r.validate)) {
-					if (
-						element instanceof FInput ||
-						element instanceof FSelect ||
-						element instanceof FDateTimePicker ||
-						element instanceof FFileUpload ||
-						element instanceof FSuggest
-					) {
-						element.loading = true;
-					}
-					result = await r.validate(value, { ...r.params, element });
-					if (
-						element instanceof FInput ||
-						element instanceof FSelect ||
-						element instanceof FDateTimePicker ||
-						element instanceof FFileUpload ||
-						element instanceof FSuggest
-					) {
-						element.loading = false;
+				if (isAsync(r.validate)) {
+					const asyncR = r as {
+						_lastValue?: string;
+						_lastResult?: boolean;
+					} & FormBuilderCustomValidationRule;
+
+					if (asyncR._lastValue === value && asyncR._lastResult !== undefined) {
+						result = asyncR._lastResult;
+					} else {
+						if (
+							element instanceof FInput ||
+							element instanceof FSelect ||
+							element instanceof FDateTimePicker ||
+							element instanceof FFileUpload ||
+							element instanceof FSuggest
+						) {
+							element.loading = true;
+						}
+						asyncR._lastValue = value;
+						result = await asyncR.validate(value, { ...asyncR.params, element });
+						asyncR._lastResult = result;
+						if (
+							element instanceof FInput ||
+							element instanceof FSelect ||
+							element instanceof FDateTimePicker ||
+							element instanceof FFileUpload ||
+							element instanceof FSuggest
+						) {
+							element.loading = false;
+						}
 					}
 				} else {
 					result = r.validate(value, { ...r.params, element }) as boolean;
 				}
 				if (!result) {
 					rule = r.name;
-					if (!message) {
-						message = getValidationMessage(r, { name, value });
-						if (element) {
-							element.dataset.lastErrorMessage = message;
-						}
-					}
+					message = getValidationMessage(r, { name, value });
 					break;
 				}
-			}
-		}
-
-		if (element) {
-			element.dataset.lastValue = value;
-			element.dataset.isLastValueValid = String(result);
-			// resetting chached message if validation success
-			if (result) {
-				delete element.dataset.lastErrorMessage;
 			}
 		}
 	}

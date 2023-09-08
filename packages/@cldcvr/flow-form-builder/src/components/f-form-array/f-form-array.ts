@@ -280,6 +280,9 @@ export class FFormArray extends FRoot {
 						ref.value as FFormInputElements,
 						false
 					);
+					/**
+					 * FLOW-903 moving up to avoid race condition
+					 */
 					if (event.type !== "blur") {
 						this.dispatchInputEvent();
 					}

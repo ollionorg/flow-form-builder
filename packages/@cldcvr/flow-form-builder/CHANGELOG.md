@@ -4,6 +4,11 @@
 
 # Change Log
 
+## [1.7.8] - 2023-09-08
+### Improvements
+- Validation and Input event sequence swapped to avoid race condition in f-form-array and f-form-object
+- Async validator last value caching logic updated.
+
 ## [1.7.7] - 2023-09-08
 ### Improvements
 - Validation and Input event sequence swapped to avoid race condition.
