@@ -148,7 +148,9 @@ describe("f-form-builder", () => {
 			const inputs = fFormArray?.shadowRoot?.querySelectorAll("f-input") as NodeListOf<FInput>;
 
 			inputs.item(2).setAttribute("value", "thirdfield");
-			inputs.item(2).dispatchEvent(new Event("input"));
+			setTimeout(() => {
+				inputs.item(2).dispatchEvent(new Event("input"));
+			});
 
 			const ev = await oneEvent(el, "input");
 

@@ -275,17 +275,17 @@ export class FFormArray extends FRoot {
 
 					this.value[idx] = ref.value?.value;
 
-					await validateField(
-						this.config.field as CanValidateFields,
-						ref.value as FFormInputElements,
-						false
-					);
 					/**
 					 * FLOW-903 moving up to avoid race condition
 					 */
 					if (event.type !== "blur") {
 						this.dispatchInputEvent();
 					}
+					await validateField(
+						this.config.field as CanValidateFields,
+						ref.value as FFormInputElements,
+						false
+					);
 				};
 
 				ref.value.oninput = fieldValidation;
