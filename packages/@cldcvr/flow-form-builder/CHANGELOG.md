@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.7.7] - 2023-09-08
+### Improvements
+- Validation and Input event sequence swapped to avoid race condition.
+
 ## [1.7.6] - 2023-09-07
 ### Improvements
 - Async validator last value caching logic updated.
