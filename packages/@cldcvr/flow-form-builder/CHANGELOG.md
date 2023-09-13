@@ -4,6 +4,10 @@
 
 # Change Log
 
+## [1.8.0] - 2023-09-13
+### Features
+- Custom validation message using callback function for dynamic messages.
+
 ## [1.7.8] - 2023-09-08
 ### Improvements
 - Validation and Input event sequence swapped to avoid race condition in f-form-array and f-form-object

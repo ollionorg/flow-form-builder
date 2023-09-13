@@ -290,7 +290,8 @@ const field: FormBuilderField = {
 			fields: {
 				username: {
 					qaId: "nestedUsernameQA",
-					type: "text",
+					type: "number",
+					placeholder: "Numbers only",
 					validationRules: [{ name: "required" }],
 					label: {
 						title: "Username"

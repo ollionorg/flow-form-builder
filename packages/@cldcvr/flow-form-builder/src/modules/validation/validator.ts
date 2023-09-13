@@ -108,7 +108,11 @@ function getValidationMessage(
 	{ name, value }: Record<string, string>
 ) {
 	if (r.message) {
-		return processCustomMessage(r.message, {
+		if (typeof r.message === "function") {
+			return r.message(name, value);
+		}
+
+		return processCustomMessage(r.message as string, {
 			name,
 			value,
 			...(r.params as Record<string, string>)
