@@ -4,6 +4,9 @@
 
 # Change Log
 
+## [1.8.1] - 2023-09-13
+### Improvements
+- Array field description font size fixed.
 ## [1.8.0] - 2023-09-13
 ### Features
 - Custom validation message using callback function for dynamic messages.
